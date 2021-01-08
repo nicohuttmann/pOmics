@@ -1,0 +1,93 @@
+#' Imports any file type using the file extension and returns list
+#'
+#' @param files file paths
+#' @param nolist returns data frame directly if only one file is imported
+#'
+#' @return
+#' @export
+#'
+#'
+import_anything <- function(files, nolist = F) {
+
+  # Select files if no paths given
+  if (!hasArg(files)) {
+    files <- choose.files(default = getwd(), multi = !nolist)
+  }
+
+
+  # Create list to store imported files
+  list.import <- list()
+
+
+
+  # Import all files
+  for (file in files) {
+
+    # Check file extension
+    ext <- tools::file_ext(file)
+
+    # Return NA if file could not be imported
+    data <- NA
+
+
+    # Read txt files
+    if (ext == "txt") {
+
+      # Default mode to read txt
+      data <- read.delim(file, stringsAsFactors = F)
+
+      # If ncol or nrow = 1 ask if this is a mistake
+      if (ncol(data) <= 1 || nrow(data) <= 1) {
+        data <- read.delim2(file, stringsAsFactors = F)
+      }
+
+    }
+
+
+    # Read csv
+    if (ext == "csv") {
+
+      # Default mode to read txt; NA if error while import
+      data <- tryCatch(
+        read.csv(file, stringsAsFactors = F),
+        error = function(cond) {
+          matrix()
+          }
+        )
+
+      # If ncol or nrow = 1 try again
+      if (ncol(data) <= 1 || nrow(data) <= 1) {
+        data <- read.csv2(file, stringsAsFactors = F)
+      }
+
+    }
+
+
+    # Read xls
+    if (ext == "xls") {
+      data <- suppressWarnings(readxl::read_xls(file, sheet = 1, col_names = T, trim_ws = T))
+    }
+
+
+    # Read xlsx
+    if (ext == "xlsx") {
+      data <- suppressWarnings(readxl::read_xlsx(file, sheet = 1, col_names = T, trim_ws = T))
+    }
+
+    # Add file to list
+    list.import[[length(list.import) + 1]] <- tibble::as_tibble(data)
+
+    # use filename for list name
+    names(list.import)[[length(list.import)]] <- tools::file_path_sans_ext(basename(file))
+
+
+  }
+
+  # Return list or one data frame
+  if (length(list.import) == 1 && nolist) {
+    list.import[[1]]
+  } else {
+    list.import
+  }
+
+}
