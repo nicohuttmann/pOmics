@@ -203,7 +203,7 @@ message(paste0("(5/n) Identifier type: ", attr(dataset, "variables.type")))
         for (j in dplyr::pull(temp, 1)) {
           variables[match(j, dplyr::pull(variables, 1)), i] <- temp[j, i]
         }
-        message(paste0("  Done with ", i))
+        message(paste0("  Finished ", i))
 
       }
 
