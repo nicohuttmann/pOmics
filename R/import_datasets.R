@@ -12,7 +12,7 @@ import_datasets <- function(files) {
   if (!hasArg(files)) files <- choose.files(default = getwd())
 
   # import files
-  list.import <- import_anything(files)
+  list.import <- import_anything(files, return = T)
 
   # Change wd according to new files
   for (file in files) {

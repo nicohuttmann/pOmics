@@ -4,10 +4,12 @@
 \alias{add_dataset}
 \title{Adds new datasets to list}
 \usage{
-add_dataset(dataset)
+add_dataset(dataset, return = T)
 }
 \arguments{
-\item{data.list}{new dataset}
+\item{dataset}{dataset to add}
+
+\item{return}{Should TRUE be returned if dataset is added successfully}
 }
 \value{
 

@@ -4,7 +4,7 @@
 \alias{import_anything}
 \title{Imports any file type using the file extension and returns list}
 \usage{
-import_anything(files, nolist = F)
+import_anything(files, return = F)
 }
 \arguments{
 \item{files}{file paths}

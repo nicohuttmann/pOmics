@@ -1,16 +1,24 @@
 #' Creates new info list
 #'
-#' @return
+#' @param replace Should info list be replaced if already existing
+#' @param return Should indication whether new info list was created be returned
+#'
+#' @return whether a new info list was created
 #' @export
 #'
 #'
-new_info_list <- function() {
+new_info_list <- function(replace = F, return = T) {
 
-  if (!".info" %in% objects(all.names = T, envir = .GlobalEnv)) {
+  if (!".info" %in% objects(all.names = TRUE, envir = .GlobalEnv) || replace) {
     .info <<- list("datasets" = c(),
-                   "dataset_default" = c())
-    .info[["datasets"]] <- c()
-    .info[["dataset_default"]] <<- c()
+                   "default_dataset" = c())
+    .info[["datasets"]] <<- c()
+    .info[["default_dataset"]] <<- c()
+
+    # Indicate if new info list was created
+    if (return) return(TRUE)
+  } else {
+    if (return) return(FALSE)
   }
 
 }
