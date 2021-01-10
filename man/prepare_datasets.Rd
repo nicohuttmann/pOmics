@@ -4,12 +4,19 @@
 \alias{prepare_datasets}
 \title{Prepares imported data}
 \usage{
-prepare_datasets(imports, find.taxonomy = T, load.UniProt.ws = T)
+prepare_datasets(
+  imports,
+  find.taxonomy = T,
+  identify.data.origin = T,
+  load.UniProt.ws = T
+)
 }
 \arguments{
 \item{imports}{imported raw data}
 
 \item{find.taxonomy}{should taxonomy be determined}
+
+\item{identify.data.origin}{Identify origin software of data}
 
 \item{load.UniProt.ws}{Should a UniProt database be downloaded}
 }

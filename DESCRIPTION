@@ -23,6 +23,7 @@ Imports:
     reshape2,
     dplyr,
     magrittr,
+    rlang,
     tibble,
     UniProt.ws
 RoxygenNote: 7.1.1

@@ -4,10 +4,15 @@
 \alias{new_info_list}
 \title{Creates new info list}
 \usage{
-new_info_list()
+new_info_list(replace = F, return = T)
+}
+\arguments{
+\item{replace}{Should info list be replaced if already existing}
+
+\item{return}{Should indication whether new info list was created be returned}
 }
 \value{
-
+whether a new info list was created
 }
 \description{
 Creates new info list

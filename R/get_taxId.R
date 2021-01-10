@@ -12,9 +12,9 @@ get_taxId <- function(x) {
   if (hasArg(x)) {
 
     # Prepares entries to test from given data frame
-    id.list <- unlist(x[1:ifelse(nrow(x) > 200, 200, nrow(x)), !unlist(lapply(imports[[1]], is.numeric))])
+    id.list <- unlist(x[1:ifelse(nrow(x) > 200, 200, nrow(x)), !unlist(lapply(x, is.numeric))])
     id.list <- c(id.list,
-                 keep.first(id.list))
+                 keep_first(id.list))
 
     taxId <- protein2taxID(id.list, silent = T)
 

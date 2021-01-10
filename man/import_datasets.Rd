@@ -4,10 +4,27 @@
 \alias{import_datasets}
 \title{Import files and stores in a list; changes wd if files come from new wd}
 \usage{
-import_datasets(files)
+import_datasets(
+  files,
+  change.wd = F,
+  prepare,
+  find.taxonomy = T,
+  identify.data.origin = T,
+  load.UniProt.ws = T
+)
 }
 \arguments{
 \item{files}{files to be imported}
+
+\item{change.wd}{Should wd be changed by default}
+
+\item{prepare}{Should imported files be forwarded to prepare_datasets}
+
+\item{find.taxonomy}{should taxonomy be determined}
+
+\item{identify.data.origin}{Identify origin software of data}
+
+\item{load.UniProt.ws}{Should a UniProt database be downloaded}
 }
 \value{
 

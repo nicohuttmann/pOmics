@@ -2,13 +2,14 @@
 #'
 #' @param imports imported raw data
 #' @param find.taxonomy should taxonomy be determined
+#' @param identify.data.origin Identify origin software of data
 #' @param load.UniProt.ws Should a UniProt database be downloaded
 #'
 #' @return
 #' @export
 #'
 #'
-prepare_datasets <- function(imports, find.taxonomy = T, load.UniProt.ws = T) {
+prepare_datasets <- function(imports, find.taxonomy = T, identify.data.origin = T, load.UniProt.ws = T) {
 
   # Put single data frame in list for generalization
   if (class(imports)[1] != "list") stop("Please provide a named list.")
@@ -26,7 +27,11 @@ prepare_datasets <- function(imports, find.taxonomy = T, load.UniProt.ws = T) {
     cat("Preparing the system...\n")
     for(j in 3:1) {cat(j, "\r"); Sys.sleep(.5)}
     # Make datasets
-    new_dataset(imports[[i]], name = names(imports)[i], load.UniProt.ws = load.UniProt.ws)
+    new_dataset(imports[[i]],
+                name = names(imports)[i],
+                identify.data.origin = identify.data.origin,
+                load.UniProt.ws = load.UniProt.ws)
+    Sys.sleep(3)
   }
 
 

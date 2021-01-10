@@ -1,24 +1,35 @@
 #' Import files and stores in a list; changes wd if files come from new wd
 #'
 #' @param files files to be imported
+#' @param change.wd Should wd be changed by default
+#' @param prepare Should imported files be forwarded to prepare_datasets
+#' @param find.taxonomy should taxonomy be determined
+#' @param identify.data.origin Identify origin software of data
+#' @param load.UniProt.ws Should a UniProt database be downloaded
 #'
 #' @return
 #' @export
 #'
 #'
-import_datasets <- function(files) {
+import_datasets <- function(files, change.wd = F, prepare, find.taxonomy = T, identify.data.origin = T, load.UniProt.ws = T) {
 
   # select files
   if (!hasArg(files)) files <- choose.files(default = getwd())
 
+
+  # Test
+  if (length(files) == 0) stop("No data to be imported.")
+
+
   # import files
-  list.import <- import_anything(files)
+  list.import <- import_files(files, return = T)
+
 
   # Change wd according to new files
   for (file in files) {
 
     # Check if new file is in a different dir than wd
-    if (dirname(file) != getwd()) {
+    if (dirname(file) != getwd() || change.wd) {
 
       # Change wd after user input
       if (menu(c("Yes", "No"), title = "Change working directory?") == 1) {
@@ -29,27 +40,24 @@ import_datasets <- function(files) {
 
   }
 
-  # Saves data in global environment
-  if ("imports" %in% objects(pos = .GlobalEnv)) {
-    x <- 1
-
-    while (paste0("imports", x) %in% objects(pos = .GlobalEnv)) {
-      x <- x + 1
-    }
-
-    assign(paste0("imports", x), list.import, pos = .GlobalEnv)
-
-  } else {
-    assign("imports", list.import, pos = .GlobalEnv)
-  }
+  # Saves imported files
+  add_import(list.import)
 
   # Continue with prepare function
-  if (menu(choices = c("Yes", "No"),
-           title = paste(ifelse(length(list.import) == 1, "One object", paste(length(list.import), "objects")),
-                         "imported, continue with preparing data?")) == 1) {
+  if (hasArg(prepare)) {
 
-    prepare_datasets(list.import)
+    if (prepare) {
+      prepare_datasets(list.import)
+    }
+
+  } else if(menu(choices = c("Yes", "No"),
+                 title = paste(ifelse(length(list.import) == 1, "One object", paste(length(list.import), "objects")),
+                               "imported, continue with preparing data?")) == 1) {
+
+    prepare_datasets(imports = list.import,
+                     find.taxonomy = find.taxonomy,
+                     identify.data.origin = identify.data.origin,
+                     load.UniProt.ws = load.UniProt.ws)
   }
-
 
 }

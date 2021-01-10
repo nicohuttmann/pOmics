@@ -1,17 +1,17 @@
 #' Imports any file type using the file extension and returns list
 #'
 #' @param files file paths
-#' @param nolist returns data frame directly if only one file is imported
+#' @param return return imported files
 #'
 #' @return
 #' @export
 #'
 #'
-import_anything <- function(files, nolist = F) {
+import_files <- function(files, return = F) {
 
-  # Select files if no paths given
+  # Select files if no path given
   if (!hasArg(files)) {
-    files <- choose.files(default = getwd(), multi = !nolist)
+    files <- choose.files(default = getwd())
   }
 
 
@@ -76,17 +76,20 @@ import_anything <- function(files, nolist = F) {
 
     # Add file to list
     list.import[[length(list.import) + 1]] <- tibble::as_tibble(data)
+    attr(list.import[[length(list.import)]], "path") <- file
+    attr(list.import[[length(list.import)]], "time") <- Sys.time()
 
     # use filename for list name
     names(list.import)[[length(list.import)]] <- tools::file_path_sans_ext(basename(file))
 
-
   }
 
+
+  # Add imported files to .import list
+  add_import(list.import)
+
   # Return list or one data frame
-  if (length(list.import) == 1 && nolist) {
-    list.import[[1]]
-  } else {
+  if (return) {
     list.import
   }
 

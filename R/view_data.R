@@ -6,8 +6,9 @@
 #'
 view_data <- function() {
 
-  View(.info)
-  View(.datasets)
   View(.databases)
+  View(.imports)
+  View(.datasets)
+  View(.info)
 
 }

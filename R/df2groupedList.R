@@ -25,22 +25,21 @@ df2groupedList <- function(x, min.similarity = 8, min.groupsize = 6) {
     # Compare data type
     if (mode(x[[i - 1]]) != mode(x[[i]])) {
       # Add column/s
-      grouped.list <- add.group.columns(grouped.list = grouped.list,
-                          x = x,
-                          from = from,
-                          to = i - 1,
-                          separate = (i - from) < min.groupsize)
+      grouped.list <- add_group_columns(grouped.list = grouped.list,
+                                        x = x,
+                                        from = from,
+                                        to = i - 1,
+                                        separate = (i - from) < min.groupsize)
       # Set new start of column group
       from <- i
 
       # If data type is the same, check names for similarity
       # If not similar; add
-    } else if (!same.prefix(names = colnames(x)[from:i],
-                              min.similarity = min.similarity,
-                              enforce.residue = T)) {
+    } else if (!same_prefix(names = colnames(x)[from:i],
+                            enforce.residue = T)) {
 
       # Add column/s
-      grouped.list <- add.group.columns(grouped.list = grouped.list,
+      grouped.list <- add_group_columns(grouped.list = grouped.list,
                           x = x,
                           from = from,
                           to = i - 1,
@@ -52,7 +51,7 @@ df2groupedList <- function(x, min.similarity = 8, min.groupsize = 6) {
     } else if (i == ncol(x)){
 
       # Add column/s
-      grouped.list <- add.group.columns(grouped.list = grouped.list,
+      grouped.list <- add_group_columns(grouped.list = grouped.list,
                           x = x,
                           from = from,
                           to = i,

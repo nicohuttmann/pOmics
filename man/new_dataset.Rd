@@ -4,12 +4,14 @@
 \alias{new_dataset}
 \title{Sorts raw data into data list with attributes}
 \usage{
-new_dataset(x, name, load.UniProt.ws = T, return = F)
+new_dataset(x, name, identify.data.origin = F, load.UniProt.ws = T, return = F)
 }
 \arguments{
 \item{x}{raw data frame}
 
 \item{name}{name of dataset}
+
+\item{identify.data.origin}{Identify origin software of data}
 
 \item{load.UniProt.ws}{Should UniProt data be loaded}
 

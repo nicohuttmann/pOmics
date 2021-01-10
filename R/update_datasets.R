@@ -17,6 +17,6 @@ update_datasets <- function(name) {
 
   # Set default if it's the first dataset
   if (is.null(.info[["dataset_default"]]))
-    update_default_dataset(silent = T)
+    set_default_dataset(silent = T)
 
 }
