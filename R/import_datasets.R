@@ -24,7 +24,6 @@ import_datasets <- function(files, change.wd = F, prepare, find.taxonomy = T, id
   # import files
   list.import <- import_files(files, return = T)
 
-
   # Change wd according to new files
   for (file in files) {
 

@@ -9,6 +9,7 @@
 #'
 new_info_list <- function(replace = F, return = T) {
 
+  #
   if (!".info" %in% objects(all.names = TRUE, envir = .GlobalEnv) || replace) {
     .info <<- tibble::lst("datasets" = c(),
                    "default_dataset" = c())
@@ -16,6 +17,7 @@ new_info_list <- function(replace = F, return = T) {
     .info[["default_dataset"]] <<- c()
 
     new_default_data()
+
 
     # Indicate if new info list was created
     if (return) return(TRUE)

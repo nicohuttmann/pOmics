@@ -4,7 +4,11 @@
 \alias{import_files}
 \title{Imports any file type using the file extension and returns list}
 \usage{
+<<<<<<< HEAD:man/import_files.Rd
 import_files(files, return = F)
+=======
+import_anything(files, return = F)
+>>>>>>> 7d97d86d9a6bddacd1932c3fceb78539f0e59175:man/import_anything.Rd
 }
 \arguments{
 \item{files}{file paths}

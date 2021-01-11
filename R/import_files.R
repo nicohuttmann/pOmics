@@ -9,6 +9,7 @@
 #'
 import_files <- function(files, return = F) {
 
+
   # Select files if no path given
   if (!hasArg(files)) {
     files <- choose.files(default = getwd())
