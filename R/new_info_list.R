@@ -16,6 +16,7 @@ new_info_list <- function(replace = F, return = T) {
     .info[["datasets"]] <<- c()
     .info[["default_dataset"]] <<- c()
 
+    # Defaults data
     new_default_data()
 
 
