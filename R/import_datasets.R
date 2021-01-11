@@ -22,8 +22,12 @@ import_datasets <- function(files, change.wd = F, prepare, find.taxonomy = T, id
 
 
   # import files
+<<<<<<< HEAD
   list.import <- import_files(files, return = T)
 
+=======
+  list.import <- import_anything(files, return = T)
+>>>>>>> 7d97d86d9a6bddacd1932c3fceb78539f0e59175
 
   # Change wd according to new files
   for (file in files) {

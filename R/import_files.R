@@ -7,7 +7,11 @@
 #' @export
 #'
 #'
+<<<<<<< HEAD:R/import_files.R
 import_files <- function(files, return = F) {
+=======
+import_anything <- function(files, return = F) {
+>>>>>>> 7d97d86d9a6bddacd1932c3fceb78539f0e59175:R/import_anything.R
 
   # Select files if no path given
   if (!hasArg(files)) {

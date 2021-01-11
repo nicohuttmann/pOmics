@@ -8,10 +8,17 @@
 #'
 #'
 new_datasets_list <- function(replace = F, return = T) {
+<<<<<<< HEAD
 
   if (!".datasets" %in% objects(all.names = TRUE, envir = .GlobalEnv) || replace) {
     .datasets <<- tibble::lst()
 
+=======
+
+  if (!".datasets" %in% objects(all.names = TRUE, envir = .GlobalEnv) || replace) {
+    .datasets <<- list()
+
+>>>>>>> 7d97d86d9a6bddacd1932c3fceb78539f0e59175
     # Indicate if new datasets list was created
     if (return) return(TRUE)
   } else {
