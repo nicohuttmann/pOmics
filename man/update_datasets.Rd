@@ -4,10 +4,10 @@
 \alias{update_datasets}
 \title{Update list of datasets}
 \usage{
-update_datasets(name)
+update_datasets(name, set.default = F)
 }
 \arguments{
-\item{name}{Name of new dataset}
+\item{name}{name of new dataset}
 }
 \value{
 

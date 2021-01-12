@@ -7,7 +7,7 @@
 #' @export
 #'
 #'
-set_default_dataset <- function(name, silent = F) {
+set_default_dataset <- function(name, silent = T) {
 
   if(is.null(.info[["datasets"]])) {
     # Silent?

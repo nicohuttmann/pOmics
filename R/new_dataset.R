@@ -2,7 +2,7 @@
 #'
 #' @param x raw data frame
 #' @param name name of dataset
-#' @param identify.data.origin Identify origin software of data
+#' @param identify.data_origin Identify origin software of data
 #' @param load.UniProt.ws Should UniProt data be loaded
 #' @param return Should dataset be returned?
 #'
@@ -11,7 +11,7 @@
 #'
 #' @importFrom magrittr %>%
 #'
-new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T, return = F) {
+new_dataset <- function(x, name , identify.data_origin = F, load.UniProt.ws = T, return = F) {
 
   # Setup
   # Clear console
@@ -30,24 +30,25 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
 
   # Preset attributes
   attr(dataset, "name") <- NA
-  attr(dataset, "data.origin") <- NA
+  attr(dataset, "data_origin") <- NA
   attr(dataset, "separator") <- NA
 
   attr(dataset, "taxId") <- NA
   attr(dataset, "species") <- NA
 
   attr(dataset, "variables") <- NA
-  attr(dataset, "variable.type") <- NA
+  attr(dataset, "variable_type") <- NA
   attr(dataset, "default_variables") <- NA
-  attr(dataset, "default_names_variables") <- NA
+  attr(dataset, "default_variables_names") <- NA
 
   attr(dataset, "observations") <- NA
-  attr(dataset, "set_observations") <- NA
-  attr(dataset, "default_set_observations") <- NA
+  attr(dataset, "observations_sets") <- NA
+  attr(dataset, "default_observations_set") <- NA
   attr(dataset, "default_observations") <- NA
-  attr(dataset, "default_names_observations") <- NA
+  attr(dataset, "default_observations_names") <- NA
 
-  attr(dataset, "data.types") <- NA
+  attr(dataset, "data_types") <- NA
+  attr(dataset, "default_data_type") <- NA
   attr(dataset, "LFQ") <- NA
   attr(dataset, "default_LFQ") <- NA
   attr(dataset, "Identification") <- NA
@@ -67,24 +68,24 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
 
 
   # Identify data origin
-  if (identify.data.origin) {
+  if (identify.data_origin) {
 
     #
     cat("Identify data origin...\r")
-    attr(dataset, "data.origin") <- identify_data_origin()
+    attr(dataset, "data_origin") <- identify_data_origin()
 
     ### Message
-    message(paste0("(", counter, "/n) Data origin: ", attr(dataset, "data.origin")))
+    message(paste0("(", counter, "/n) Data origin: ", attr(dataset, "data_origin")))
     counter <- counter + 1
   }
 
 
 
   # Identify separator
-  if (!is.na(attr(dataset, "data.origin"))) {
+  if (!is.na(attr(dataset, "data_origin"))) {
 
     # Get default
-    attr(dataset, "separator") <- get_defaults(attr(dataset, "data.origin"), "separator")
+    attr(dataset, "separator") <- get_defaults(attr(dataset, "data_origin"), "separator")
 
   } else {
 
@@ -216,23 +217,23 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
 
   # Get column name for data with findORchoose; if not found fill with NAs
   # Protein accession id
-  prot <- raw.dataset[[find_data_entry(data = raw.dataset, entry = "UNIPROTKB", data.origin = attr(dataset, "data.origin"))]]
+  prot <- raw.dataset[[find_data_entry(data = raw.dataset, entry = "UNIPROTKB", data.origin = attr(dataset, "data_origin"))]]
   if (!is.null(prot)) variables <- tibble::add_column(variables, UNIPROTKB = prot)
   else variables <- dplyr::mutate(variables, UNIPROTKB = NA_character_)
 
 
   # Gene symbol
-  gen <- raw.dataset[[find_data_entry(data = raw.dataset, entry = "GENES", data.origin = attr(dataset, "data.origin"))]]
+  gen <- raw.dataset[[find_data_entry(data = raw.dataset, entry = "GENES", data.origin = attr(dataset, "data_origin"))]]
   if (!is.null(gen)) variables <- tibble::add_column(variables, GENES = gen)
   else variables <- dplyr::mutate(variables, GENES = NA_character_)
 
   # Protein name
-  nam <- raw.dataset[[find_data_entry(data = raw.dataset, entry = "PROTEIN-NAMES", data.origin = attr(dataset, "data.origin"))]]
+  nam <- raw.dataset[[find_data_entry(data = raw.dataset, entry = "PROTEIN-NAMES", data.origin = attr(dataset, "data_origin"))]]
   if (!is.null(nam)) variables <- tibble::add_column(variables, `PROTEIN-NAMES` = nam)
   else variables <- dplyr::mutate(variables, `PROTEIN-NAMES` = NA_character_)
 
   # Entrez gene id
-  eg <- raw.dataset[[find_data_entry(data = raw.dataset, entry = "ENTREZ_GENE", data.origin = attr(dataset, "data.origin"))]]
+  eg <- raw.dataset[[find_data_entry(data = raw.dataset, entry = "ENTREZ_GENE", data.origin = attr(dataset, "data_origin"))]]
   if (!is.null(eg)) variables <- tibble::add_column(variables, ENTREZ_GENE = eg)
   else variables <- dplyr::mutate(variables, ENTREZ_GENE = NA_character_)
 
@@ -240,16 +241,16 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
 
 
   # Determine identifier type by comparing columns with rownames/identifiers
-  if (!is.na(attr(dataset, "data.origin"))) {
+  if (!is.na(attr(dataset, "data_origin"))) {
     #
-    if (!is.na(get_defaults(attr(dataset, "data.origin"), type = "variable.type"))) {
+    if (!is.na(get_defaults(attr(dataset, "data_origin"), type = "variables_type"))) {
       #
-      attr(dataset, "variable.type") <- get_defaults(attr(dataset, "data.origin"), type = "variable.type")
+      attr(dataset, "variables_type") <- get_defaults(attr(dataset, "data_origin"), type = "variables_type")
     } else {
       # Identify manually
       for (i in 2:ncol(variables)) {
         if (identical(dplyr::pull(variables, 1), unname(dplyr::pull(variables, i)))) {
-          attr(dataset, "variable.type") <- colnames(variables)[i]
+          attr(dataset, "variables_type") <- colnames(variables)[i]
           break
         }
       }
@@ -260,7 +261,7 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
     # Idenify manually
     for (i in 2:ncol(variables)) {
       if (identical(dplyr::pull(variables, 1), unname(dplyr::pull(variables, i)))) {
-        attr(dataset, "variable.type") <- colnames(variables)[i]
+        attr(dataset, "variables_type") <- colnames(variables)[i]
         break
       }
     }
@@ -269,7 +270,7 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
 
 
   ### Message
-  message(paste0("(", counter, "/n) Identifier type: ", attr(dataset, "variable.type")))
+  message(paste0("(", counter, "/n) Identifier type: ", attr(dataset, "variables_type")))
   counter <- counter + 1
 
 
@@ -295,7 +296,7 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
         temp <- select_UniProt(x = .databases[["UniProt"]][[as.character(attr(dataset, "taxId"))]],
                                keys = names(which(is.na(dplyr::pull(variables, i, name = variables)))),
                                columns = i,
-                               keytype = attr(dataset, "variable.type"))
+                               keytype = attr(dataset, "variables_type"))
         # Add missing data
         for (j in dplyr::pull(temp, 1)) {
           variables[match(j, dplyr::pull(variables, 1)), i] <- temp[j, i]
@@ -350,10 +351,10 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
 
 
   # Add attributes
-  attr(dataset, "set_observations") <- "raw"
-  attr(dataset, "default_set_observations") <- "raw"
+  attr(dataset, "observations_sets") <- "raw"
+  attr(dataset, "default_observations_set") <- "raw"
   attr(dataset, "default_observations") <- "all"
-  attr(dataset, "default_names_observations") <- "observations"
+  attr(dataset, "default_observations_names") <- "observations"
 
   ### Message
   message(paste0("(", counter, "/n)  Setup observation dataframes."))

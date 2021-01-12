@@ -6,6 +6,7 @@
 #'
 get_default_dataset <- function() {
 
-return(attr(.info, "default_dataset"))
+  # Return
+  return(.info[["default_dataset"]])
 
 }

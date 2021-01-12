@@ -9,7 +9,7 @@
 get_dataset <- function(dataset) {
 
   # Default if not given
-  if (!hasArg(dataset)) return(.info[["dataset_default"]])
+  if (!hasArg(dataset)) return(get_default_dataset())
 
   # Name correct
   if (dataset %in% .info[["datasets"]]) return(dataset)

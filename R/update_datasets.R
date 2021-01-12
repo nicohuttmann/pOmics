@@ -1,22 +1,23 @@
 #' Update list of datasets
 #'
-#' @param name Name of new dataset
+#' @param name name of new dataset
 #'
 #' @return
 #' @export
 #'
 #'
-update_datasets <- function(name) {
+update_datasets <- function(name, set.default = F) {
 
   # First entry
   if (is.null(.info[["datasets"]])) {
     .info[["datasets"]] <<- name
+    # Add
   } else {
     .info[["datasets"]] <<- c(.info[["datasets"]], name)
   }
 
   # Set default if it's the first dataset
-  if (is.null(.info[["dataset_default"]]))
-    set_default_dataset(silent = T)
+  if (is.null(.info[["dataset_default"]]) || set.default)
+    set_default_dataset(name, silent = TRUE)
 
 }
