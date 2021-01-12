@@ -15,7 +15,7 @@ update_data_names <- function(name, type, dataset, set.default = T) {
   dataset <- get_dataset(dataset)
 
   # check data type
-  type <- get_data_type(type)
+  type <- get_data_type(type, dataset)
 
 
   # First entry

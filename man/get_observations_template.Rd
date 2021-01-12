@@ -4,12 +4,12 @@
 \alias{get_observations_template}
 \title{Creates template for new variables data}
 \usage{
-get_observations_template(dataset, observations.set, fill = NA)
+get_observations_template(observations.set, dataset, fill = NA)
 }
 \arguments{
-\item{dataset}{dataset}
-
 \item{observations.set}{set of observations}
+
+\item{dataset}{dataset}
 
 \item{fill}{entries of vector}
 }

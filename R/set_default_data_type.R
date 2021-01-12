@@ -17,7 +17,7 @@ set_default_data_type <- function(type, dataset, silent = T) {
   # Add if name is in list
   if (type %in% attr(.datasets[[dataset]], "data_types")) {
     #
-    attr(.datasets[[dataset]][["default_data_type"]]) <<- type
+    attr(.datasets[[dataset]], "default_data_type") <<- type
     if (!silent) message(paste0(attr(.datasets[[dataset]], "default_data_type"), " was set as default data type."))
 
   } else {

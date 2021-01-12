@@ -17,6 +17,6 @@ get_default_data_name <- function(type, dataset) {
 
 
   # Return
-  return(attr(.dataset[[dataset]], paste0("default_", type)))
+  return(attr(.datasets[[dataset]], paste0("default_", type)))
 
 }

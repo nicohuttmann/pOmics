@@ -4,12 +4,12 @@
 \alias{get_observations_set}
 \title{Checks and returns correct observations set identifier}
 \usage{
-get_observations_set(dataset, observations.set)
+get_observations_set(observations.set, dataset)
 }
 \arguments{
-\item{dataset}{dataset name or number}
-
 \item{observations.set}{set of observations}
+
+\item{dataset}{dataset name or number}
 }
 \value{
 

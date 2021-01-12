@@ -46,7 +46,7 @@ new_default_data <- function() {
     for (i in names(defaults)) {
       #
       names(defaults[[i]]) <- c("separator",
-                                "variable.type",
+                                "variables_type",
                                 "column_UNIPROTKB",
                                 "column_GENES",
                                 "column_PROTEIN-NAMES",

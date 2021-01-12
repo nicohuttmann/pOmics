@@ -4,12 +4,12 @@
 \alias{get_variables}
 \title{Assembles variables}
 \usage{
-get_variables(dataset, variables)
+get_variables(variables, dataset)
 }
 \arguments{
-\item{dataset}{dataset}
-
 \item{variables}{variables defined by dplyr::filter}
+
+\item{dataset}{dataset}
 }
 \value{
 

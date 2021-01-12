@@ -4,14 +4,14 @@
 \alias{get_observations}
 \title{Assembles observations}
 \usage{
-get_observations(dataset, observations.set, observations)
+get_observations(observations, observations.set, dataset)
 }
 \arguments{
-\item{dataset}{datset}
+\item{observations}{observations defined by dplyr::filter}
 
 \item{observations.set}{observations data frame}
 
-\item{observations}{observations defined by dplyr::filter}
+\item{dataset}{datset}
 }
 \value{
 

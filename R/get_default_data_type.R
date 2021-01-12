@@ -9,7 +9,7 @@
 get_default_data_type <- function(dataset) {
 
   # Check dataset
-  dataset <- get_default(dataset)
+  dataset <- get_dataset(dataset)
 
 
   # Return

@@ -1,7 +1,7 @@
 #' Assembles variables
 #'
-#' @param dataset dataset
 #' @param variables variables defined by dplyr::filter
+#' @param dataset dataset
 #'
 #' @return
 #' @export
@@ -9,7 +9,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-get_variables <- function(dataset, variables) {
+get_variables <- function(variables, dataset) {
 
   # check dataset
   dataset <- get_dataset(dataset)

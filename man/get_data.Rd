@@ -4,20 +4,20 @@
 \alias{get_data}
 \title{Assemble data from dataset}
 \usage{
-get_data(name, type, dataset, variables, observations.set, observations)
+get_data(variables, observations, observations.set, name, type, dataset)
 }
 \arguments{
+\item{variables}{selected variables}
+
+\item{observations}{selected observations}
+
+\item{observations.set}{set of observations}
+
 \item{name}{specific name of data type}
 
 \item{type}{data type}
 
 \item{dataset}{dataset name or number}
-
-\item{variables}{selected variables}
-
-\item{observations.set}{set of observations}
-
-\item{observations}{selected observations}
 }
 \value{
 

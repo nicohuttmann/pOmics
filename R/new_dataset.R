@@ -2,7 +2,7 @@
 #'
 #' @param x raw data frame
 #' @param name name of dataset
-#' @param identify.data_origin Identify origin software of data
+#' @param identify.data.origin Identify origin software of data
 #' @param load.UniProt.ws Should UniProt data be loaded
 #' @param return Should dataset be returned?
 #'
@@ -11,7 +11,7 @@
 #'
 #' @importFrom magrittr %>%
 #'
-new_dataset <- function(x, name , identify.data_origin = F, load.UniProt.ws = T, return = F) {
+new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T, return = F) {
 
   # Setup
   # Clear console
@@ -48,7 +48,7 @@ new_dataset <- function(x, name , identify.data_origin = F, load.UniProt.ws = T,
   attr(dataset, "default_observations_names") <- NA
 
   attr(dataset, "data_types") <- NA
-  attr(dataset, "default_data_type") <- NA
+  attr(dataset, "default_data_type") <- "LFQ"
   attr(dataset, "LFQ") <- NA
   attr(dataset, "default_LFQ") <- NA
   attr(dataset, "Identification") <- NA
@@ -68,7 +68,7 @@ new_dataset <- function(x, name , identify.data_origin = F, load.UniProt.ws = T,
 
 
   # Identify data origin
-  if (identify.data_origin) {
+  if (identify.data.origin) {
 
     #
     cat("Identify data origin...\r")
@@ -172,7 +172,7 @@ new_dataset <- function(x, name , identify.data_origin = F, load.UniProt.ws = T,
   attr(dataset, "default_LFQ") <- "raw"
 
   # Update data_type attribute
-  attr(dataset, "data.types") <- if (is.na(attr(dataset, "data.types"))) "LFQ" else c(attr(dataset, "data.types"), "LFQ")
+  attr(dataset, "data_types") <- if (is.na(attr(dataset, "data_types"))) "LFQ" else c(attr(dataset, "data_types"), "LFQ")
 
 
 
@@ -189,11 +189,11 @@ new_dataset <- function(x, name , identify.data_origin = F, load.UniProt.ws = T,
   attr(dataset, "default_Identification") <- "raw"
 
   # Update data_type attribute
-  attr(dataset, "data.types") <- if (is.na(attr(dataset, "data.types"))) "Identification" else c(attr(dataset, "data.types"), "Identification")
+  attr(dataset, "data_types") <- if (is.na(attr(dataset, "data_types"))) "Identification" else c(attr(dataset, "data_types"), "Identification")
 
 
   ### Message
-  message(paste0("(", counter, "/n) Added data: ", paste(attr(dataset, "data.types"), collapse = ", ")))
+  message(paste0("(", counter, "/n) Added data: ", paste(attr(dataset, "data_types"), collapse = ", ")))
   counter <- counter + 1
 
 
@@ -339,7 +339,7 @@ new_dataset <- function(x, name , identify.data_origin = F, load.UniProt.ws = T,
 
   # Observations
   # Assumes for now that all observations in all data are equal
-  attr(dataset, "observations") <- rownames(dataset[[attr(dataset, "data.types")[1]]][["raw"]])
+  attr(dataset, "observations") <- rownames(dataset[[attr(dataset, "data_types")[1]]][["raw"]])
 
   # Build observation matrix to store names and group info
   observations <- tibble::tibble(observations = attr(dataset, "observations"))
