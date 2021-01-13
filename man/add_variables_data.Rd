@@ -4,7 +4,7 @@
 \alias{add_variables_data}
 \title{Add data to variables}
 \usage{
-add_variables_data(data, name, dataset)
+add_variables_data(data, name, dataset, set.default = F)
 }
 \arguments{
 \item{data}{new data}
@@ -12,6 +12,8 @@ add_variables_data(data, name, dataset)
 \item{name}{name}
 
 \item{dataset}{dataset}
+
+\item{set.default}{set new variables data as default}
 }
 \value{
 

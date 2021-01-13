@@ -8,6 +8,8 @@ update_datasets(name, set.default = F)
 }
 \arguments{
 \item{name}{name of new dataset}
+
+\item{set.default}{set new dataset as default}
 }
 \value{
 

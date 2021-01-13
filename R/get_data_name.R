@@ -14,7 +14,7 @@ get_data_name <- function(name, type, dataset) {
   dataset <- get_dataset(dataset)
 
   # check data type
-  type <- get_data_type(type)
+  type <- get_data_type(type = type, dataset = dataset)
 
   # Default if not given
   if (!hasArg(name)) return(get_default_data_name(type, dataset))

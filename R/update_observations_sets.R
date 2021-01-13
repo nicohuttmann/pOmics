@@ -15,7 +15,7 @@ update_observations_sets <- function(set, dataset, set.default = T) {
 
 
   # First entry
-  if (is.na(attr(.datasets[[dataset]], "observations_sets"))) {
+  if (length(attr(.datasets[[dataset]], "observations_sets")) == 1 && is.na(attr(.datasets[[dataset]], "observations_sets"))) {
     attr(.datasets[[dataset]], "observations_sets") <<- set
     # Add
   } else {
@@ -23,7 +23,7 @@ update_observations_sets <- function(set, dataset, set.default = T) {
   }
 
   # Set default if it's the first dataset
-  if (attr(dataset, "default_observations_set") || set.default)
+  if (is.na(attr(dataset, "default_observations_set")) || set.default)
     set_default_observations_set(set, dataset, silent = TRUE)
 
 }

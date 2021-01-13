@@ -10,7 +10,7 @@ import_datasets(
   prepare,
   find.taxonomy = T,
   identify.data.origin = T,
-  load.UniProt.ws = T
+  load.UniProt.ws = F
 )
 }
 \arguments{

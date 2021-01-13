@@ -16,7 +16,7 @@ get_observations_template <- function(observations.set, dataset, fill = NA) {
   dataset <- get_dataset(dataset)
 
   # Check observation set
-  observations.set <- get_observations_set(dataset, observations.set)
+  observations.set <- get_observations_set(observations.set = observations.set, dataset = dataset)
 
   # Get names vector
   template <- .datasets[[dataset]][["observations"]][[observations.set]] %>%

@@ -19,7 +19,7 @@ update_data_names <- function(name, type, dataset, set.default = T) {
 
 
   # First entry
-  if (is.na(attr(.datasets[[dataset]], type))) {
+  if (length(attr(.datasets[[dataset]], type)) == 1 && is.na(attr(.datasets[[dataset]], type))) {
     attr(.datasets[[dataset]], type) <<- name
     # Add
   } else {

@@ -11,7 +11,7 @@
 #' @export
 #'
 #'
-import_datasets <- function(files, change.wd = F, prepare, find.taxonomy = T, identify.data.origin = T, load.UniProt.ws = T) {
+import_datasets <- function(files, change.wd = F, prepare, find.taxonomy = T, identify.data.origin = T, load.UniProt.ws = F) {
 
   # select files
   if (!hasArg(files)) files <- choose.files(default = getwd())

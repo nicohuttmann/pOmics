@@ -1,6 +1,7 @@
 #' Update list of datasets
 #'
 #' @param name name of new dataset
+#' @param set.default set new dataset as default
 #'
 #' @return
 #' @export

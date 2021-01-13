@@ -4,16 +4,18 @@
 \alias{add_observations_data}
 \title{Adds data to observations dataframe}
 \usage{
-add_observations_data(data, name, dataset, observations.set)
+add_observations_data(data, name, observations.set, dataset, ignore.names = F)
 }
 \arguments{
 \item{data}{new data}
 
 \item{name}{name}
 
+\item{observations.set}{set of observations}
+
 \item{dataset}{dataset}
 
-\item{observations.set}{set of observations}
+\item{ignore.names}{Assumes that data matches observations}
 }
 \value{
 
