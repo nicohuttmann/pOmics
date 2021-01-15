@@ -33,7 +33,7 @@ add_dataset <- function(dataset, return = T) {
     .datasets[[attr(dataset, "name")]] <<- dataset
 
     # Update info
-    update_datasets(attr(dataset, "name"))
+    update_datasets(default.dataset = attr(dataset, "name"))
 
     # Indicate if new info list was created
     if (return) return(TRUE)

@@ -1,28 +1,30 @@
 #' Adds new data type
 #'
-#' @param type data type
 #' @param dataset dataset
-#' @param set.default should default be changed
+#' @param default.type new default data type
 #'
 #' @return
 #' @export
 #'
 #'
-update_data_types <- function(type, dataset, set.default = F) {
+update_data_types <- function(dataset, default.type = NA) {
 
   # Check dataset
   dataset <- get_dataset(dataset)
 
-  # First entry
-  if (is.na(attr(.datasets[[dataset]], "data_types"))) {
-    attr(.datasets[[dataset]], "data_types") <<- type
-    # Add
-  } else {
-    attr(.datasets[[dataset]], "data_types") <<- c(attr(.datasets[[dataset]], "data_types"), type)
-  }
+
+  # Update
+  attr(.datasets[[dataset]], "data_types") <- setdiff(names(.datasets[[dataset]]), c("variables", "observations"))
+
 
   # Set default if it's the first dataset
-  if (attr(dataset, "default_data_type") || set.default)
-    set_default_data_type(type, dataset, silent = TRUE)
+  if (!is.na(default.type)) {
+    #
+    set_default_data_type(type = default.type, dataset = dataset, silent = TRUE)
+  } else if (is.na(attr(.datasets[[dataset]], "default_data_type"))) {
+    #
+    set_default_data_type(type = get_data_types(dataset = dataset, print = FALSE, return = TRUE)[1], dataset, silent = TRUE)
+  }
+
 
 }

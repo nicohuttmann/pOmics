@@ -19,6 +19,9 @@ add_variables_data <- function(data, name, dataset, set.default = F) {
   # Get template
   template <- get_variables_template(dataset)
 
+  # Name
+  name <- ask_name(name = name)
+
 
   # Fill template with data
   if (length(names(data)) > 0) {
