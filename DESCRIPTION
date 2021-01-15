@@ -15,7 +15,8 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-Imports: 
+Imports:
+    fastcluster,
     ggplot2,
     ggfortify,
     ggdendro,

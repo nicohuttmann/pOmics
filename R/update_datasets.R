@@ -7,18 +7,19 @@
 #' @export
 #'
 #'
-update_datasets <- function(name, set.default = F) {
+update_datasets <- function(default.dataset = NA) {
 
-  # First entry
-  if (is.null(.info[["datasets"]])) {
-    .info[["datasets"]] <<- name
-    # Add
-  } else {
-    .info[["datasets"]] <<- c(.info[["datasets"]], name)
+  # Update
+  .info[["datasets"]] <<- names(.datasets)
+
+  # Set default if given
+  if (!is.na(default.dataset)) {
+    #
+    set_default_dataset(name = default.dataset, silent = TRUE)
+    # Set default if it's the first dataset
+  } else if (is.na(.info[["default_dataset"]])) {
+    #
+    set_default_dataset(name = .info[["datasets"]][1], silent = TRUE)
   }
-
-  # Set default if it's the first dataset
-  if (is.null(.info[["default_dataset"]]) || set.default)
-    set_default_dataset(name, silent = TRUE)
 
 }

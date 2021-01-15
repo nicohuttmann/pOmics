@@ -33,19 +33,25 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
   attr(dataset, "data_origin") <- NA
   attr(dataset, "separator") <- NA
 
+
   attr(dataset, "taxId") <- NA
   attr(dataset, "species") <- NA
 
+
   attr(dataset, "variables") <- NA
-  attr(dataset, "variable_type") <- NA
+  attr(dataset, "variables_type") <- NA
   attr(dataset, "default_variables") <- NA
-  attr(dataset, "default_variables_names") <- NA
+  attr(dataset, "default_variables_names") <- "GENES"
+
 
   attr(dataset, "observations") <- NA
   attr(dataset, "observations_sets") <- NA
   attr(dataset, "default_observations_set") <- NA
-  attr(dataset, "default_observations") <- NA
-  attr(dataset, "default_observations_names") <- NA
+
+  attr(dataset, "default_raw_observations") <- "all"
+  attr(dataset, "default_raw_names") <- "observations"
+  attr(dataset, "default_raw_groups") <- NA
+
 
   attr(dataset, "data_types") <- NA
   attr(dataset, "default_data_type") <- "LFQ"

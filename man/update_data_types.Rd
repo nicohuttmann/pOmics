@@ -4,14 +4,12 @@
 \alias{update_data_types}
 \title{Adds new data type}
 \usage{
-update_data_types(type, dataset, set.default = F)
+update_data_types(dataset, default.type = NA)
 }
 \arguments{
-\item{type}{data type}
-
 \item{dataset}{dataset}
 
-\item{set.default}{should default be changed}
+\item{default.type}{new default data type}
 }
 \value{
 

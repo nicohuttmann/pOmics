@@ -9,7 +9,7 @@
 #'
 set_default_dataset <- function(name, silent = T) {
 
-  if(is.null(.info[["datasets"]])) {
+  if(is.na(.info[["datasets"]])) {
     # Silent?
     if(silent) stop()
     else stop("No datasets added yet.")

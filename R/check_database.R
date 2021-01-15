@@ -13,12 +13,13 @@ check_database <- function(database = "UniProt", taxId) {
   if (hasArg(taxId) && ".databases" %in% objects(all.names = T, envir = .GlobalEnv)) {
 
     # database entry exists
-    if (length(.databases) > 0 && database %in% names(.databases)) {
+    if (length(names(.databases)) > 0 && database %in% names(.databases)) {
 
       # taxId exists
-      if (length(.databases[[database]]) > 0 && taxId %in% names(.databases[[database]])) {
+      if (length(names(.databases[[database]])) > 0 && taxId %in% names(.databases[[database]])) {
 
         return(TRUE)
+
       }
 
     }

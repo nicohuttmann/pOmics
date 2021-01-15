@@ -4,12 +4,12 @@
 \alias{update_observations_sets}
 \title{Adds observations set}
 \usage{
-update_observations_sets(set, dataset, set.default = T)
+update_observations_sets(dataset, default.set = NA)
 }
 \arguments{
-\item{set}{observations set}
-
 \item{dataset}{dataset}
+
+\item{set}{observations set}
 
 \item{set.default}{should default be changed}
 }

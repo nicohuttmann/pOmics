@@ -13,8 +13,8 @@ new_info_list <- function(replace = F, return = T) {
   if (!".info" %in% objects(all.names = TRUE, envir = .GlobalEnv) || replace) {
     .info <<- tibble::lst("datasets" = c(),
                    "default_dataset" = c())
-    .info[["datasets"]] <<- c()
-    .info[["default_dataset"]] <<- c()
+    .info[["datasets"]] <<- NA
+    .info[["default_dataset"]] <<- NA
 
     # Defaults data
     new_default_data()

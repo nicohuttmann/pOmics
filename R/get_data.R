@@ -11,7 +11,7 @@
 #' @export
 #'
 #'
-get_data <- function(variables,  observations, observations.set, name, type, dataset) {
+get_data <- function(variables, observations, observations.set, name, type, dataset) {
 
   # Checks correct name of dataset
   dataset <- get_dataset(dataset)

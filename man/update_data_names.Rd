@@ -4,16 +4,14 @@
 \alias{update_data_names}
 \title{Add new data name}
 \usage{
-update_data_names(name, type, dataset, set.default = T)
+update_data_names(type, dataset, default.name = NA)
 }
 \arguments{
-\item{name}{data name}
-
 \item{type}{data type}
 
 \item{dataset}{dataset}
 
-\item{set.default}{Should data name be set as default}
+\item{default.name}{new default name}
 }
 \value{
 

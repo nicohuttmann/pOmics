@@ -8,22 +8,26 @@
 #' @export
 #'
 #'
-update_observations_sets <- function(set, dataset, set.default = T) {
+update_observations_sets <- function(dataset, default.set = NA) {
 
   # Check dataset
   dataset <- get_dataset(dataset)
 
 
-  # First entry
-  if (length(attr(.datasets[[dataset]], "observations_sets")) == 1 && is.na(attr(.datasets[[dataset]], "observations_sets"))) {
-    attr(.datasets[[dataset]], "observations_sets") <<- set
-    # Add
-  } else {
-    attr(.datasets[[dataset]], "observations_sets") <<- c(attr(.datasets[[dataset]], "observations_sets"), set)
-  }
+  # Update
+  attr(dataset, "default_observations_set") <- names(.datasets[[dataset]][["observations"]])
+
 
   # Set default if it's the first dataset
-  if (is.na(attr(dataset, "default_observations_set")) || set.default)
-    set_default_observations_set(set, dataset, silent = TRUE)
+  if (!is.na(set.default)) {
+    #
+    set_default_observations_set(default.set, dataset, silent = TRUE)
+  } else if (is.na(attr(dataset, "default_observations_set"))) {
+    #
+    set_default_observations_set(get_observations_sets(dataset = dataset, print = F, return = T)[1], dataset, silent = TRUE)
+  }
+
+
+
 
 }
