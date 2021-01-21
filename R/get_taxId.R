@@ -8,69 +8,89 @@
 #'
 get_taxId <- function(x) {
 
+  #
+  found <- FALSE
+
   # Tries to determine taxId from given data
   if (hasArg(x)) {
 
-    # Prepares entries to test from given data frame
-    id.list <- unlist(x[1:ifelse(nrow(x) > 200, 200, nrow(x)), !unlist(lapply(x, is.numeric))])
-    id.list <- c(id.list,
-                 keep_first(id.list))
+    # Test data type; data frame
+    if (is.data.frame(x)) {
 
-    taxId <- protein2taxID(id.list, silent = T)
+      # Prepares entries to test from given data frame
+      id.list <- unlist(x[1:ifelse(nrow(x) > 200, 200, nrow(x)), !unlist(lapply(x, is.numeric))])
+      id.list <- c(id.list,
+                   keep_first(id.list))
+
+      taxId <- protein2taxID(id.list, silent = T)
 
 
 
-    if (taxId == 0) {
-      found <- FALSE
-      message("Species could not be determined.")
-    } else {
-      found <- TRUE
-    }
+      if (taxId == 0) {
+        message("Species could not be determined from data frame entries.")
+      } else {
+        found <- TRUE
+      }
 
-    # Let's user specify the taxId manually
-    while(!found) {
+    } else if (is.numeric(x)) {
 
-      Id2name <- UniProt.ws::availableUniprotSpecies(readline("Enter a species name: "))
 
-      name <- menu(Id2name$`Species name`,
-                   title = "Select species:")
+      taxonomy <- tryCatch(
+        UniProt.ws::lookupUniprotSpeciesFromTaxId(x),
+        error = function(cond) {
+          0
+        }
+      )
 
-      taxId <- Id2name$`taxon ID`[ifelse(name == 0, 9606, name)]
+      # Test if id was successfully identified
+      if (taxonomy > 0) {
+        #
+        found <- TRUE
+        taxId <- x
 
-      found <- ifelse(menu(c("Yes", "No"),
-                           title = paste0("Correct species? (",
-                                          UniProt.ws::lookupUniprotSpeciesFromTaxId(taxId),
-                                          ")")) == 1,
-                      TRUE,
-                      FALSE)
+      }
 
-    }
+    } else if(is.character(x)) {
 
-  } else {
+        #
+        dummy <- UniProt.ws::availableUniprotSpecies(x)
 
-    found <- FALSE
+        #
+        if (any(dummy$`Species name` == x)) {
 
-    while(!found) {
-
-      Id2name <- UniProt.ws::availableUniprotSpecies(readline("Enter a species name: "))
-
-      name <- menu(Id2name$`Species name`,
-                   title = "Select species:")
-
-      taxId <- Id2name$`taxon ID`[ifelse(name == 0, 9606, name)]
-
-      found <- ifelse(menu(c("Yes", "No"),
-                           title = paste0("Correct species? (",
-                                          UniProt.ws::lookupUniprotSpeciesFromTaxId(taxId),
-                                          ")")) == 1,
-                      TRUE,
-                      FALSE)
+          #
+          taxId <- dummy[which(dummy$`Species name` == x), 1]
+          #
+          found <- TRUE
+        }
 
     }
 
   }
 
 
-  taxId
+
+  # If not found from input
+  while(!found) {
+
+    Id2name <- UniProt.ws::availableUniprotSpecies(readline("Enter a species name: "))
+
+    name <- menu(Id2name$`Species name`,
+                 title = "Select species:")
+
+    taxId <- Id2name$`taxon ID`[ifelse(name == 0, 9606, name)]
+
+    found <- ifelse(menu(c("Yes", "No"),
+                         title = paste0("Correct species? (",
+                                        UniProt.ws::lookupUniprotSpeciesFromTaxId(taxId),
+                                        ")")) == 1,
+                    TRUE,
+                    FALSE)
+
+  }
+
+
+
+  return(taxId)
 
 }

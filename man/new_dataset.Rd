@@ -4,18 +4,33 @@
 \alias{new_dataset}
 \title{Sorts raw data into data list with attributes}
 \usage{
-new_dataset(x, name, identify.data.origin = F, load.UniProt.ws = T, return = F)
+new_dataset(
+  x,
+  name,
+  data.origin,
+  species,
+  load.UniProt.ws = T,
+  return = F,
+  min.similarity,
+  min.groupsize
+)
 }
 \arguments{
 \item{x}{raw data frame}
 
 \item{name}{name of dataset}
 
-\item{identify.data.origin}{Identify origin software of data}
+\item{data.origin}{Identify origin software of data}
+
+\item{species}{protein origin}
 
 \item{load.UniProt.ws}{Should UniProt data be loaded}
 
 \item{return}{Should dataset be returned?}
+
+\item{min.similarity}{minimum similarity oi column names}
+
+\item{min.groupsize}{minimum number of samples}
 }
 \value{
 
