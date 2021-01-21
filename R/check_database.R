@@ -20,9 +20,14 @@ check_database <- function(database = "UniProt", taxId) {
 
         return(TRUE)
 
+      } else {
+        return(FALSE)
       }
 
+    } else {
+      return(FALSE)
     }
+
 
   } else {
     return(FALSE)

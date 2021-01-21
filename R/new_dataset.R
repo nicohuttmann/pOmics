@@ -2,16 +2,19 @@
 #'
 #' @param x raw data frame
 #' @param name name of dataset
-#' @param identify.data.origin Identify origin software of data
+#' @param data.origin Identify origin software of data
+#' @param species protein origin
 #' @param load.UniProt.ws Should UniProt data be loaded
 #' @param return Should dataset be returned?
+#' @param min.similarity minimum similarity oi column names
+#' @param min.groupsize minimum number of samples
 #'
 #' @return
 #' @export
 #'
 #' @importFrom magrittr %>%
 #'
-new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T, return = F) {
+new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, return = F, min.similarity, min.groupsize) {
 
   # Setup
   # Clear console
@@ -74,7 +77,7 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
 
 
   # Identify data origin
-  if (identify.data.origin) {
+  if (!hasArg(data.origin) || !is_data_origin(data.origin)) {
 
     #
     cat("Identify data origin...\r")
@@ -83,6 +86,15 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
     ### Message
     message(paste0("(", counter, "/n) Data origin: ", attr(dataset, "data_origin")))
     counter <- counter + 1
+  } else {
+    #
+    attr(dataset, "data_origin") <- data.origin
+
+    ### Message
+    message(paste0("(", counter, "/n) Data origin: ", attr(dataset, "data_origin")))
+    counter <- counter + 1
+
+
   }
 
 
@@ -101,6 +113,7 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
   ### Message
   message(paste0("(", counter, "/n) Separator: ", attr(dataset, "separator")))
   counter <- counter + 1
+
   }
 
 
@@ -112,18 +125,51 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
 
 
   # Identify taxonomy Id
-  cat("Identify species...\r")
-  attr(dataset, "taxId") <- get_taxId(x)
-  # Species name
-  attr(dataset, "species") <- dataset %>%
-    attr("taxId") %>%
-    suppressMessages() %>%
-    UniProt.ws::lookupUniprotSpeciesFromTaxId()
-  ### Message 2
-  message(paste0("(", counter, "/n) Species: ", attr(dataset, "species")))
-  counter <- counter + 1
+  if (hasArg(species) && species == FALSE) {
+
+    load.UniProt.ws <- FALSE
+
+
+  } else {
+
+    #
+    cat("Identify species...\r")
+
+    # Argument given
+    if (hasArg(species)) {
+
+      #Id or name given
+      attr(dataset, "taxId") <- get_taxId(species)
+
+      # Search for Id
+    } else {
+      attr(dataset, "taxId") <- get_taxId(x)
+    }
+
+    # Species name
+    attr(dataset, "species") <- dataset %>%
+      attr("taxId") %>%
+      suppressMessages() %>%
+      UniProt.ws::lookupUniprotSpeciesFromTaxId()
+
+
+
+
+    ### Message 2
+    message(paste0("(", counter, "/n) Species: ", attr(dataset, "species")))
+    counter <- counter + 1
+
+
+  }
+
+
+
+
+
 
   ##############################
+
+
 
 
   # Load UniProt.ws
@@ -161,9 +207,11 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
 
   # Aggregate data frame
   raw.dataset <- x %>%
-    df2groupedList() %>%
+    df2groupedList(min.similarity = min.similarity, min.groupsize = min.groupsize) %>%
     sep_vector2list(sep = attr(dataset, "separator")) %>%
     list_entries2vector()
+
+
 
 
   # Quantitative value; mostly LFQ
@@ -210,7 +258,7 @@ new_dataset <- function(x, name , identify.data.origin = F, load.UniProt.ws = T,
 
 
 
-  cat("Identify variable names...\r")
+  #cat("Identify variable names...\r")
 
 
   # Build and add Names dataframe

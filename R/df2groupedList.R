@@ -14,6 +14,13 @@ df2groupedList <- function(x, min.similarity = 8, min.groupsize = 6) {
   grouped.list <- list()
 
 
+  # minimum similarity
+  if (!hasArg(min.similarity)) min.similarity <- 8
+
+  #minimum groupsize
+  if (!hasArg(min.groupsize)) min.groupsize <- 6
+
+
   # Add all columns to the list
   # done will be checke after each iteration based on column number
   done <- FALSE

@@ -8,8 +8,8 @@ import_datasets(
   files,
   change.wd = F,
   prepare,
-  find.taxonomy = T,
-  identify.data.origin = T,
+  species,
+  data.origin,
   load.UniProt.ws = F
 )
 }
@@ -20,9 +20,9 @@ import_datasets(
 
 \item{prepare}{Should imported files be forwarded to prepare_datasets}
 
-\item{find.taxonomy}{should taxonomy be determined}
+\item{species}{should taxonomy be determined}
 
-\item{identify.data.origin}{Identify origin software of data}
+\item{data.origin}{Identify origin software of data}
 
 \item{load.UniProt.ws}{Should a UniProt database be downloaded}
 }

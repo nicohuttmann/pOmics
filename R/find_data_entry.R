@@ -11,26 +11,26 @@
 find_data_entry <- function(data, entry, data.origin) {
 
   # Column/names of rawdata
-  names = names(data)[unlist(lapply(data, function(x) !is.matrix(x) && is.character(x)))]
+  names <- names(data)[unlist(lapply(data, function(x) !is.matrix(x) && is.character(x)))]
 
 
-  column <- get_defaults(data.origin = data.origin,
-                         type = paste0("column_", entry))
+  default <- get_defaults(data.origin = data.origin,
+                         type = entry)
+
+
 
 
   # If column found by default
-  if (column %in% names) {
-    return(column)
+  if (default[["column"]] %in% names) {
+    return(default[["column"]])
     # "NA" string indicates column cannot be found
-  } else if (column == "NA") {
+  } else if (default[["column"]] == "NA") {
     return(NA)
     # Search by pattern
   } else {
     return(findORchoose(names = names,
-                        patterns = get_defaults(data.origin,
-                                                paste0("pattern_", entry)),
-                        title = get_defaults(data.origin,
-                                             paste0("question_", entry))))
+                        patterns = default[["pattern"]],
+                        title = default[["question"]]))
   }
 
 }

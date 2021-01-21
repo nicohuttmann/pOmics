@@ -6,19 +6,25 @@
 \usage{
 prepare_datasets(
   imports,
-  find.taxonomy = T,
-  identify.data.origin = T,
-  load.UniProt.ws = T
+  data.origin,
+  species,
+  load.UniProt.ws = F,
+  min.similarity = 8,
+  min.groupsize = 6
 )
 }
 \arguments{
 \item{imports}{imported raw data}
 
-\item{find.taxonomy}{should taxonomy be determined}
+\item{data.origin}{Identify origin software of data}
 
-\item{identify.data.origin}{Identify origin software of data}
+\item{species}{should taxonomy be determined}
 
 \item{load.UniProt.ws}{Should a UniProt database be downloaded}
+
+\item{min.similarity}{minimum similarity oi column names}
+
+\item{min.groupsize}{minimum number of samples}
 }
 \value{
 

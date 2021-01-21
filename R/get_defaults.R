@@ -14,7 +14,7 @@ get_defaults <- function(data.origin, type) {
 
 
   # Set data.origin to NA if not known
-  if (!hasArg(data.origin) || !data.origin %in% colnames(.info[["defaults"]])) data.origin <- "na"
+  if (!hasArg(data.origin) || !data.origin %in% names(.info[["defaults"]])) data.origin <- "na"
 
 
   # Return all defaults if no type is given

@@ -29,7 +29,7 @@ eval_data_var <- function(variables, observations, expr, name, observations.set,
 
 
   #
-  variables.data <- apply(data, 2, function(x) sum(rlang::eval_tidy(rlang::enexpr(expr))))
+  variables.data <- apply(data, 2, function(x) rlang::eval_tidy(rlang::enexpr(expr)))
 
 
 

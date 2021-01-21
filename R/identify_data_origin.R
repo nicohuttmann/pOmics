@@ -7,6 +7,6 @@
 identify_data_origin <- function() {
 
   # Return
-  return("MaxQuant")
+  return("MaxQuant_proteinGroups")
 
 }

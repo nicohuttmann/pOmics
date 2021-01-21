@@ -3,63 +3,45 @@
 #' @return
 #' @export
 #'
+#' @importFrom tibble lst
+#'
 #'
 new_default_data <- function() {
 
   # Check info list
-  new_info_list(return = F)
+  new_info_list(return = FALSE)
 
   # Add defaults data frame
   if (!"defaults" %in% names(.info)) {
 
     # Define default info
-     defaults <- tibble::tibble(na = tibble::lst(NA,
-                                                 NA,
-                                                 NA,
-                                                 NA,
-                                                 NA,
-                                                 NA,
-                                                 c("protein", "accession", "id", "Uniprot"),
-                                                 c("gene", "symbol"),
-                                                 c("protein", "name"),
-                                                 c("Entrez", "EG"),
-                                                 "Protein accession Ids?",
-                                                 "Gene symbols?",
-                                                 "Protein names?",
-                                                 "Entrez gene Id?"),
-                                MaxQuant = tibble::lst(";",
-                                                       "UNIPROTKB",
-                                                       "Protein.IDs",
-                                                       "Gene.names",
-                                                       "Protein.names",
-                                                       "NA",
-                                                       c("protein", "accession", "id", "Uniprot"),
-                                                       c("gene", "symbol"),
-                                                       c("protein", "name"),
-                                                       c("Entrez", "EG"),
-                                                       "Protein accession Ids?",
-                                                       "Gene symbols?",
-                                                       "Protein names?",
-                                                       "Entrez gene Id?"))
+     defaults <- lst(
+       # Default for any protein import
+       na = lst(separator = NA,
+                variables_type = NA,
+                UNIPROTKB = lst(column = NA, pattern = c("protein", "accession", "id", "Uniprot"), question = "Protein accession Ids?"),
+                GENES = lst(column = NA, pattern = c("gene", "symbol"), question = "Gene symbols?"),
+                `PROTEIN-NAMES` = lst(column = NA, pattern = c("protein", "name"), question = "Protein names?"),
+                ENTREZ_GENE = lst(column = NA, pattern = c("Entrez", "EG"), question = "Entrez gene Id?")),
 
-    # Name entries
-    for (i in names(defaults)) {
-      #
-      names(defaults[[i]]) <- c("separator",
-                                "variables_type",
-                                "column_UNIPROTKB",
-                                "column_GENES",
-                                "column_PROTEIN-NAMES",
-                                "column_ENTREZ_GENE",
-                                "pattern_UNIPROTKB",
-                                "pattern_GENES",
-                                "pattern_PROTEIN-NAMES",
-                                "pattern_ENTREZ_GENE",
-                                "question_UNIPROTKB",
-                                "question_GENES",
-                                "question_PROTEIN-NAMES",
-                                "question_ENTREZ_GENE")
-    }
+       # MaxQuant proteinGroups
+       MaxQuant_proteinGroups = lst(separator = ";",
+                                    variables_type = "UNIPROTKB",
+                                    UNIPROTKB = lst(column = "Protein.IDs", pattern = c("protein", "accession", "id", "Uniprot"), question = "Protein accession Ids?"),
+                                    GENES = lst(column = "Gene.names", pattern = c("gene", "symbol"), question = "Gene symbols?"),
+                                    `PROTEIN-NAMES` = lst(column = "Protein.names", pattern = c("protein", "name"), question = "Protein names?"),
+                                    ENTREZ_GENE = lst(column = "NA", pattern = c("Entrez", "EG"), question = "Entrez gene Id?")),
+
+       # MaxQuant peptides
+       MaxQuant_peptides = lst(separator = ";",
+                               variables_type = "Sequence",
+                               UNIPROTKB = lst(column = "Proteins", pattern = c("protein", "accession", "id", "Uniprot"), question = "Protein accession Ids?"),
+                               GENES = lst(column = "NA", pattern = c("gene", "symbol"), question = "Gene symbols?"),
+                               `PROTEIN-NAMES` = lst(column = "NA", pattern = c("protein", "name"), question = "Protein names?"),
+                               ENTREZ_GENE = lst(column = "NA", pattern = c("Entrez", "EG"), question = "Entrez gene Id?"))
+     )
+
+
 
 
   .info[["defaults"]] <<- defaults
