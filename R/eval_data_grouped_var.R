@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #' Evaluates data column-wise and saves variables data
+=======
+#' Evaluates data columnwise and saves variables data
+>>>>>>> 29901b06c782a07289b6e5b6284db737c18cddaa
 #'
 #' @param variables variables
 #' @param observations observations

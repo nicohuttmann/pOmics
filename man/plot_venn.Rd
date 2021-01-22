@@ -4,16 +4,37 @@
 \alias{plot_venn}
 \title{Plots a venn diagram form given data}
 \usage{
+<<<<<<< HEAD
 plot_venn(x, name, plot = T, export = F)
+=======
+plot_venn(
+  x,
+  name,
+  dataset,
+  save = F,
+  export.table = F,
+  return.export.table = F
+)
+>>>>>>> 29901b06c782a07289b6e5b6284db737c18cddaa
 }
 \arguments{
 \item{x}{table or list}
 
 \item{name}{name}
 
+<<<<<<< HEAD
 \item{plot}{plot venn diagrams to device}
 
 \item{export}{exports plot to pdf}
+=======
+\item{dataset}{dataset}
+
+\item{save}{save venn diagram groups}
+
+\item{export.table}{export table}
+
+\item{return.export.table}{return exported table}
+>>>>>>> 29901b06c782a07289b6e5b6284db737c18cddaa
 }
 \value{
 

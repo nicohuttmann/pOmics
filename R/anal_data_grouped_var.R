@@ -22,7 +22,7 @@
 #' @export
 #'
 #'
-anal_data_grouped_var <- function(variables, observations, groups, expr1, expr2, name, observations.set, data.name, type, dataset, save.separete = T,
+anal_data_grouped_var <- function(variables, observations, groups, expr1, expr2, name, observations.set, data.name, type, dataset, save.separate = T,
                                   save.variable.groups = T, show = T, export.plot = T, export.table = F, return.export.table = F) {
 
 
@@ -42,7 +42,9 @@ anal_data_grouped_var <- function(variables, observations, groups, expr1, expr2,
 
 
 
+
   plot_venn(x = data.grouped,
+
             plot = show,
             export = export.plot)
 

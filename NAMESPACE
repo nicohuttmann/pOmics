@@ -16,8 +16,13 @@ export(check_database)
 export(combine_data_groups)
 export(common_prefix)
 export(cor_matrix)
+export(data2venn)
 export(df2groupedList)
+<<<<<<< HEAD
 export(eval_data_grouped_var)
+=======
+export(eval_data_grouped)
+>>>>>>> 29901b06c782a07289b6e5b6284db737c18cddaa
 export(eval_data_var)
 export(factorize_matrix)
 export(findORchoose)
@@ -88,7 +93,10 @@ export(update_observations_sets)
 export(view_data)
 import(dplyr)
 import(ggplot2)
+<<<<<<< HEAD
 import(ggvenn)
+=======
+>>>>>>> 29901b06c782a07289b6e5b6284db737c18cddaa
 importFrom(magrittr,"%>%")
 importFrom(rlang,sym)
 importFrom(tibble,lst)
