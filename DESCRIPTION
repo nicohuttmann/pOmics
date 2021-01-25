@@ -16,6 +16,7 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 Imports:
+    cowplot,
     fastcluster,
     ggplot2,
     ggfortify,

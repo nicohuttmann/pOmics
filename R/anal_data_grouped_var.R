@@ -50,7 +50,7 @@ anal_data_grouped_var <- function(variables, observations, groups, expr1, expr2,
 
 
 
-  if(save.variable.gorups) {
+  if(save.variable.groups) {
 
   }
 

@@ -15,7 +15,7 @@ anal_data_grouped_var(
   data.name,
   type,
   dataset,
-  save.separete = T,
+  save.separate = T,
   save.variable.groups = T,
   show = T,
   export.plot = T,
@@ -44,8 +44,6 @@ anal_data_grouped_var(
 
 \item{dataset}{dataset}
 
-\item{save.separete}{save results from group evaluation in variables data}
-
 \item{save.variable.groups}{save variable groups in variables data}
 
 \item{show}{show plot}
@@ -55,6 +53,8 @@ anal_data_grouped_var(
 \item{export.table}{exports table of proteins}
 
 \item{return.export.table}{return table of proteins}
+
+\item{save.separete}{save results from group evaluation in variables data}
 }
 \value{
 

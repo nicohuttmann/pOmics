@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 #' Evaluates data column-wise and saves variables data
-=======
-#' Evaluates data columnwise and saves variables data
->>>>>>> 29901b06c782a07289b6e5b6284db737c18cddaa
 #'
 #' @param variables variables
 #' @param observations observations
@@ -66,7 +62,7 @@ eval_data_grouped_var <- function(variables, observations, groups, expr1, expr2,
 
     name <- ask_name(name, "Name for variables data: ")
 
-    for(group in groups) {
+    for(group in unique(groups)) {
       #
       add_variables_data(data = dplyr::pull(.data = results.data, var = group, name = variables), name = paste0(name, "_", group), dataset = dataset, set.default = FALSE)
     }
