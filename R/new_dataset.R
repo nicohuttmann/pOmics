@@ -337,7 +337,7 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
 
   # Complete variables data frame if missing values are present
   # AND if UniProt database is available
-  if(check_database("UniProt", taxId = attr(dataset, "taxId"))) {
+  if(check_database(id = attr(dataset, "taxId"), type = "UniProt")) {
 
     # Complete
     for (i in colnames(variables)) {

@@ -27,5 +27,6 @@ Imports:
     magrittr,
     rlang,
     tibble,
+    topGO,
     UniProt.ws
 RoxygenNote: 7.1.1

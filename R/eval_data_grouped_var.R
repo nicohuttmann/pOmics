@@ -3,8 +3,7 @@
 #' @param variables variables
 #' @param observations observations
 #' @param groups group definition
-#' @param expr1 function(x) how columns should be evaluated
-#' @param expr2 function(x) how groups should be evaluated
+#' @param expr function(x) how columns should be evaluated
 #' @param name name of new data
 #' @param observations.set set of observations
 #' @param data.name data name
@@ -20,7 +19,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-eval_data_grouped_var <- function(variables, observations, groups, expr1, expr2, name, observations.set, data.name, type, dataset, set.default = F, save = T, return = F) {
+eval_data_grouped_var <- function(variables, observations, groups, expr, name, observations.set, data.name, type, dataset, set.default = F, save = T, return = F) {
 
   # Get data
   data <- get_data(variables = !!dplyr::enquo(variables),
@@ -51,9 +50,7 @@ eval_data_grouped_var <- function(variables, observations, groups, expr1, expr2,
     #
     results.data[, group] <- data %>%
       matrix_rows(row.names = groups == group) %>%
-      apply(MARGIN = 2, FUN = function(x) rlang::eval_tidy(rlang::enexpr(expr1))) %>%
-      sapply(FUN = function(x) rlang::eval_tidy(rlang::enexpr(expr2)))
-
+      apply(MARGIN = 2, FUN = function(x) rlang::eval_tidy(rlang::enexpr(expr1)))
   }
 
 

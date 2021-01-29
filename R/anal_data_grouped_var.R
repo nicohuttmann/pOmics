@@ -4,8 +4,7 @@
 #' @param variables variables
 #' @param observations observations
 #' @param groups group definition
-#' @param expr1 function(x) how columns should be evaluated
-#' @param expr2 function(x) how groups should be evaluated
+#' @param expr function(x) how groups should be evaluated
 #' @param name name
 #' @param observations.set set of observations
 #' @param data.name data name
@@ -22,15 +21,14 @@
 #' @export
 #'
 #'
-anal_data_grouped_var <- function(variables, observations, groups, expr1, expr2, name, observations.set, data.name, type, dataset, save.separate = T,
+anal_data_grouped_var <- function(variables, observations, groups, expr, name, observations.set, data.name, type, dataset, save.separate = T,
                                   save.variable.groups = T, show = T, export.plot = T, export.table = F, return.export.table = F) {
 
 
   data.grouped <- eval_data_grouped_var(variables = variables,
                                         observations = variables,
                                         groups = groups,
-                                        expr1 = expr1,
-                                        expr2 = expr2,
+                                        expr = expr,
                                         name = name,
                                         observations.set,
                                         data.name = data.name,

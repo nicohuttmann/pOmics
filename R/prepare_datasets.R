@@ -22,6 +22,9 @@ prepare_datasets <- function(imports, data.origin, species, load.UniProt.ws = F,
   # .info file
   new_info_list()
 
+  # .cache list
+  new_cache_list()
+
   #
   for (i in seq_along(imports)) {
     # Stupid BS

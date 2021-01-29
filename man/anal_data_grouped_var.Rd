@@ -8,8 +8,7 @@ anal_data_grouped_var(
   variables,
   observations,
   groups,
-  expr1,
-  expr2,
+  expr,
   name,
   observations.set,
   data.name,
@@ -30,9 +29,7 @@ anal_data_grouped_var(
 
 \item{groups}{group definition}
 
-\item{expr1}{function(x) how columns should be evaluated}
-
-\item{expr2}{function(x) how groups should be evaluated}
+\item{expr}{function(x) how groups should be evaluated}
 
 \item{name}{name}
 

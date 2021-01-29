@@ -4,12 +4,12 @@
 \alias{check_database}
 \title{Checks if database is available}
 \usage{
-check_database(database = "UniProt", taxId)
+check_database(id, type = "UniProt")
 }
 \arguments{
-\item{database}{annotation database}
+\item{id}{database name/identifier}
 
-\item{taxId}{taxonomy Id}
+\item{type}{type of database}
 }
 \value{
 

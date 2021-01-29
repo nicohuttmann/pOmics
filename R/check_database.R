@@ -1,22 +1,22 @@
 #' Checks if database is available
 #'
-#' @param database annotation database
-#' @param taxId taxonomy Id
+#' @param type type of database
+#' @param id database name/identifier
 #'
 #' @return
 #' @export
 #'
 #'
-check_database <- function(database = "UniProt", taxId) {
+check_database <- function(id, type = "UniProt") {
 
   # .databases exists
-  if (hasArg(taxId) && ".databases" %in% objects(all.names = T, envir = .GlobalEnv)) {
+  if (hasArg(id) && ".databases" %in% objects(all.names = T, envir = .GlobalEnv)) {
 
     # database entry exists
-    if (length(names(.databases)) > 0 && database %in% names(.databases)) {
+    if (length(names(.databases)) > 0 && type %in% names(.databases)) {
 
       # taxId exists
-      if (length(names(.databases[[database]])) > 0 && taxId %in% names(.databases[[database]])) {
+      if (length(names(.databases[[type]])) > 0 && id %in% names(.databases[[type]])) {
 
         return(TRUE)
 
