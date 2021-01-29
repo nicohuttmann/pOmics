@@ -15,11 +15,8 @@
 #'
 new_GOdata <- function(proteins, ontology = "CC", statistic = "fisher", nodeSize = 10, dataset, save = T, return = F) {
 
-<<<<<<< HEAD
   require(topGO)
 
-=======
->>>>>>> 8038c7547053747d8c5b58ae7c7fccdb642c2412
   # Checks dataset
   dataset <- get_dataset(dataset)
 
