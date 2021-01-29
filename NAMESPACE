@@ -33,11 +33,7 @@ export(eval_data_var)
 export(factorize_matrix)
 export(findORchoose)
 export(find_data_entry)
-<<<<<<< HEAD
 export(fisher_test)
-=======
-export(fisher_pvalue)
->>>>>>> 8038c7547053747d8c5b58ae7c7fccdb642c2412
 export(fun_enrich)
 export(geomean)
 export(get_GOdata)

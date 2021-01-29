@@ -50,7 +50,7 @@ eval_data_grouped_var <- function(variables, observations, groups, expr, name, o
     #
     results.data[, group] <- data %>%
       matrix_rows(row.names = groups == group) %>%
-      apply(MARGIN = 2, FUN = function(x) rlang::eval_tidy(rlang::enexpr(expr1)))
+      apply(MARGIN = 2, FUN = function(x) rlang::eval_tidy(rlang::enexpr(expr)))
   }
 
 

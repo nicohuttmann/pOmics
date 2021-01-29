@@ -18,7 +18,6 @@
 #'
 eval_data_var <- function(variables, observations, expr, name, observations.set, data.name, type, dataset, set.default = F, save = T, return = F) {
 
-  #
   # Get data
   data <- get_data(variables = !!dplyr::enquo(variables),
                    observations = !!dplyr::enquo(observations),
