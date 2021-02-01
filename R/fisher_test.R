@@ -8,16 +8,16 @@
 #'
 #'
 fisher_test <- function(proteins, annotated.proteins) {
-  
+
   return(
     topGO::runTest(
       new("classicCount",
-      testStatistic = topGO::GOFisherTest,
-      name = "fisher",
-      allMembers = names(proteins),
-      groupMembers = annotated.proteins,
-      sigMembers = names(proteins)[proteins])
+          testStatistic = topGO::GOFisherTest,
+          name = "fisher",
+          allMembers = names(proteins),
+          groupMembers = intersect(annotated.proteins, names(proteins)),
+          sigMembers = names(proteins)[proteins])
     )
   )
-  
+
 }

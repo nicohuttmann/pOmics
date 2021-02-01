@@ -7,7 +7,7 @@
 #' @export
 #'
 ks_test <- function(protein.scores, annotated.proteins) {
-  
+
   return(
     topGO::runTest(
       new("classicScore",
@@ -15,8 +15,8 @@ ks_test <- function(protein.scores, annotated.proteins) {
           name = "ks",
           allMembers = names(protein.scores),
           score = protein.scores,
-          groupMembers = annotated.proteins)
+          groupMembers = intersect(annotated.proteins, names(proteins)))
     )
   )
-  
+
 }

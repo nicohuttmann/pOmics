@@ -15,7 +15,7 @@ select_UniProt(x, keys, columns, keytype = "UNIPROTKB", modify = T)
 
 \item{keytype}{type of key}
 
-\item{modify}{should columns be modified after query}
+\item{modify}{(recommended) Should output values be modified to to singluar entries?}
 }
 \value{
 

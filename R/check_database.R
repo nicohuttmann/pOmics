@@ -15,7 +15,9 @@ check_database <- function(id, type = "UniProt") {
     # database entry exists
     if (length(names(.databases)) > 0 && type %in% names(.databases)) {
 
-      # taxId exists
+      # make taxIds characters
+      if (is.numeric(id)) id <- as.character(id)
+      # id exists
       if (length(names(.databases[[type]])) > 0 && id %in% names(.databases[[type]])) {
 
         return(TRUE)

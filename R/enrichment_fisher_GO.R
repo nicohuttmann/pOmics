@@ -13,13 +13,13 @@ enrichment_fisher_GO <- function(proteins, ontology) {
   GOdata <- get_GOdata(proteins = proteins, ontology = ontology)
 
   #
-  fisher <- topGO::runTestrunTest(GOdata, algorithm = "classic", statistic = "fisher")
+  fisher <- topGO::runTest(GOdata, algorithm = "classic", statistic = "fisher")
 
 
-  results <- topGO::runTestGenTable(GOdata,
-                                    p.value = fisher,
-                                    orderBy = "classic",
-                                    topNodes = fisher@geneData["SigTerms"])
+  results <- topGO::GenTable(GOdata,
+                             p.value = fisher,
+                             orderBy = "classic",
+                             topNodes = fisher@geneData["SigTerms"])
 
   # Return
   return(results)

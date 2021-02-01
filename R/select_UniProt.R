@@ -4,7 +4,7 @@
 #' @param keys keys
 #' @param columns data to query
 #' @param keytype type of key
-#' @param modify should columns be modified after query
+#' @param modify (recommended) Should output values be modified to to singluar entries?
 #'
 #' @return
 #' @export
