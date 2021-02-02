@@ -1,4 +1,4 @@
-#' Ask user for name of no name given
+#' Asks user for name if no name given
 #'
 #' @param name name
 #' @param message message
@@ -8,8 +8,8 @@
 #'
 #'
 ask_name <- function(name, message) {
-  
-  # 
+
+  #
   if (hasArg(name)) {
     return(name)
   } else {
@@ -17,5 +17,5 @@ ask_name <- function(name, message) {
     while(name == "") name <- readline(ifelse(hasArg(message), message, "Name: "))
     return(name)
   }
-  
+
 }

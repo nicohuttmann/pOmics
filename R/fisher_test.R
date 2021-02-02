@@ -9,6 +9,10 @@
 #'
 fisher_test <- function(proteins, annotated.proteins) {
 
+  # Load topGO
+  require(topGO)
+
+  #
   return(
     topGO::runTest(
       new("classicCount",

@@ -4,14 +4,12 @@
 \alias{normalize}
 \title{Normalizes and returns data}
 \usage{
-normalize(data, method = "none", data2)
+normalize(data, method = "pqn")
 }
 \arguments{
 \item{data}{data}
 
 \item{method}{method to use}
-
-\item{data2}{(optional) second data set from which normalization factors should be generated}
 }
 \value{
 

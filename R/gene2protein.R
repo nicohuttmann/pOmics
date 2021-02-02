@@ -7,13 +7,13 @@
 #'
 #'
 gene2protein <- function(genes) {
-  
-  proteins <- gprofiler2::gconvert(query = data[[1]], target = "UNIPROTSWISSPROT_ACC")
-  
+
+  proteins <- gprofiler2::gconvert(query = genes, target = "UNIPROTSWISSPROT_ACC")
+
   proteins <- proteins[!duplicated(proteins$input_number), ]
-  
+
   proteins <- proteins[proteins$target != "nan",]
-  
+
   return(proteins$target)
-  
+
 }

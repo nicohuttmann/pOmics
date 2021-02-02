@@ -8,14 +8,18 @@
 #'
 ks_test <- function(protein.scores, annotated.proteins) {
 
+  # Load library
+  require(topGO)
+
+
   return(
     topGO::runTest(
       new("classicScore",
-          testStatistic = GOKSTest,
+          testStatistic = topGO::GOKSTest,
           name = "ks",
           allMembers = names(protein.scores),
           score = protein.scores,
-          groupMembers = intersect(annotated.proteins, names(proteins)))
+          groupMembers = intersect(annotated.proteins, names(protein.scores)))
     )
   )
 

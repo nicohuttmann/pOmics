@@ -2,7 +2,7 @@
 % Please edit documentation in R/ask_name.R
 \name{ask_name}
 \alias{ask_name}
-\title{Ask user for name of no name given}
+\title{Asks user for name if no name given}
 \usage{
 ask_name(name, message)
 }
@@ -15,5 +15,5 @@ ask_name(name, message)
 
 }
 \description{
-Ask user for name of no name given
+Asks user for name if no name given
 }
