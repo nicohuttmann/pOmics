@@ -4,12 +4,19 @@
 \alias{plot_dend_enrich_lines}
 \title{Plots -log10 p-value profile of dendrogram enrichment}
 \usage{
-plot_dend_enrich_lines(dend.table.pvalue, dend.table.cluster, gridlines = T)
+plot_dend_enrich_lines(
+  dend.table.pvalue,
+  dend.table.cluster,
+  title,
+  gridlines = T
+)
 }
 \arguments{
 \item{dend.table.pvalue}{dend.table.pvalue}
 
 \item{dend.table.cluster}{dend.table.cluster}
+
+\item{title}{name of enrichment}
 
 \item{gridlines}{add gridlines to the plot}
 }

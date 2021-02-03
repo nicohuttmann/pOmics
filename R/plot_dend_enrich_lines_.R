@@ -8,26 +8,30 @@
 #'
 #'
 plot_dend_enrich_lines_ <- function(cor_list, name) {
-  
+
   # given name
   if (hasArg(name) && paste0("dend.enrich_", name) %in% names(cor_list)) {
     plot_dend_enrich_lines(dend.table.pvalue = cor_list[[paste0("dend.enrich_", name)]][["dend.table.pvalue"]],
-                           dend.table.cluster = cor_list[[paste0("dend.enrich_", name)]][["dend.table.cluster"]])
+                           dend.table.cluster = cor_list[[paste0("dend.enrich_", name)]][["dend.table.cluster"]],
+                           title = name)
     # No name given
-  } else if (any(grepl("dend.enrich", names(cor_list)))) {
+  } else if (!hasArg(name) && any(grepl("dend.enrich", names(cor_list)))) {
     # Only one dend.enrich list in cor_object
     if (sum(grepl("dend.enrich", names(cor_list))) == 1) {
       plot_dend_enrich_lines(dend.table.pvalue = cor_list[[names(cor_list)[grep("dend.enrich", names(cor_list))]]][["dend.table.pvalue"]],
-                             dend.table.cluster = cor_list[[names(cor_list)[grep("dend.enrich", names(cor_list))]]][["dend.table.cluster"]])
+                             dend.table.cluster = cor_list[[names(cor_list)[grep("dend.enrich", names(cor_list))]]][["dend.table.cluster"]],
+                             title = name)
     # More than one dend.enrich list in cor_object
-    } else {
+    } else if (!hasArg(name)) {
       message(paste0("Using ", names(cor_list)[first_(grep("dend.enrich", names(cor_list)))], " for plot."))
       plot_dend_enrich_lines(dend.table.pvalue = cor_list[[names(cor_list)[first_(grep("dend.enrich", names(cor_list)))]]][["dend.table.pvalue"]],
-                             dend.table.cluster = cor_list[[names(cor_list)[first_(grep("dend.enrich", names(cor_list)))]]][["dend.table.cluster"]])
+                             dend.table.cluster = cor_list[[names(cor_list)[first_(grep("dend.enrich", names(cor_list)))]]][["dend.table.cluster"]],
+                             title = name)
     }
   # No dend.enrich list object
   } else {
     stop("No enrichment list in cor_object.")
   }
-  
+
+
 }

@@ -16,9 +16,9 @@ fun_enrich <- function(proteins, background = NULL, databases = "CC", view = T, 
   #
   require(topGO)
 
-  # # Check databases for functional enrichment
-  # if (any(!databases %in% .info[["Functional enrichment databases"]]))
-  #   stop("No database setup for functional enrichment. Use setup_fun_enrich() to prepare databases.")
+  # Check databases for functional enrichment
+  if (!"Functional enrichment databases" %in% names(.info)&& any(!databases %in% .info[["Functional enrichment databases"]]))
+    stop("No database setup for functional enrichment. Use setup_fun_enrich() to prepare databases.")
 
 
 

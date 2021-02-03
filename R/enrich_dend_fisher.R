@@ -25,7 +25,7 @@ enrich_dend_fisher <- function(dend.table, annotated.proteins, n = 10) {
 
     for (j in 1:i) {
 
-      dend.table.pvalue[dend.table.cluster[, i] == j, i] <- fisher_test(proteins = dplyr::pull(table, var = as.character(i)) == j,
+      dend.table.pvalue[dend.table.cluster[, i] == j, i] <- fisher_test(proteins = dplyr::pull(dend.table, var = as.character(i)) == j,
                                                                         annotated.proteins = annotated.proteins)
 
     }

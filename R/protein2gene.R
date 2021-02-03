@@ -12,10 +12,10 @@ protein2gene <- function(proteins, dataset = 1) {
 
 
 
-  annotations <- UniProt.ws::select(x = .databases[["UniProt"]][[.info[[dataset]][["taxId"]]]],
-                        columns = "GENES",
-                        keys = proteins,
-                        keytype = "UNIPROTKB")
+  annotations <- select_UniProt(x = .databases[["UniProt"]][[.info[[dataset]][["taxId"]]]],
+                                columns = "GENES",
+                                keys = proteins,
+                                keytype = "UNIPROTKB")
 
-  annotations
+  return(annotations)
 }

@@ -92,7 +92,10 @@ new_GOdata <- function(proteins, ontology = "CC", statistic = "fisher", nodeSize
 
 
   # save GOdata object
-  if (save) add_database(database = GOdata, id = paste(ontology, statistic, sep = "_"), type = "GOdata", replace = F)
+  if (save) {
+    add_database(database = GOdata, id = paste(ontology, statistic, sep = "_"), type = "GOdata", replace = F)
+    message("")
+  }
 
   # Return
   if (return) return(GOdata)
