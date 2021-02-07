@@ -4,7 +4,18 @@
 \alias{enrich_dend_}
 \title{Calculates enrichment for each cluster level}
 \usage{
-enrich_dend_(cor_list, proteins, n = 10, name, cut = T, return = T, plot = T)
+enrich_dend_(
+  cor_list,
+  proteins,
+  n = 10,
+  inverse = F,
+  name,
+  cut = T,
+  return = T,
+  plot = T,
+  fun.enrich = T,
+  databases = "GO"
+)
 }
 \arguments{
 \item{cor_list}{cor_list object}
@@ -13,9 +24,19 @@ enrich_dend_(cor_list, proteins, n = 10, name, cut = T, return = T, plot = T)
 
 \item{n}{max number of clusters}
 
+\item{inverse}{inverse enrichment (works for both Fisher and KS test)}
+
 \item{name}{name}
 
+\item{cut}{cut dendrogram}
+
+\item{return}{return cor_list object}
+
 \item{plot}{Plot results?}
+
+\item{fun.enrich}{Do functional enrichment}
+
+\item{databases}{databases to use for functional enrichment}
 }
 \value{
 

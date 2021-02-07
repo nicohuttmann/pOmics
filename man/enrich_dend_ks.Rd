@@ -4,7 +4,7 @@
 \alias{enrich_dend_ks}
 \title{Performs KS test on all cluster levels of given dendrogram}
 \usage{
-enrich_dend_ks(dend.table, protein.scores, n = 10)
+enrich_dend_ks(dend.table, protein.scores, n = 10, inverse = F)
 }
 \arguments{
 \item{dend.table}{drndrogram represented as dataframe}
@@ -12,6 +12,8 @@ enrich_dend_ks(dend.table, protein.scores, n = 10)
 \item{protein.scores}{vector of protein scores}
 
 \item{n}{maximum number of clusters}
+
+\item{inverse}{enrichment for higher scores}
 }
 \value{
 

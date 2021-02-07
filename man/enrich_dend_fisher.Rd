@@ -7,7 +7,7 @@
 enrich_dend_fisher(dend.table, annotated.proteins, n = 10)
 }
 \arguments{
-\item{dend.table}{drndrogram represented as dataframe}
+\item{dend.table}{dendrogram represented as dataframe}
 
 \item{annotated.proteins}{vector of annotated proteins}
 

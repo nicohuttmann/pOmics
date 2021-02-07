@@ -7,7 +7,7 @@
 fun_enrich(
   proteins,
   background = NULL,
-  databases = "CC",
+  databases = "GO",
   view = T,
   return = F,
   save = F
