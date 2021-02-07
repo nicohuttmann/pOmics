@@ -21,7 +21,7 @@ combine_data_groups <- function(data, groups, method) {
 
 
   # Check combination method
-  if(length(method) != 1 || !method %in% c("mean", "median", "sum", "max", "min", "and", "or"))
+  if(length(method) != 1 || !method %in% c("mean", "median", "sum", "max", "min", "sd", "and", "or"))
     stop("Combination method not found.")
 
 
@@ -70,6 +70,16 @@ combine_data_groups <- function(data, groups, method) {
     for(i in 1:nrow(data.combined)) {
       for(j in 1:ncol(data.combined)) {
         data.combined[i, j] <- min(data[groups == rownames(data.combined)[i], j], na.rm = T)
+      }
+    }
+
+  }
+
+  else if (method == "sd") {
+
+    for(i in 1:nrow(data.combined)) {
+      for(j in 1:ncol(data.combined)) {
+        data.combined[i, j] <- sd(data[groups == rownames(data.combined)[i], j], na.rm = T)
       }
     }
 

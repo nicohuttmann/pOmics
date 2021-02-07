@@ -9,101 +9,100 @@
 #' @export
 #'
 #' @import ggplot2
-#' @importFrom magrittr %>% 
+#' @importFrom magrittr %>%
 #'
 plot_cormat_enrichment <- function(cor_list, name) {
-  
-  
+
+
   # Get adjacency matrix
   data <- cor_list[["adjacency"]]
-  
-  
+
+
   # Save names
   x_names <- colnames(data)
   y_names <- rownames(data)
-  
-  
-  
+
+
+
   # y-axis dendrogram
-  dend_y <- cor_list[["dendrogram"]] %>% 
+  dend_y <- cor_list[["dendrogram"]] %>%
     as.dendrogram()
-    
-  
-  
+
+
+
   # Get dendrogram data
   dend_data_y <- ggdendro::dendro_data(dend_y)
-  
+
   # Invert layout observations
   segment_data_y <- with(ggdendro::segment(dend_data_y),
                          data.frame(x = y, y = x, xend = yend, yend = xend))
-  
+
   # Position observations
   pos_table_y <- with(dend_data_y$labels,
                       data.frame(y_center = x,
                                  y = as.character(label),
                                  height = 1))
-  
+
   # Position x
   pos_table_x <- with(dend_data_y$labels,
                       data.frame(x_center = x,
                                  x = as.character(label),
                                  width = 1))
-  
-  
-  
+
+
+
   # Construct heatmap df
   data_heatmap <- data %>%
-    set_diagonal(diag = 1) %>% 
+    set_diagonal(diag = 1) %>%
     reshape2::melt(value.name = "expr", varnames = c("y", "x")) %>%
     dplyr::left_join(pos_table_x, by = "x") %>%
     dplyr::left_join(pos_table_y, by = "y")
-  
-  
-  
+
+
+
   # Limits for the vertical axes
   axis_limits_y <- with(
     pos_table_y,
     c(min(y_center - 0.5 * height), max(y_center + 0.5 * height))
   )
-  
+
   # Limits for the horizontal axes
   # axis_limits_x <- <- data.frame(sample = sample_names) %>%
-  #   mutate(x_center = (1:n()), 
+  #   mutate(x_center = (1:n()),
   #          width = 1)
-  # 
-  
-  
-  
-  
-  # Get enrichment table
-  dend.enrich <- cor_list[[paste0("dend.enrich_", name)]]
-  
-  segment_data_y <- add_segment_pvalue(segment_data_y, dend.enrich = dend.enrich)
-  
-  
-  
-  
+  #
+
+
+
+
+
+  # Add p-values to branches
+  segment_data_y <- add_segment_pvalue(segment = segment_data_y, dend.enrich = cor_list[[paste0("dend.enrich_", name)]])
+
+
+
+
   # Indicate highest enrichment cluster
-  protein.cluster.pos <- pos_table_x[pos_table_x[, 2] %in% dend.enrich[["proteins"]], 1]
+  protein.cluster.pos <- pos_table_x[pos_table_x[, 2] %in% cor_list[[paste0("dend.enrich_", name)]][["proteins"]], 1]
   cluster_table <- tibble(xmin = min(protein.cluster.pos) - 0.5,
                           xmax = max(protein.cluster.pos) + 0.5,
                           ymin = min(protein.cluster.pos) - 0.5,
                           ymax = max(protein.cluster.pos) + 0.5)
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
   # Heatmap plot
   p_hmap <- ggplot(data_heatmap,
                    aes(x = x_center, y = y_center, fill = expr,
                        height = height, width = width)) +
     geom_tile() +
-    geom_rect(data = cluster_table, 
-              aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax), 
-              fill = NA, colour = "red", size = 4/.pt, inherit.aes = FALSE) +
-    scale_fill_gradient2("expr", high = "darkred", mid = "white", low = "darkblue") + #low = "navyblue", mid = "white", high = "red4"
+    geom_rect(data = cluster_table,
+              aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+              fill = NA, colour = "#cc5500", size = 4/.pt, inherit.aes = FALSE) +
+    scale_fill_gradientn("expr", values = c(0, 0.5, 1), colors = c("darkblue", "white", "darkred")) + #low = "navyblue", mid = "white", high = "red4"
     scale_x_reverse(breaks = rev(pos_table_x$x_center),
                     #labels = pos_table_x$x,
                     #limits = axis_limits_x,
@@ -125,14 +124,13 @@ plot_cormat_enrichment <- function(cor_list, name) {
           axis.ticks = element_blank(),
           axis.title = element_blank(),
           legend.position = "none")
-  
-  
-  
-  
-  
+
+
+
+
+
   # Dendrogram plot y
   p_dend_y <- ggplot(segment_data_y) +
-    geom_segment(aes(x = x, y = y, xend = xend, yend = yend, color = logpvalue), size = 3/.pt) +
     scale_x_reverse(expand = c(0, 0)) +
     scale_y_continuous(breaks = pos_table_y$y_center,
                        #                   labels = pos_table_y$y,
@@ -150,14 +148,13 @@ plot_cormat_enrichment <- function(cor_list, name) {
           axis.title = element_blank(),
           plot.margin = unit(c(0, 0, 0, 0), "cm"),
           legend.position = "left") +
-    scale_color_gradient(low = "yellow", high = "red")
-  
-  
-  
-  
-  
+    scale_color_gradient(low = "#ffe670", high = "#cc5500") + #800020
+    geom_segment(aes(x = x, y = y, xend = xend, yend = yend, color = logpvalue), size = 1.5/.pt, )
+
+
+
+
   print(cowplot::plot_grid(p_dend_y, p_hmap, align = 'h', rel_widths = c(.5, 1)))
-  
-  
+
+
 }
-  

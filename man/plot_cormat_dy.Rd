@@ -10,10 +10,6 @@ plot_cormat_dy(data, dend_y)
 \item{data}{data}
 
 \item{dend_y}{y-axis dendrogram}
-
-\item{scale}{should data be scaled}
-
-\item{transform}{should data be transformed}
 }
 \value{
 

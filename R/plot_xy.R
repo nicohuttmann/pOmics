@@ -15,13 +15,13 @@ plot_xy <- function(x, y, fit = F) {
 
   names <- intersect(names(x), names(y))
 
-  if (fit) model <- lm(y ~ x)
+  if (fit) model <- lm(y[names] ~ x[names])
 
   plot(x[names], y[names], main = ifelse(fit, paste0("R2 = ", summary(model)$r.squared), ""),
        xlab = deparse(substitute(x)),
        ylab = deparse(substitute(x)),
        pch = 16)
 
-  if (fit) abline(lm(y ~ x), col = "red")
+  if (fit) abline(model, col = "red")
 
 }

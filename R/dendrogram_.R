@@ -19,9 +19,9 @@ dendrogram_ <- function(cor_list, method = "average") {
 
   # Reorder
   for (i in setdiff(names(cor_list), "raw_data")) {
-    cor_list[[i]] <- cor_list[[i]][dend$order, dend$order]
+    cor_list[[i]] <- cor_list[[i]][rev(dend$order), rev(dend$order)]
   }
-  cor_list[["raw_data"]] <- cor_list[["raw_data"]][, dend$order]
+  cor_list[["raw_data"]] <- cor_list[["raw_data"]][, rev(dend$order)]
   attr(cor_list, "variables") <- colnames(cor_list[["raw_data"]])
 
 
@@ -34,6 +34,9 @@ dendrogram_ <- function(cor_list, method = "average") {
 
   # Add method
   attr(cor_list, "clustering") <- method
+
+  # Add table representation
+  cor_list <- dendrogram2table_(cor_list = cor_list)
 
   # Return
   return(cor_list)

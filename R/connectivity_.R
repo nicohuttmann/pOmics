@@ -1,28 +1,29 @@
-#'  Add connectivity to cor_list
+#'  Add connectivity and intracluster connectivity to cor_list
 #'
 #' @param cor_list cor_list object
+#' @param k max number of clusters
 #' @param scale Scale connectivity values
-#' @param plot plot results 
-#' @param fun.enrich do functional enrichment on connectivity values
 #'
 #' @return
 #' @export
 #'
 #'
-connectivity_ <- function(cor_list, scale = T, plot = T, fun.enrich) {
-  
-  # 
-  con <- connectivity(adjacency.matrix = cor_list[["adjacency"]], scale = T)
-  
-  cor_list[["connectivity"]] <- con
-  
-  # Plot
-  if (plot) plot(con, 20)
-  
-  # Functional enrichment
-  if (hasArg(fun.enrich)) fun_enrich(proteins = con, databases = fun.enrich)
-  
+connectivity_ <- function(cor_list, k = 20, scale = T) {
+
+  # Add total and intracluster connectivity
+  for (k in 1:k) {
+
+    for (l in 1:k) {
+
+      cor_list[["connectivity"]][[paste(k, l, sep = ".")]] <- cor_list %>%
+        get_cor_data(name = "adjacency", k = k, l = l) %>%
+        connectivity(scale = T)
+
+    }
+
+  }
+
   # Return list
   return(cor_list)
-  
+
 }

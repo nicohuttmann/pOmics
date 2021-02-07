@@ -4,7 +4,7 @@
 \alias{enrich_dend_}
 \title{Calculates enrichment for each cluster level}
 \usage{
-enrich_dend_(cor_list, proteins, n = 10, name, cut = T, plot = T)
+enrich_dend_(cor_list, proteins, n = 10, name, cut = T, return = T, plot = T)
 }
 \arguments{
 \item{cor_list}{cor_list object}

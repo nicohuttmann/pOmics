@@ -11,7 +11,11 @@
 #' @export
 #'
 #'
-fun_enrich <- function(proteins, background = NULL, databases = "CC", view = T, return = F, save = F) {
+fun_enrich <- function(proteins, background = NULL, databases = "GO", view = T, return = F, save = F) {
+
+  # Modify input
+  if (databases == "GO") databases <- c("CC", "BP", "MF")
+
 
   #
   require(topGO)

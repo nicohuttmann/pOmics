@@ -2,22 +2,20 @@
 % Please edit documentation in R/connectivity_.R
 \name{connectivity_}
 \alias{connectivity_}
-\title{Add connectivity to cor_list}
+\title{Add connectivity and intracluster connectivity to cor_list}
 \usage{
-connectivity_(cor_list, scale = T, plot = T, fun.enrich)
+connectivity_(cor_list, k = 20, scale = T)
 }
 \arguments{
 \item{cor_list}{cor_list object}
 
+\item{k}{max number of clusters}
+
 \item{scale}{Scale connectivity values}
-
-\item{plot}{plot results}
-
-\item{fun.enrich}{do functional enrichment on connectivity values}
 }
 \value{
 
 }
 \description{
-Add connectivity to cor_list
+Add connectivity and intracluster connectivity to cor_list
 }

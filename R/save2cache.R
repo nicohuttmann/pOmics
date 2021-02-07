@@ -18,5 +18,6 @@ save2cache <- function(data, view = F, new = F) {
 
   #View
   View(.cache[[length(.cache)]], title = paste0(".cache[[", length(.cache), "]]"))
+  if (length(data) == 1) View(.cache[[length(.cache)]][[1]], title = paste0(".cache[[", length(.cache), "]][[1]]"))
 
 }
