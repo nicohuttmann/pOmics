@@ -2,24 +2,26 @@
 % Please edit documentation in R/fun_enrich_.R
 \name{fun_enrich_}
 \alias{fun_enrich_}
-\title{Title}
+\title{Functional enrichment of cor_list object}
 \usage{
-fun_enrich_(cor_list, name, k, l, databases = "CC")
+fun_enrich_(cor_list, name, k, l, databases = "CC", algorithm = "classic")
 }
 \arguments{
-\item{cor_list}{}
+\item{cor_list}{cor_list object}
 
-\item{name}{}
+\item{name}{(optional) name of enrichment entry}
 
-\item{k}{}
+\item{k}{(optional) number of clusters}
 
-\item{l}{}
+\item{l}{(optional) number of cluster to analyse specifically}
 
-\item{databases}{}
+\item{databases}{databases for which to perform enrichment}
+
+\item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 }
 \value{
 
 }
 \description{
-Title
+Either name or k must be given. Number of clusters will be analysed as groups if no l is specified.
 }

@@ -4,12 +4,14 @@
 \alias{do_enrichment_ks}
 \title{Performs gene set enrichment on numeric protein vector with specified Ontology}
 \usage{
-do_enrichment_ks(proteins, database)
+do_enrichment_ks(proteins, database, algorithm)
 }
 \arguments{
 \item{proteins}{numeric score vector}
 
 \item{database}{database to use}
+
+\item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 }
 \value{
 

@@ -3,6 +3,7 @@
 #' @param proteins list of proteins/scores/protein groups
 #' @param background (optional) background genes
 #' @param databases databases to use
+#' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
 #' @param view View results?
 #' @param return Return results?
 #' @param save Save results?
@@ -11,7 +12,7 @@
 #' @export
 #'
 #'
-fun_enrich <- function(proteins, background = NULL, databases = "GO", view = T, return = F, save = F) {
+fun_enrich <- function(proteins, background = NULL, databases = "GO", algorithm = "weight01", view = T, return = F, save = F) {
 
   # Modify input
   if (databases == "GO") databases <- c("CC", "BP", "MF")
@@ -73,13 +74,16 @@ fun_enrich <- function(proteins, background = NULL, databases = "GO", view = T, 
   for (database in databases) {
     # Single Fisher's exact test
     if (is.logical(allProteins)) list.enrichment[[database]] <- do_enrichment_fisher(proteins = ifelse(allProteins, 1, 0),
-                                                                                     database = database)
+                                                                                     database = database,
+                                                                                     algorithm = algorithm)
     # Multiple fisher's exact test
     if (is.character(allProteins)) list.enrichment[[database]] <- do_enrichment_mfisher(proteins = allProteins,
-                                                                                        database = database)
+                                                                                        database = database,
+                                                                                        algorithm = algorithm)
     # Kolmogorov-Smirnov test
     if (is.numeric(allProteins)) list.enrichment[[database]] <- do_enrichment_ks(proteins = allProteins,
-                                                                                 database = database)
+                                                                                 database = database,
+                                                                                 algorithm = algorithm)
 
   }
 

@@ -44,15 +44,15 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
   attr(dataset, "variables") <- NA
   attr(dataset, "variables_type") <- NA
   attr(dataset, "default_variables") <- NA
-  attr(dataset, "default_variables_names") <- "GENES"
+  attr(dataset, "default_variables_labels") <- "GENES"
 
 
   attr(dataset, "observations") <- NA
   attr(dataset, "observations_sets") <- NA
   attr(dataset, "default_observations_set") <- NA
 
-  attr(dataset, "default_raw_observations") <- "all"
-  attr(dataset, "default_raw_names") <- "observations"
+  attr(dataset, "default_raw_observations") <- "All"
+  attr(dataset, "default_raw_labels") <- "observations"
   attr(dataset, "default_raw_groups") <- NA
 
 
@@ -372,10 +372,10 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
 
 
   # Add Names data frame
-  dataset[["variables"]] <- variables %>% dplyr::mutate(all = TRUE)
+  dataset[["variables"]] <- variables %>% dplyr::mutate(All = TRUE)
 
   # Set attributes
-  attr(dataset, "default_variables") <- "all"
+  attr(dataset, "default_variables") <- "All"
   attr(dataset, "default_names_variables") <- "GENES"
 
 
@@ -401,13 +401,13 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
 
   # Add observations data frame
   dataset[["observations"]] <- tibble::lst()
-  dataset[["observations"]][["raw"]] <- observations %>% dplyr::mutate(all = TRUE)
+  dataset[["observations"]][["raw"]] <- observations %>% dplyr::mutate(All = TRUE)
 
 
   # Add attributes
   attr(dataset, "observations_sets") <- "raw"
   attr(dataset, "default_observations_set") <- "raw"
-  attr(dataset, "default_observations") <- "all"
+  attr(dataset, "default_observations") <- "All"
   attr(dataset, "default_observations_names") <- "observations"
 
   ### Message

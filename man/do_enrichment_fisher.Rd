@@ -4,12 +4,14 @@
 \alias{do_enrichment_fisher}
 \title{Performs overexpression enrichment on logical protein vector with specified Ontology}
 \usage{
-do_enrichment_fisher(proteins, database)
+do_enrichment_fisher(proteins, database, algorithm)
 }
 \arguments{
 \item{proteins}{character vector}
 
 \item{database}{database to use}
+
+\item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 }
 \value{
 

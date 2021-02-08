@@ -2,18 +2,19 @@
 #'
 #' @param proteins numeric score vector
 #' @param ontology GO ontology
+#' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
 #'
 #' @return
 #' @export
 #'
 #'
-enrichment_ks_GO <- function(proteins, ontology) {
+enrichment_ks_GO <- function(proteins, ontology, algorithm) {
 
   # Get and update GO object
   GOdata <- get_GOdata(proteins = proteins, ontology = ontology)
 
   #
-  ks <- topGO::runTest(GOdata, algorithm = "classic", statistic = "ks")
+  ks <- topGO::runTest(GOdata, algorithm = algorithm, statistic = "ks")
 
 
   results <- topGO::GenTable(GOdata,

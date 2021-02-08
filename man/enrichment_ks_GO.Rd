@@ -4,12 +4,14 @@
 \alias{enrichment_ks_GO}
 \title{Performs gene set enrichment on numeric protein vector with specified Ontology}
 \usage{
-enrichment_ks_GO(proteins, ontology)
+enrichment_ks_GO(proteins, ontology, algorithm)
 }
 \arguments{
 \item{proteins}{numeric score vector}
 
 \item{ontology}{GO ontology}
+
+\item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 }
 \value{
 

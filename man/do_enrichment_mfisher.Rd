@@ -4,12 +4,14 @@
 \alias{do_enrichment_mfisher}
 \title{Performs overexpression enrichment on protein group vectors}
 \usage{
-do_enrichment_mfisher(proteins, database)
+do_enrichment_mfisher(proteins, database, algorithm)
 }
 \arguments{
 \item{proteins}{character vector}
 
 \item{database}{database to use}
+
+\item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 }
 \value{
 

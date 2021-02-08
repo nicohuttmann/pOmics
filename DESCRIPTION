@@ -17,6 +17,7 @@ Suggests:
 VignetteBuilder: knitr
 Imports:
     cowplot,
+    disgenet2r,
     fastcluster,
     ggplot2,
     ggfortify,

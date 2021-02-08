@@ -4,12 +4,14 @@
 \alias{enrichment_fisher_GO}
 \title{Performs overexpression enrichment on logical protein vector with specified GO ontology}
 \usage{
-enrichment_fisher_GO(proteins, ontology)
+enrichment_fisher_GO(proteins, ontology, algorithm)
 }
 \arguments{
 \item{proteins}{character vector}
 
 \item{ontology}{GO ontology}
+
+\item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 }
 \value{
 

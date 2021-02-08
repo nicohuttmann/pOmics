@@ -4,10 +4,12 @@
 \alias{set_wd}
 \title{Changes working directory}
 \usage{
-set_wd(wd, save = T)
+set_wd(wd, change = F, save = T)
 }
 \arguments{
 \item{wd}{working directory}
+
+\item{change}{change saved working directory}
 
 \item{save}{Should new working directory be saved?}
 }

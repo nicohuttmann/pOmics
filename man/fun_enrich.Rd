@@ -8,6 +8,7 @@ fun_enrich(
   proteins,
   background = NULL,
   databases = "GO",
+  algorithm = "weight01",
   view = T,
   return = F,
   save = F
@@ -19,6 +20,8 @@ fun_enrich(
 \item{background}{(optional) background genes}
 
 \item{databases}{databases to use}
+
+\item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 
 \item{view}{View results?}
 

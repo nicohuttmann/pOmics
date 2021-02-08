@@ -59,7 +59,7 @@ get_groups <- function(observations, groups, control, observations.set, dataset,
     group.factors <- factor(group.vector, levels = c(control, setdiff(unique(group.vector), control)))
   } else if(hasArg(control) && control.first) {
 
-    stop("Only one mode of ordering can be used")
+    stop("Only one mode of ordering can be used.")
   } else if (control.first) {
 
     group.factors <- factor(group.vector, levels = unique(group.vector))
