@@ -9,7 +9,7 @@
 #'
 protein2gene <- function(proteins, dataset) {
 
-  dataset <- get_default_dataset(dataset)
+  dataset <- get_dataset(dataset)
 
   annotations <- select_UniProt(x = .databases[["UniProt"]][[get_dataset_attr(which = "taxId", dataset = dataset)]],
                                 columns = "GENES",

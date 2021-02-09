@@ -4,10 +4,10 @@
 \alias{set_dataset_attr}
 \title{Sets dataset attribute; does not check if exists}
 \usage{
-set_dataset_attr(attribute, which, dataset)
+set_dataset_attr(x, which, dataset)
 }
 \arguments{
-\item{attribute}{attribute}
+\item{x}{attribute}
 
 \item{which}{attribute type}
 

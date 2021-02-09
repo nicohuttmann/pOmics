@@ -7,9 +7,10 @@
 build_cor_list(
   data,
   min.0 = 0.5,
+  normalize.method = "pqn",
   shift = 1.8,
   width = 0.3,
-  seed.impute = 123,
+  seed = 123,
   similarity.method = "preserve",
   adjacency.method = "none"
 )
@@ -19,11 +20,13 @@ build_cor_list(
 
 \item{min.0}{threshold to keep proteins}
 
+\item{normalize.method}{method for normalization}
+
 \item{shift}{shift in standard deviations}
 
 \item{width}{width in standard deviations}
 
-\item{seed.impute}{seed}
+\item{seed}{seed for imputation}
 
 \item{similarity.method}{method to calculate similarity matrix}
 

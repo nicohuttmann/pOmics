@@ -43,7 +43,7 @@ add_variables_data <- function(data, name, dataset, set.default = F) {
 
 
   # Set as default variables
-  if (set.default) set_dataset_attr(attribute = "name", which = "default_variables", dataset = dataset)
+  if (set.default) set_dataset_attr(x = name, which = "default_variables", dataset = dataset)
 
 
 }
