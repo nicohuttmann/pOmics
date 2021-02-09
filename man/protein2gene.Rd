@@ -4,7 +4,7 @@
 \alias{protein2gene}
 \title{Translates protein accession Ids to gene names}
 \usage{
-protein2gene(proteins, dataset = 1)
+protein2gene(proteins, dataset)
 }
 \arguments{
 \item{proteins}{proteins}

@@ -7,12 +7,11 @@
 #' @export
 #'
 #'
-protein2gene <- function(proteins, dataset = 1) {
+protein2gene <- function(proteins, dataset) {
 
+  dataset <- get_default_dataset(dataset)
 
-
-
-  annotations <- select_UniProt(x = .databases[["UniProt"]][[.info[[dataset]][["taxId"]]]],
+  annotations <- select_UniProt(x = .databases[["UniProt"]][[get_dataset_attr(which = "taxId", dataset = dataset)]],
                                 columns = "GENES",
                                 keys = proteins,
                                 keytype = "UNIPROTKB")

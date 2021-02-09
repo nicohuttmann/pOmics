@@ -17,7 +17,8 @@ enrich_dend_ks <- function(dend.table, protein.scores, n = 10, inverse = F) {
   # Set rownames
   rownames(dend.table.pvalue) <- dplyr::pull(dend.table, var = 1)
 
-  protein.scores <- protein.scores[dplyr::pull(dend.table, var = 1)]
+  protein.scores <- protein.scores[intersect(names(protein.scores),
+                                                   dplyr::pull(dend.table, var = 1))]
 
   # Inverse enrichment
   if(inverse) protein.scores <- -protein.scores
@@ -33,7 +34,7 @@ enrich_dend_ks <- function(dend.table, protein.scores, n = 10, inverse = F) {
     for (j in 1:i) {
 
       dend.table.pvalue[dend.table.cluster[, i] == j, i] <- ks_test(protein.scores = protein.scores,
-                                                               annotated.proteins = proteins[dend.table.cluster[, i] == j])
+                                                                    annotated.proteins = proteins[dend.table.cluster[, i] == j])
 
     }
 

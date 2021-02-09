@@ -8,7 +8,7 @@
 #' @export
 #'
 #'
-enrich_dend_fisher <- function(dend.table, annotated.proteins, n = 10) {
+enrich_dend_fisher <- function(dend.table, annotated.proteins, n = 10, inverse = F) {
 
   # Extract data as matrix
   dend.table.pvalue <- as.matrix(dend.table[, c(1:n + 1)])
@@ -19,18 +19,39 @@ enrich_dend_fisher <- function(dend.table, annotated.proteins, n = 10) {
   # Save position data for convenience
   dend.table.cluster <- dend.table.pvalue
 
+  # Regular enrichment
+  if (!inverse) {
 
-  # Fill dend.table.pvalue with enrichment scores
-  for (i in 1:n) {
+    # Fill dend.table.pvalue with enrichment scores
+    for (i in 1:n) {
 
-    for (j in 1:i) {
+      for (j in 1:i) {
 
-      dend.table.pvalue[dend.table.cluster[, i] == j, i] <- fisher_test(proteins = dplyr::pull(dend.table, var = as.character(i)) == j,
-                                                                        annotated.proteins = annotated.proteins)
+        dend.table.pvalue[dend.table.cluster[, i] == j, i] <- fisher_test(proteins = dplyr::pull(dend.table, var = as.character(i)) == j,
+                                                                          annotated.proteins = annotated.proteins)
+
+      }
+
+    }
+
+
+  } else {
+
+    # Inverse enrichment
+    # Fill dend.table.pvalue with enrichment scores
+    for (i in 1:n) {
+
+      for (j in 1:i) {
+
+        dend.table.pvalue[dend.table.cluster[, i] == j, i] <- fisher_test(proteins = dplyr::pull(dend.table, var = as.character(i)) != j,
+                                                                          annotated.proteins = annotated.proteins)
+
+      }
 
     }
 
   }
+
 
   # Return
   return(list(dend.table.cluster = dend.table.cluster, dend.table.pvalue = dend.table.pvalue))

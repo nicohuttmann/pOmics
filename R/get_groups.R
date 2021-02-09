@@ -1,17 +1,16 @@
 #' Returns groups vector
 #'
-#' @param observations observations
 #' @param groups groups
 #' @param control (optional) which group is control
+#' @param observations observations
 #' @param observations.set which observations.set to use
 #' @param dataset dataset
-#' @param control.first (optional) should first group be set as control
 # '
 #' @return
 #' @export
 #'
 #'
-get_groups <- function(observations, groups, control, observations.set, dataset, control.first = F) {
+get_groups <- function(groups, control, observations, observations.set, dataset) {
 
   # Check dataset
   dataset <- get_dataset(dataset)
@@ -20,52 +19,55 @@ get_groups <- function(observations, groups, control, observations.set, dataset,
   observations.set <- get_observations_set(observations.set = observations.set,
                                            dataset = dataset)
 
+  # Check if input is vector
+  vector.input <- tryCatch(is.vector(observations),
+                           error = function(cond) FALSE)
 
-  # Return
-  if (hasArg(groups)) {
 
-    #
-    group.vector <- .datasets[[dataset]][["observations"]][[observations.set]] %>%
-      dplyr::pull(var = !!dplyr::enquo(groups), name = observations)
-
-    # If no variable if defined, take default
-  } else {
-
-    #
-    group.vector <- .datasets[[dataset]][["observations"]][[observations.set]] %>%
-      dplyr::pull(var = !!rlang::sym(attr(.datasets[[dataset]], paste0("default_", observations.set, "groups"))),
-                  name = observations)
-
+  # if variables input is vector
+  if (!vector.input) {
+    observations <- get_observations(observations = !!dplyr::enquo(observations),
+                                     observations.set = observations.set,
+                                     dataset = dataset)
   }
 
 
-  group.vector <- na.omit(group.vector)
-
-
-  # Check observations
-  if (any(!observations %in% names(group.vector))) stop("Group definition does not contain all observations.")
-
-  else group.vector <- group.vector[observations]
+  # Get groups data
+  group.vector <- .datasets[[dataset]][["observations"]][[observations.set]] %>%
+    dplyr::pull(!!dplyr::enquo(groups))
 
 
 
-  # Check order
-  if (length(unique(group.vector)) > 2 && !hasArg(control) && !control.first) {
+  # Check observations and groups
+  if (any(!observations %in% names(group.vector))) stop("Groups do not contain all observations.")
+
+
+  # Remove observations
+  group.vector <- group.vector[observations]
+
+
+
+
+  # Define order of groups
+
+  # More than two groups
+  if (!hasArg(control)) {
 
     group.factors <- factor(group.vector)
 
-  } else if(hasArg(control) && control %in% group.vector && !control.first) {
+    # control defined but not in groups
+  } else if (hasArg(control) && !(control %in% group.vector)) {
+
+    stop("Control not found in groups.")
+
+    # Control group defined
+  } else if(hasArg(control) && control %in% group.vector) {
 
     group.factors <- factor(group.vector, levels = c(control, setdiff(unique(group.vector), control)))
-  } else if(hasArg(control) && control.first) {
 
-    stop("Only one mode of ordering can be used.")
-  } else if (control.first) {
-
-    group.factors <- factor(group.vector, levels = unique(group.vector))
-
+    #
   } else {
-    stop("Group assignment not correct.")
+    stop("Something went wrong.")
   }
 
 

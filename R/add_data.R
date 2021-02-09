@@ -32,14 +32,14 @@ add_data <- function(data, name, type, dataset, set.default = F) {
 
 
   # Check observations
-  if (any(!rownames(data) %in% get_observations(observations = all, dataset = dataset))) {
+  if (any(!rownames(data) %in% get_observations(observations = All, dataset = dataset))) {
     # Define new set of observations
     add_observations_set(name = name, observations = rownames(data), dataset = dataset, set.default = TRUE)
   }
 
 
   # Check variables
-  if (all(colnames(data) %in% get_variables(variables = all, dataset = dataset)) && ncol(data) < length(get_variables(variables = all, dataset = dataset))) {
+  if (all(colnames(data) %in% get_variables(variables = All, dataset = dataset)) && ncol(data) < length(get_variables(variables = all, dataset = dataset))) {
     # Define new set of observations
     add_variables_data(data = colnames(data), name = name, dataset = dataset, set.default = TRUE)
   }

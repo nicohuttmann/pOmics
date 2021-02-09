@@ -7,7 +7,7 @@
 get_dataset_attr(which = "names", dataset)
 }
 \arguments{
-\item{which}{attribute}
+\item{which}{attribute type}
 
 \item{dataset}{dataset}
 }

@@ -4,7 +4,7 @@
 \alias{enrich_dend_fisher}
 \title{Performs Fisher's exact test on all cluster levels of given dendrogram}
 \usage{
-enrich_dend_fisher(dend.table, annotated.proteins, n = 10)
+enrich_dend_fisher(dend.table, annotated.proteins, n = 10, inverse = F)
 }
 \arguments{
 \item{dend.table}{dendrogram represented as dataframe}

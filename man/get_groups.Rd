@@ -4,27 +4,18 @@
 \alias{get_groups}
 \title{Returns groups vector}
 \usage{
-get_groups(
-  observations,
-  groups,
-  control,
-  observations.set,
-  dataset,
-  control.first = F
-)
+get_groups(groups, control, observations, observations.set, dataset)
 }
 \arguments{
-\item{observations}{observations}
-
 \item{groups}{groups}
 
 \item{control}{(optional) which group is control}
 
+\item{observations}{observations}
+
 \item{observations.set}{which observations.set to use}
 
 \item{dataset}{dataset}
-
-\item{control.first}{(optional) should first group be set as control}
 }
 \value{
 

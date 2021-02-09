@@ -32,7 +32,7 @@ add_observations_set <- function(name, observations, dataset, set.default = T) {
 
 
   # Add observations data frame
-  .datasets[[dataset]][["observations"]][[name]] <<- observations %>% dplyr::mutate(all = TRUE)
+  .datasets[[dataset]][["observations"]][[name]] <<- observations %>% dplyr::mutate(All = TRUE)
 
 
   # Update list of observations sets

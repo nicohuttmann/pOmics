@@ -20,7 +20,7 @@ get_observations_template <- function(observations.set, dataset, fill = NA) {
 
   # Get names vector
   template <- .datasets[[dataset]][["observations"]][[observations.set]] %>%
-    dplyr::pull(var = all, name = observations)
+    dplyr::pull(var = All, name = observations)
 
   # Fill template
   template[] <- fill

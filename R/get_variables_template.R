@@ -5,22 +5,22 @@
 #'
 #' @return
 #' @export
-#' 
+#'
 #' @importFrom magrittr %>%
 #'
 #'
 get_variables_template <- function(dataset, fill = NA) {
-  
+
   # Check dataset
   dataset <- get_dataset(dataset)
-  
+
   # Get names vector
   template <- .datasets[[dataset]][["variables"]] %>%
-    dplyr::pull(var = all, name = variables)
-  
+    dplyr::pull(var = All, name = variables)
+
   # Fill template
   template[] <- fill
-  
+
   return(template)
-  
+
 }

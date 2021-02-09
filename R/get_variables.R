@@ -1,6 +1,6 @@
-#' Assembles variables
+#' Return variables data
 #'
-#' @param variables variables defined by dplyr::filter
+#' @param variables vector of variables
 #' @param dataset dataset
 #'
 #' @return
@@ -14,23 +14,45 @@ get_variables <- function(variables, dataset) {
   # check dataset
   dataset <- get_dataset(dataset)
 
+  # No variables specified
+  if (!hasArg(variables)) return(.datasets[[dataset]][["variables"]] %>%
+                                   dplyr::pull(var = "variables", name = NULL))
 
-  # Return
-  if (hasArg(variables)) {
 
-    #
+  # Check if input is vector
+  vector.input <- tryCatch(is.vector(variables),
+                           error = function(cond) FALSE)
+
+
+  # if variables input expression
+  if (!vector.input) {
     return(.datasets[[dataset]][["variables"]] %>%
              dplyr::filter(!!dplyr::enquo(variables)) %>%
-             dplyr::pull(variables))
+             dplyr::pull(var = "variables", name = NULL))
 
-    # If no variable if defined, take default
+  # default
+  } else if (length(variables) == 1 && variables == "default") {
+
+    # No default
+    if (is.na(get_dataset_attr(which = "default_variables", dataset = dataset))) stop("No default variables set.")
+
+    variables.data <- get_variables_data(variables = All,
+                                         name = get_dataset_attr(which = "default_variables", dataset = dataset),
+                                         dataset = dataset) %>%
+      na.omit()
+
+    return(names(variables.data)[variables.data])
+
+
+  # input given as vector
+  # intersect given proteins with proteins in dataset
   } else {
+    return(intersect(variables,
+                     .datasets[[dataset]][["variables"]] %>%
+                       dplyr::pull(var = "variables", name = NULL)))
 
-    #
-    return(.datasets[[dataset]][["variables"]] %>%
-             dplyr::filter(!!rlang::sym(attr(.datasets[[dataset]], "default_variables"))) %>%
-             dplyr::pull(variables))
 
   }
+
 
 }

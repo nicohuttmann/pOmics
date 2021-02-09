@@ -4,7 +4,7 @@
 \alias{fun_enrich_}
 \title{Functional enrichment of cor_list object}
 \usage{
-fun_enrich_(cor_list, name, k, l, databases = "CC", algorithm = "classic")
+fun_enrich_(cor_list, name, k, l, databases = "CC", algorithm = "weight01")
 }
 \arguments{
 \item{cor_list}{cor_list object}

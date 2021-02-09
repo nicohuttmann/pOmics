@@ -9,7 +9,9 @@
 #' @param cut cut dendrogram
 #' @param return return cor_list object
 #' @param fun.enrich Do functional enrichment
+#' @param labels proteins to label on y-axis
 #' @param databases databases to use for functional enrichment
+#' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
 #'
 #' @return
 #' @export
@@ -17,7 +19,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name, cut = T, return = T, plot = T, fun.enrich = T, databases = "GO") {
+enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name = "test", cut = T, return = T, plot = T, labels, fun.enrich = T, databases = "GO", algorithm = "weight01") {
 
   # Check input
   if(!hasArg(cor_list) || !hasArg(proteins)) stop("Missing input.")
@@ -36,7 +38,8 @@ enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name, cut = T,
   } else if(is.character(proteins)) {
     cor_list[[paste0("dend.enrich_", name)]] <- enrich_dend_fisher(dend.table = cor_list[["dend.table"]],
                                                                    annotated.proteins = proteins,
-                                                                   n = n) %>%
+                                                                   n = n,
+                                                                   inverse = inverse) %>%
                                                 eval_dend_enrich(cut = cut)
   # Incorrect input
   } else {
@@ -49,16 +52,20 @@ enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name, cut = T,
 
   # Plot enrichment results
   if(plot) {
-    # Plot lines
     plot_dend_enrich_lines_(cor_list = cor_list, name = name)
+    # Plot lines
     # plot cormat
-    plot_cormat_enrichment(cor_list = cor_list, name = name)
+    if (!hasArg(labels)) {
+      plot_cormat_enrichment(cor_list = cor_list, name = name)
+    } else {
+      plot_cormat_enrichment_labels(cor_list = cor_list, name = name, labels = labels)
+    }
   }
 
   # Functional enrichment
-  if (fun.enrich) fun_enrich_(cor_list = cor_list, name = name, databases = databases)
+  if (fun.enrich) fun_enrich_(cor_list = cor_list, name = name, databases = databases, algorithm = algorithm)
 
   # Return
-  return(cor_list)
+  if (return) return(cor_list)
 
 }

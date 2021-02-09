@@ -1,9 +1,9 @@
 #' Assemble data from dataset
 #'
+#' @param name specific name of data type
 #' @param variables selected variables
 #' @param observations selected observations
 #' @param observations.set set of observations
-#' @param name specific name of data type
 #' @param type data type
 #' @param dataset dataset name or number
 #'
@@ -11,7 +11,7 @@
 #' @export
 #'
 #'
-get_data <- function(variables, observations, observations.set, name, type, dataset) {
+get_data <- function(name, variables = "default", observations = "default", observations.set, type, dataset) {
 
   # Checks correct name of dataset
   dataset <- get_dataset(dataset)
@@ -26,11 +26,11 @@ get_data <- function(variables, observations, observations.set, name, type, data
                         dataset = dataset)
 
   # Assemble variables
-  variables <- get_variables(variables = !!dplyr::enquo(variables),
+  variables <- get_variables(variables = {{variables}},
                              dataset = dataset)
 
   # Assemble observations
-  observations <- get_observations(observations = !!dplyr::enquo(observations),
+  observations <- get_observations(observations = {{observations}},
                                    observations.set = observations.set,
                                    dataset = dataset)
 

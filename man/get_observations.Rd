@@ -2,20 +2,20 @@
 % Please edit documentation in R/get_observations.R
 \name{get_observations}
 \alias{get_observations}
-\title{Assembles observations}
+\title{Return observations data}
 \usage{
 get_observations(observations, observations.set, dataset)
 }
 \arguments{
-\item{observations}{observations defined by dplyr::filter}
+\item{observations}{vector of observations}
 
 \item{observations.set}{observations data frame}
 
-\item{dataset}{datset}
+\item{dataset}{dataset}
 }
 \value{
 
 }
 \description{
-Assembles observations
+Return observations data
 }

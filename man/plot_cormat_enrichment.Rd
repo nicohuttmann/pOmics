@@ -7,13 +7,9 @@
 plot_cormat_enrichment(cor_list, name)
 }
 \arguments{
-\item{data}{data}
+\item{cor_list}{cor_list object}
 
-\item{dend_y}{y-axis dendrogram}
-
-\item{scale}{should data be scaled}
-
-\item{transform}{should data be transformed}
+\item{name}{name of enrichment analysis}
 }
 \value{
 

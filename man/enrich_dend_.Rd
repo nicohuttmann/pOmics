@@ -9,12 +9,14 @@ enrich_dend_(
   proteins,
   n = 10,
   inverse = F,
-  name,
+  name = "test",
   cut = T,
   return = T,
   plot = T,
+  labels,
   fun.enrich = T,
-  databases = "GO"
+  databases = "GO",
+  algorithm = "weight01"
 )
 }
 \arguments{
@@ -34,9 +36,13 @@ enrich_dend_(
 
 \item{plot}{Plot results?}
 
+\item{labels}{proteins to label on y-axis}
+
 \item{fun.enrich}{Do functional enrichment}
 
 \item{databases}{databases to use for functional enrichment}
+
+\item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 }
 \value{
 

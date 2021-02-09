@@ -2,12 +2,12 @@
 % Please edit documentation in R/get_variables.R
 \name{get_variables}
 \alias{get_variables}
-\title{Assembles variables}
+\title{Return variables data}
 \usage{
 get_variables(variables, dataset)
 }
 \arguments{
-\item{variables}{variables defined by dplyr::filter}
+\item{variables}{vector of variables}
 
 \item{dataset}{dataset}
 }
@@ -15,5 +15,5 @@ get_variables(variables, dataset)
 
 }
 \description{
-Assembles variables
+Return variables data
 }

@@ -376,7 +376,7 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
 
   # Set attributes
   attr(dataset, "default_variables") <- "All"
-  attr(dataset, "default_names_variables") <- "GENES"
+  attr(dataset, "default_variables_labels") <- "GENES"
 
 
   ### Message

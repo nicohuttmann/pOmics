@@ -10,7 +10,7 @@
 new_annotations_data_DisGeNet <- function(nodeSize = 5, save = T, return = F) {
 
   # Collect all variables
-  variables <- get_variables_data(var = all == TRUE, name = "GENES")
+  variables <- get_variables_data(var = All, name = "GENES")
 
 
 

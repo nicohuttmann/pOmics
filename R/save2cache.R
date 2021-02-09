@@ -11,7 +11,7 @@
 save2cache <- function(data, view = F, new = F) {
 
   # Add cache list or replace
-  new_cache_list(replace = new)
+  new_cache(replace = new)
 
   # Add new data
   .cache[[length(.cache) + 1]] <<- data

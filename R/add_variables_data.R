@@ -41,4 +41,9 @@ add_variables_data <- function(data, name, dataset, set.default = F) {
     dplyr::mutate(new = template) %>%
     dplyr::rename(!!name := new)
 
+
+  # Set as default variables
+  if (set.default) set_dataset_attr(attribute = "name", which = "default_variables", dataset = dataset)
+
+
 }
