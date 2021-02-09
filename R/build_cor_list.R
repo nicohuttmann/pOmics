@@ -20,7 +20,7 @@ build_cor_list <- function(data, min.0 = 0.5, normalize.method = "pqn", shift = 
     data %>%
       threshold_0(min = min.0) %>%
       pOmics::normalize(method = normalize.method) %>%
-      impute_norm(shift = shift, width = width, seed = seed.impute) %>%
+      impute_norm(shift = shift, width = width, seed = seed) %>%
       cor_() %>%
       similarity_(method = similarity.method) %>%
       adjacency_(method = adjacency.method) %>%
