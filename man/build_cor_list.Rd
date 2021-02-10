@@ -12,7 +12,10 @@ build_cor_list(
   width = 0.3,
   seed = 123,
   similarity.method = "preserve",
-  adjacency.method = "none"
+  adjacency.method = "none",
+  add.connectivity = F,
+  connectivity.k = 20,
+  connectivity.scale = T
 )
 }
 \arguments{
@@ -31,6 +34,12 @@ build_cor_list(
 \item{similarity.method}{method to calculate similarity matrix}
 
 \item{adjacency.method}{method to calculate adjacency matrix}
+
+\item{add.connectivity}{calculate connectivity measures}
+
+\item{connectivity.k}{max number of clusters for connectivity}
+
+\item{connectivity.scale}{scale connectivity values to cluster size}
 }
 \value{
 

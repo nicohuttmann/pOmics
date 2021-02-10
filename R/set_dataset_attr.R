@@ -11,11 +11,11 @@
 set_dataset_attr <- function(x, which, dataset) {
 
   # Check argument
-  if (!hasArg(attribute) || !hasArg(which)) stop("No attribute given.")
+  if (!hasArg(x) || !hasArg(which)) stop("No attribute given.")
 
   # Get dataset
   dataset <- get_dataset(dataset)
 
-  attr(x = .datasets[[dataset]], which = which) <<- attribute
+  attr(x = .datasets[[dataset]], which = which) <<- x
 
 }
