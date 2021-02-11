@@ -5,44 +5,47 @@
 \title{Evaluates data column-wise and saves variables data}
 \usage{
 eval_data_grouped_var(
-  variables,
-  observations,
+  data,
   groups,
   expr,
-  name,
-  observations.set,
+  variables = "default",
+  observations = "default",
+  control,
   data.name,
-  type,
+  type = "LFQ",
+  observations.set,
   dataset,
-  set.default = F,
-  save = T,
-  return = F
+  return = T,
+  view = F,
+  save = F
 )
 }
 \arguments{
-\item{variables}{variables}
-
-\item{observations}{observations}
+\item{data}{data}
 
 \item{groups}{group definition}
 
 \item{expr}{function(x) how columns should be evaluated}
 
-\item{name}{name of new data}
+\item{variables}{variables}
 
-\item{observations.set}{set of observations}
+\item{observations}{observations}
 
 \item{data.name}{data name}
 
 \item{type}{data type}
 
+\item{observations.set}{set of observations}
+
 \item{dataset}{dataset}
 
-\item{set.default}{should new data be set as default}
+\item{return}{Return results matrix?}
 
-\item{save}{save}
+\item{view}{View results matrix?}
 
-\item{return}{return}
+\item{save}{Save results matrix?}
+
+\item{name}{name of new data}
 }
 \value{
 

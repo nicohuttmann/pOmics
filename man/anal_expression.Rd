@@ -15,10 +15,10 @@ anal_expression(
   type = "LFQ",
   observations.set,
   dataset,
+  return = T,
   plot = T,
   view = F,
-  save = F,
-  return = T
+  save = F
 )
 }
 \arguments{
@@ -42,13 +42,13 @@ anal_expression(
 
 \item{dataset}{dataset}
 
+\item{return}{Return results matrix?}
+
 \item{plot}{Plot?}
 
 \item{view}{View results matrix?}
 
 \item{save}{Save results matrix?}
-
-\item{return}{Return results matrix?}
 }
 \value{
 

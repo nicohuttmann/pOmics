@@ -10,16 +10,16 @@
 #' @param type data type
 #' @param observations.set observations.set
 #' @param dataset dataset
+#' @param return Return results matrix?
 #' @param plot Plot?
 #' @param view View results matrix?
 #' @param save Save results matrix?
-#' @param return Return results matrix?
 #'
 #' @return
 #' @export
 #'
 #'
-anal_expression <- function(data, variables = "default", observations = "default", groups, control, data.name, var.equal = T, type = "LFQ", observations.set, dataset, plot = T, view = F, save = F, return = T) {
+anal_expression <- function(data, variables = "default", observations = "default", groups, control, data.name, var.equal = T, type = "LFQ", observations.set, dataset, return = T, plot = T, view = F, save = F) {
 
   # Check data input
   if (!hasArg(data) && variables == "default" && observations == "default") stop("Provide data or specify variables and observations.")
@@ -30,7 +30,7 @@ anal_expression <- function(data, variables = "default", observations = "default
   # Get observations set
   observations.set <- get_observations_set(observations.set = observations.set, dataset = dataset)
 
-  #
+  # Get variables
   variables <- get_variables(variables = {{variables}},
                              dataset = dataset)
 
