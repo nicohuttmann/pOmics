@@ -4,7 +4,7 @@
 \alias{check_database}
 \title{Checks if database is available}
 \usage{
-check_database(id, type = "UniProt")
+check_database(id, type)
 }
 \arguments{
 \item{id}{database name/identifier}

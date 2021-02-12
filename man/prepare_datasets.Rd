@@ -18,7 +18,7 @@ prepare_datasets(
 
 \item{data.origin}{Identify origin software of data}
 
-\item{species}{should taxonomy be determined}
+\item{species}{protein origin (T or F or UniProt taxosnomy ID)}
 
 \item{load.UniProt.ws}{Should a UniProt database be downloaded}
 

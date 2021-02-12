@@ -22,7 +22,7 @@ new_dataset(
 
 \item{data.origin}{Identify origin software of data}
 
-\item{species}{protein origin}
+\item{species}{protein origin (T or F or UniProt taxosnomy ID)}
 
 \item{load.UniProt.ws}{Should UniProt data be loaded}
 

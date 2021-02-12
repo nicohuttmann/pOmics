@@ -3,7 +3,7 @@
 #' @param files files to be imported
 #' @param change.wd Should wd be changed by default
 #' @param prepare Should imported files be forwarded to prepare_datasets
-#' @param species should taxonomy be determined
+#' @param species protein origin (T or F or UniProt taxosnomy ID)
 #' @param data.origin Identify origin software of data
 #' @param load.UniProt.ws Should a UniProt database be downloaded
 #'
@@ -11,7 +11,11 @@
 #' @export
 #'
 #'
-import_datasets <- function(files, change.wd = F, prepare, species, data.origin, load.UniProt.ws = F) {
+import_datasets <- function(files, change.wd, prepare, species, data.origin, load.UniProt.ws = F) {
+
+  # Add .info list file
+  new_info_list(replace = FALSE, return = FALSE)
+
 
   # select files
   if (!hasArg(files)) files <- choose.files(default = getwd())
@@ -28,13 +32,16 @@ import_datasets <- function(files, change.wd = F, prepare, species, data.origin,
   for (file in files) {
 
     # Check if new file is in a different dir than wd
-    if (dirname(file) != getwd() || change.wd) {
+    if (dirname(file) != getwd() && !hasArg(change.wd)) {
 
       # Change wd after user input
       if (menu(c("Yes", "No"), title = "Change working directory?") == 1) {
-        setwd(dirname(file))
+        set_wd(wd = dirname(file), change = TRUE, save = TRUE)
       }
 
+      # Predefined change of wd
+    } else if(change.wd) {
+      set_wd(wd = dirname(file), change = TRUE, save = TRUE)
     }
 
   }

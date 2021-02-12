@@ -3,7 +3,7 @@
 #' @param x raw data frame
 #' @param name name of dataset
 #' @param data.origin Identify origin software of data
-#' @param species protein origin
+#' @param species protein origin (T or F or UniProt taxosnomy ID)
 #' @param load.UniProt.ws Should UniProt data be loaded
 #' @param return Should dataset be returned?
 #' @param min.similarity minimum similarity oi column names

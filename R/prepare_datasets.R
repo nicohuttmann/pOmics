@@ -2,7 +2,7 @@
 #'
 #' @param imports imported raw data
 #' @param data.origin Identify origin software of data
-#' @param species should taxonomy be determined
+#' @param species protein origin (T or F or UniProt taxosnomy ID)
 #' @param load.UniProt.ws Should a UniProt database be downloaded
 #' @param min.similarity minimum similarity oi column names
 #' @param min.groupsize minimum number of samples

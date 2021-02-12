@@ -7,32 +7,50 @@
 #' @export
 #'
 #'
-check_database <- function(id, type = "UniProt") {
+check_database <- function(id, type) {
+
+  #
+  if (!hasArg(id) && !hasArg(type)) stop("No names specified.")
 
   # .databases exists
-  if (hasArg(id) && ".databases" %in% objects(all.names = T, envir = .GlobalEnv)) {
+  if (".databases" %in% objects(all.names = T, envir = .GlobalEnv) && length(names(.databases)) > 0) {
 
-    # database entry exists
-    if (length(names(.databases)) > 0 && type %in% names(.databases)) {
+    # Check database by id
+    if (hasArg(id)) {
 
-      # make taxIds characters
-      if (is.numeric(id)) id <- as.character(id)
-      # id exists
-      if (length(names(.databases[[type]])) > 0 && id %in% names(.databases[[type]])) {
-
-        return(TRUE)
-
-      } else {
-        return(FALSE)
+      # database type given?
+      if (!hasArg(type)) {
+        type <- names(.databases)
       }
 
+      for (type in type) {
+
+        # database entry exists
+        if (type %in% names(.databases)) {
+
+          # make taxIds characters
+          if (is.numeric(id)) id <- as.character(id)
+          # id exists
+          if (length(names(.databases[[type]])) > 0 && id %in% names(.databases[[type]])) {
+
+            return(TRUE)
+
+          }
+
+        }
+
+      }
+
+    # Check database type
     } else {
-      return(FALSE)
+      if (type %in% names(.databases)) return(TRUE)
     }
 
 
-  } else {
-    return(FALSE)
+
   }
+
+  # Database not found
+  return(FALSE)
 
 }

@@ -11,9 +11,7 @@ load_UniProt <- function(taxId = get_taxId()) {
   # Check if data base list exists
   if (!exists(".databases")) {
 
-    assign(".databases",
-           list(),
-           pos = .GlobalEnv)
+    .databases <<- list()
 
   }
 

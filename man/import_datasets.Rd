@@ -6,7 +6,7 @@
 \usage{
 import_datasets(
   files,
-  change.wd = F,
+  change.wd,
   prepare,
   species,
   data.origin,
@@ -20,7 +20,7 @@ import_datasets(
 
 \item{prepare}{Should imported files be forwarded to prepare_datasets}
 
-\item{species}{should taxonomy be determined}
+\item{species}{protein origin (T or F or UniProt taxosnomy ID)}
 
 \item{data.origin}{Identify origin software of data}
 

@@ -8,20 +8,15 @@
 #' @export
 #'
 #'
-plot_xy <- function(x, y, fit = F) {
+plot_xy <- function(x, y) {
 
   # check input for names
   if (length(names(x)) == 0 || length(names(y)) == 0) stop("Arguments don't have names.")
 
   names <- intersect(names(x), names(y))
 
-  if (fit) model <- lm(y[names] ~ x[names])
 
-  plot(x[names], y[names], main = ifelse(fit, paste0("R2 = ", summary(model)$r.squared), ""),
-       xlab = deparse(substitute(x)),
-       ylab = deparse(substitute(x)),
-       pch = 16)
+  plotly::plot_ly(x = x[names], y = y[names], type = "scatter", name = p2g(names))
 
-  if (fit) abline(model, col = "red")
 
 }
