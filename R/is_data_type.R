@@ -14,7 +14,7 @@ is_data_type <- function(type, dataset) {
 
 
   # Exists
-  if (type %in% attr(.datasets[[dataset]], "data_types"))
+  if (type %in% names(.datasets[[dataset]]))
     return(TRUE)
 
   # Does not exist

@@ -24,17 +24,14 @@ get_data_types <- function(dataset, print = T, return = F) {
     for (i in dataset) {
 
       message(paste0("Dataset: ", i))
-      print(attr(.datasets[[i]], "data_types"))
+      print(setdiff(names(.datasets[[i]]), c("variables", "observations")))
       print(attr(.datasets[[i]], "default_data_type"))
 
     }
 
   }
 
-
-
-
   #
-  if (return && length(dataset) == 1) return(attr(.datasets[[dataset]], "data_types"))
+  if (return && length(dataset) == 1) return(setdiff(names(.datasets[[i]]), c("variables", "observations")))
 
 }

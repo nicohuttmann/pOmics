@@ -4,7 +4,7 @@
 \alias{add_data}
 \title{Adds new data}
 \usage{
-add_data(data, name, type, dataset, set.default = F)
+add_data(data, name, type, dataset, set.default.type = F, set.default.name = F)
 }
 \arguments{
 \item{data}{new data}
@@ -15,7 +15,9 @@ add_data(data, name, type, dataset, set.default = F)
 
 \item{dataset}{dataset}
 
-\item{set.default}{Set new data as default}
+\item{set.default.type}{set data type as default}
+
+\item{set.default.name}{set dataset as default for given type}
 }
 \value{
 

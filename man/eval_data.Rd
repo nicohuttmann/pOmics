@@ -17,7 +17,7 @@ eval_data(
   view = F,
   save = F,
   name,
-  set.default = F
+  set.default.name = F
 )
 }
 \arguments{
@@ -45,7 +45,7 @@ eval_data(
 
 \item{name}{name of new data}
 
-\item{set.default}{should new data be set as default}
+\item{set.default.name}{should new data be set as default}
 }
 \value{
 
