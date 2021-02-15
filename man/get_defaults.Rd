@@ -4,12 +4,14 @@
 \alias{get_defaults}
 \title{Returns default data}
 \usage{
-get_defaults(data.origin, type)
+get_defaults(data.origin, type, silent = F)
 }
 \arguments{
 \item{data.origin}{data origin program}
 
 \item{type}{info type}
+
+\item{silent}{suppress messages}
 }
 \value{
 

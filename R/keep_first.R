@@ -11,7 +11,7 @@
 keep_first <- function(x, sep) {
 
   # Identifies separator if not given
-  if (!hasArg(sep)) sep <- most_common_character(x)
+  if (!hasArg(sep)) sep <- identify_separator(x)
 
   # Separates strings and keeps first element of each vector
   x %>%

@@ -11,8 +11,10 @@ new_dataset(
   species,
   load.UniProt.ws = T,
   return = F,
-  min.similarity,
-  min.groupsize
+  identifier,
+  data.types,
+  min.similarity = 8,
+  min.groupsize = 6
 )
 }
 \arguments{
@@ -24,9 +26,13 @@ new_dataset(
 
 \item{species}{protein origin (T or F or UniProt taxosnomy ID)}
 
-\item{load.UniProt.ws}{Should UniProt data be loaded}
+\item{load.UniProt.ws}{(optional) Should UniProt data be loaded}
 
 \item{return}{Should dataset be returned?}
+
+\item{identifier}{(optional) specific vector of identifier column/s}
+
+\item{data.types}{(optional) types of data to extract; uses defaults if not specified}
 
 \item{min.similarity}{minimum similarity oi column names}
 

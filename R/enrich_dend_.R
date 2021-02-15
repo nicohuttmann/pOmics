@@ -19,7 +19,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name = "test", cut = T, return = T, plot = T, labels, fun.enrich = T, databases = "GO", algorithm = "weight01") {
+enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name = "test", cut = T, return = F, plot = T, labels, fun.enrich = T, databases = "GO", algorithm = "weight01") {
 
   # Check input
   if(!hasArg(cor_list) || !hasArg(proteins)) stop("Missing input.")

@@ -4,12 +4,14 @@
 \alias{get_identifiers}
 \title{Finds feasible identifier columns}
 \usage{
-get_identifiers(x, sep)
+get_identifiers(x, sep, identifier)
 }
 \arguments{
 \item{x}{data frame}
 
 \item{sep}{separator}
+
+\item{identifier}{vector of identifier columns}
 }
 \value{
 

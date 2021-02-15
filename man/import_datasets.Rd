@@ -10,7 +10,8 @@ import_datasets(
   prepare,
   species,
   data.origin,
-  load.UniProt.ws = F
+  load.UniProt.ws = F,
+  data.types
 )
 }
 \arguments{
@@ -25,6 +26,10 @@ import_datasets(
 \item{data.origin}{Identify origin software of data}
 
 \item{load.UniProt.ws}{Should a UniProt database be downloaded}
+
+\item{data.types}{types of data to be extracted}
+
+\item{identifier}{(optional) specific vector of column/s to use as identifier}
 }
 \value{
 

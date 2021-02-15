@@ -11,7 +11,7 @@ enrich_dend_(
   inverse = F,
   name = "test",
   cut = T,
-  return = T,
+  return = F,
   plot = T,
   labels,
   fun.enrich = T,

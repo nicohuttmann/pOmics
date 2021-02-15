@@ -6,12 +6,14 @@
 #' @param species protein origin (T or F or UniProt taxosnomy ID)
 #' @param data.origin Identify origin software of data
 #' @param load.UniProt.ws Should a UniProt database be downloaded
+#' @param identifier (optional) specific vector of column/s to use as identifier
+#' @param data.types types of data to be extracted
 #'
 #' @return
 #' @export
 #'
 #'
-import_datasets <- function(files, change.wd, prepare, species, data.origin, load.UniProt.ws = F) {
+import_datasets <- function(files, change.wd, prepare, species, data.origin, load.UniProt.ws = F, data.types) {
 
   # Add .info list file
   new_info_list(replace = FALSE, return = FALSE)
@@ -63,7 +65,9 @@ import_datasets <- function(files, change.wd, prepare, species, data.origin, loa
     prepare_datasets(imports = list.import,
                      species = species,
                      data.origin = data.origin,
-                     load.UniProt.ws = load.UniProt.ws)
+                     load.UniProt.ws = load.UniProt.ws,
+                     identifier = identifier,
+                     data.types = data.types)
   }
 
 }

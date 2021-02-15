@@ -10,6 +10,7 @@
 #' @param data.name data name
 #' @param type data type
 #' @param dataset dataset
+#' @param name name to be saved under
 #' @param return Return results matrix?
 #' @param view View results matrix?
 #' @param save Save results matrix?
@@ -20,7 +21,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-eval_data_grouped_var <- function(data, groups, expr, variables = "default", observations = "default", control, data.name, type = "LFQ", observations.set, dataset, return = T, view = F, save = F) {
+eval_data_grouped_var <- function(data, groups, expr, variables = "default", observations = "default", data.name, type = "LFQ", observations.set, dataset, name, return = T, view = F, save = F) {
 
   # Check data input
   if (!hasArg(data) && variables == "default" && observations == "default") stop("Provide data or specify variables and observations.")
@@ -59,7 +60,6 @@ eval_data_grouped_var <- function(data, groups, expr, variables = "default", obs
 
   # Get groups
   groups <- get_groups(groups = !!dplyr::enquo(groups),
-                       control = control,
                        observations = rownames(data),
                        observations.set = observations.set,
                        dataset = dataset)

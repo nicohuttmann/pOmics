@@ -9,6 +9,8 @@ prepare_datasets(
   data.origin,
   species,
   load.UniProt.ws = F,
+  identifier,
+  data.types,
   min.similarity = 8,
   min.groupsize = 6
 )
@@ -18,9 +20,13 @@ prepare_datasets(
 
 \item{data.origin}{Identify origin software of data}
 
-\item{species}{protein origin (T or F or UniProt taxosnomy ID)}
+\item{species}{protein origin (T or F or UniProt taxonomy ID)}
 
 \item{load.UniProt.ws}{Should a UniProt database be downloaded}
+
+\item{identifier}{(optional) specific vector of column/s to use as identifier}
+
+\item{data.types}{types of data to be extracted}
 
 \item{min.similarity}{minimum similarity oi column names}
 

@@ -10,11 +10,11 @@ eval_data_grouped_var(
   expr,
   variables = "default",
   observations = "default",
-  control,
   data.name,
   type = "LFQ",
   observations.set,
   dataset,
+  name,
   return = T,
   view = F,
   save = F
@@ -39,13 +39,13 @@ eval_data_grouped_var(
 
 \item{dataset}{dataset}
 
+\item{name}{name to be saved under}
+
 \item{return}{Return results matrix?}
 
 \item{view}{View results matrix?}
 
 \item{save}{Save results matrix?}
-
-\item{name}{name of new data}
 }
 \value{
 

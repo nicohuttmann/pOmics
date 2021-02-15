@@ -34,7 +34,6 @@ anal_data_grouped_var <- function(variables, observations, groups, expr, name, o
                                         data.name = data.name,
                                         type = type,
                                         dataset = dataset,
-                                        set.default = F,
                                         save = save.separate,
                                         return = T)
 

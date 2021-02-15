@@ -4,8 +4,10 @@
 #' @param name name of dataset
 #' @param data.origin Identify origin software of data
 #' @param species protein origin (T or F or UniProt taxosnomy ID)
-#' @param load.UniProt.ws Should UniProt data be loaded
+#' @param load.UniProt.ws (optional) Should UniProt data be loaded
 #' @param return Should dataset be returned?
+#' @param identifier (optional) specific vector of identifier column/s
+#' @param data.types (optional) types of data to extract; uses defaults if not specified
 #' @param min.similarity minimum similarity oi column names
 #' @param min.groupsize minimum number of samples
 #'
@@ -14,7 +16,7 @@
 #'
 #' @importFrom magrittr %>%
 #'
-new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, return = F, min.similarity, min.groupsize) {
+new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, return = F, identifier, data.types, min.similarity = 8, min.groupsize = 6) {
 
   # Setup
   # Clear console
@@ -36,32 +38,17 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
   attr(dataset, "data_origin") <- NA
   attr(dataset, "separator") <- NA
 
-
   attr(dataset, "taxId") <- NA
   attr(dataset, "species") <- NA
 
 
-  attr(dataset, "variables") <- NA
-  attr(dataset, "variables_type") <- NA
-  attr(dataset, "default_variables") <- NA
-  attr(dataset, "default_variables_labels") <- "GENES"
+  attr(dataset, "default_variables") <- "All"
+  attr(dataset, "default_variables_labels") <- "variables"
 
-
-  attr(dataset, "observations") <- NA
-  attr(dataset, "observations_sets") <- NA
-  attr(dataset, "default_observations_set") <- NA
-
-  attr(dataset, "default_raw_observations") <- "All"
-  attr(dataset, "default_raw_labels") <- "observations"
-  attr(dataset, "default_raw_groups") <- NA
-
-
-  attr(dataset, "data_types") <- NA
-  attr(dataset, "default_data_type") <- "LFQ"
-  attr(dataset, "LFQ") <- NA
-  attr(dataset, "default_LFQ") <- NA
-  attr(dataset, "Identification") <- NA
-  attr(dataset, "default_Identification") <- NA
+  attr(dataset, "default_observations_set") <- "raw"
+  attr(dataset, "default_observations") <- "All"
+  attr(dataset, "default_labels") <- "observations"
+  attr(dataset, "default_groups") <- NA
 
 
 
@@ -76,26 +63,26 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
   counter <- counter + 1
 
 
-  # Identify data origin
-  if (!hasArg(data.origin) || !is_data_origin(data.origin)) {
+  ########
 
+
+
+  # Identify data origin
+  # No data origin specified or unknown data origin given
+  if (!hasArg(data.origin) || !is_data_origin(data.origin)) {
     #
     cat("Identify data origin...\r")
     attr(dataset, "data_origin") <- identify_data_origin()
-
-    ### Message
-    message(paste0("(", counter, "/n) Data origin: ", attr(dataset, "data_origin")))
-    counter <- counter + 1
+  # Data origin given and known
   } else {
     #
     attr(dataset, "data_origin") <- data.origin
-
-    ### Message
-    message(paste0("(", counter, "/n) Data origin: ", attr(dataset, "data_origin")))
-    counter <- counter + 1
-
-
   }
+
+  ### Message
+  message(paste0("(", counter, "/n) Data origin: ", attr(dataset, "data_origin")))
+  counter <- counter + 1
+
 
 
 
@@ -108,7 +95,7 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
   } else {
 
   cat("Identify separator...\r")
-  attr(dataset, "separator") <- most_common_character(x)
+  attr(dataset, "separator") <- identify_separator(x)
 
   ### Message
   message(paste0("(", counter, "/n) Separator: ", attr(dataset, "separator")))
@@ -190,10 +177,10 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
 
 
   # Find identifiers
-  attr(dataset, "variables") <- get_identifiers(x, sep = attr(dataset, "separator"))
+  variables <- get_identifiers(x, sep = attr(dataset, "separator")) # Removed identifier = identifier
 
   # Set row names to identifiers
-  suppressWarnings(rownames(x) <- attr(dataset, "variables"))
+  suppressWarnings(rownames(x) <- variables)
 
 
 
@@ -203,184 +190,22 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
 
 
   # Update
-  cat("Adding data to the dataset...\r")
+  cat("Adding data...\r")
 
-  # Aggregate data frame
-  raw.dataset <- x %>%
-    df2groupedList(min.similarity = min.similarity, min.groupsize = min.groupsize) %>%
-    sep_vector2list(sep = attr(dataset, "separator")) %>%
-    list_entries2vector()
-
-
-
-
-  # Quantitative value; mostly LFQ
-  dataset[["LFQ"]] <- tibble::lst()
-  dataset[["LFQ"]][["raw"]] <- raw.dataset[[findORchoose(names = names(raw.dataset)[unlist(lapply(raw.dataset, is.matrix))],
-                                               patterns = c("intensity", "LFQ", "int"),
-                                               title = "Quantitative data?")]]
-  # Add entry to attribute data
-  attr(dataset, "LFQ") <- "raw"
-
-  # Set default LFQ dataset
-  attr(dataset, "default_LFQ") <- "raw"
-
-  # Update data_type attribute
-  attr(dataset, "data_types") <- if (is.na(attr(dataset, "data_types"))) "LFQ" else c(attr(dataset, "data_types"), "LFQ")
-
-
-
-
-  # Identification
-  dataset[["Identification"]] <- tibble::lst()
-  dataset[["Identification"]][["raw"]] <- raw.dataset[[findORchoose(names = names(raw.dataset)[unlist(lapply(raw.dataset, is.matrix))],
-                                                          patterns = c("Identification", "identified", "id"),
-                                                          title = "Identification data?")]]
-  # Add entry to attribute data
-  attr(dataset, "Identification") <- "raw"
-
-  # Set default Identification dataset
-  attr(dataset, "default_Identification") <- "raw"
-
-  # Update data_type attribute
-  attr(dataset, "data_types") <- if (is.na(attr(dataset, "data_types"))) "Identification" else c(attr(dataset, "data_types"), "Identification")
-
+  dataset <- add_data2dataset(x = x,
+                              dataset = dataset,
+                              data.types = data.types,
+                              data.origin = attr(dataset, "data_origin"),
+                              min.similarity = min.similarity,
+                              min.groupsize = min.groupsize)
 
   ### Message
-  message(paste0("(", counter, "/n) Added data: ", paste(attr(dataset, "data_types"), collapse = ", ")))
+  message(paste0("(", counter, "/n) Data added."))
   counter <- counter + 1
 
 
-
-
-  ################################
-
-
-
-
-  #cat("Identify variable names...\r")
-
-
-  # Build and add Names dataframe
-  variables <- tibble::tibble(variables = attr(dataset, "variables"))
-                              # UNIPROTKB = NA,
-                              # GENES = NA,
-                              # `PROTEIN-NAMES` = NA,
-                              # ENTREZ_GENE = NA)
-
-
-  # Get column name for data with findORchoose; if not found fill with NAs
-  # Protein accession id
-  prot <- raw.dataset[[find_data_entry(data = raw.dataset, entry = "UNIPROTKB", data.origin = attr(dataset, "data_origin"))]]
-  if (!is.null(prot)) variables <- tibble::add_column(variables, UNIPROTKB = prot)
-  else variables <- dplyr::mutate(variables, UNIPROTKB = NA_character_)
-
-
-  # Gene symbol
-  gen <- raw.dataset[[find_data_entry(data = raw.dataset, entry = "GENES", data.origin = attr(dataset, "data_origin"))]]
-  if (!is.null(gen)) variables <- tibble::add_column(variables, GENES = gen)
-  else variables <- dplyr::mutate(variables, GENES = NA_character_)
-
-  # Protein name
-  nam <- raw.dataset[[find_data_entry(data = raw.dataset, entry = "PROTEIN-NAMES", data.origin = attr(dataset, "data_origin"))]]
-  if (!is.null(nam)) variables <- tibble::add_column(variables, `PROTEIN-NAMES` = nam)
-  else variables <- dplyr::mutate(variables, `PROTEIN-NAMES` = NA_character_)
-
-  # Entrez gene id
-  eg <- raw.dataset[[find_data_entry(data = raw.dataset, entry = "ENTREZ_GENE", data.origin = attr(dataset, "data_origin"))]]
-  if (!is.null(eg)) variables <- tibble::add_column(variables, ENTREZ_GENE = eg)
-  else variables <- dplyr::mutate(variables, ENTREZ_GENE = NA_character_)
-
-
-
-
-  # Determine identifier type by comparing columns with rownames/identifiers
-  if (!is.na(attr(dataset, "data_origin"))) {
-    #
-    if (!is.na(get_defaults(attr(dataset, "data_origin"), type = "variables_type"))) {
-      #
-      attr(dataset, "variables_type") <- get_defaults(attr(dataset, "data_origin"), type = "variables_type")
-    } else {
-      # Identify manually
-      for (i in 2:ncol(variables)) {
-        if (identical(dplyr::pull(variables, 1), unname(dplyr::pull(variables, i)))) {
-          attr(dataset, "variables_type") <- colnames(variables)[i]
-          break
-        }
-      }
-    }
-
-    # No data origin
-  } else {
-    # Idenify manually
-    for (i in 2:ncol(variables)) {
-      if (identical(dplyr::pull(variables, 1), unname(dplyr::pull(variables, i)))) {
-        attr(dataset, "variables_type") <- colnames(variables)[i]
-        break
-      }
-    }
-  }
-
-
-
   ### Message
-  message(paste0("(", counter, "/n) Identifier type: ", attr(dataset, "variables_type")))
-  counter <- counter + 1
-
-
-
-
-  #########################
-
-
-
-
-  # Complete variables data frame if missing values are present
-  # AND if UniProt database is available
-  if(check_database(id = attr(dataset, "taxId"), type = "UniProt")) {
-
-    # Complete
-    for (i in colnames(variables)) {
-      # Check is any data is missing
-      if (anyNA(variables[, i])) {
-
-        # Message
-        cat(paste0("Complete ", i, " \r"))
-        # Query missing data
-        temp <- select_UniProt(x = .databases[["UniProt"]][[as.character(attr(dataset, "taxId"))]],
-                               keys = names(which(is.na(dplyr::pull(variables, i, name = variables)))),
-                               columns = i,
-                               keytype = attr(dataset, "variables_type"))
-        # Add missing data
-        for (j in dplyr::pull(temp, 1)) {
-          variables[match(j, dplyr::pull(variables, 1)), i] <- temp[j, i]
-        }
-        message(paste0("  Finished ", i))
-
-      }
-
-    }
-
-  }
-
-
-
-
-  ### Message
-  #message(paste0("(", counter, "/n)  Variables completed."))
-  #counter <- counter + 1
-
-
-  # Add Names data frame
-  dataset[["variables"]] <- variables %>% dplyr::mutate(All = TRUE)
-
-  # Set attributes
-  attr(dataset, "default_variables") <- "All"
-  attr(dataset, "default_variables_labels") <- "GENES"
-
-
-  ### Message
-  message(paste0("(", counter, "/n)  Setup variable dataframes."))
+  message(paste0("(", counter, "/n) Variables dataframe setup."))
   counter <- counter + 1
 
 
@@ -393,10 +218,10 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
 
   # Observations
   # Assumes for now that all observations in all data are equal
-  attr(dataset, "observations") <- rownames(dataset[[attr(dataset, "data_types")[1]]][["raw"]])
+  if (length(dataset) > 2) {
 
   # Build observation matrix to store names and group info
-  observations <- tibble::tibble(observations = attr(dataset, "observations"))
+  observations <- tibble::tibble(observations = rownames(dataset[[3]][[1]]))
 
 
   # Add observations data frame
@@ -404,15 +229,13 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
   dataset[["observations"]][["raw"]] <- observations %>% dplyr::mutate(All = TRUE)
 
 
-  # Add attributes
-  attr(dataset, "observations_sets") <- "raw"
-  attr(dataset, "default_observations_set") <- "raw"
-  attr(dataset, "default_observations") <- "All"
-  attr(dataset, "default_observations_names") <- "observations"
 
   ### Message
-  message(paste0("(", counter, "/n)  Setup observation dataframes."))
+  message(paste0("(", counter, "/n) Observation dataframe setop."))
   counter <- counter + 1
+
+  }
+
 
 
 
@@ -425,9 +248,17 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
   # Add new dataset
   if (add_dataset(dataset)) {
     ### Message
-    message(paste0("(", counter, "/", counter, ")  Dataset saved."))
+    message(paste0("(", counter, "/", counter, ") Dataset saved."))
   } else {
-    stop("Something went wrong while saving the dataset.")
+    if (menu(choices = c("Yes", "No"), title = "Replace dataset? ") == 1) {
+      .datasets[[attr(dataset, "name")]] <<- NULL
+      if (add_dataset(dataset)) {
+        ### Message
+        message(paste0("(", counter, "/", counter, ")  Dataset saved."))
+      } else {
+        stop("Unclear error. Check name of the dataset.")
+      }
+    }
   }
 
 
