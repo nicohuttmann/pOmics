@@ -1,16 +1,21 @@
 #' Improved select function for UniProt databases
 #'
-#' @param x UniProt data base
 #' @param keys keys
 #' @param columns data to query
 #' @param keytype type of key
+#' @param x UniProt data base
 #' @param modify (recommended) Should output values be modified to to singluar entries?
 #'
 #' @return
 #' @export
 #'
 #'
-select_UniProt <- function(x, keys, columns, keytype = "UNIPROTKB", modify = T) {
+select_UniProt <- function(keys, columns, keytype = "UNIPROTKB", x, modify = T) {
+
+
+  if (!hasArg(x)) {
+    x <- get_database(id = get_dataset_attr("taxId"), "UniProt")
+  }
 
   # Prebuild data frame
   data <- data.frame(matrix(NA, ncol = length(columns) + 1, nrow = length(keys)))

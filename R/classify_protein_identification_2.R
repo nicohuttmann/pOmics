@@ -12,7 +12,7 @@
 #' @export
 #'
 #'
-classify_protein_identification_2 <- function(data.eval, upper.neg = 0, lower.pos = 0.5, plot = T, export = F, save = F, return = T) {
+classify_protein_identification_2 <- function(data.eval, sig.variables, upper.neg = 0, lower.pos = 0.5, dataset, plot = T, export = F, name, save = F, return = T) {
 
   # Check data
   if (ncol(data.eval) != 3 || colnames(data.eval)[1] != "variables" || mode(data.eval[[2]]) != "numeric") stop("Provide correct input.")
@@ -28,18 +28,21 @@ classify_protein_identification_2 <- function(data.eval, upper.neg = 0, lower.po
     filter(rlang::eval_tidy(rlang::parse_expr(paste0(groups[1], ">=", lower.pos, "&", groups[2], "<=", upper.neg)))) %>%
     pull(var = "variables", name = NULL)
 
-
+if (hasArg(sig.variables)) results.list[[groups[1]]] <- intersect(results.list[[groups[1]]],
+                                                                  sig.variables)
 
 
   results.list[[groups[2]]] <- data.eval %>%
     filter(rlang::eval_tidy(rlang::parse_expr(paste0(groups[2], ">=", lower.pos, "&", groups[1], "<=", upper.neg)))) %>%
     pull(var = "variables", name = NULL)
 
+  if (hasArg(sig.variables)) results.list[[groups[2]]] <- intersect(results.list[[groups[2]]],
+                                                                    sig.variables)
 
 
   results.list[["common"]] <- setdiff(
     data.eval %>%
-      filter(rlang::eval_tidy(rlang::parse_expr(paste0(groups[1], ">", lower.pos, "&", groups[2], ">", lower.pos)))) %>%
+      filter(rlang::eval_tidy(rlang::parse_expr(paste0(groups[1], ">", upper.neg, "&", groups[2], ">", upper.neg)))) %>%
       pull(var = "variables", name = NULL),
     c(results.list[[groups[1]]], results.list[[groups[2]]]))
 
@@ -59,7 +62,15 @@ classify_protein_identification_2 <- function(data.eval, upper.neg = 0, lower.po
   }
 
   # Save
-  #if (save)
+  if (save) {
+    # Save unique protein identifications
+    for (i in groups) {
+      add_variables_data(data = results.list[[i]], name = paste0("unique_", i), dataset = dataset, set.default = FALSE)
+    }
+    # Save commonly identified proteins
+    name  <- ask_name(name, "Name of comparison? ")
+    add_variables_data(data = results.list[["common"]], name = paste0("common_", name), dataset = dataset, set.default = F)
+  }
 
   # Return
   if (return) return(results.list)

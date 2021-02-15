@@ -4,16 +4,16 @@
 \alias{select_UniProt}
 \title{Improved select function for UniProt databases}
 \usage{
-select_UniProt(x, keys, columns, keytype = "UNIPROTKB", modify = T)
+select_UniProt(keys, columns, keytype = "UNIPROTKB", x, modify = T)
 }
 \arguments{
-\item{x}{UniProt data base}
-
 \item{keys}{keys}
 
 \item{columns}{data to query}
 
 \item{keytype}{type of key}
+
+\item{x}{UniProt data base}
 
 \item{modify}{(recommended) Should output values be modified to to singluar entries?}
 }
