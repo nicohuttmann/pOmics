@@ -19,7 +19,7 @@
 #' @export
 #'
 #'
-anal_expression <- function(data, variables = "default", observations = "default", groups, control, data.name, var.equal = T, type = "LFQ", observations.set, dataset, return = T, plot = T, view = F, save = F) {
+analyse_expression <- function(data, variables = "default", observations = "default", groups, control, data.name, var.equal = T, type = "LFQ", observations.set, dataset, return = F, plot = T, view = F, save = F) {
 
   # Check data input
   if (!hasArg(data) && variables == "default" && observations == "default") stop("Provide data or specify variables and observations.")
@@ -102,7 +102,15 @@ anal_expression <- function(data, variables = "default", observations = "default
   if (view) save2cache(data = data.ttest, view = TRUE)
 
   # Save
-  #if (save)
+  if (save) {
+
+    name <- paste0(levels(groups)[2], "-", levels(groups)[1])
+
+    add_variables_data(data = data.ttest[, "log2.fc"], name = paste0("log2.fc_", name), dataset = dataset, set.default = FALSE)
+
+    add_variables_data(data = data.ttest[, "p.value"], name = paste0("p.value_", name), dataset = dataset, set.default = FALSE)
+
+  }
 
   # Return
   if (return) return(data.ttest)

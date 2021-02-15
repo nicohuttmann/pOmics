@@ -55,7 +55,12 @@ import_datasets <- function(files, change.wd, prepare, species, data.origin, loa
   if (hasArg(prepare)) {
 
     if (prepare) {
-      prepare_datasets(list.import)
+      prepare_datasets(prepare_datasets(imports = list.import,
+                                        species = species,
+                                        data.origin = data.origin,
+                                        load.UniProt.ws = load.UniProt.ws,
+                                        identifier = identifier,
+                                        data.types = data.types))
     }
 
   } else if (menu(choices = c("Yes", "No"),
