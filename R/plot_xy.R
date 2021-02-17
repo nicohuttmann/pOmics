@@ -15,8 +15,15 @@ plot_xy <- function(x, y) {
 
   names <- intersect(names(x), names(y))
 
+  data <- data.frame(x = x[names], y = y[names])
 
-  plotly::plot_ly(x = x[names], y = y[names], type = "scatter", name = p2g(names))
+  plotly::plot_ly(data = data,
+                  x = x,
+                  y = y,
+                  type = "scatter",
+                  mode = "markers",
+                  name = p2g(names),
+                  marker = list(size = 4, color = "black", alpha = 0.8))
 
 
 }

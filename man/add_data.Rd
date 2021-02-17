@@ -4,7 +4,15 @@
 \alias{add_data}
 \title{Adds new data}
 \usage{
-add_data(data, name, type, dataset, set.default.type = F, set.default.name = F)
+add_data(
+  data,
+  name,
+  type,
+  dataset,
+  set.default.type = F,
+  set.default.data.name = F,
+  new.observations.set.name
+)
 }
 \arguments{
 \item{data}{new data}
@@ -17,7 +25,9 @@ add_data(data, name, type, dataset, set.default.type = F, set.default.name = F)
 
 \item{set.default.type}{set data type as default}
 
-\item{set.default.name}{set dataset as default for given type}
+\item{set.default.data.name}{set data name as default for data type}
+
+\item{new.observations.set.name}{if new observations set is added, specify name}
 }
 \value{
 

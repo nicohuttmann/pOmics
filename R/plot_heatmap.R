@@ -14,7 +14,7 @@
 #' @param observations.labels labels of observations
 #' @param variables.order should variables be ordered by dendrogram
 #' @param observations.order should observations be ordered by dendrogram
-#' @param ratio x-y-ratio of tiles
+#' @param ratio y/x-ratio of tiles
 #'
 #' @return
 #' @export
@@ -22,7 +22,7 @@
 #'
 plot_heatmap <- function(variables, observations, groups, observations.set, name, type, dataset,
                          scale = T, grouping, clustering.method = "average", variables.labels, observations.labels, variables.order = T,
-                         observations.order = T, ratio = 1) {
+                         observations.order = T, ratio = 3) {
 
 
 
@@ -92,6 +92,13 @@ plot_heatmap <- function(variables, observations, groups, observations.set, name
   else data.heatmap.melt$X<-factor(data.heatmap.melt$X, levels = unique(data.heatmap.melt$X))
 
 
+
+
+  # Calculate ratio of tiles
+  ratio <- nrow(data) / ncol(data) * ratio
+
+
+
   #Just plot
   p <- ggplot(data.heatmap.melt, aes(X, Y)) +
     geom_tile(aes(fill = value)) +
@@ -102,7 +109,7 @@ plot_heatmap <- function(variables, observations, groups, observations.set, name
           axis.ticks.x = element_blank(),
           axis.ticks.y = element_blank(),
           axis.text.y = element_blank(),
-          panel.border = element_rect(colour = "black", fill=NA, size=1)
+          panel.border = element_rect(colour = "black", fill=NA, size=1/.pt)
     ) +
     scale_x_discrete(expand = c(0,0)) +
     scale_y_discrete(expand = c(0,0)) +

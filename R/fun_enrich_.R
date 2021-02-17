@@ -13,7 +13,7 @@
 #' @export
 #'
 #'
-fun_enrich_ <- function(cor_list, name, k, l, databases = "CC", algorithm = "weight01") {
+fun_enrich_ <- function(cor_list, name, k, l, databases = "GO", algorithm = "weight01") {
 
   # if enrichment name given
   if (hasArg(name)) {

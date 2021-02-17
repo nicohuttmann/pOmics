@@ -89,12 +89,8 @@ analyse_expression <- function(data, variables = "default", observations = "defa
   # Plot
   if (plot) {
 
-    plot(data.ttest[,"log2.fc"],
-         -log10(data.ttest[,"p.value"]),
-         pch = 16,
-         xlab = paste0("log2 fold-change (", levels(groups)[2], " - ", levels(groups)[1], "[C])"),
-         ylab = "-log10(p-value)")
-    abline(h = -log10(0.05))
+    plot_volcano(x = data.ttest[,"log2.fc"],
+                 y = data.ttest[,"p.value"])
 
   }
 
@@ -106,9 +102,9 @@ analyse_expression <- function(data, variables = "default", observations = "defa
 
     name <- paste0(levels(groups)[2], "-", levels(groups)[1])
 
-    add_variables_data(data = data.ttest[, "log2.fc"], name = paste0("log2.fc_", name), dataset = dataset, set.default = FALSE)
+    add_variables_data(data = data.ttest[, "log2.fc"], name = paste0("fc_", name), dataset = dataset, set.default = FALSE)
 
-    add_variables_data(data = data.ttest[, "p.value"], name = paste0("p.value_", name), dataset = dataset, set.default = FALSE)
+    add_variables_data(data = data.ttest[, "p.value"], name = paste0("p_", name), dataset = dataset, set.default = FALSE)
 
   }
 

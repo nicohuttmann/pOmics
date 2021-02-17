@@ -35,7 +35,10 @@ get_data <- function(name, variables = "default", observations = "default", obse
                                    dataset = dataset)
 
 
+  data <- .datasets[[dataset]][[type]][[name]]
+
+
   # Return
-  return(.datasets[[dataset]][[type]][[name]][observations, variables])
+  return(data[intersect(rownames(data), observations), intersect(colnames(data), variables)])
 
 }

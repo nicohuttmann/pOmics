@@ -4,10 +4,12 @@
 \alias{dendrogram_}
 \title{Computes a dendrogram from adjacency matrix in cor_object}
 \usage{
-dendrogram_(cor_list, method = "average")
+dendrogram_(cor_list, data = "adjacency", method = "average")
 }
 \arguments{
 \item{cor_list}{cor_list object}
+
+\item{data}{data to use for clustering}
 
 \item{method}{clustering method}
 }

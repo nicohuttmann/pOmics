@@ -1,16 +1,17 @@
 #' Computes a dendrogram from adjacency matrix in cor_object
 #'
 #' @param cor_list cor_list object
+#' @param data data to use for clustering
 #' @param method clustering method
 #'
 #' @return
 #' @export
 #'
 #'
-dendrogram_ <- function(cor_list, method = "average") {
+dendrogram_ <- function(cor_list, data = "adjacency", method = "average") {
 
   # Add dendrogram
-  dend <- cor_list[["adjacency"]] %>%
+  dend <- cor_list[[data]] %>%
     # Calculate distance
     dist() %>%
     # Cluster distance matrix
@@ -19,14 +20,18 @@ dendrogram_ <- function(cor_list, method = "average") {
 
   # Reorder
   for (i in setdiff(names(cor_list), "raw_data")) {
-    cor_list[[i]] <- cor_list[[i]][rev(dend$order), rev(dend$order)]
+    if (ncol(cor_list[[i]]) == nrow(cor_list[[i]])) {
+      cor_list[[i]] <- cor_list[[i]][rev(dend$order), rev(dend$order)]
+    } else {
+      cor_list[["raw_data"]] <- cor_list[["raw_data"]][, rev(dend$order)]
+    }
+
   }
-  cor_list[["raw_data"]] <- cor_list[["raw_data"]][, rev(dend$order)]
+
   attr(cor_list, "variables") <- colnames(cor_list[["raw_data"]])
 
-
   # Add dendrogram
-  cor_list[["dendrogram"]] <- cor_list[["adjacency"]] %>%
+  cor_list[["dendrogram"]] <- cor_list[[data]] %>%
     # Calculate distance
     dist() %>%
     # Cluster distance matrix

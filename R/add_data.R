@@ -5,13 +5,14 @@
 #' @param type data type
 #' @param dataset dataset
 #' @param set.default.type set data type as default
-#' @param set.default.name set dataset as default for given type
+#' @param set.default.data.name set data name as default for data type
+#' @param new.observations.set.name if new observations set is added, specify name
 #'
 #' @return
 #' @export
 #'
 #'
-add_data <- function(data, name, type, dataset, set.default.type = F, set.default.name = F) {
+add_data <- function(data, name, type, dataset, set.default.type = F, set.default.data.name = F, new.observations.set.name) {
 
   # Checks correct name of dataset
   dataset <- get_dataset(dataset)
@@ -27,10 +28,9 @@ add_data <- function(data, name, type, dataset, set.default.type = F, set.defaul
   .datasets[[dataset]][[type]][[name]] <<- data
 
   # Update names
-  if (set.default.name) set_default_data_name(name = name,
+  if (set.default.data.name) set_default_data_name(name = name,
                                               type = type,
-                                              dataset = dataset,
-                                              silent = T)
+                                              dataset = dataset)
 
 
 
@@ -38,14 +38,14 @@ add_data <- function(data, name, type, dataset, set.default.type = F, set.defaul
   # Check observations
   if (any(!rownames(data) %in% get_observations(observations = All, dataset = dataset))) {
     # Define new set of observations
-    add_observations_set(name = name, observations = rownames(data), dataset = dataset, set.default = TRUE)
+    add_observations_set(name = new.observations.set.name, observations = rownames(data), dataset = dataset, set.default = TRUE)
   }
 
 
   # Check variables
-  if (all(colnames(data) %in% get_variables(variables = All, dataset = dataset)) && ncol(data) < length(get_variables(variables = all, dataset = dataset))) {
+  if (!all(colnames(data) %in% get_variables(variables = All, dataset = dataset))) {
     # Define new set of observations
-    add_variables_data(data = colnames(data), name = name, dataset = dataset, set.default = TRUE)
+    stop("Data contains unknown variables. Integration of new variables not contained yet. Bug Nico.")
   }
 
 }

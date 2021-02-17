@@ -36,6 +36,6 @@ add_observations_set <- function(name, observations, dataset, set.default = T) {
 
 
   # Update list of observations sets
-  update_observations_sets(dataset = dataset, default.set = ifelse(set.default, name, NA))
+  if(set.default) set_dataset_attr(x = name, which = "default_observations_set", dataset = dataset)
 
 }

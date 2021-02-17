@@ -19,7 +19,7 @@ plot_heatmap(
   observations.labels,
   variables.order = T,
   observations.order = T,
-  ratio = 1
+  ratio = 3
 )
 }
 \arguments{
@@ -51,7 +51,7 @@ plot_heatmap(
 
 \item{observations.order}{should observations be ordered by dendrogram}
 
-\item{ratio}{x-y-ratio of tiles}
+\item{ratio}{y/x-ratio of tiles}
 }
 \value{
 

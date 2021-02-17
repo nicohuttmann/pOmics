@@ -10,15 +10,16 @@
 #'
 get_data_types <- function(dataset, print = T, return = F) {
 
+  # No dataset given
+  if (!hasArg(dataset)) {
+    dataset <- get_datasets(print = FALSE, return = T)
+  } else {
+    dataset <- get_dataset(dataset)
+  }
+
   # Print
   if (print) {
 
-    # No dataset given
-    if (!hasArg(dataset)) {
-      dataset <- get_datasets(print = FALSE, return = T)
-    } else {
-      dataset <- get_dataset(dataset)
-    }
 
     #
     for (i in dataset) {
@@ -32,6 +33,6 @@ get_data_types <- function(dataset, print = T, return = F) {
   }
 
   #
-  if (return && length(dataset) == 1) return(setdiff(names(.datasets[[i]]), c("variables", "observations")))
+  if (return && length(dataset) == 1) return(setdiff(names(.datasets[[dataset]]), c("variables", "observations")))
 
 }

@@ -4,7 +4,7 @@
 \alias{set_default_data_name}
 \title{Set default data name}
 \usage{
-set_default_data_name(name, type, dataset, silent = T)
+set_default_data_name(name, type, dataset)
 }
 \arguments{
 \item{name}{data name}
@@ -12,8 +12,6 @@ set_default_data_name(name, type, dataset, silent = T)
 \item{type}{data type}
 
 \item{dataset}{dataset}
-
-\item{silent}{Silent?}
 }
 \value{
 
