@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_volcano.R
 \name{plot_volcano}
 \alias{plot_volcano}
-\title{Title}
+\title{Plot volcano plot with plotly}
 \usage{
 plot_volcano(
   x,
@@ -11,13 +11,15 @@ plot_volcano(
   size = 4,
   opacity = 0.8,
   axis.title.x = "log2 fold-change",
-  axis.title.y = "-log10 p-value"
+  axis.title.y = "-log10 p-value",
+  print = T,
+  return = F
 )
 }
 \arguments{
 \item{x}{log2 fold change}
 
-\item{y}{pvalue}
+\item{y}{p-value}
 
 \item{markers}{specific proteins to highlight}
 
@@ -25,13 +27,17 @@ plot_volcano(
 
 \item{opacity}{opacity of dots}
 
-\item{axis.title.x}{}
+\item{axis.title.x}{x-axis title}
 
-\item{axis.title.y}{}
+\item{print}{print plot to device}
+
+\item{return}{return plot object}
+
+\item{axis.title.yy-axis}{title}
 }
 \value{
 
 }
 \description{
-Title
+Plot volcano plot with plotly
 }

@@ -1,18 +1,20 @@
-#' Title
+#' Plot volcano plot with plotly
 #'
 #' @param x log2 fold change
-#' @param y pvalue
+#' @param y p-value
 #' @param markers specific proteins to highlight
 #' @param size size of dots
 #' @param opacity opacity of dots
-#' @param axis.title.x
-#' @param axis.title.y
+#' @param axis.title.x x-axis title
+#' @param axis.title.yy-axis title
+#' @param print print plot to device
+#' @param return return plot object
 #'
 #' @return
 #' @export
 #'
 #'
-plot_volcano <- function(x, y, markers = "default", size = 4, opacity = 0.8, axis.title.x = "log2 fold-change", axis.title.y = "-log10 p-value") {
+plot_volcano <- function(x, y, markers = "default", size = 4, opacity = 0.8, axis.title.x = "log2 fold-change", axis.title.y = "-log10 p-value", print = T, return = F) {
 
 
   x <- x[!is.na(x)]
@@ -68,7 +70,7 @@ plot_volcano <- function(x, y, markers = "default", size = 4, opacity = 0.8, axi
 
 
 
-  plotly::plot_ly() %>%
+  p <- plotly::plot_ly() %>%
     plotly::add_trace(data = data,
                       x = ~x,
                       y = ~-log10(y),
@@ -86,11 +88,11 @@ plot_volcano <- function(x, y, markers = "default", size = 4, opacity = 0.8, axi
     plotly::layout(xaxis = list(title = axis.title.x,
                                 hoverformat = '.2f'),
                    yaxis = list(title = axis.title.y,
-                                hoverformat = '.2f')) %>%
-    print()
+                                hoverformat = '.2f'))
 
+if (print) print(p)
 
-
+if (return) return(p)
 
 
 }

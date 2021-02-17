@@ -89,8 +89,8 @@ analyse_expression <- function(data, variables = "default", observations = "defa
   # Plot
   if (plot) {
 
-    plot_volcano(x = data.ttest[,"log2.fc"],
-                 y = data.ttest[,"p.value"])
+    p <- plot_volcano(x = data.ttest[,"log2.fc"],
+                 y = data.ttest[,"p.value"], print = F, return = T)
 
   }
 
@@ -109,6 +109,13 @@ analyse_expression <- function(data, variables = "default", observations = "defa
   }
 
   # Return
-  if (return) return(data.ttest)
+  if (return) {
+
+    ret <- list()
+    if (plot) ret[["plot"]] <- p
+    ret[["ttest"]] <- data.ttest
+
+    return(ret)
+  }
 
 }
