@@ -13,6 +13,8 @@
 #' @return
 #' @export
 #'
+#' @importFrom magrittr %>%
+#'
 #'
 plot_volcano <- function(x, y, markers = "default", size = 4, opacity = 0.8, axis.title.x = "log2 fold-change", axis.title.y = "-log10 p-value", print = T, return = F) {
 

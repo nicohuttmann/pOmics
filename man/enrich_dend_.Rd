@@ -9,7 +9,7 @@ enrich_dend_(
   proteins,
   n = 10,
   inverse = F,
-  name = "test",
+  name,
   cut = T,
   return = F,
   plot = T,

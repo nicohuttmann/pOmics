@@ -19,7 +19,7 @@ dendrogram_ <- function(cor_list, data = "adjacency", method = "average") {
 
 
   # Reorder
-  for (i in setdiff(names(cor_list), "raw_data")) {
+  for (i in names(cor_list)) {
     if (ncol(cor_list[[i]]) == nrow(cor_list[[i]])) {
       cor_list[[i]] <- cor_list[[i]][rev(dend$order), rev(dend$order)]
     } else {
