@@ -86,6 +86,18 @@ select_UniProt <- function(keys, columns, keytype = "UNIPROTKB", x, modify = T) 
       data[, "ENTREZ_GENE"] <- gsub(" ", "", data[, "ENTREZ_GENE"])
     }
 
+    # ENTREZ_GENE
+    if ("FUNCTION" %in% colnames(data)) {
+      data[, "FUNCTION"] <- substring(data[, "FUNCTION"], 11)
+      data[, "FUNCTION"] <- sapply(data[, "FUNCTION"],
+                                   FUN = function(x)
+                                     {
+                                     if (is.na(x)) return("")
+                                     else if (grepl("ECO:", x)) return(substring(x, 1, regexpr("ECO:", x) - 3))
+                                     else return(x)
+                                   })
+    }
+
   }
 
   return(data)

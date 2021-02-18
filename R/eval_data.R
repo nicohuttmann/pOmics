@@ -64,7 +64,7 @@ eval_data <- function(data, expr, variables = "default", observations = "default
   if(view) View(data)
 
   # Save
-  if (save) add_data(data = data, name = name, dataset = dataset, set.default.name = set.default.name)
+  if (save) add_data(data = data, name = name, type = type, dataset = dataset, set.default.data.name = set.default.name)
 
   # Return
   if (return) return(data)

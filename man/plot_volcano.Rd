@@ -9,9 +9,10 @@ plot_volcano(
   y,
   markers = "default",
   size = 4,
-  opacity = 0.8,
+  opacity = opacity,
   axis.title.x = "log2 fold-change",
   axis.title.y = "-log10 p-value",
+  add.protein.function = F,
   print = T,
   return = F
 )
@@ -29,11 +30,13 @@ plot_volcano(
 
 \item{axis.title.x}{x-axis title}
 
+\item{axis.title.y}{y-axis title}
+
+\item{add.protein.function}{add protein function as hover information}
+
 \item{print}{print plot to device}
 
 \item{return}{return plot object}
-
-\item{axis.title.yy-axis}{title}
 }
 \value{
 
