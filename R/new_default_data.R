@@ -9,7 +9,7 @@
 new_default_data <- function() {
 
   # Check info list
-  new_info_list(return = FALSE)
+  new_info_list(replace = FALSE)
 
   # Add defaults data frame
   if (!"defaults" %in% names(.info)) {

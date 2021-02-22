@@ -6,14 +6,13 @@
 #' @param nodeSize minimum genes per annotation
 #' @param dataset dataset
 #' @param save Save?
-#' @param return Return?
 #'
 #' @return
 #' @export
 #'
 #' @importFrom magrittr %>%
 #'
-new_GOdata <- function(proteins, ontology = "CC", statistic = "fisher", nodeSize = 10, dataset, save = T, return = F) {
+new_GOdata <- function(proteins, ontology = "CC", statistic = "fisher", nodeSize = 10, dataset, save = T) {
 
   require(topGO)
 
@@ -98,6 +97,6 @@ new_GOdata <- function(proteins, ontology = "CC", statistic = "fisher", nodeSize
   }
 
   # Return
-  if (return) return(GOdata)
+  invisible(GOdata)
 
 }

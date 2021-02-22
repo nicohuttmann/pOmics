@@ -13,8 +13,7 @@ classify_protein_identification_2(
   plot = T,
   export = F,
   name,
-  save = F,
-  return = T
+  save = F
 )
 }
 \arguments{
@@ -29,8 +28,6 @@ classify_protein_identification_2(
 \item{export}{Export ven diagram plot?}
 
 \item{save}{Save results list?}
-
-\item{return}{Return results list?}
 }
 \value{
 

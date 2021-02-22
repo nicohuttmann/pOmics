@@ -4,12 +4,7 @@
 \alias{new_annotations_data_UniProt}
 \title{Builds annotation list from UniProt data}
 \usage{
-new_annotations_data_UniProt(
-  annotation = "GO-ID",
-  dataset,
-  save = T,
-  return = F
-)
+new_annotations_data_UniProt(annotation = "GO-ID", dataset, save = T)
 }
 \arguments{
 \item{annotation}{annotation type}
@@ -17,8 +12,6 @@ new_annotations_data_UniProt(
 \item{dataset}{dataset}
 
 \item{save}{Save?}
-
-\item{return}{Return?}
 }
 \value{
 

@@ -4,12 +4,10 @@
 \alias{import_files}
 \title{Imports any file type using the file extension and returns list}
 \usage{
-import_files(files, return = F)
+import_files(files)
 }
 \arguments{
 \item{files}{file paths}
-
-\item{return}{return imported files}
 }
 \value{
 

@@ -7,7 +7,6 @@
 #' @param name name
 #' @param plot Plot results?
 #' @param cut cut dendrogram
-#' @param return return cor_list object
 #' @param fun.enrich Do functional enrichment
 #' @param labels proteins to label on y-axis
 #' @param databases databases to use for functional enrichment
@@ -19,7 +18,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name, cut = T, return = F, plot = T, labels, fun.enrich = T, databases = "GO", algorithm = "weight01") {
+enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name, cut = T, plot = T, labels, fun.enrich = T, databases = "GO", algorithm = "weight01") {
 
   # Check input
   if(!hasArg(cor_list) || !hasArg(proteins)) stop("Missing input.")
@@ -66,6 +65,6 @@ enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name, cut = T,
   if (fun.enrich) fun_enrich_(cor_list = cor_list, name = name, databases = databases, algorithm = algorithm)
 
   # Return
-  if (return) return(cor_list)
+  invisible(cor_list)
 
 }

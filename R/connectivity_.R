@@ -24,6 +24,6 @@ connectivity_ <- function(cor_list, k = 20, scale = T) {
   }
 
   # Return list
-  return(cor_list)
+  invisible(cor_list)
 
 }

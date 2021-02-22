@@ -1,13 +1,12 @@
 #' Builds annotation list from DisGeNet
 #'
 #' @param save Save?
-#' @param return Return?
 #'
 #' @return
 #' @export
 #'
 #'
-new_annotations_data_DisGeNet <- function(nodeSize = 5, save = T, return = F) {
+new_annotations_data_DisGeNet <- function(nodeSize = 5, save = T) {
 
   # Collect all variables
   variables <- get_variables_data(var = All, name = "GENES")
@@ -26,6 +25,6 @@ new_annotations_data_DisGeNet <- function(nodeSize = 5, save = T, return = F) {
   if (save) add_database(annotations, id = "DisGeNet", type = "Annotations")
 
   # Return
-  if (return) return(annotations)
+  invisible(annotations)
 
 }

@@ -37,8 +37,7 @@ get_GOdata <- function(proteins, ontology) {
                             ontology = ontology,
                             statistic = statistic,
                             nodeSize = 10,
-                            save = TRUE,
-                            return = TRUE)
+                            save = TRUE)
 
 
   # Return

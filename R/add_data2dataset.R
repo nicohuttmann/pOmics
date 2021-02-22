@@ -108,5 +108,4 @@ add_data2dataset <- function(x, dataset, data.types, data.origin, min.similarity
   # Return
   return(dataset)
 
-
 }

@@ -4,7 +4,7 @@
 \alias{plot_xy}
 \title{Matches names and plots scattrplot of two variables}
 \usage{
-plot_xy(x, y, axis.title.x, axis.title.y)
+plot_xy(x, y, axis.title.x = "x", axis.title.y = "y")
 }
 \arguments{
 \item{x}{names x vector}

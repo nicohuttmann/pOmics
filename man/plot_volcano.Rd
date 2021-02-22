@@ -13,8 +13,7 @@ plot_volcano(
   axis.title.x = "log2 fold-change",
   axis.title.y = "-log10 p-value",
   add.protein.function = F,
-  print = T,
-  return = F
+  print = T
 )
 }
 \arguments{
@@ -35,8 +34,6 @@ plot_volcano(
 \item{add.protein.function}{add protein function as hover information}
 
 \item{print}{print plot to device}
-
-\item{return}{return plot object}
 }
 \value{
 

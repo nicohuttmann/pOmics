@@ -15,7 +15,6 @@ eval_data_grouped_var(
   observations.set,
   dataset,
   name,
-  return = T,
   view = F,
   save = F
 )
@@ -40,8 +39,6 @@ eval_data_grouped_var(
 \item{dataset}{dataset}
 
 \item{name}{name to be saved under}
-
-\item{return}{Return results matrix?}
 
 \item{view}{View results matrix?}
 

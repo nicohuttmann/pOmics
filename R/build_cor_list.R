@@ -35,6 +35,6 @@ build_cor_list <- function(data, min.0 = 0.5, normalize.method = "pqn", shift = 
   if (add.connectivity) data <- connectivity_(cor_list = data, k = connectivity.k, scale = connectivity.scale)
 
   # Return
-  return(data)
+  invisible(data)
 
 }

@@ -2,20 +2,19 @@
 #'
 #' @param dataset dataset/s
 #' @param print print
-#' @param return return
 #'
 #' @return
 #' @export
 #'
 #'
-get_observations_sets <- function(dataset, print = T, return = F) {
+get_observations_sets <- function(dataset, print = T) {
 
   # Print
   if (print) {
 
     # No dataset given
     if (!hasArg(dataset)) {
-      dataset <- get_datasets(print = FALSE, return = T)
+      dataset <- get_datasets(print = FALSE)
     } else {
       dataset <- get_dataset(dataset)
     }
@@ -35,7 +34,7 @@ get_observations_sets <- function(dataset, print = T, return = F) {
 
 
   #
-  if (return && length(dataset) == 1) return(attr(.datasets[[dataset]], "observations_sets"))
+  if (length(dataset) == 1) invisible(attr(.datasets[[dataset]], "observations_sets"))
 
 
 

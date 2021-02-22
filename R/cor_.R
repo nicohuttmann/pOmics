@@ -9,26 +9,26 @@
 #'
 #'
 cor_ <- function(data, method = "pearson", set.diag.0 = F) {
-  
+
   # Setup a list to store all correlation data
   cor_list <- tibble::lst()
-  
+
   # Add raw data
   cor_list[["raw_data"]] <- data
-  
+
   # Add variable names
   attr(cor_list, "variables") <- colnames(data)
-  
+
   # Add correlation matrix
   cor_list[["correlation"]] <- cor(x = data, method = method)
-  
+
   # Set diagonal to zero
   if (set.diag.0) diag(cor_list[["correlation"]]) <- 0
-  
+
   # Add attributes
   attr(cor_list, "correlation") <- method
-  
+
   # Return
-  return(cor_list)
-  
+  invisible(cor_list)
+
 }

@@ -26,8 +26,7 @@ setup_fun_enrich <- function(databases = "all") {
       new_GOdata(ontology = "CC",
                  nodeSize = 10,
                  statistic = statistic,
-                 save = TRUE,
-                 return = FALSE)
+                 save = TRUE)
     }
   }
 
@@ -39,8 +38,7 @@ setup_fun_enrich <- function(databases = "all") {
       new_GOdata(ontology = "BP",
                  nodeSize = 10,
                  statistic = statistic,
-                 save = TRUE,
-                 return = FALSE)
+                 save = TRUE)
     }
   }
 
@@ -52,8 +50,7 @@ setup_fun_enrich <- function(databases = "all") {
       new_GOdata(ontology = "MF",
                  nodeSize = 10,
                  statistic = statistic,
-                 save = TRUE,
-                 return = FALSE)
+                 save = TRUE)
     }
   }
 

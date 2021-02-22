@@ -10,7 +10,6 @@ fun_enrich(
   databases = "GO",
   algorithm = "weight01",
   view = T,
-  return = F,
   save = F
 )
 }
@@ -24,8 +23,6 @@ fun_enrich(
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 
 \item{view}{View results?}
-
-\item{return}{Return results?}
 
 \item{save}{Save results?}
 }

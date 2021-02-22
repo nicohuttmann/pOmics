@@ -10,7 +10,7 @@ get_all_variables <- function() {
   variables <- c()
 
   #
-  for (dataset in get_datasets(print = FALSE, return = TRUE)) {
+  for (dataset in get_datasets(print = FALSE)) {
     variables <- unique(c(variables, get_variables(variables = All,
                                                    dataset = dataset)))
   }

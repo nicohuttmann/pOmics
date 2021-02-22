@@ -16,7 +16,7 @@
 import_datasets <- function(files, change.wd, prepare, species, data.origin, load.UniProt.ws = F, data.types) {
 
   # Add .info list file
-  new_info_list(replace = FALSE, return = FALSE)
+  new_info_list(replace = FALSE)
 
 
   # select files
@@ -28,7 +28,7 @@ import_datasets <- function(files, change.wd, prepare, species, data.origin, loa
 
 
   # import files
-  list.import <- import_files(files, return = T)
+  list.import <- import_files(files)
 
   # Change wd according to new files
   for (file in files) {

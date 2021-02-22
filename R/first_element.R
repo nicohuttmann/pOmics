@@ -6,9 +6,9 @@
 #' @export
 #'
 #'
-first_ <- function(x) {
-  
+first_element <- function(x) {
+
   # Return first element
   return(x[1])
-  
+
 }

@@ -10,7 +10,7 @@
 save_wd <- function(wd, silent = F) {
 
   # Check info file
-  new_info_list(replace = FALSE, return = F)
+  new_info_list(replace = FALSE)
 
   # No working directory given
   if(!hasArg(wd)) {

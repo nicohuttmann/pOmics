@@ -9,7 +9,6 @@
 #' @param axis.title.y y-axis title
 #' @param add.protein.function add protein function as hover information
 #' @param print print plot to device
-#' @param return return plot object
 #'
 #' @return
 #' @export
@@ -17,7 +16,8 @@
 #' @importFrom magrittr %>%
 #'
 #'
-plot_volcano <- function(x, y, markers = "default", size = 4, opacity = opacity, axis.title.x = "log2 fold-change", axis.title.y = "-log10 p-value", add.protein.function = F, print = T, return = F) {
+plot_volcano <- function(x, y, markers = "default", size = 4, opacity = opacity, axis.title.x = "log2 fold-change",
+                         axis.title.y = "-log10 p-value", add.protein.function = F, print = T) {
 
 
   x <- x[!is.na(x)]
@@ -129,9 +129,8 @@ plot_volcano <- function(x, y, markers = "default", size = 4, opacity = opacity,
 
   }
 
-if (print) print(p)
+  if (print) print(p)
 
-if (return) return(p)
-
+  invisible(p)
 
 }

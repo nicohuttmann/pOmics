@@ -10,7 +10,6 @@
 #' @param type data type
 #' @param observations.set observations.set
 #' @param dataset dataset
-#' @param return Return results matrix?
 #' @param plot Plot?
 #' @param view View results matrix?
 #' @param save Save results matrix?
@@ -19,7 +18,7 @@
 #' @export
 #'
 #'
-analyse_expression <- function(data, variables = "default", observations = "default", groups, control, data.name, var.equal = T, type = "LFQ", observations.set, dataset, return = F, plot = T, view = F, save = F) {
+analyse_expression <- function(data, variables = "default", observations = "default", groups, control, data.name, var.equal = T, type = "LFQ", observations.set, dataset, plot = T, view = F, save = F) {
 
   # Check data input
   if (!hasArg(data) && variables == "default" && observations == "default") stop("Provide data or specify variables and observations.")
@@ -90,7 +89,7 @@ analyse_expression <- function(data, variables = "default", observations = "defa
   if (plot) {
 
     p <- plot_volcano(x = data.ttest[,"log2.fc"],
-                 y = data.ttest[,"p.value"], print = F, return = T)
+                 y = data.ttest[,"p.value"], print = F)
 
   }
 
@@ -109,13 +108,10 @@ analyse_expression <- function(data, variables = "default", observations = "defa
   }
 
   # Return
-  if (return) {
+  ret <- list()
+  if (plot) ret[["plot"]] <- p
+  ret[["ttest"]] <- data.ttest
 
-    ret <- list()
-    if (plot) ret[["plot"]] <- p
-    ret[["ttest"]] <- data.ttest
-
-    return(ret)
-  }
+  invisible(ret)
 
 }

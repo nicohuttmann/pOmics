@@ -4,14 +4,12 @@
 \alias{get_observations_sets}
 \title{Prints or returns observations sets}
 \usage{
-get_observations_sets(dataset, print = T, return = F)
+get_observations_sets(dataset, print = T)
 }
 \arguments{
 \item{dataset}{dataset/s}
 
 \item{print}{print}
-
-\item{return}{return}
 }
 \value{
 

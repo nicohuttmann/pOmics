@@ -10,8 +10,7 @@ new_GOdata(
   statistic = "fisher",
   nodeSize = 10,
   dataset,
-  save = T,
-  return = F
+  save = T
 )
 }
 \arguments{
@@ -26,8 +25,6 @@ new_GOdata(
 \item{dataset}{dataset}
 
 \item{save}{Save?}
-
-\item{return}{Return?}
 }
 \value{
 

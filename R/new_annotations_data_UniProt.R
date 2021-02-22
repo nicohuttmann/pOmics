@@ -3,13 +3,12 @@
 #' @param annotation annotation type
 #' @param dataset dataset
 #' @param save Save?
-#' @param return Return?
 #'
 #' @return
 #' @export
 #'
 #'
-new_annotations_data_UniProt <- function(annotation = "GO-ID", dataset, save = T, return = F) {
+new_annotations_data_UniProt <- function(annotation = "GO-ID", dataset, save = T) {
 
   # Collect all variables
   variables <- get_all_variables()
@@ -29,6 +28,6 @@ new_annotations_data_UniProt <- function(annotation = "GO-ID", dataset, save = T
   if (save) add_database(annotations, id = annotation, type = "Annotations")
 
   # Return
-  if (return) return(annotations)
+  invisible(annotations)
 
 }

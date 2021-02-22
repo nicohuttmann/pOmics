@@ -9,7 +9,7 @@
 #'
 #' @importFrom magrittr %>%
 #'
-plot_xy <- function(x, y, axis.title.x, axis.title.y) {
+plot_xy <- function(x, y, axis.title.x = "x", axis.title.y = "y") {
 
   # check input for names
   if (length(names(x)) == 0 || length(names(y)) == 0) stop("Arguments don't have names.")

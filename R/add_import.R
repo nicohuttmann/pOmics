@@ -9,7 +9,7 @@
 add_import <- function(import) {
 
   # Check for .imports list
-  new_imports_list(return = FALSE)
+  new_imports_list()
 
   # All imported files in list
   for (i in seq_along(import)) {

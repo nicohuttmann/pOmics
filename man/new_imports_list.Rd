@@ -4,12 +4,10 @@
 \alias{new_imports_list}
 \title{Creates imports list}
 \usage{
-new_imports_list(replace = F, return = T)
+new_imports_list(replace = F)
 }
 \arguments{
 \item{replace}{Should imports list be replaced if already existing}
-
-\item{return}{Should indication whether new imports list was created be returned}
 }
 \value{
 

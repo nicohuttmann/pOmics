@@ -3,17 +3,16 @@
 #' @param type data type
 #' @param dataset dataset
 #' @param print print
-#' @param return return
 #'
 #' @return
 #' @export
 #'
 #'
-get_data_names <- function(type, dataset, print = T, return = F) {
+get_data_names <- function(type, dataset, print = T) {
 
   # No dataset given
   if (!hasArg(dataset)) {
-    dataset <- get_datasets(print = FALSE, return = T)
+    dataset <- get_datasets(print = FALSE)
   } else {
     dataset <- get_dataset(dataset)
   }
@@ -24,7 +23,7 @@ get_data_names <- function(type, dataset, print = T, return = F) {
 
     # No data type given
     if (!hasArg(type)) {
-      types <- get_data_types(dataset = i, print = FALSE, return = T)
+      types <- get_data_types(dataset = i, print = FALSE)
     } else {
       types <- get_data_type(type)
     }
@@ -48,7 +47,7 @@ get_data_names <- function(type, dataset, print = T, return = F) {
   }
 
 
-  #
-  if (return && length(dataset) == 1 && length(type) == 1) return(attr(.datasets[[dataset]], type))
+  # Return if datatype is specified
+  if (length(dataset) == 1 && length(type) == 1) invisible(attr(.datasets[[dataset]], type))
 
 }

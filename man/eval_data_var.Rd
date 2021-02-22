@@ -13,7 +13,6 @@ eval_data_var(
   data.name,
   type,
   dataset,
-  return = T,
   view = F,
   save = F,
   name,
@@ -36,8 +35,6 @@ eval_data_var(
 \item{type}{data type}
 
 \item{dataset}{dataset}
-
-\item{return}{Return results?}
 
 \item{view}{View results?}
 

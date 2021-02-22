@@ -18,8 +18,7 @@ anal_data_grouped_var(
   save.variable.groups = T,
   show = T,
   export.plot = T,
-  export.table = F,
-  return.export.table = F
+  export.table = F
 )
 }
 \arguments{
@@ -48,8 +47,6 @@ anal_data_grouped_var(
 \item{export.plot}{exports plot to pdf}
 
 \item{export.table}{exports table of proteins}
-
-\item{return.export.table}{return table of proteins}
 
 \item{save.separete}{save results from group evaluation in variables data}
 }

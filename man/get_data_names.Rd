@@ -4,7 +4,7 @@
 \alias{get_data_names}
 \title{Prints or returns data names}
 \usage{
-get_data_names(type, dataset, print = T, return = F)
+get_data_names(type, dataset, print = T)
 }
 \arguments{
 \item{type}{data type}
@@ -12,8 +12,6 @@ get_data_names(type, dataset, print = T, return = F)
 \item{dataset}{dataset}
 
 \item{print}{print}
-
-\item{return}{return}
 }
 \value{
 

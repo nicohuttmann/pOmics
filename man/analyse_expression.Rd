@@ -15,7 +15,6 @@ analyse_expression(
   type = "LFQ",
   observations.set,
   dataset,
-  return = F,
   plot = T,
   view = F,
   save = F
@@ -41,8 +40,6 @@ analyse_expression(
 \item{observations.set}{observations.set}
 
 \item{dataset}{dataset}
-
-\item{return}{Return results matrix?}
 
 \item{plot}{Plot?}
 

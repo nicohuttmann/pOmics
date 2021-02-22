@@ -10,7 +10,6 @@ new_dataset(
   data.origin,
   species,
   load.UniProt.ws = T,
-  return = F,
   identifier,
   data.types,
   min.similarity = 8,
@@ -27,8 +26,6 @@ new_dataset(
 \item{species}{protein origin (T or F or UniProt taxosnomy ID)}
 
 \item{load.UniProt.ws}{(optional) Should UniProt data be loaded}
-
-\item{return}{Should dataset be returned?}
 
 \item{identifier}{(optional) specific vector of identifier column/s}
 

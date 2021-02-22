@@ -13,7 +13,6 @@ eval_data(
   type = "LFQ",
   observations.set,
   dataset,
-  return = T,
   view = F,
   save = F,
   name,
@@ -36,8 +35,6 @@ eval_data(
 \item{observations.set}{set of observations}
 
 \item{dataset}{dataset}
-
-\item{return}{Return results?}
 
 \item{view}{View results?}
 

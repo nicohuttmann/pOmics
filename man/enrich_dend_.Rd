@@ -11,7 +11,6 @@ enrich_dend_(
   inverse = F,
   name,
   cut = T,
-  return = F,
   plot = T,
   labels,
   fun.enrich = T,
@@ -31,8 +30,6 @@ enrich_dend_(
 \item{name}{name}
 
 \item{cut}{cut dendrogram}
-
-\item{return}{return cor_list object}
 
 \item{plot}{Plot results?}
 

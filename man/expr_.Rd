@@ -2,26 +2,26 @@
 % Please edit documentation in R/expr_.R
 \name{expr_}
 \alias{expr_}
-\title{Title}
+\title{Builds expression analysis list}
 \usage{
 expr_(data, groups, scale = T, combine = "mean", observations.set, dataset)
 }
 \arguments{
-\item{data}{}
+\item{data}{data}
 
-\item{groups}{}
+\item{groups}{groups}
 
-\item{scale}{}
+\item{scale}{scale data}
 
-\item{combine}{}
+\item{combine}{combine groups}
 
-\item{observations.set}{}
+\item{observations.set}{which observations set}
 
-\item{dataset}{}
+\item{dataset}{dataset}
 }
 \value{
 
 }
 \description{
-Title
+Builds expression analysis list
 }

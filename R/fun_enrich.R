@@ -5,14 +5,13 @@
 #' @param databases databases to use
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
 #' @param view View results?
-#' @param return Return results?
 #' @param save Save results?
 #'
 #' @return
 #' @export
 #'
 #'
-fun_enrich <- function(proteins, background = NULL, databases = "GO", algorithm = "weight01", view = T, return = F, save = F) {
+fun_enrich <- function(proteins, background = NULL, databases = "GO", algorithm = "weight01", view = T, save = F) {
 
   # Modify input
   if (databases == "GO") databases <- c("CC", "BP", "MF")
@@ -92,6 +91,6 @@ fun_enrich <- function(proteins, background = NULL, databases = "GO", algorithm 
   if (view) save2cache(data = list.enrichment, view = TRUE, new = FALSE)
 
   # Return
-  if (return) return(list.enrichment)
+  invisible(list.enrichment)
 
 }

@@ -15,14 +15,13 @@
 #' @param show show plot
 #' @param export.plot exports plot to pdf
 #' @param export.table exports table of proteins
-#' @param return.export.table return table of proteins
 #'
 #' @return
 #' @export
 #'
 #'
 anal_data_grouped_var <- function(variables, observations, groups, expr, name, observations.set, data.name, type, dataset, save.separate = T,
-                                  save.variable.groups = T, show = T, export.plot = T, export.table = F, return.export.table = F) {
+                                  save.variable.groups = T, show = T, export.plot = T, export.table = F) {
 
 
   data.grouped <- eval_data_grouped_var(variables = variables,
@@ -34,14 +33,12 @@ anal_data_grouped_var <- function(variables, observations, groups, expr, name, o
                                         data.name = data.name,
                                         type = type,
                                         dataset = dataset,
-                                        save = save.separate,
-                                        return = T)
+                                        save = save.separate)
 
 
 
 
   plot_venn(x = data.grouped,
-
             plot = show,
             export = export.plot)
 
@@ -51,8 +48,8 @@ anal_data_grouped_var <- function(variables, observations, groups, expr, name, o
 
   }
 
-
-  if(return.export.table) return(table)
+# Return export table
+  invisible(table)
 
 
 }

@@ -4,14 +4,12 @@
 \alias{get_data_types}
 \title{Prints or returns datatypes}
 \usage{
-get_data_types(dataset, print = T, return = F)
+get_data_types(dataset, print = T)
 }
 \arguments{
 \item{dataset}{dataset/s}
 
 \item{print}{print}
-
-\item{return}{return}
 }
 \value{
 

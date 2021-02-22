@@ -59,13 +59,7 @@ cor_matrix <- function(variables, observations, observations.set, name, type, da
   # Compute clustering dendrogram
   cor.list[["dendrogram"]] <- fastcluster::hclust(d = dist, method = clustering.method)
 
-
-
-
-
-
+  # Return
   return(cor.list)
 
-
-
-  }
+}

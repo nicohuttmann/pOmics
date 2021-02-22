@@ -4,12 +4,10 @@
 \alias{new_annotations_data_DisGeNet}
 \title{Builds annotation list from DisGeNet}
 \usage{
-new_annotations_data_DisGeNet(nodeSize = 5, save = T, return = F)
+new_annotations_data_DisGeNet(nodeSize = 5, save = T)
 }
 \arguments{
 \item{save}{Save?}
-
-\item{return}{Return?}
 }
 \value{
 

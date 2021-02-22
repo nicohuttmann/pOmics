@@ -12,6 +12,7 @@ dendrogram_ <- function(cor_list, data = "adjacency", method = "average") {
 
   # Add dendrogram
   dend <- cor_list[[data]] %>%
+    t() %>%
     # Calculate distance
     dist() %>%
     # Cluster distance matrix
@@ -23,7 +24,7 @@ dendrogram_ <- function(cor_list, data = "adjacency", method = "average") {
     if (ncol(cor_list[[i]]) == nrow(cor_list[[i]])) {
       cor_list[[i]] <- cor_list[[i]][rev(dend$order), rev(dend$order)]
     } else {
-      cor_list[["raw_data"]] <- cor_list[["raw_data"]][, rev(dend$order)]
+      cor_list[[i]] <- cor_list[[i]][, rev(dend$order)]
     }
 
   }
@@ -32,6 +33,7 @@ dendrogram_ <- function(cor_list, data = "adjacency", method = "average") {
 
   # Add dendrogram
   cor_list[["dendrogram"]] <- cor_list[[data]] %>%
+    t() %>%
     # Calculate distance
     dist() %>%
     # Cluster distance matrix
@@ -44,6 +46,6 @@ dendrogram_ <- function(cor_list, data = "adjacency", method = "average") {
   cor_list <- dendrogram2table_(cor_list = cor_list)
 
   # Return
-  return(cor_list)
+  invisible(cor_list)
 
 }

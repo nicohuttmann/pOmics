@@ -24,6 +24,6 @@ dendrogram2table_ <- function(cor_list) {
   # Add table
   cor_list[["dend.table"]] <- dend_table
 
-  return(cor_list)
+  invisible(cor_list)
 
 }

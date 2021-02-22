@@ -1,13 +1,12 @@
 #' Prints or returns datasets
 #'
 #' @param print print
-#' @param return return
 #'
 #' @return
 #' @export
 #'
 #'
-get_datasets <- function(print = T, return = F) {
+get_datasets <- function(print = T) {
 
   # Print
   if (print) {
@@ -16,6 +15,6 @@ get_datasets <- function(print = T, return = F) {
   }
 
   # Return
-  if (return) return(.info[["datasets"]])
+  invisible(.info[["datasets"]])
 
 }

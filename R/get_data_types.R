@@ -2,17 +2,16 @@
 #'
 #' @param dataset dataset/s
 #' @param print print
-#' @param return return
 #'
 #' @return
 #' @export
 #'
 #'
-get_data_types <- function(dataset, print = T, return = F) {
+get_data_types <- function(dataset, print = T) {
 
   # No dataset given
   if (!hasArg(dataset)) {
-    dataset <- get_datasets(print = FALSE, return = T)
+    dataset <- get_datasets(print = FALSE)
   } else {
     dataset <- get_dataset(dataset)
   }
@@ -33,6 +32,6 @@ get_data_types <- function(dataset, print = T, return = F) {
   }
 
   #
-  if (return && length(dataset) == 1) return(setdiff(names(.datasets[[dataset]]), c("variables", "observations")))
+  if (length(dataset) == 1) invisible(setdiff(names(.datasets[[dataset]]), c("variables", "observations")))
 
 }

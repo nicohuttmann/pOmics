@@ -1,13 +1,12 @@
 #' Imports any file type using the file extension and returns list
 #'
 #' @param files file paths
-#' @param return return imported files
 #'
 #' @return
 #' @export
 #'
 #'
-import_files <- function(files, return = F) {
+import_files <- function(files) {
 
 
   # Select files if no path given
@@ -90,8 +89,7 @@ import_files <- function(files, return = F) {
   add_import(list.import)
 
   # Return list or one data frame
-  if (return) {
-    list.import
-  }
+
+  invisible(list.import)
 
 }

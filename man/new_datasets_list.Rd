@@ -4,12 +4,10 @@
 \alias{new_datasets_list}
 \title{Creates datasets list}
 \usage{
-new_datasets_list(replace = F, return = T)
+new_datasets_list(replace = F)
 }
 \arguments{
 \item{replace}{Should datasets list be replaced if already existing}
-
-\item{return}{Should indication whether new datasets info was created be returned}
 }
 \value{
 

@@ -5,7 +5,6 @@
 #' @param data.origin Identify origin software of data
 #' @param species protein origin (T or F or UniProt taxosnomy ID)
 #' @param load.UniProt.ws (optional) Should UniProt data be loaded
-#' @param return Should dataset be returned?
 #' @param identifier (optional) specific vector of identifier column/s
 #' @param data.types (optional) types of data to extract; uses defaults if not specified
 #' @param min.similarity minimum similarity oi column names
@@ -16,7 +15,7 @@
 #'
 #' @importFrom magrittr %>%
 #'
-new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, return = F, identifier, data.types, min.similarity = 8, min.groupsize = 6) {
+new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, identifier, data.types, min.similarity = 8, min.groupsize = 6) {
 
   # Setup
   # Clear console
@@ -268,6 +267,6 @@ new_dataset <- function(x, name, data.origin, species, load.UniProt.ws = T, retu
 
 
   # Return
-  if (return) dataset
+  invisible(dataset)
 
 }

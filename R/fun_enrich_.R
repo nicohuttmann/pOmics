@@ -26,7 +26,6 @@ fun_enrich_ <- function(cor_list, name, k, l, databases = "GO", algorithm = "wei
                     databases = databases,
                     algorithm = algorithm,
                     view = TRUE,
-                    return =  FALSE,
                     save = FALSE)
 
   } else if (hasArg(k)) {
@@ -37,7 +36,6 @@ fun_enrich_ <- function(cor_list, name, k, l, databases = "GO", algorithm = "wei
                  databases = databases,
                  algorithm = algorithm,
                  view = TRUE,
-                 return =  FALSE,
                  save = FALSE)
 
     } else {
@@ -48,7 +46,6 @@ fun_enrich_ <- function(cor_list, name, k, l, databases = "GO", algorithm = "wei
                  databases = databases,
                  algorithm = algorithm,
                  view = TRUE,
-                 return =  FALSE,
                  save = FALSE)
 
     }

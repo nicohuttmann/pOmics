@@ -6,13 +6,12 @@
 #' @param plot Plot venn diagram?
 #' @param export Export ven diagram plot?
 #' @param save Save results list?
-#' @param return Return results list?
 #'
 #' @return
 #' @export
 #'
 #'
-classify_protein_identification_2 <- function(data.eval, sig.variables, upper.neg = 0, lower.pos = 0.5, dataset, plot = T, export = F, name, save = F, return = T) {
+classify_protein_identification_2 <- function(data.eval, sig.variables, upper.neg = 0, lower.pos = 0.5, dataset, plot = T, export = F, name, save = F) {
 
   # Check data
   if (ncol(data.eval) != 3 || colnames(data.eval)[1] != "variables" || mode(data.eval[[2]]) != "numeric") stop("Provide correct input.")
@@ -73,6 +72,6 @@ if (hasArg(sig.variables)) results.list[[groups[1]]] <- intersect(results.list[[
   }
 
   # Return
-  if (return) return(results.list)
+  invisible(results.list)
 
 }

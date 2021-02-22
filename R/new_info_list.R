@@ -1,13 +1,12 @@
 #' Creates new info list
 #'
 #' @param replace Should info list be replaced if already existing
-#' @param return Should indication whether new info list was created be returned
 #'
 #' @return whether a new info list was created
 #' @export
 #'
 #'
-new_info_list <- function(replace = F, return = T) {
+new_info_list <- function(replace = F) {
 
   #
   if (!".info" %in% objects(all.names = TRUE, envir = .GlobalEnv) || replace) {
@@ -21,9 +20,9 @@ new_info_list <- function(replace = F, return = T) {
 
 
     # Indicate if new info list was created
-    if (return) return(TRUE)
+    invisible(TRUE)
   } else {
-    if (return) return(FALSE)
+    invisible(FALSE)
   }
 
 }

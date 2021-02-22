@@ -4,12 +4,10 @@
 \alias{new_cache}
 \title{Creates new cache list}
 \usage{
-new_cache(replace = T, return = F)
+new_cache(replace = T)
 }
 \arguments{
 \item{replace}{Should cache list be replaced if already existing}
-
-\item{return}{Should indication whether new cache list was created be returned}
 }
 \value{
 whether a new cache list was created

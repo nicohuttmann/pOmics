@@ -4,12 +4,10 @@
 \alias{get_datasets}
 \title{Prints or returns datasets}
 \usage{
-get_datasets(print = T, return = F)
+get_datasets(print = T)
 }
 \arguments{
 \item{print}{print}
-
-\item{return}{return}
 }
 \value{
 
