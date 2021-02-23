@@ -4,7 +4,7 @@
 \alias{add_variables_data}
 \title{Add data to variables}
 \usage{
-add_variables_data(data, name, dataset, set.default = F)
+add_variables_data(data, name, dataset, set.default = F, replace)
 }
 \arguments{
 \item{data}{new data}
@@ -14,6 +14,8 @@ add_variables_data(data, name, dataset, set.default = F)
 \item{dataset}{dataset}
 
 \item{set.default}{set new variables data as default}
+
+\item{replace}{replace existing column}
 }
 \value{
 

@@ -4,7 +4,14 @@
 \alias{add_observations_data}
 \title{Adds data to observations dataframe}
 \usage{
-add_observations_data(data, name, observations.set, dataset, ignore.names = F)
+add_observations_data(
+  data,
+  name,
+  observations.set,
+  dataset,
+  ignore.names = F,
+  replace
+)
 }
 \arguments{
 \item{data}{new data}
@@ -16,6 +23,8 @@ add_observations_data(data, name, observations.set, dataset, ignore.names = F)
 \item{dataset}{dataset}
 
 \item{ignore.names}{Assumes that data matches observations}
+
+\item{replace}{replace existing column}
 }
 \value{
 

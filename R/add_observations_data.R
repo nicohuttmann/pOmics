@@ -5,6 +5,7 @@
 #' @param observations.set set of observations
 #' @param dataset dataset
 #' @param ignore.names Assumes that data matches observations
+#' @param replace replace existing column
 #'
 #' @return
 #' @export
@@ -12,7 +13,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-add_observations_data <- function(data, name, observations.set, dataset, ignore.names = F) {
+add_observations_data <- function(data, name, observations.set, dataset, ignore.names = F, replace) {
 
   # Check dataset
   dataset <- get_dataset(dataset)
@@ -29,7 +30,7 @@ add_observations_data <- function(data, name, observations.set, dataset, ignore.
 
   # Check data
   if (!hasArg(data)) stop("No data given.")
-  if (!hasArg(name)) stop("No name given.")
+
   if (is.null(names(data)) && !ignore.names) stop("Data must be named.")
 
 
@@ -40,11 +41,45 @@ add_observations_data <- function(data, name, observations.set, dataset, ignore.
     template[] <- data
   }
 
+  # check name
+  name <- ask_name(name, "Name for new data: ")
+
+  # Name already present in dataset
+  if (name %in% .datasets[[dataset]][["observations"]][[observations.set]]) {
+
+    # Argument replace given as TRUE
+    if (hasArg(replace) && replace) {
+
+      remove_observations_data(name = name,
+                               observations.set = observations.set,
+                               dataset = dataset,
+                               require.confirmation = FALSE)
+
+    # No argument given for replace
+    } else if (!hasArg(replace)) {
+
+      # Ask
+      if (menu(choices = c("Yes", "No"), title = "Should column be replaced? ") == 1) {
+
+        remove_observations_data(name = name,
+                                 observations.set = observations.set,
+                                 dataset = dataset,
+                                 require.confirmation = FALSE)
+
+      } else {
+        stop("Column with same name already exists.")
+      }
+
+    } else {
+      stop("Column with same name already exists.")
+    }
+
+  }
 
 
   # Add
-  .datasets[[dataset]][["observations"]][[observations.set]] <<- .datasets[[dataset]][["observations"]][[observations.set]] %>%
-    dplyr::mutate(new = template) %>%
-    dplyr::rename(!!name := new)
+  .datasets[[dataset]][["observations"]][[observations.set]] <<-
+    .datasets[[dataset]][["observations"]][[observations.set]] %>%
+    dplyr::mutate(!!name := template)
 
 }
