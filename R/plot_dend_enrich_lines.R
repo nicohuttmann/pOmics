@@ -4,12 +4,13 @@
 #' @param dend.table.cluster dend.table.cluster
 #' @param title name of enrichment
 #' @param gridlines add gridlines to the plot
+#' @param print print plot to device
 #'
 #' @return
 #' @export
 #'
 #'
-plot_dend_enrich_lines <- function(dend.table.pvalue, dend.table.cluster, title, gridlines = T) {
+plot_dend_enrich_lines <- function(dend.table.pvalue, dend.table.cluster, title, gridlines = T, print = T) {
 
   # set name
   title <- ask_name(title, "Title of plot: ")
@@ -49,6 +50,11 @@ plot_dend_enrich_lines <- function(dend.table.pvalue, dend.table.cluster, title,
 
   #ggtitle(Term(annotation))
 
-  print(p)
+
+  # Print plot
+  if (print) print(p)
+
+  # Return
+  invisible(p)
 
 }

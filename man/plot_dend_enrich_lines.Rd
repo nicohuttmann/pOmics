@@ -8,7 +8,8 @@ plot_dend_enrich_lines(
   dend.table.pvalue,
   dend.table.cluster,
   title,
-  gridlines = T
+  gridlines = T,
+  print = T
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ plot_dend_enrich_lines(
 \item{title}{name of enrichment}
 
 \item{gridlines}{add gridlines to the plot}
+
+\item{print}{print plot to device}
 }
 \value{
 

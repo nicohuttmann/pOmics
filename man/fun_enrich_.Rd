@@ -4,7 +4,17 @@
 \alias{fun_enrich_}
 \title{Functional enrichment of cor_list object}
 \usage{
-fun_enrich_(cor_list, name, k, l, databases = "GO", algorithm = "weight01")
+fun_enrich_(
+  cor_list,
+  name,
+  k,
+  l,
+  inverse = F,
+  databases = "GO",
+  algorithm = "weight01",
+  add.info = T,
+  view = T
+)
 }
 \arguments{
 \item{cor_list}{cor_list object}
@@ -15,13 +25,19 @@ fun_enrich_(cor_list, name, k, l, databases = "GO", algorithm = "weight01")
 
 \item{l}{(optional) number of cluster to analyse specifically}
 
+\item{inverse}{scores: enriches for higher scores if TRUE}
+
 \item{databases}{databases for which to perform enrichment}
 
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
+
+\item{add.info}{Add additional information (takes longer)}
+
+\item{view}{View enrichment tables}
 }
 \value{
 
 }
 \description{
-Either name or k must be given. Number of clusters will be analysed as groups if no l is specified.
+Either name or k must be given. Clusters will be analysed as groups if no l is specified.
 }

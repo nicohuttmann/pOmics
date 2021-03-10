@@ -1,12 +1,13 @@
 #' Returns GO terms from given terms
 #'
 #' @param terms GO ids
+#' @param include.child.terms include child terms
 #'
 #' @return
 #' @export
 #'
 #'
-get_GO_proteins_TRY <- function(terms) {
+get_GO_proteins <- function(terms, include.child.terms = F) {
 
 
   # Check if database exists
@@ -24,16 +25,28 @@ get_GO_proteins_TRY <- function(terms) {
   database <- topGO::inverseList(database)
 
 
-
-
   # No argument or terms do not match
-  if (!hasArg(terms) || any(!terms %in% names(database))) {
-    # #
-    # View(database)
-    #
-    # while () {
-    #
-    # }
+  if (!hasArg(terms) || (all(!terms %in% names(database)) && !include.child.terms)) {
+
+    terms <- choose_GO_terms(return.ID = TRUE)
+
+  }
+
+  # Get child terms
+  if (include.child.terms) {
+    terms <- get_child_terms(terms = terms)
+  }
+
+
+  if (any(!terms %in% names(database))) {
+
+    if (!include.child.terms) {
+      message("Following terms not found: ")
+      print(terms[!terms %in% names(database)])
+      message("Continue with remaing terms.")
+    }
+
+    terms <- terms[terms %in% names(database)]
 
   }
 
@@ -47,7 +60,5 @@ get_GO_proteins_TRY <- function(terms) {
 
   # Return
   return(proteins)
-
-
 
 }

@@ -4,12 +4,14 @@
 \alias{plot_dend_enrich_lines_}
 \title{Plots -log10 p-value profile of dendrogram enrichment from cor_list object}
 \usage{
-plot_dend_enrich_lines_(cor_list, name)
+plot_dend_enrich_lines_(cor_list, name, print = T)
 }
 \arguments{
 \item{cor_list}{cor_list object}
 
 \item{name}{name of enrichment}
+
+\item{print}{print plot to device}
 }
 \value{
 

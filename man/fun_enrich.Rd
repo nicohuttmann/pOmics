@@ -7,10 +7,12 @@
 fun_enrich(
   proteins,
   background = NULL,
+  inverse = F,
   databases = "GO",
   algorithm = "weight01",
-  view = T,
-  save = F
+  threshold = 0.05,
+  add.info = F,
+  view = T
 )
 }
 \arguments{
@@ -18,13 +20,17 @@ fun_enrich(
 
 \item{background}{(optional) background genes}
 
+\item{inverse}{scores: enriches for higher scores if TRUE}
+
 \item{databases}{databases to use}
 
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 
-\item{view}{View results?}
+\item{threshold}{p-value/confidence threshold to exclude terms}
 
-\item{save}{Save results?}
+\item{add.info}{Add additional information (takes longer)}
+
+\item{view}{View results?}
 }
 \value{
 

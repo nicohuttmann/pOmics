@@ -6,26 +6,21 @@
 \usage{
 classify_protein_identification_2(
   data.eval,
-  sig.variables,
-  upper.neg = 0,
-  lower.pos = 0.5,
+  conf.variables,
+  lower.limit = 0,
   dataset,
   plot = T,
-  export = F,
-  name,
   save = F
 )
 }
 \arguments{
 \item{data.eval}{data from eval_ function}
 
-\item{upper.neg}{upper limit for "not identified"}
+\item{lower.limit}{values above limit are considered positive/identified}
 
-\item{lower.pos}{lower limit for "confidently identified"}
+\item{dataset}{dataset}
 
 \item{plot}{Plot venn diagram?}
-
-\item{export}{Export ven diagram plot?}
 
 \item{save}{Save results list?}
 }

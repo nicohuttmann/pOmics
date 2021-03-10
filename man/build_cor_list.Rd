@@ -15,7 +15,8 @@ build_cor_list(
   adjacency.method = "none",
   add.connectivity = F,
   connectivity.k = 20,
-  connectivity.scale = T
+  connectivity.scale = T,
+  plot = F
 )
 }
 \arguments{
@@ -40,6 +41,8 @@ build_cor_list(
 \item{connectivity.k}{max number of clusters for connectivity}
 
 \item{connectivity.scale}{scale connectivity values to cluster size}
+
+\item{plot}{print plot of correlation matrix}
 }
 \value{
 

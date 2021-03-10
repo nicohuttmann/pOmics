@@ -1,19 +1,25 @@
 #' Performs gene set enrichment on numeric protein vector with specified Ontology
 #'
 #' @param proteins numeric score vector
+#' @param inverse enrich for terms in higher values/scores
 #' @param database database to use
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
+#' @param threshold p-value/confidence threshold to exclude terms
+#' @param add.info Add additional information (takes longer)
 #'
 #' @return
 #' @export
 #'
 #'
-do_enrichment_ks <- function(proteins, database, algorithm) {
+do_enrichment_ks <- function(proteins, inverse = F, database, algorithm, threshold, add.info = F) {
 
   # GO enrichment
   if (database %in% c("CC", "BP", "MF")) results <- enrichment_ks_GO(proteins = proteins,
+                                                                     inverse = inverse,
                                                                      ontology = database,
-                                                                     algorithm = algorithm)
+                                                                     algorithm = algorithm,
+                                                                     threshold = threshold,
+                                                                     add.info = add.info)
   #
 
   # Return results

@@ -4,7 +4,14 @@
 \alias{add_variables_data}
 \title{Add data to variables}
 \usage{
-add_variables_data(data, name, dataset, set.default = F, replace)
+add_variables_data(
+  data,
+  name,
+  dataset,
+  set.default = F,
+  add.background.variable = T,
+  replace
+)
 }
 \arguments{
 \item{data}{new data}
@@ -14,6 +21,8 @@ add_variables_data(data, name, dataset, set.default = F, replace)
 \item{dataset}{dataset}
 
 \item{set.default}{set new variables data as default}
+
+\item{add.background.variable}{add name of column to the background variables for easy access}
 
 \item{replace}{replace existing column}
 }

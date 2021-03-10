@@ -19,13 +19,13 @@ add_dataset <- function(dataset) {
     # Check for name
     if (is.null(attr(dataset, "name"))) {
       message("Dataset could not be identified.")
-      invisble(FALSE)
+      invisible(FALSE)
     }
 
     # Check if name is already present in datasets
     if (attr(dataset, "name") %in% names(.datasets)) {
       message("Dataset or name already added.")
-      invisble(FALSE)
+      invisible(FALSE)
     }
 
     # Add dataset
@@ -35,11 +35,11 @@ add_dataset <- function(dataset) {
     update_datasets(default.dataset = attr(dataset, "name"))
 
     # Indicate if new info list was created
-    invisble(TRUE)
+    invisible(TRUE)
   } else {
 
     message("No dataset provided.")
-    invisble(FALSE)
+    invisible(FALSE)
   }
 
 }

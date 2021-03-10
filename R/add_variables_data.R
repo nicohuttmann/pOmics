@@ -4,6 +4,7 @@
 #' @param name name
 #' @param dataset dataset
 #' @param set.default set new variables data as default
+#' @param add.background.variable add name of column to the background variables for easy access
 #' @param replace replace existing column
 #'
 #' @return
@@ -12,7 +13,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-add_variables_data <- function(data, name, dataset, set.default = F, replace) {
+add_variables_data <- function(data, name, dataset, set.default = F, add.background.variable = T, replace) {
 
   # Check dataset
   dataset <- get_dataset(dataset)
@@ -38,7 +39,7 @@ add_variables_data <- function(data, name, dataset, set.default = F, replace) {
 
 
   # Name already present in dataset
-  if (name %in% .datasets[[dataset]][["variables"]]) {
+  if (name %in% colnames(.datasets[[dataset]][["variables"]])) {
 
     # Argument replace given as TRUE
     if (hasArg(replace) && replace) {
@@ -51,6 +52,8 @@ add_variables_data <- function(data, name, dataset, set.default = F, replace) {
     } else if (!hasArg(replace)) {
 
       # Ask
+      message("")
+      message(paste0("Column <", name, "> already in variables data."))
       if (menu(choices = c("Yes", "No"), title = "Should column be replaced? ") == 1) {
 
         remove_variables_data(name = name,
@@ -68,8 +71,6 @@ add_variables_data <- function(data, name, dataset, set.default = F, replace) {
   }
 
 
-
-
   # Add
   .datasets[[dataset]][["variables"]] <<- .datasets[[dataset]][["variables"]] %>%
     dplyr::mutate(!!name := template)
@@ -77,5 +78,9 @@ add_variables_data <- function(data, name, dataset, set.default = F, replace) {
 
   # Set as default variables
   if (set.default) set_dataset_attr(x = name, which = "default_variables", dataset = dataset)
+
+
+  # Add background variable
+  if (add.background.variable) add_background_variable(name)
 
 }

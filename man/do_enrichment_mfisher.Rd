@@ -4,7 +4,7 @@
 \alias{do_enrichment_mfisher}
 \title{Performs overexpression enrichment on protein group vectors}
 \usage{
-do_enrichment_mfisher(proteins, database, algorithm)
+do_enrichment_mfisher(proteins, database, algorithm, threshold, add.info = F)
 }
 \arguments{
 \item{proteins}{character vector}
@@ -12,6 +12,10 @@ do_enrichment_mfisher(proteins, database, algorithm)
 \item{database}{database to use}
 
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
+
+\item{threshold}{p-value/confidence threshold to exclude terms}
+
+\item{add.info}{Add additional information (takes longer)}
 }
 \value{
 

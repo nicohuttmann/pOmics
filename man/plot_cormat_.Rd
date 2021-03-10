@@ -4,12 +4,14 @@
 \alias{plot_cormat_}
 \title{Plots correlation matrix from cor_list object}
 \usage{
-plot_cormat_(cor_list, data = "adjacency")
+plot_cormat_(cor_list, data = "adjacency", print = T)
 }
 \arguments{
 \item{cor_list}{cor_list object}
 
 \item{data}{data type to be plotted (adjacency, similarity or correlation)}
+
+\item{print}{print plot to device}
 }
 \value{
 

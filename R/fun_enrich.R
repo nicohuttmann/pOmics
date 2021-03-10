@@ -2,23 +2,25 @@
 #'
 #' @param proteins list of proteins/scores/protein groups
 #' @param background (optional) background genes
+#' @param inverse scores: enriches for higher scores if TRUE
 #' @param databases databases to use
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
+#' @param threshold p-value/confidence threshold to exclude terms
+#' @param add.info Add additional information (takes longer)
 #' @param view View results?
-#' @param save Save results?
 #'
 #' @return
 #' @export
 #'
 #'
-fun_enrich <- function(proteins, background = NULL, databases = "GO", algorithm = "weight01", view = T, save = F) {
+fun_enrich <- function(proteins, background = NULL, inverse = F, databases = "GO", algorithm = "weight01", threshold = 0.05, add.info = F, view = T) {
 
   # Modify input
   if (databases == "GO") databases <- c("CC", "BP", "MF")
 
 
   #
-  require(topGO)
+  suppressMessages(require(topGO))
 
   # Check databases for functional enrichment
   if (!"Functional enrichment databases" %in% names(.info)&& any(!databases %in% .info[["Functional enrichment databases"]]))
@@ -74,15 +76,22 @@ fun_enrich <- function(proteins, background = NULL, databases = "GO", algorithm 
     # Single Fisher's exact test
     if (is.logical(allProteins)) list.enrichment[[database]] <- do_enrichment_fisher(proteins = ifelse(allProteins, 1, 0),
                                                                                      database = database,
-                                                                                     algorithm = algorithm)
+                                                                                     algorithm = algorithm,
+                                                                                     threshold = threshold,
+                                                                                     add.info = add.info)
     # Multiple fisher's exact test
     if (is.character(allProteins)) list.enrichment[[database]] <- do_enrichment_mfisher(proteins = allProteins,
                                                                                         database = database,
-                                                                                        algorithm = algorithm)
+                                                                                        algorithm = algorithm,
+                                                                                        threshold = threshold,
+                                                                                        add.info = add.info)
     # Kolmogorov-Smirnov test
     if (is.numeric(allProteins)) list.enrichment[[database]] <- do_enrichment_ks(proteins = allProteins,
+                                                                                 inverse = inverse,
                                                                                  database = database,
-                                                                                 algorithm = algorithm)
+                                                                                 algorithm = algorithm,
+                                                                                 threshold = threshold,
+                                                                                 add.info = add.info)
 
   }
 

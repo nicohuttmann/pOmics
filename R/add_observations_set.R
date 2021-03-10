@@ -16,7 +16,7 @@ add_observations_set <- function(name, observations, dataset, set.default = T) {
   # Check name
   for (i in get_data_types(dataset, print = F)) {
     #
-    if (!hasArg(name) || name %in% get_data_names(type = i, dataset = dataset, return = T)) {
+    if (!hasArg(name) || name %in% get_data_names(type = i, dataset = dataset)) {
       #
       name <- ""
       while (name == "") {

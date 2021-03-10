@@ -10,6 +10,7 @@ add_observations_data(
   observations.set,
   dataset,
   ignore.names = F,
+  add.background.variable = T,
   replace
 )
 }
@@ -23,6 +24,8 @@ add_observations_data(
 \item{dataset}{dataset}
 
 \item{ignore.names}{Assumes that data matches observations}
+
+\item{add.background.variable}{add name of column to the background variables for easy access}
 
 \item{replace}{replace existing column}
 }

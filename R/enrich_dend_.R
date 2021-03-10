@@ -5,12 +5,14 @@
 #' @param n max number of clusters
 #' @param inverse inverse enrichment (works for both Fisher and KS test)
 #' @param name name
-#' @param plot Plot results?
+#' @param plot.lines Plot lines plot
+#' @param plot.matrix Plot correlation matrix
 #' @param cut cut dendrogram
 #' @param fun.enrich Do functional enrichment
 #' @param labels proteins to label on y-axis
 #' @param databases databases to use for functional enrichment
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
+#' @param add.info adds protein information to fun enrich tables
 #'
 #' @return
 #' @export
@@ -18,7 +20,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name, cut = T, plot = T, labels, fun.enrich = T, databases = "GO", algorithm = "weight01") {
+enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name, cut = T, plot.lines = F, plot.matrix = T, labels, fun.enrich = F, databases = "GO", algorithm = "weight01", add.info = F) {
 
   # Check input
   if(!hasArg(cor_list) || !hasArg(proteins)) stop("Missing input.")
@@ -46,23 +48,26 @@ enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name, cut = T,
   }
 
 
+  # Plot lines
+  cor_list <- plot_dend_enrich_lines_(cor_list = cor_list, name = name, print = plot.lines)
 
 
-
-  # Plot enrichment results
-  if(plot) {
-    plot_dend_enrich_lines_(cor_list = cor_list, name = name)
-    # Plot lines
-    # plot cormat
-    if (!hasArg(labels)) {
-      plot_cormat_enrichment(cor_list = cor_list, name = name)
-    } else {
-      plot_cormat_enrichment_labels(cor_list = cor_list, name = name, labels = labels)
-    }
+  # plot cormat
+  if (!hasArg(labels)) {
+    cor_list <- plot_cormat_enrichment_(cor_list = cor_list, name = name, print = plot.matrix)
+  } else {
+    cor_list <- plot_cormat_enrichment_labels(cor_list = cor_list, name = name, labels = labels, print = plot.matrix)
   }
 
+
+
   # Functional enrichment
-  if (fun.enrich) fun_enrich_(cor_list = cor_list, name = name, databases = databases, algorithm = algorithm)
+  if (fun.enrich) cor_list <- fun_enrich_(cor_list = cor_list,
+                                          name = name,
+                                          inverse = F,
+                                          databases = databases,
+                                          algorithm = algorithm,
+                                          add.info = add.info)
 
   # Return
   invisible(cor_list)

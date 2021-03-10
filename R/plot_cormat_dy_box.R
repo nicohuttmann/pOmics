@@ -9,84 +9,78 @@
 #' @export
 #'
 #' @import ggplot2
-#' @importFrom magrittr %>% 
+#' @importFrom magrittr %>%
 #'
 plot_cormat_dy_box <- function(data, dend_y) {
-  
-  
+
+
   # Save names
   x_names <- colnames(data)
   y_names <- rownames(data)
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
   # y-axis dendrogram
   dend_y <- data %>%
     dist() %>%
     hclust(method = "average") %>%
     as.dendrogram()
-  
-  
+
+
   # Get dendrogram data
   dend_data_y <- ggdendro::dendro_data(dend_y)
-  
+
   # Invert layout observations
   segment_data_y <- with(ggdendro::segment(dend_data_y),
                          data.frame(x = y, y = x, xend = yend, yend = xend))
-  
+
   # Position observations
   pos_table_y <- with(dend_data_y$labels,
                       data.frame(y_center = x,
                                  y = as.character(label),
                                  height = 1))
-  
+
   # Position x
   pos_table_x <- with(dend_data_y$labels,
                       data.frame(x_center = x,
                                  x = as.character(label),
                                  width = 1))
-  
-  
-  
+
+
+
   # Construct heatmap df
   data_heatmap <- data %>%
-    set_diagonal(diag = 1) %>% 
+    set_diagonal(diag = 1) %>%
     reshape2::melt(value.name = "expr", varnames = c("y", "x")) %>%
     dplyr::left_join(pos_table_x, by = "x") %>%
     dplyr::left_join(pos_table_y, by = "y")
-  
-  
-  
+
+
+
   # Limits for the vertical axes
   axis_limits_y <- with(
     pos_table_y,
     c(min(y_center - 0.5 * height), max(y_center + 0.5 * height))
   )
-  
+
   # Limits for the horizontal axes
   # axis_limits_x <- <- data.frame(sample = sample_names) %>%
-  #   mutate(x_center = (1:n()), 
+  #   mutate(x_center = (1:n()),
   #          width = 1)
-  # 
-  
-  
+  #
+
+
   cluster_table <- tibble(xmin = 29.5, xmax = 52.5, ymin = 29.5, ymax = 52.5)
-  
-  
+
+
   # Heatmap plot
   p_hmap <- ggplot(data_heatmap,
                    aes(x = x_center, y = y_center, fill = expr,
                        height = height, width = width)) +
     geom_tile() +
-    geom_rect(data = cluster_table, 
-              aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax), 
+    geom_rect(data = cluster_table,
+              aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
               fill = NA, colour = "white", size = 2/.pt, inherit.aes = FALSE) +
     scale_fill_gradient2("expr", high = "darkred", mid = "white", low = "darkblue") + #low = "navyblue", mid = "white", high = "red4"
     scale_x_reverse(breaks = rev(pos_table_x$x_center),
@@ -110,10 +104,10 @@ plot_cormat_dy_box <- function(data, dend_y) {
           axis.ticks = element_blank(),
           axis.title = element_blank(),
           legend.position = "none")
-  
-  
-  
-  
+
+
+
+
   # Dendrogram plot y
   p_dend_y <- ggplot(segment_data_y) +
     geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = 1/.pt) +
@@ -132,18 +126,18 @@ plot_cormat_dy_box <- function(data, dend_y) {
           axis.ticks = element_blank(),
           axis.title = element_blank(),
           plot.margin = unit(c(0, 0, 0, 0), "cm"))
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
   cowplot::plot_grid(p_dend_y, p_hmap, align = 'h', rel_widths = c(.2, 1))
-  
-  
-  
-  
+
+
+
+
 }
 

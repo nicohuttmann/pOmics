@@ -4,14 +4,27 @@
 \alias{do_enrichment_ks}
 \title{Performs gene set enrichment on numeric protein vector with specified Ontology}
 \usage{
-do_enrichment_ks(proteins, database, algorithm)
+do_enrichment_ks(
+  proteins,
+  inverse = F,
+  database,
+  algorithm,
+  threshold,
+  add.info = F
+)
 }
 \arguments{
 \item{proteins}{numeric score vector}
 
+\item{inverse}{enrich for terms in higher values/scores}
+
 \item{database}{database to use}
 
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
+
+\item{threshold}{p-value/confidence threshold to exclude terms}
+
+\item{add.info}{Add additional information (takes longer)}
 }
 \value{
 

@@ -4,7 +4,13 @@
 \alias{enrichment_fisher_GO}
 \title{Performs overexpression enrichment on logical protein vector with specified GO ontology}
 \usage{
-enrichment_fisher_GO(proteins, ontology, algorithm)
+enrichment_fisher_GO(
+  proteins,
+  ontology = "CC",
+  algorithm = "classic",
+  threshold = 0.05,
+  add.info = F
+)
 }
 \arguments{
 \item{proteins}{character vector}
@@ -12,6 +18,10 @@ enrichment_fisher_GO(proteins, ontology, algorithm)
 \item{ontology}{GO ontology}
 
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
+
+\item{threshold}{p-value/confidence threshold to exclude terms}
+
+\item{add.info}{Add additional information (takes longer)}
 }
 \value{
 

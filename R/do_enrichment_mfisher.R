@@ -3,12 +3,14 @@
 #' @param proteins character vector
 #' @param database database to use
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
+#' @param threshold p-value/confidence threshold to exclude terms
+#' @param add.info Add additional information (takes longer)
 #'
 #' @return
 #' @export
 #'
 #'
-do_enrichment_mfisher <- function(proteins, database, algorithm) {
+do_enrichment_mfisher <- function(proteins, database, algorithm, threshold, add.info = F) {
 
   list.enrichment <- tibble::lst()
 
@@ -18,7 +20,9 @@ do_enrichment_mfisher <- function(proteins, database, algorithm) {
     #
     list.enrichment[[as.character(group)]] <- do_enrichment_fisher(proteins = ifelse(proteins == group, 1, 0),
                                                                    database = database,
-                                                                   algorithm = algorithm)
+                                                                   algorithm = algorithm,
+                                                                   threshold = threshold,
+                                                                   add.info = add.info)
   }
 
   # Return

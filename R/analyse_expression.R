@@ -7,6 +7,7 @@
 #' @param control (optional) define control sample (case / control)
 #' @param data.name (optional)
 #' @param var.equal t-test with equal variance
+#' @param paired t-test with paired samples
 #' @param type data type
 #' @param observations.set observations.set
 #' @param dataset dataset
@@ -18,7 +19,7 @@
 #' @export
 #'
 #'
-analyse_expression <- function(data, variables = "default", observations = "default", groups, control, data.name, var.equal = T, type = "LFQ", observations.set, dataset, plot = T, view = F, save = F) {
+analyse_expression <- function(data, variables = "default", observations = "default", groups, control, data.name, var.equal = T, paired = F, type = "LFQ", observations.set, dataset, plot = T, view = F, save = F) {
 
   # Check data input
   if (!hasArg(data) && variables == "default" && observations == "default") stop("Provide data or specify variables and observations.")
@@ -64,6 +65,11 @@ analyse_expression <- function(data, variables = "default", observations = "defa
   if (length(levels(groups)) != 2) stop("More than two groups defined.")
 
 
+  # Data list
+  expr_list <- tibble::lst(data = data)
+
+
+
   # Calculate fold change and p-value
   data.log2 <- log2(data)
   data.log2[is.infinite(data.log2)] <- 0
@@ -80,16 +86,24 @@ analyse_expression <- function(data, variables = "default", observations = "defa
 
   for(i in 1:nrow(data.ttest)) {
     data.ttest[i,"log2.fc"] <- log2(mean(data[groups == levels(groups)[2],i]) / mean(data[groups == levels(groups)[1],i]))
-    data.ttest[i,"p.value"] <- t.test(data.log2[groups == levels(groups)[2],i], data.log2[groups == levels(groups)[1],i], var.equal = var.equal)$p.value
+    data.ttest[i,"p.value"] <- t.test(data.log2[groups == levels(groups)[2],i], data.log2[groups == levels(groups)[1],i], var.equal = var.equal, paired = paired)$p.value
   }
 
+
+  # Add data
+  expr_list[["ttest"]] <- data.ttest
+
+
+  p <- plot_volcano(x = data.ttest[,"log2.fc"],
+                    y = data.ttest[,"p.value"], print = F)
+
+  expr_list[["plot"]] <- p
 
 
   # Plot
   if (plot) {
 
-    p <- plot_volcano(x = data.ttest[,"log2.fc"],
-                 y = data.ttest[,"p.value"], print = F)
+    print(p)
 
   }
 
@@ -103,15 +117,15 @@ analyse_expression <- function(data, variables = "default", observations = "defa
 
     add_variables_data(data = data.ttest[, "log2.fc"], name = paste0("fc_", name), dataset = dataset, set.default = FALSE)
 
-    add_variables_data(data = data.ttest[, "p.value"], name = paste0("p_", name), dataset = dataset, set.default = FALSE)
+    add_variables_data(data = data.ttest[, "p.value"], name = paste0("p_ttest_", name), dataset = dataset, set.default = FALSE)
 
   }
 
-  # Return
-  ret <- list()
-  if (plot) ret[["plot"]] <- p
-  ret[["ttest"]] <- data.ttest
 
-  invisible(ret)
+
+
+
+  # Return
+  invisible(expr_list)
 
 }

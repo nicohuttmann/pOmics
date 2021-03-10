@@ -4,14 +4,27 @@
 \alias{enrichment_ks_GO}
 \title{Performs gene set enrichment on numeric protein vector with specified Ontology}
 \usage{
-enrichment_ks_GO(proteins, ontology, algorithm)
+enrichment_ks_GO(
+  proteins,
+  inverse = F,
+  ontology = "CC",
+  algorithm = "classic",
+  threshold = 0.05,
+  add.info = F
+)
 }
 \arguments{
 \item{proteins}{numeric score vector}
 
+\item{inverse}{enrich for terms in higher values/scores}
+
 \item{ontology}{GO ontology}
 
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
+
+\item{threshold}{p-value/confidence threshold to exclude terms}
+
+\item{add.info}{Add additional information (takes longer)}
 }
 \value{
 

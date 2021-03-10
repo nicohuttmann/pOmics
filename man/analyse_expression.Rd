@@ -12,6 +12,7 @@ analyse_expression(
   control,
   data.name,
   var.equal = T,
+  paired = F,
   type = "LFQ",
   observations.set,
   dataset,
@@ -34,6 +35,8 @@ analyse_expression(
 \item{data.name}{(optional)}
 
 \item{var.equal}{t-test with equal variance}
+
+\item{paired}{t-test with paired samples}
 
 \item{type}{data type}
 

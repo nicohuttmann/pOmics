@@ -16,7 +16,7 @@ new_cache <- function(replace = T) {
     # Indicate if new cache list was created
     invisible(TRUE)
   } else {
-    iinvisible(FALSE)
+    invisible(FALSE)
   }
 
 }

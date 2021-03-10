@@ -4,12 +4,14 @@
 \alias{plot_cormat_dy}
 \title{Plots cormat with y-axis dendrogram}
 \usage{
-plot_cormat_dy(data, dend_y)
+plot_cormat_dy(data, dend_y, print = T)
 }
 \arguments{
 \item{data}{data}
 
 \item{dend_y}{y-axis dendrogram}
+
+\item{print}{print plot to device}
 }
 \value{
 

@@ -22,7 +22,7 @@ eval_dend_enrich <- function(dend.enrich, cut = T) {
              MARGIN = 2,
              FUN = function(x) p.value %in% x) %>%
     which() %>%
-    first_() %>%
+    first_element() %>%
     unname()
 
   # Collapse table
@@ -39,7 +39,7 @@ eval_dend_enrich <- function(dend.enrich, cut = T) {
   rownames(dend.table.cluster.cut) <- c()
 
   # Cluster identifier
-  l <- dend.table.cluster.cut[(dend.table.pvalue.cut[, k] == p.value) %>% which() %>% first_, k] %>% unname()
+  l <- dend.table.cluster.cut[(dend.table.pvalue.cut[, k] == p.value) %>% which() %>% first_element, k] %>% unname()
 
 
   dend.enrich[["dend.table.cluster.cut"]] <- dend.table.cluster.cut

@@ -5,6 +5,7 @@
 #' @param observations.set set of observations
 #' @param dataset dataset
 #' @param ignore.names Assumes that data matches observations
+#' @param add.background.variable add name of column to the background variables for easy access
 #' @param replace replace existing column
 #'
 #' @return
@@ -13,7 +14,8 @@
 #' @importFrom magrittr %>%
 #'
 #'
-add_observations_data <- function(data, name, observations.set, dataset, ignore.names = F, replace) {
+add_observations_data <- function(data, name, observations.set, dataset, ignore.names = F, add.background.variable = T,
+                                  replace) {
 
   # Check dataset
   dataset <- get_dataset(dataset)
@@ -41,11 +43,13 @@ add_observations_data <- function(data, name, observations.set, dataset, ignore.
     template[] <- data
   }
 
+
   # check name
   name <- ask_name(name, "Name for new data: ")
 
+
   # Name already present in dataset
-  if (name %in% .datasets[[dataset]][["observations"]][[observations.set]]) {
+  if (name %in% colnames(.datasets[[dataset]][["observations"]][[observations.set]])) {
 
     # Argument replace given as TRUE
     if (hasArg(replace) && replace) {
@@ -59,6 +63,8 @@ add_observations_data <- function(data, name, observations.set, dataset, ignore.
     } else if (!hasArg(replace)) {
 
       # Ask
+      message("")
+      message(paste0("Column <", name, "> already in observations data."))
       if (menu(choices = c("Yes", "No"), title = "Should column be replaced? ") == 1) {
 
         remove_observations_data(name = name,
@@ -81,5 +87,10 @@ add_observations_data <- function(data, name, observations.set, dataset, ignore.
   .datasets[[dataset]][["observations"]][[observations.set]] <<-
     .datasets[[dataset]][["observations"]][[observations.set]] %>%
     dplyr::mutate(!!name := template)
+
+
+  # Add background variable
+  if (add.background.variable) add_background_variable(name)
+
 
 }

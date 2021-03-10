@@ -9,7 +9,7 @@ plot_volcano(
   y,
   markers = "default",
   size = 4,
-  opacity = opacity,
+  opacity = 0.8,
   axis.title.x = "log2 fold-change",
   axis.title.y = "-log10 p-value",
   add.protein.function = F,

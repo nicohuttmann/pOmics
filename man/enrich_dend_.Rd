@@ -11,11 +11,13 @@ enrich_dend_(
   inverse = F,
   name,
   cut = T,
-  plot = T,
+  plot.lines = F,
+  plot.matrix = T,
   labels,
-  fun.enrich = T,
+  fun.enrich = F,
   databases = "GO",
-  algorithm = "weight01"
+  algorithm = "weight01",
+  add.info = F
 )
 }
 \arguments{
@@ -31,7 +33,9 @@ enrich_dend_(
 
 \item{cut}{cut dendrogram}
 
-\item{plot}{Plot results?}
+\item{plot.lines}{Plot lines plot}
+
+\item{plot.matrix}{Plot correlation matrix}
 
 \item{labels}{proteins to label on y-axis}
 
@@ -40,6 +44,8 @@ enrich_dend_(
 \item{databases}{databases to use for functional enrichment}
 
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
+
+\item{add.info}{adds protein information to fun enrich tables}
 }
 \value{
 

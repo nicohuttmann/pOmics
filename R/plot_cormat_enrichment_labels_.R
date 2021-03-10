@@ -1,7 +1,9 @@
-#' Plots cormat with y-axis dendrogram
+#' Plots cormat with y-axis dendrogram and labels on the right y-axis
 #'
 #' @param cor_list cor_list object
 #' @param name name of enrichment analysis
+#' @param labels proteins to label on y-axis
+#' @param print print plot to device
 #'
 #' @return
 #' @export
@@ -9,7 +11,7 @@
 #' @import ggplot2
 #' @importFrom magrittr %>%
 #'
-plot_cormat_enrichment <- function(cor_list, name) {
+plot_cormat_enrichment_labels <- function(cor_list, name, labels, print = T) {
 
 
   # Get adjacency matrix
@@ -89,6 +91,17 @@ plot_cormat_enrichment <- function(cor_list, name) {
 
 
 
+  # Define y-axis labels
+  ylabels <- get_variables_data(variables = rev(y_names),
+                               name = get_dataset_attr(which = "default_variables_labels", get_dataset()),
+                               dataset = get_dataset())
+
+  ylabels[is.na(ylabels)] <- ""
+
+  ylabels[!names(ylabels) %in% labels] <- ""
+
+
+
 
 
 
@@ -107,13 +120,14 @@ plot_cormat_enrichment <- function(cor_list, name) {
                     expand = c(0, 0)) +
     # For the y axis, alternatively set the labels as: gene_position_table$gene
     scale_y_continuous(breaks = pos_table_y[, "y_center"],
-                       #labels = rep("", nrow(pos_table_y)),
+                       labels = ylabels,
                        limits = axis_limits_y,
-                       expand = c(0, 0)) +
+                       expand = c(0, 0),
+                       position = "right") +
     #labs(x = "Sample", y = "") +
     #theme_bw() +
     theme(axis.text.x = element_blank(), #, hjust = 1, angle = 45
-          axis.text.y = element_blank(),
+          axis.text.y = element_text(),
           # margin: top, right, bottom, and left
           plot.margin = unit(c(0, 0, 0, 0), "cm"), # unit(c(1, 0.2, 0.2, -0.7)
           panel.grid.minor = element_blank(),
@@ -147,12 +161,21 @@ plot_cormat_enrichment <- function(cor_list, name) {
           plot.margin = unit(c(0, 0, 0, 0), "cm"),
           legend.position = "left") +
     scale_color_gradient(low = "#ffe670", high = "#cc5500") + #800020
-    geom_segment(aes(x = x, y = y, xend = xend, yend = yend, color = logpvalue), size = 1.5/.pt, )
+    geom_segment(aes(x = x, y = y, xend = xend, yend = yend, color = logpvalue), size = 1.5/.pt)
 
 
 
 
-  print(cowplot::plot_grid(p_dend_y, p_hmap, align = 'h', rel_widths = c(.5, 1)))
+  p <- cowplot::plot_grid(p_dend_y, p_hmap, align = 'h', rel_widths = c(.5, 1))
 
+
+  # Print plot
+  if (print) print(p)
+
+  # Add to list
+  cor_list[[paste0("plot_enrichment_", name)]] <- p
+
+  # Return
+  invisible(cor_list)
 
 }
