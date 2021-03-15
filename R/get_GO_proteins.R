@@ -25,7 +25,23 @@ get_GO_proteins <- function(terms, include.child.terms = F) {
   database <- topGO::inverseList(database)
 
 
-  # No argument or terms do not match
+  # Names to GO-IDs
+  if (hasarg(terms)) {
+
+    for (i in seq_along(terms)) {
+
+      if (!grepl("GO:", terms[i])) {
+
+        terms[i] <- which_names(terms[i] == Term(names(database)))
+
+      }
+
+    }
+
+  }
+
+
+  # No argument or terms match
   if (!hasArg(terms) || (all(!terms %in% names(database)) && !include.child.terms)) {
 
     terms <- choose_GO_terms(return.ID = TRUE)

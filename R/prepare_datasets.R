@@ -16,7 +16,7 @@
 prepare_datasets <- function(imports, data.origin, species, load.UniProt.ws = F, identifier, data.types, min.similarity = 8, min.groupsize = 6) {
 
   # Put single data frame in list for generalization
-  if (class(imports)[1] != "list") stop("Please provide a named list.")
+  if (!is.list(imports) || is.data.frame(imports)) stop("Please provide a named list.")
 
   # .datasets file
   new_datasets_list()
