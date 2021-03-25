@@ -12,6 +12,8 @@ Main features:
 * [ggplot2](https://ggplot2.tidyverse.org/), for publication-quality figures
 
 
+For details, please visit https://nicohuttmann.github.io/pOmics-guide/.
+
 # Installation
 You can install pOmics from GitHub via:
 
