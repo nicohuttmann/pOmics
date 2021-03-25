@@ -12,12 +12,17 @@
 #'
 do_enrichment_fisher <- function(proteins, database, algorithm, threshold, add.info = F) {
 
-  # GO enrichment
+  # Gene Ontology
   if (database %in% c("CC", "BP", "MF")) results <- enrichment_fisher_GO(proteins = proteins,
                                                                          ontology = database,
                                                                          algorithm = algorithm,
                                                                          threshold = threshold,
                                                                          add.info = add.info)
+  # KEGG
+  else if (database %in% c("Kegg", "KEGG", "kegg")) results <- enrichment_fisher_kegg(proteins = proteins,
+                                                                                      threshold = threshold,
+                                                                                      add.info = add.info)
+
 
   # Return results
   return(results)

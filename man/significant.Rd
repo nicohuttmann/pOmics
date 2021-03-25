@@ -4,14 +4,16 @@
 \alias{significant}
 \title{Returns logical vector indication significant p-values}
 \usage{
-significant(p.values, method = "threshold", threshold = 0.05, na = F)
+significant(p.values, method = "threshold", limit = 0.05, na.value = NA)
 }
 \arguments{
 \item{p.values}{named vector of p-values}
 
 \item{method}{method to determine significant p-values ("threshold", "bhc" (Benjamini-Hochberg-Correction))}
 
-\item{threshold}{threshold for p.values and FDR for Benjamini-Hochberg-Correction}
+\item{limit}{limit for p.values and FDR for Benjamini-Hochberg-Correction}
+
+\item{na.value}{return value for NA}
 }
 \value{
 

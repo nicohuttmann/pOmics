@@ -5,8 +5,7 @@
 \title{Plot volcano plot with plotly}
 \usage{
 plot_volcano(
-  x,
-  y,
+  data,
   markers = "default",
   size = 4,
   opacity = 0.8,
@@ -17,9 +16,7 @@ plot_volcano(
 )
 }
 \arguments{
-\item{x}{log2 fold change}
-
-\item{y}{p-value}
+\item{data}{ttest data frame}
 
 \item{markers}{specific proteins to highlight}
 

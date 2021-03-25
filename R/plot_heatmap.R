@@ -2,9 +2,9 @@
 #'
 #' @param variables variables (see get variables)
 #' @param observations observations (see get observations)
-#' @param groups grousp
+#' @param groups groups
 #' @param observations.set set of observations
-#' @param name data name
+#' @param data.name data name
 #' @param type data type
 #' @param dataset dataset
 #' @param scale should data be scaled
@@ -20,8 +20,8 @@
 #' @export
 #'
 #'
-plot_heatmap <- function(variables, observations, groups, observations.set, name, type, dataset,
-                         scale = T, grouping, clustering.method = "average", variables.labels, observations.labels, variables.order = T,
+plot_heatmap <- function(variables, observations, groups, observations.set, data.name, type, dataset,
+                         scale = T, grouping, clustering.method = "complete", variables.labels, observations.labels, variables.order = T,
                          observations.order = T, ratio = 3) {
 
 
@@ -30,9 +30,10 @@ plot_heatmap <- function(variables, observations, groups, observations.set, name
   data <- get_data(variables = !!dplyr::enquo(variables),
                    observations = !!dplyr::enquo(observations),
                    observations.set = observations.set,
-                   name = name,
+                   data.name = data.name,
                    type = type,
-                   dataset = dataset)
+                   dataset = dataset,
+                   tidy = F)
 
   # Get groups
   if (hasArg(groups)) {

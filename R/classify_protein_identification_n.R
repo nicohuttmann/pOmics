@@ -48,7 +48,7 @@ classify_protein_identification_n <- function(data.eval, lower.limit = 0, datase
   for (n in seq(2, length(groups) - 1)) {
 
     # Compute combinations
-    grid <- as.matrix(expand.grid(rep(list(0:1), length(groups))))
+    grid <- as.matrix(expand.grid(rep(list(c(FALSE, TRUE)), length(groups))))
     grid <- grid[apply(grid, 1, sum) == n, ]
 
     #

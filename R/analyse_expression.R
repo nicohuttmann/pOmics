@@ -1,25 +1,23 @@
-#' Calculates Fold change and p-value from given dataframe or defined variables, observations and groups
+#' Calculates Fold change and p-value from given data frame or defined variables, observations and groups
 #'
-#' @param data (optional) data frame
-#' @param variables (optional) variables definition
-#' @param observations (optional) observatoins definition
-#' @param groups groups
-#' @param control (optional) define control sample (case / control)
-#' @param data.name (optional)
+#' @param data data frame
+#' @param groups vector containing group information
+#' @param control optional define control sample (case / control)
 #' @param var.equal t-test with equal variance
 #' @param paired t-test with paired samples
-#' @param type data type
 #' @param observations.set observations.set
 #' @param dataset dataset
-#' @param plot Plot?
-#' @param view View results matrix?
-#' @param save Save results matrix?
+#' @param plot plot results
+#' @param view view results matrix
+#' @param save Save results matrix
 #'
 #' @return
 #' @export
 #'
 #'
-analyse_expression <- function(data, variables = "default", observations = "default", groups, control, data.name, var.equal = T, paired = F, type = "LFQ", observations.set, dataset, plot = T, view = F, save = F) {
+do_t.test <- function(data, groups, control, var.equal = T, paired = F,
+                               significance.method = "threshold", p.value.limit = 0.05, fold.change.abs.limit = 0,
+                               observations.set, dataset, plot = T, view = F, save = F) {
 
   # Check data input
   if (!hasArg(data) && variables == "default" && observations == "default") stop("Provide data or specify variables and observations.")
@@ -30,27 +28,7 @@ analyse_expression <- function(data, variables = "default", observations = "defa
   # Get observations set
   observations.set <- get_observations_set(observations.set = observations.set, dataset = dataset)
 
-  # Get variables
-  variables <- get_variables(variables = {{variables}},
-                             dataset = dataset)
 
-  # Get observations
-  observations <- get_observations(observations = {{observations}},
-                                   observations.set = observations.set,
-                                   dataset = dataset)
-
-  # No data given
-  if (!hasArg(data)) {
-
-    # Get data
-    data <- get_data(variables = variables,
-                     observations = observations,
-                     observations.set = observations.set,
-                     name = data.name,
-                     type = type,
-                     dataset = dataset)
-
-  }
 
 
   # Get groups
@@ -91,21 +69,20 @@ analyse_expression <- function(data, variables = "default", observations = "defa
 
 
   # Add data
-  expr_list[["ttest"]] <- data.ttest
+  expr_list[["ttest"]] <- data.ttest %>%
+    eval_expression(significance.method = significance.method,
+                    p.value.limit = p.value.limit,
+                    fold.change.abs.limit = fold.change.abs.limit)
 
 
-  p <- plot_volcano(x = data.ttest[,"log2.fc"],
-                    y = data.ttest[,"p.value"], print = F)
+
+  p <- plot_volcano(data = expr_list[["ttest"]], print = F)
 
   expr_list[["plot"]] <- p
 
 
   # Plot
-  if (plot) {
-
-    print(p)
-
-  }
+  if (plot) print(p)
 
   # View
   if (view) save2cache(data = data.ttest, view = TRUE)
@@ -120,9 +97,6 @@ analyse_expression <- function(data, variables = "default", observations = "defa
     add_variables_data(data = data.ttest[, "p.value"], name = paste0("p_ttest_", name), dataset = dataset, set.default = FALSE)
 
   }
-
-
-
 
 
   # Return

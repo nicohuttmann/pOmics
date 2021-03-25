@@ -1,7 +1,6 @@
 #' Plot volcano plot with plotly
 #'
-#' @param x log2 fold change
-#' @param y p-value
+#' @param data ttest data frame
 #' @param markers specific proteins to highlight
 #' @param size size of dots
 #' @param opacity opacity of dots
@@ -16,17 +15,14 @@
 #' @importFrom magrittr %>%
 #'
 #'
-plot_volcano <- function(x, y, markers = "default", size = 4, opacity = 0.8, axis.title.x = "log2 fold-change",
+plot_volcano <- function(data, markers = "default", size = 4, opacity = 0.8, axis.title.x = "log2 fold-change",
                          axis.title.y = "-log10 p-value", add.protein.function = F, print = T) {
 
 
-  x <- x[!is.na(x)]
-  y <- y[!is.na(y)]
 
-  variables <- intersect(names(x), names(y))
+  variables <- data %>%
+    dplyr::pull(variables)
 
-  x <- x[variables]
-  y <- y[variables]
 
 
   # Add genes as labels
@@ -36,20 +32,11 @@ plot_volcano <- function(x, y, markers = "default", size = 4, opacity = 0.8, axi
   # Add color
   if (markers == "default") {
 
-    color <- rep("grey", length(variables))
-    color[(x > 0) %and% (y < 0.05)] <- "red"
-    color[(x < 0) %and% (y < 0.05)] <- "blue"
-
-    color <- factor(color, levels = c("grey", "blue", "red", "black"))
+    color <- factor(data$expression, levels = c("not", "down", "up"))
 
   } else {
 
     color <- rep("grey", length(variables))
-    color[(x > 0) %and% (y < 0.05)] <- "red"
-    color[(x < 0) %and% (y < 0.05)] <- "blue"
-    color[(y < 0.05) %and% !(variables %in% markers)] <- "grey"
-    color[(y >= 0.05) %and% (variables %in% markers)] <- "black"
-    color <- factor(color, levels = c("grey", "blue", "red", "black"))
 
   }
 
@@ -59,11 +46,10 @@ plot_volcano <- function(x, y, markers = "default", size = 4, opacity = 0.8, axi
 
 
   # Build base dataframe
-  data <- tibble::tibble(variables = variables,
-                         x = x[variables],
-                         y = y[variables],
-                         labels = labels,
-                         names = protein.names)
+  data <- data %>%
+    dplyr::mutate(labels = p2g(variables),
+                  names = get_variables_data("PROTEIN-NAMES", variables = variables))
+
 
   # Add protein functions to the plot
   if (add.protein.function) {
@@ -77,12 +63,12 @@ plot_volcano <- function(x, y, markers = "default", size = 4, opacity = 0.8, axi
 
     p <- plotly::plot_ly() %>%
       plotly::add_trace(data = data,
-                        x = ~x,
-                        y = ~-log10(y),
+                        x = ~log2.fc,
+                        y = ~-log10(p.value),
                         type = "scatter",
                         mode = "markers",
                         color = color,
-                        colors = c("grey", "blue", "red", "black"),
+                        colors = c("grey", "blue", "red"),
                         marker = list(opacity = opacity),
                         name = ~labels,
                         text = ~names,
@@ -106,12 +92,12 @@ plot_volcano <- function(x, y, markers = "default", size = 4, opacity = 0.8, axi
 
     p <- plotly::plot_ly() %>%
       plotly::add_trace(data = data,
-                        x = ~x,
-                        y = ~-log10(y),
+                        x = ~log2.fc,
+                        y = ~-log10(p.value),
                         type = "scatter",
                         mode = "markers",
                         color = color,
-                        colors = c("grey", "blue", "red", "black"),
+                        colors = c("grey", "blue", "red"),
                         marker = list(opacity = opacity),
                         name = ~labels,
                         text = ~names,

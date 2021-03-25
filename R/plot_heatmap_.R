@@ -1,77 +1,77 @@
-plot_heatmap_ <- function(expr_list, ratio = 3) {
-  
+plot_heatmap_ <- function(expr_list, new = F, ...) {
+
   #
   data <- t(expr_list[["data"]])
-  
+
   # Save names
   x_names <- colnames(data)
   y_names <- rownames(data)
-  
-  
-  
+
+
+
   # x-axis dendrogram
   dend_x <- data %>%
-    t() %>% 
+    t() %>%
     dist() %>%
     hclust(method = "average") %>%
     as.dendrogram()
-  
+
   # Get dendrogram data
   dend_data_x <- ggdendro::dendro_data(dend_x)
-  
+
   # Segment data for dendrogram plot
   segment_data_x <- with(ggdendro::segment(dend_data_x),
                          data.frame(x = x, y = y, xend = xend, yend = yend))
-  
+
   # Position variables
   pos_table_x <- with(dend_data_x$labels,
                       data.frame(x_center = x,
                                  x = as.character(label),
                                  width = 1))
-  
-  
+
+
   # y-axis dendrogram
   dend_y <- expr_list[["dendrogram"]]
-  
+
   # Get dendrogram data
   dend_data_y <- ggdendro::dendro_data(dend_y)
-  
+
   # Invert layout observations
   segment_data_y <- with(ggdendro::segment(dend_data_y),
                          data.frame(x = y, y = x, xend = yend, yend = xend))
-  
+
   # Position observations
   pos_table_y <- with(dend_data_y$labels,
                       data.frame(y_center = x,
                                  y = as.character(label),
                                  height = 1))
-  
+
   # Construct heatmap df
   data_heatmap <- data %>%
     reshape2::melt(value.name = "expr", varnames = c("y", "x")) %>%
     dplyr::left_join(pos_table_x, by = "x") %>%
     dplyr::left_join(pos_table_y, by = "y")
-  
-  
-  
+
+
+
   # Limits for the vertical axes
   axis_limits_y <- with(
     pos_table_y,
     c(min(y_center - 0.5 * height), max(y_center + 0.5 * height))
   )
-  
+
   # Limits for the horizontal axes
   axis_limits_x <- with(
     pos_table_x,
     c(min(x_center - 0.5 * width), max(x_center + 0.5 * width))
   )
-  
-  
-  
+
+
+
   # Calculate ratio of tiles
   ratio <- ncol(data) / nrow(data) * ratio
-  
-  
+
+
   # Heatmap plot
   p_heatmap <- ggplot(data_heatmap,
                       aes(x = x_center, y = y_center, fill = expr,
@@ -101,10 +101,10 @@ plot_heatmap_ <- function(expr_list, ratio = 3) {
           axis.ticks = element_blank(),
           axis.title = element_blank(),
           legend.position = "none")
-  
-  
-  
-  
+
+
+
+
   # Dendrogram plot y
   p_dend_y <- ggplot(segment_data_y) +
     geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = 1.5/.pt) +
@@ -123,10 +123,10 @@ plot_heatmap_ <- function(expr_list, ratio = 3) {
           axis.ticks = element_blank(),
           axis.title = element_blank(),
           plot.margin = unit(c(0, 0, 0, 0), "cm"))
-  
-  
-  
-  
+
+
+
+
   # Dendrogram plot x
   p_dend_x <- ggplot(segment_data_x) +
     geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = 1.5/.pt) +
@@ -145,14 +145,14 @@ plot_heatmap_ <- function(expr_list, ratio = 3) {
           axis.ticks = element_blank(),
           axis.title = element_blank(),
           plot.margin = unit(c(0, 0, 0, 0), "cm"))
-  
-  
-  
-  
-  
+
+
+
+
+
   cowplot::plot_grid(p_dend_y, p_heatmap, align = 'v', rel_widths = c(.2, 1))
-  
-  
-  
-  
+
+
+
+
 }

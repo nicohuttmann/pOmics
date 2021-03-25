@@ -1,4 +1,4 @@
-#' Assemble data from dataset
+#' Assemble data from dataset and return in list
 #'
 #' @param data.name specific name of data type
 #' @param variables selected variables
@@ -6,13 +6,15 @@
 #' @param observations.set set of observations
 #' @param type data type
 #' @param dataset dataset name or number
-#' @param tidy return tidy data frame or matrix
+#' @param tidy add data as tidy data frame or matrix
+#' @param name name to save in list
 #'
 #' @return
 #' @export
 #'
 #'
-get_data <- function(data.name, variables = "default", observations = "default", observations.set, type, dataset, tidy = T) {
+get_data_ <- function(data.name, variables = "default", observations = "default", observations.set, type, dataset, tidy = T,
+                      name = "raw_data") {
 
   # Checks correct name of dataset
   dataset <- get_dataset(dataset)
@@ -23,8 +25,8 @@ get_data <- function(data.name, variables = "default", observations = "default",
 
   # Check data type and name
   data.name <- get_data_name(name = data.name,
-                        type = type,
-                        dataset = dataset)
+                             type = type,
+                             dataset = dataset)
 
   # Assemble variables
   variables <- get_variables(variables = {{variables}},
@@ -39,10 +41,17 @@ get_data <- function(data.name, variables = "default", observations = "default",
   data <- .datasets[[dataset]][[type]][[data.name]]
 
 
-  # Return
-  if (!tidy) return(data[intersect(rownames(data), observations), intersect(colnames(data), variables)])
+  # Add data to list
+  if (!tidy)
+    analysis.list <- tibble::lst(!!name := data[intersect(rownames(data), observations),
+                                                intersect(colnames(data), variables)])
 
-  else return(data2tibble(data[intersect(rownames(data), observations), intersect(colnames(data), variables)],
-                             row.names = "observations"))
+  else
+    analysis.list <- tibble::lst(!!name := data2tibble(data[intersect(rownames(data), observations),
+                                                            intersect(colnames(data), variables)],
+                                                       row.names = "observations"))
+
+  # Return
+  return(analysis.list)
 
 }

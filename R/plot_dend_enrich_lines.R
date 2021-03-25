@@ -48,7 +48,7 @@ plot_dend_enrich_lines <- function(dend.table.pvalue, dend.table.cluster, title,
       scale_x_continuous(breaks = seq(1, ncol(lines), 1))
   }
 
-  #ggtitle(Term(annotation))
+  #ggtitle(AnnotationDbi::Term(annotation))
 
 
   # Print plot

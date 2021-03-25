@@ -26,13 +26,13 @@ get_GO_proteins <- function(terms, include.child.terms = F) {
 
 
   # Names to GO-IDs
-  if (hasarg(terms)) {
+  if (hasArg(terms)) {
 
     for (i in seq_along(terms)) {
 
       if (!grepl("GO:", terms[i])) {
 
-        terms[i] <- which_names(terms[i] == Term(names(database)))
+        terms[i] <- which_names(terms[i] == AnnotationDbi::Term(names(database)))
 
       }
 

@@ -4,7 +4,14 @@
 \alias{plot_heatmap_dxy}
 \title{Plots heatmap with dendrograms}
 \usage{
-plot_heatmap_dxy(data, dend_x, dend_y, scale = T, transform = T)
+plot_heatmap_dxy(
+  data,
+  dend_x,
+  dend_y,
+  scale = T,
+  transform = T,
+  clustering.method = "complete"
+)
 }
 \arguments{
 \item{data}{data}
@@ -16,6 +23,8 @@ plot_heatmap_dxy(data, dend_x, dend_y, scale = T, transform = T)
 \item{scale}{should data be scaled}
 
 \item{transform}{should data be transformed}
+
+\item{clustering.method}{method to cluster variables and observations}
 }
 \value{
 

@@ -9,12 +9,12 @@ plot_heatmap(
   observations,
   groups,
   observations.set,
-  name,
+  data.name,
   type,
   dataset,
   scale = T,
   grouping,
-  clustering.method = "average",
+  clustering.method = "complete",
   variables.labels,
   observations.labels,
   variables.order = T,
@@ -27,11 +27,11 @@ plot_heatmap(
 
 \item{observations}{observations (see get observations)}
 
-\item{groups}{grousp}
+\item{groups}{groups}
 
 \item{observations.set}{set of observations}
 
-\item{name}{data name}
+\item{data.name}{data name}
 
 \item{type}{data type}
 

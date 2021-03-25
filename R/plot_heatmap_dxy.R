@@ -5,6 +5,7 @@
 #' @param dend_y y-axis dendrogram
 #' @param scale should data be scaled
 #' @param transform should data be transformed
+#' @param clustering.method method to cluster variables and observations
 #'
 #' @return
 #' @export
@@ -13,7 +14,7 @@
 #' @importFrom magrittr %>%
 #'
 plot_heatmap_dxy <- function(data, dend_x, dend_y,
-                           scale = T, transform = T) {
+                           scale = T, transform = T, clustering.method = "complete") {
 
   # Scale data (Z-scoring)
   if (scale) data <- scale(data)
@@ -55,7 +56,7 @@ plot_heatmap_dxy <- function(data, dend_x, dend_y,
   if (!hasArg(dend_y)) {
     dend_y <- data %>%
       dist() %>%
-      hclust(method = "average") %>%
+      hclust(method = clustering.method) %>%
       as.dendrogram()
   }
 
