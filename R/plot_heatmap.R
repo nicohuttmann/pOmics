@@ -109,13 +109,16 @@ plot_heatmap <- function(variables, observations, groups, observations.set, data
           #axis.text.y = element_text(color = "black", face = "bold"),
           axis.ticks.x = element_blank(),
           axis.ticks.y = element_blank(),
-          axis.text.y = element_blank(),
+          axis.text.y = element_text(),
           panel.border = element_rect(colour = "black", fill=NA, size=1/.pt)
     ) +
     scale_x_discrete(expand = c(0,0)) +
     scale_y_discrete(expand = c(0,0)) +
-    coord_fixed(ratio = ratio)
-
+    coord_fixed(ratio = ratio) +
+    scale_y_continuous(breaks = pos_table_y[, "y_center"],
+                       labels = ylabels,
+                       expand = c(0, 0),
+                       position = "right")
 
   print(p)
 
