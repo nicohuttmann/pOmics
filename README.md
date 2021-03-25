@@ -6,7 +6,7 @@ Main features:
 * unified data structure.
 * predefined functions for statistical analysis in proteomics
 * functional enrichment via [clusterProfiler](https://guangchuangyu.github.io/software/clusterProfiler/) 
-* [tidyverse](tidyverse]https://www.tidyverse.org/) friendly
+* [tidyverse](https://www.tidyverse.org/) friendly
 * [R Markdown](https://rmarkdown.rstudio.com/), for efficient communication
 * [plotly](https://plotly.com/r/), for interactive data exploration
 * [ggplot2](https://ggplot2.tidyverse.org/), for publication-quality figures
