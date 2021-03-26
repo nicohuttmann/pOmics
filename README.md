@@ -1,10 +1,10 @@
 
 # pOmics
-This package provides a framework for the analysis and visualization of proteomics data.
+This package provides a framework for the analysis and visualization of proteomics data in R.
 
 Main features:
-* unified data structure.
-* predefined functions for statistical analysis in proteomics
+* provides data structure for simple loading and handling of data
+* statistical analysis for proteomics data
 * functional enrichment via [clusterProfiler](https://guangchuangyu.github.io/software/clusterProfiler/) 
 * [tidyverse](https://www.tidyverse.org/) friendly
 * [R Markdown](https://rmarkdown.rstudio.com/), for efficient communication
