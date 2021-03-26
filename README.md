@@ -3,13 +3,13 @@
 This package provides a framework for the analysis and visualization of proteomics data in R.
 
 Main features:
-* provides data structure for simple loading and handling of data
+* data structure for simple loading and handling of data
 * statistical analysis for proteomics data
 * functional enrichment via [clusterProfiler](https://guangchuangyu.github.io/software/clusterProfiler/) 
 * [tidyverse](https://www.tidyverse.org/) friendly
-* [R Markdown](https://rmarkdown.rstudio.com/), for efficient communication
-* [plotly](https://plotly.com/r/), for interactive data exploration
 * [ggplot2](https://ggplot2.tidyverse.org/), for publication-quality figures
+* [plotly](https://plotly.com/r/), for interactive data exploration
+* [R Markdown](https://rmarkdown.rstudio.com/), for efficient communication
 
 
 For details, please visit https://nicohuttmann.github.io/pOmics-handbook/.
