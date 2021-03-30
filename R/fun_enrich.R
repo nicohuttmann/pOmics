@@ -74,24 +74,24 @@ fun_enrich <- function(proteins, background = NULL, inverse = F, databases = "GO
 
   for (database in databases) {
     # Single Fisher's exact test
-    if (is.logical(allProteins)) list.enrichment[[database]] <- do_enrichment_fisher(proteins = ifelse(allProteins, 1, 0),
-                                                                                     database = database,
-                                                                                     algorithm = algorithm,
-                                                                                     threshold = threshold,
-                                                                                     add.info = add.info)
+    if (is.logical(allProteins)) list.enrichment[[database]] <- do_ORA(proteins = ifelse(allProteins, 1, 0),
+                                                                       database = database,
+                                                                       algorithm = algorithm,
+                                                                       threshold = threshold,
+                                                                       add.info = add.info)
     # Multiple fisher's exact test
-    if (is.character(allProteins)) list.enrichment[[database]] <- do_enrichment_mfisher(proteins = allProteins,
-                                                                                        database = database,
-                                                                                        algorithm = algorithm,
-                                                                                        threshold = threshold,
-                                                                                        add.info = add.info)
+    if (is.character(allProteins)) list.enrichment[[database]] <- do_ORA_groups(proteins = allProteins,
+                                                                                database = database,
+                                                                                algorithm = algorithm,
+                                                                                threshold = threshold,
+                                                                                add.info = add.info)
     # Kolmogorov-Smirnov test
-    if (is.numeric(allProteins)) list.enrichment[[database]] <- do_enrichment_ks(proteins = allProteins,
-                                                                                 inverse = inverse,
-                                                                                 database = database,
-                                                                                 algorithm = algorithm,
-                                                                                 threshold = threshold,
-                                                                                 add.info = add.info)
+    if (is.numeric(allProteins)) list.enrichment[[database]] <- do_GSEA(proteins = allProteins,
+                                                                        inverse = inverse,
+                                                                        database = database,
+                                                                        algorithm = algorithm,
+                                                                        threshold = threshold,
+                                                                        add.info = add.info)
 
   }
 

@@ -10,10 +10,10 @@
 #' @export
 #'
 #'
-do_enrichment_fisher <- function(proteins, database, algorithm, threshold, add.info = F) {
+do_ORA <- function(proteins, database, algorithm, threshold, add.info = F) {
 
   # Gene Ontology
-  if (database %in% c("CC", "BP", "MF")) results <- enrichment_fisher_GO(proteins = proteins,
+  if (database %in% c("CC", "BP", "MF")) results <- do_ORA_GO(proteins = proteins,
                                                                          ontology = database,
                                                                          algorithm = algorithm,
                                                                          threshold = threshold,

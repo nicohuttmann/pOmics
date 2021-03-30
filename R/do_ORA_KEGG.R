@@ -1,4 +1,4 @@
-enrichment_fisher_KEGG <- function() {
+do_ORA_KEGG <- function() {
 
 
 

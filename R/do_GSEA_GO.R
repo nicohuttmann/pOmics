@@ -13,7 +13,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-enrichment_ks_GO <- function(proteins, inverse = F, ontology = "CC", algorithm = "classic", threshold = 0.05, add.info = F) {
+do_GSEA_GO <- function(proteins, inverse = F, ontology = "CC", algorithm = "classic", threshold = 0.05, add.info = F) {
 
   # Get and update GO object
   if (!inverse) {

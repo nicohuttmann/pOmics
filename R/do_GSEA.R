@@ -11,10 +11,10 @@
 #' @export
 #'
 #'
-do_enrichment_ks <- function(proteins, inverse = F, database, algorithm, threshold, add.info = F) {
+do_GSEA <- function(proteins, inverse = F, database, algorithm, threshold, add.info = F) {
 
   # GO enrichment
-  if (database %in% c("CC", "BP", "MF")) results <- enrichment_ks_GO(proteins = proteins,
+  if (database %in% c("CC", "BP", "MF")) results <- do_GSEA_GO(proteins = proteins,
                                                                      inverse = inverse,
                                                                      ontology = database,
                                                                      algorithm = algorithm,

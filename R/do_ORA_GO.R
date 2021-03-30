@@ -10,7 +10,7 @@
 #' @export
 #'
 #'
-enrichment_fisher_GO <- function(proteins, ontology = "CC", algorithm = "classic", threshold = 0.05, add.info = F) {
+do_ORA_GO <- function(proteins, ontology = "CC", algorithm = "classic", threshold = 0.05, add.info = F) {
 
   # Get and update GO object
   GOdata <- get_GOdata(proteins = proteins, ontology = ontology)

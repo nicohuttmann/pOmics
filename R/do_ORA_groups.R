@@ -10,7 +10,7 @@
 #' @export
 #'
 #'
-do_enrichment_mfisher <- function(proteins, database, algorithm, threshold, add.info = F) {
+do_ORA_groups <- function(proteins, database, algorithm, threshold, add.info = F) {
 
   list.enrichment <- tibble::lst()
 
@@ -18,7 +18,7 @@ do_enrichment_mfisher <- function(proteins, database, algorithm, threshold, add.
   for (group in unique(proteins)) {
 
     #
-    list.enrichment[[as.character(group)]] <- do_enrichment_fisher(proteins = ifelse(proteins == group, 1, 0),
+    list.enrichment[[as.character(group)]] <- do_ORA(proteins = ifelse(proteins == group, 1, 0),
                                                                    database = database,
                                                                    algorithm = algorithm,
                                                                    threshold = threshold,
