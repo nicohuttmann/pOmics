@@ -2,16 +2,17 @@
 % Please edit documentation in R/plot_lines.R
 \name{plot_lines}
 \alias{plot_lines}
-\title{Lines plot}
+\title{Lines plot fo rpublication in ggplot2}
 \usage{
 plot_lines(
   data,
-  group.column = "groups",
-  label.column = "labels",
-  x.y.ratio = 1,
+  group.column = "observations",
+  label.column,
+  x.y.ratio,
   main.color = "grey",
   highlight.color = "red",
   highlight.proteins = NULL,
+  variables.label.fun = p2g,
   alpha = 0.8,
   xlab = NULL,
   ylab = NULL
@@ -32,6 +33,8 @@ plot_lines(
 
 \item{highlight.proteins}{vector giving containing proteins to highlight}
 
+\item{variables.label.fun}{function to transform accession IDs to labels}
+
 \item{alpha}{transparency of lines}
 
 \item{xlab}{x-axis label}
@@ -42,5 +45,5 @@ plot_lines(
 
 }
 \description{
-Lines plot
+Lines plot fo rpublication in ggplot2
 }

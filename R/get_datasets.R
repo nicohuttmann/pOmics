@@ -10,11 +10,11 @@ get_datasets <- function(print = T) {
 
   # Print
   if (print) {
-    print(.info[["datasets"]])
-    print(.info[["default_dataset"]])
+    print(paste0("Datasets: ", paste(names(.datasets), collapse = ", ")))
+    print(paste0("Default dataset: ", .info[["default_dataset"]]))
   }
 
   # Return
-  invisible(.info[["datasets"]])
+  invisible(names(.datasets))
 
 }

@@ -2,7 +2,6 @@
 #'
 #' @param data.eval data from eval_ function
 #' @param lower.limit values above limit are considered positive/identified
-#' @param dataset dataset
 #' @param plot Plot venn diagram?
 #' @param save Save results list?
 #'
@@ -10,7 +9,7 @@
 #' @export
 #'
 #'
-classify_protein_identification_n <- function(data.eval, lower.limit = 0, dataset, plot = T) {
+classify_protein_identification_n <- function(data.eval, lower.limit = 0, plot = T) {
 
   # Check data
   if (!ncol(data.eval) > 3 || colnames(data.eval)[1] != "variables" || mode(data.eval[[2]]) != "numeric")
@@ -30,7 +29,7 @@ classify_protein_identification_n <- function(data.eval, lower.limit = 0, datase
   # Unique proteins
   for (i in groups) {
 
-    expression <- paste0(i, ">", lower.limit, " & ", paste(paste0(setdiff(groups, i), "<=", lower.limit),
+    expression <- paste0("`", i, "`", ">", lower.limit, " & ", paste(paste0("`", setdiff(groups, i), "`", "<=", lower.limit),
                                                            collapse = " & "))
 
     l.name <- paste0("unique_", i, "_(",paste(setdiff(groups, i), collapse = "_"), ")")
@@ -54,10 +53,10 @@ classify_protein_identification_n <- function(data.eval, lower.limit = 0, datase
     #
     for (i in seq(nrow(grid))) {
 
-      expression <- paste0(paste(paste0(groups[grid[i, ]], ">", lower.limit),
+      expression <- paste0(paste(paste0("`", groups[grid[i, ]], "`", ">", lower.limit),
                                  collapse = " & "),
                            " & ",
-                           paste(paste0(groups[!grid[i, ]], "<=", lower.limit),
+                           paste(paste0("`", groups[!grid[i, ]], "`", "<=", lower.limit),
                                  collapse = " & "))
 
       l.name <- paste0("common_",
@@ -79,7 +78,7 @@ classify_protein_identification_n <- function(data.eval, lower.limit = 0, datase
 
   # Common to all
   l.name <- paste0("common_", paste(groups, collapse = "_"))
-  expression <- paste0(paste(paste0(groups, ">", lower.limit),
+  expression <- paste0(paste(paste0("`", groups, "`", ">", lower.limit),
                              collapse = " & "))
 
   # Evaluate proteins

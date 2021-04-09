@@ -4,12 +4,14 @@
 \alias{ask_name}
 \title{Asks user for name if no name given}
 \usage{
-ask_name(name, message)
+ask_name(name, message, exclude = NA)
 }
 \arguments{
 \item{name}{name}
 
 \item{message}{message}
+
+\item{exclude}{exclusion list for unavailable names}
 }
 \value{
 

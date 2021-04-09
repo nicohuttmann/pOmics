@@ -12,7 +12,6 @@ anal_data_grouped_var(
   name,
   observations.set,
   data.name,
-  type,
   dataset,
   save.separate = T,
   save.variable.groups = T,
@@ -35,8 +34,6 @@ anal_data_grouped_var(
 \item{observations.set}{set of observations}
 
 \item{data.name}{data name}
-
-\item{type}{data type}
 
 \item{dataset}{dataset}
 

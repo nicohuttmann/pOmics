@@ -10,7 +10,6 @@ eval_data(
   variables = "default",
   observations = "default",
   data.name,
-  type = "LFQ",
   observations.set,
   dataset,
   view = F,
@@ -29,8 +28,6 @@ eval_data(
 \item{observations}{observations}
 
 \item{data.name}{data name}
-
-\item{type}{data type}
 
 \item{observations.set}{set of observations}
 

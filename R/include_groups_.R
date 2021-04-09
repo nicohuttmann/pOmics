@@ -1,6 +1,6 @@
 #' Adds group vector to data frame
 #'
-#' @param data data frame
+#' @param analysis_list analysis list
 #' @param groups groups
 #' @param control (optional) which group is control
 #' @param observations.set which observations.set to use
@@ -13,7 +13,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-include_groups_ <- function(analysis_list, groups, control, observations.set, dataset, target.data = "data") {
+include_groups_ <- function(analysis_list, groups, control, observations.set, dataset, target.data = "raw_data") {
 
   # Check data input
   if (!hasArg(analysis_list)) stop("Please provide data input.")

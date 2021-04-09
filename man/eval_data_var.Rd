@@ -11,7 +11,6 @@ eval_data_var(
   observations = "default",
   observations.set,
   data.name,
-  type,
   dataset,
   view = F,
   save = F,
@@ -31,8 +30,6 @@ eval_data_var(
 \item{observations.set}{set of observations}
 
 \item{data.name}{data name}
-
-\item{type}{data type}
 
 \item{dataset}{dataset}
 

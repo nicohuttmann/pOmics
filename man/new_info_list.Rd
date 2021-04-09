@@ -10,7 +10,7 @@ new_info_list(replace = F)
 \item{replace}{Should info list be replaced if already existing}
 }
 \value{
-whether a new info list was created
+logical indication if new .info list was created
 }
 \description{
 Creates new info list

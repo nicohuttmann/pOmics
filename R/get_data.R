@@ -4,7 +4,6 @@
 #' @param variables selected variables
 #' @param observations selected observations
 #' @param observations.set set of observations
-#' @param type data type
 #' @param dataset dataset name or number
 #' @param tidy return tidy data frame or matrix
 #'
@@ -12,19 +11,14 @@
 #' @export
 #'
 #'
-get_data <- function(data.name, variables = "default", observations = "default", observations.set, type, dataset, tidy = T) {
+get_data <- function(data.name, variables = "default", observations = "default", observations.set, dataset, tidy = T) {
 
   # Checks correct name of dataset
   dataset <- get_dataset(dataset)
 
-  # Check data type
-  type <- get_data_type(type = type,
-                        dataset = dataset)
-
   # Check data type and name
   data.name <- get_data_name(name = data.name,
-                        type = type,
-                        dataset = dataset)
+                             dataset = dataset)
 
   # Assemble variables
   variables <- get_variables(variables = {{variables}},
@@ -36,13 +30,16 @@ get_data <- function(data.name, variables = "default", observations = "default",
                                    dataset = dataset)
 
 
-  data <- .datasets[[dataset]][[type]][[data.name]]
+  data <- .datasets[[dataset]][[data.name]]
 
 
   # Return
-  if (!tidy) return(data[intersect(rownames(data), observations), intersect(colnames(data), variables)])
+  if (!tidy) return(data %>%
+                      dplyr::filter(observations %in% !!observations) %>%
+                      dplyr::select(dplyr::any_of(variables)))
 
-  else return(data2tibble(data[intersect(rownames(data), observations), intersect(colnames(data), variables)],
-                             row.names = "observations"))
+  else return(data %>%
+                dplyr::filter(observations %in% !!observations) %>%
+                dplyr::select(dplyr::any_of(variables)))
 
 }

@@ -12,10 +12,10 @@ get_dataset <- function(dataset) {
   if (!hasArg(dataset)) return(get_default_dataset())
 
   # Name correct
-  if (dataset %in% .info[["datasets"]]) return(dataset)
+  if (dataset %in% names(.datasets)) return(dataset)
 
   # Number correct
-  if (dataset %in% seq_along(.info[["datasets"]])) return(.info[["datasets"]][dataset])
+  if (dataset %in% seq_along(names(.datasets))) return(names(.datasets)[dataset])
 
   # Incorrect dataset
   stop("Dataset could not be found.")

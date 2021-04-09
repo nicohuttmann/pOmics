@@ -23,56 +23,65 @@ import_files <- function(files) {
   # Import all files
   for (file in files) {
 
-    # Check file extension
-    ext <- tools::file_ext(file)
+    # Import data file
+    data <- suppressWarnings(vroom::vroom(file = file))
 
-    # Return NA if file could not be imported
-    data <- NA
-
-
-    # Read txt files
-    if (ext == "txt") {
-
-      # Default mode to read txt
-      data <- read.delim(file, stringsAsFactors = F)
-
-      # If ncol or nrow = 1 ask if this is a mistake
-      if (ncol(data) <= 1 || nrow(data) <= 1) {
-        data <- read.delim2(file, stringsAsFactors = F)
-      }
-
-    }
+    # Rename columns to avoid spaces
+    names(data) <- gsub(pattern = " ", replacement = ".", names(data))
 
 
-    # Read csv
-    if (ext == "csv") {
-
-      # Default mode to read txt; NA if error while import
-      data <- tryCatch(
-        read.csv(file, stringsAsFactors = F),
-        error = function(cond) {
-          matrix()
-          }
-        )
-
-      # If ncol or nrow = 1 try again
-      if (ncol(data) <= 1 || nrow(data) <= 1) {
-        data <- read.csv2(file, stringsAsFactors = F)
-      }
-
-    }
 
 
-    # Read xls
-    if (ext == "xls") {
-      data <- suppressWarnings(readxl::read_xls(file, sheet = 1, col_names = T, trim_ws = T))
-    }
-
-
-    # Read xlsx
-    if (ext == "xlsx") {
-      data <- suppressWarnings(readxl::read_xlsx(file, sheet = 1, col_names = T, trim_ws = T))
-    }
+    # # Check file extension
+    # ext <- tools::file_ext(file)
+    #
+    # # Return NA if file could not be imported
+    # data <- NA
+    #
+    #
+    # # Read txt files
+    # if (ext == "txt") {
+    #
+    #   # Default mode to read txt
+    #   data <- read.delim(file, stringsAsFactors = F)
+    #
+    #   # If ncol or nrow = 1 ask if this is a mistake
+    #   if (ncol(data) <= 1 || nrow(data) <= 1) {
+    #     data <- read.delim2(file, stringsAsFactors = F)
+    #   }
+    #
+    # }
+    #
+    #
+    # # Read csv
+    # if (ext == "csv") {
+    #
+    #   # Default mode to read txt; NA if error while import
+    #   data <- tryCatch(
+    #     read.csv(file, stringsAsFactors = F),
+    #     error = function(cond) {
+    #       matrix()
+    #       }
+    #     )
+    #
+    #   # If ncol or nrow = 1 try again
+    #   if (ncol(data) <= 1 || nrow(data) <= 1) {
+    #     data <- read.csv2(file, stringsAsFactors = F)
+    #   }
+    #
+    # }
+    #
+    #
+    # # Read xls
+    # if (ext == "xls") {
+    #   data <- suppressWarnings(readxl::read_xls(file, sheet = 1, col_names = T, trim_ws = T))
+    # }
+    #
+    #
+    # # Read xlsx
+    # if (ext == "xlsx") {
+    #   data <- suppressWarnings(readxl::read_xlsx(file, sheet = 1, col_names = T, trim_ws = T))
+    # }
 
     # Add file to list
     list.import[[length(list.import) + 1]] <- tibble::as_tibble(data)

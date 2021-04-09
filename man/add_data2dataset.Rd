@@ -4,14 +4,7 @@
 \alias{add_data2dataset}
 \title{Add variables data and data in matrix form to a dataset}
 \usage{
-add_data2dataset(
-  x,
-  dataset,
-  data.types,
-  data.origin,
-  min.similarity = 8,
-  min.groupsize = 6
-)
+add_data2dataset(x, dataset, data.types, data.origin)
 }
 \arguments{
 \item{x}{raw data}
@@ -21,10 +14,6 @@ add_data2dataset(
 \item{data.types}{types of data to be imported}
 
 \item{data.origin}{origin of data}
-
-\item{min.similarity}{minimum similarity oi column names}
-
-\item{min.groupsize}{minimum number of samples}
 }
 \value{
 

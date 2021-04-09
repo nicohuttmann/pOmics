@@ -8,7 +8,6 @@
 #' @param name name
 #' @param observations.set set of observations
 #' @param data.name data name
-#' @param type data type
 #' @param dataset dataset
 #' @param save.separete save results from group evaluation in variables data
 #' @param save.variable.groups save variable groups in variables data
@@ -20,7 +19,7 @@
 #' @export
 #'
 #'
-anal_data_grouped_var <- function(variables, observations, groups, expr, name, observations.set, data.name, type, dataset, save.separate = T,
+anal_data_grouped_var <- function(variables, observations, groups, expr, name, observations.set, data.name, dataset, save.separate = T,
                                   save.variable.groups = T, show = T, export.plot = T, export.table = F) {
 
 
@@ -31,7 +30,6 @@ anal_data_grouped_var <- function(variables, observations, groups, expr, name, o
                                         name = name,
                                         observations.set,
                                         data.name = data.name,
-                                        type = type,
                                         dataset = dataset,
                                         save = save.separate)
 

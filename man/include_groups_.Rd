@@ -10,10 +10,12 @@ include_groups_(
   control,
   observations.set,
   dataset,
-  target.data = "data"
+  target.data = "raw_data"
 )
 }
 \arguments{
+\item{analysis_list}{analysis list}
+
 \item{groups}{groups}
 
 \item{control}{(optional) which group is control}
@@ -23,8 +25,6 @@ include_groups_(
 \item{dataset}{dataset}
 
 \item{target.data}{data frame to be modified}
-
-\item{data}{data frame}
 }
 \value{
 

@@ -6,7 +6,6 @@
 #' @param observations observations
 #' @param observations.set set of observations
 #' @param data.name data name
-#' @param type data type
 #' @param dataset dataset
 #' @param view View results?
 #' @param save Save results?
@@ -17,7 +16,7 @@
 #' @export
 #'
 #'
-eval_data <- function(data, expr, variables = "default", observations = "default", data.name, type = "LFQ", observations.set, dataset, view = F, save = F, name, set.default.name = F) {
+eval_data <- function(data, expr, variables = "default", observations = "default", data.name, observations.set, dataset, view = F, save = F, name, set.default.name = F) {
 
   # Check data input
   if (!hasArg(data) && variables == "default" && observations == "default") stop("Provide data or specify variables and observations.")
@@ -48,8 +47,7 @@ eval_data <- function(data, expr, variables = "default", observations = "default
     data <- get_data(variables = variables,
                      observations = observations,
                      observations.set = observations.set,
-                     name = data.name,
-                     type = type,
+                     data.name = data.name,
                      dataset = dataset)
 
   }
@@ -63,7 +61,7 @@ eval_data <- function(data, expr, variables = "default", observations = "default
   if(view) View(data)
 
   # Save
-  if (save) add_data(data = data, name = name, type = type, dataset = dataset, set.default.data.name = set.default.name)
+  if (save) add_data(data = data, name = name, dataset = dataset, set.default.data.name = set.default.name)
 
   # Return
   invisible(data)

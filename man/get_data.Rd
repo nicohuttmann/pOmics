@@ -9,7 +9,6 @@ get_data(
   variables = "default",
   observations = "default",
   observations.set,
-  type,
   dataset,
   tidy = T
 )
@@ -22,8 +21,6 @@ get_data(
 \item{observations}{selected observations}
 
 \item{observations.set}{set of observations}
-
-\item{type}{data type}
 
 \item{dataset}{dataset name or number}
 

@@ -4,14 +4,12 @@
 \alias{get_data_name}
 \title{Check data type and return data.name}
 \usage{
-get_data_name(name, type, dataset)
+get_data_name(name, dataset)
 }
 \arguments{
 \item{name}{(optional) name of data}
 
-\item{type}{type of data}
-
-\item{dataset}{datset}
+\item{dataset}{dataset}
 }
 \value{
 

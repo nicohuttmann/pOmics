@@ -2,34 +2,29 @@
 #'
 #' @param data new data
 #' @param name data name
-#' @param type data type
 #' @param dataset dataset
-#' @param set.default.type set data type as default
-#' @param set.default.data.name set data name as default for data type
+#' @param set.default.data.name set data name as default
 #' @param new.observations.set.name if new observations set is added, specify name
 #'
 #' @return
 #' @export
 #'
 #'
-add_data <- function(data, name, type, dataset, set.default.type = F, set.default.data.name = F, new.observations.set.name) {
+add_data <- function(data, name, dataset, set.default.data.name = F, new.observations.set.name) {
 
   # Checks correct name of dataset
   dataset <- get_dataset(dataset)
 
-  # Check data type
-  if (set.default.type) set_default_data_type(type = type, dataset = dataset, silent = TRUE)
 
-  # Check data type and name
-  if (is_data_name(name, type, dataset)) stop("Name already taken.")
+  # Check data name
+  if (is_data_name(name, dataset)) stop("Name already taken.")
 
 
   #Add data
-  .datasets[[dataset]][[type]][[name]] <<- data
+  .datasets[[dataset]][[name]] <<- data
 
   # Update names
   if (set.default.data.name) set_default_data_name(name = name,
-                                              type = type,
                                               dataset = dataset)
 
 

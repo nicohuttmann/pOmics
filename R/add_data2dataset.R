@@ -4,19 +4,17 @@
 #' @param dataset dataset list
 #' @param data.types types of data to be imported
 #' @param data.origin origin of data
-#' @param min.similarity minimum similarity oi column names
-#' @param min.groupsize minimum number of samples
 #'
 #' @return
 #' @export
 #'
 #'
-add_data2dataset <- function(x, dataset, data.types, data.origin, min.similarity = 8, min.groupsize = 6) {
+add_data2dataset <- function(x, dataset, data.types, data.origin) {
 
 
   # Aggregate data frame
   raw.dataset <- x %>%
-    df2groupedList(min.similarity = min.similarity, min.groupsize = min.groupsize) %>%
+    df2groupedList() %>%
     sep_vector2list(sep = attr(dataset, "separator")) %>%
     list_entries2vector()
 

@@ -5,35 +5,29 @@
 \title{Sorts raw data into data list with attributes}
 \usage{
 new_dataset(
-  x,
+  import,
   name,
   data.origin,
   species,
   load.UniProt.ws = T,
   identifier,
-  data.types,
-  min.similarity = 8,
-  min.groupsize = 6
+  data.types
 )
 }
 \arguments{
-\item{x}{raw data frame}
+\item{import}{imported raw data frame}
 
 \item{name}{name of dataset}
 
 \item{data.origin}{Identify origin software of data}
 
-\item{species}{protein origin (T or F or UniProt taxosnomy ID)}
+\item{species}{protein origin (T or F or UniProt taxonomy ID)}
 
 \item{load.UniProt.ws}{(optional) Should UniProt data be loaded}
 
 \item{identifier}{(optional) specific vector of identifier column/s}
 
 \item{data.types}{(optional) types of data to extract; uses defaults if not specified}
-
-\item{min.similarity}{minimum similarity oi column names}
-
-\item{min.groupsize}{minimum number of samples}
 }
 \value{
 

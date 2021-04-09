@@ -16,7 +16,18 @@ get_identifiers <- function(x, sep, identifier) {
     sep <- identify_separator(x)
   }
 
-  x <- as.data.frame(x)
+
+  # Fill NAs
+  x <- x %>%
+    dplyr::mutate(across(.fns = function(x) {
+      for (i in seq_along(x)) {
+        if (is.na(x[i])) {
+          x[i] <- paste0("NA_", i)
+        }
+      }
+      x
+    }))
+
 
   # No identifier specified; only test first column
   if (!hasArg(identifier)) {
@@ -35,12 +46,15 @@ get_identifiers <- function(x, sep, identifier) {
     if (all(identifier %in% colnames(x))) {
 
       # Build identifiers vector; join columns if multiple specified
-      x1 <- x[, identifier[1]] %>%
+      x1 <- x %>%
+        dplyr::pull(identifier[1]) %>%
         as.character %>%
         keep_first(sep = sep)
-      if (length(identifier > 1)) {
+      if (length(identifier) > 1) {
         for (i in identifier[-1])
-        x1 <- paste(x1, x[, i] %>%
+        x1 <- paste(x1,
+                    x %>%
+                    dplyr::pull(i) %>%
                     as.character %>%
                     keep_first(sep = sep),
                     sep = "_")

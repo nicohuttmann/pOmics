@@ -18,8 +18,8 @@ logical_df2list <- function(data) {
   for (i in colnames(data)[-1]) {
 
     data.list[[i]] <- data %>%
-      filter(rlang::eval_tidy(rlang::parse_expr(i))) %>%
-      pull(1)
+      dplyr::filter(rlang::eval_tidy(rlang::parse_expr(paste0("`", i, "`")))) %>%
+      dplyr::pull(1)
 
   }
 

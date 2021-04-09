@@ -8,7 +8,7 @@ collapse_groups_(
   analysis_list,
   FUN = mean,
   group.column = "groups",
-  data.name = "data",
+  data.name = "raw_data",
   new.name = "grouped_data"
 )
 }

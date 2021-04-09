@@ -72,7 +72,7 @@ include_groups <- function(data, groups, control, observations.set, dataset) {
 
   # Add groups
   data <- data %>%
-    dplyr::mutate(Groups = group.factors, .after = observations)
+    dplyr::mutate(groups = group.factors, .after = observations)
 
 
   # Return

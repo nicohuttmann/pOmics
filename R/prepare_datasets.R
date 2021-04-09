@@ -6,14 +6,12 @@
 #' @param load.UniProt.ws Should a UniProt database be downloaded
 #' @param identifier (optional) specific vector of column/s to use as identifier
 #' @param data.types types of data to be extracted
-#' @param min.similarity minimum similarity oi column names
-#' @param min.groupsize minimum number of samples
 #'
 #' @return
 #' @export
 #'
 #'
-prepare_datasets <- function(imports, data.origin, species, load.UniProt.ws = F, identifier, data.types, min.similarity = 8, min.groupsize = 6) {
+prepare_datasets <- function(imports, data.origin, species, load.UniProt.ws = F, identifier, data.types) {
 
   # Put single data frame in list for generalization
   if (!is.list(imports) || is.data.frame(imports)) stop("Please provide a named list.")
@@ -37,15 +35,13 @@ prepare_datasets <- function(imports, data.origin, species, load.UniProt.ws = F,
 
     # Important part
     # Make datasets
-    new_dataset(x = imports[[i]],
+    new_dataset(import = imports[[i]],
                 name = names(imports)[i],
                 data.origin = data.origin,
                 species = species,
                 load.UniProt.ws = load.UniProt.ws,
                 identifier = identifier,
-                data.types = data.types,
-                min.similarity = min.similarity,
-                min.groupsize = min.groupsize)
+                data.types = data.types)
     Sys.sleep(3)
   }
 

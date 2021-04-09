@@ -4,11 +4,9 @@
 \alias{get_default_data_name}
 \title{Return default data name}
 \usage{
-get_default_data_name(type, dataset)
+get_default_data_name(dataset)
 }
 \arguments{
-\item{type}{data type}
-
 \item{dataset}{datset}
 }
 \value{

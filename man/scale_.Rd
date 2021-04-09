@@ -2,20 +2,18 @@
 % Please edit documentation in R/scale_.R
 \name{scale_}
 \alias{scale_}
-\title{Scales data form tibbles or analysis_list containing a tibble}
+\title{Scales data (Z-scores) from tibbles or analysis_list containing a tibble}
 \usage{
-scale_(analysis_list, data.name = "data", new.name = "data")
+scale_(analysis_list, target.data = "raw_data")
 }
 \arguments{
 \item{analysis_list}{data list}
 
-\item{data.name}{name of data entry}
-
-\item{new.name}{new name of scaled data}
+\item{target.data}{data to be modified}
 }
 \value{
 
 }
 \description{
-Scales data form tibbles or analysis_list containing a tibble
+Scales data (Z-scores) from tibbles or analysis_list containing a tibble
 }

@@ -7,12 +7,12 @@
 #' @export
 #'
 #'
-cleanup_proteins_v <- function(vector, prefix = c("CON_", "REV_")) {
+cleanup_proteins_v <- function(vector, prefix = c("CON_", "REV_", "NA_")) {
 
   # Remove proteins from vector based on prefix
   for (i in prefix) {
 
-    vector <- vector[!grepl(i, vector)]
+    vector <- vector[regexpr(i, vector) != 1]
 
   }
 

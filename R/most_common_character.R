@@ -1,13 +1,14 @@
 #' Finds and returns most common character in a data
 #'
 #' @param x data frame
+#' @param exclude characters to be excluded from list
 #'
 #' @return
 #' @export
 #'
 #' @importFrom magrittr %>%
 #'
-most_common_character <- function(x) {
+most_common_character <- function(x, exclude = NA) {
 
   if (is.data.frame(x)) {
     x <- x[, !unlist(lapply(x, is.numeric))]
@@ -19,11 +20,14 @@ most_common_character <- function(x) {
     paste(collapse = "")
 
   # Find highest frequency
-  all %>%
+  all <- all %>%
     strsplit(split = "") %>%
     table() %>%
     sort(decreasing = T) %>%
     names() %>%
-    dplyr::first()
+    setdiff(exclude)
+
+  # Return
+  return(all[1])
 
 }

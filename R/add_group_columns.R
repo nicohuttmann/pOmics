@@ -7,7 +7,7 @@
 #' @param separate should columns be added separately
 #'
 #' @return
-#'
+#' @export
 #'
 add_group_columns <- function(grouped.list, x, from, to, separate) {
 

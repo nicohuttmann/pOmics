@@ -4,7 +4,7 @@
 \alias{cleanup_proteins_m}
 \title{Removes proteins based on prefixes from columns}
 \usage{
-cleanup_proteins_m(matrix, prefix = c("CON_", "REV_"))
+cleanup_proteins_m(matrix, prefix = c("CON_", "REV_", "NA_"))
 }
 \arguments{
 \item{matrix}{data}

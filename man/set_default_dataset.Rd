@@ -9,7 +9,7 @@ set_default_dataset(name, silent = T)
 \arguments{
 \item{name}{Name of dataset}
 
-\item{silent}{Silent?}
+\item{silent}{suppress messages}
 }
 \value{
 

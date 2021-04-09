@@ -4,10 +4,10 @@
 \alias{add_dataset}
 \title{Adds new datasets to list}
 \usage{
-add_dataset(dataset)
+add_dataset(name)
 }
 \arguments{
-\item{dataset}{dataset to add}
+\item{name}{dataset to add}
 }
 \value{
 

@@ -4,10 +4,10 @@
 \alias{is_dataset}
 \title{Check if dataset exists}
 \usage{
-is_dataset(dataset)
+is_dataset(name)
 }
 \arguments{
-\item{dataset}{dataset}
+\item{name}{dataset name}
 }
 \value{
 

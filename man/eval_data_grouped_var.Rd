@@ -11,7 +11,6 @@ eval_data_grouped_var(
   variables = "default",
   observations = "default",
   data.name,
-  type = "LFQ",
   observations.set,
   dataset,
   name,
@@ -31,8 +30,6 @@ eval_data_grouped_var(
 \item{observations}{observations}
 
 \item{data.name}{data name}
-
-\item{type}{data type}
 
 \item{observations.set}{set of observations}
 

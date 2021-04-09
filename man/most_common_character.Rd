@@ -4,10 +4,12 @@
 \alias{most_common_character}
 \title{Finds and returns most common character in a data}
 \usage{
-most_common_character(x)
+most_common_character(x, exclude = NA)
 }
 \arguments{
 \item{x}{data frame}
+
+\item{exclude}{characters to be excluded from list}
 }
 \value{
 

@@ -10,9 +10,7 @@ prepare_datasets(
   species,
   load.UniProt.ws = F,
   identifier,
-  data.types,
-  min.similarity = 8,
-  min.groupsize = 6
+  data.types
 )
 }
 \arguments{
@@ -27,10 +25,6 @@ prepare_datasets(
 \item{identifier}{(optional) specific vector of column/s to use as identifier}
 
 \item{data.types}{types of data to be extracted}
-
-\item{min.similarity}{minimum similarity oi column names}
-
-\item{min.groupsize}{minimum number of samples}
 }
 \value{
 

@@ -2,12 +2,12 @@
 % Please edit documentation in R/impute_norm.R
 \name{impute_norm}
 \alias{impute_norm}
-\title{Imputes values based on normal deviation}
+\title{Imputes values based on normal distribution}
 \usage{
 impute_norm(data, shift = 1.8, width = 0.3, seed = 123)
 }
 \arguments{
-\item{data}{data}
+\item{data}{data (either a tibble, data frame or matrix)}
 
 \item{shift}{shift in standard deviations}
 
@@ -19,5 +19,5 @@ impute_norm(data, shift = 1.8, width = 0.3, seed = 123)
 
 }
 \description{
-Imputes values based on normal deviation
+Imputes values based on normal distribution
 }

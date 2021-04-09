@@ -3,8 +3,7 @@
 #' @param variables variables (see get variables)
 #' @param observations observations (see get observations)
 #' @param observations.set set of observations
-#' @param name data name
-#' @param type data type
+#' @param data.name data name
 #' @param dataset dataset
 #' @param similarity.method similarity function
 #' @param adjacency.method adjacency function
@@ -17,7 +16,7 @@
 #' @export
 #'
 #'
-cor_matrix <- function(variables, observations, observations.set, name, type, dataset,
+cor_matrix <- function(variables, observations, observations.set, data.name, dataset,
                        similarity.method = "none", adjacency.method = "none", alpha, theta, beta,
                        clustering.method = "average") {
 
@@ -28,8 +27,7 @@ cor_matrix <- function(variables, observations, observations.set, name, type, da
   cor.list[["data"]] <- get_data(variables = !!dplyr::enquo(variables),
                                    observations = !!dplyr::enquo(observations),
                                    observations.set = observations.set,
-                                   name = name,
-                                   type = type,
+                                   data.name = data.name,
                                    dataset = dataset)
 
   # Test data

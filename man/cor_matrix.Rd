@@ -8,8 +8,7 @@ cor_matrix(
   variables,
   observations,
   observations.set,
-  name,
-  type,
+  data.name,
   dataset,
   similarity.method = "none",
   adjacency.method = "none",
@@ -26,9 +25,7 @@ cor_matrix(
 
 \item{observations.set}{set of observations}
 
-\item{name}{data name}
-
-\item{type}{data type}
+\item{data.name}{data name}
 
 \item{dataset}{dataset}
 

@@ -7,9 +7,7 @@
 add_data(
   data,
   name,
-  type,
   dataset,
-  set.default.type = F,
   set.default.data.name = F,
   new.observations.set.name
 )
@@ -19,13 +17,9 @@ add_data(
 
 \item{name}{data name}
 
-\item{type}{data type}
-
 \item{dataset}{dataset}
 
-\item{set.default.type}{set data type as default}
-
-\item{set.default.data.name}{set data name as default for data type}
+\item{set.default.data.name}{set data name as default}
 
 \item{new.observations.set.name}{if new observations set is added, specify name}
 }

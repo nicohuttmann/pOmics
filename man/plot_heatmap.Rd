@@ -10,7 +10,6 @@ plot_heatmap(
   groups,
   observations.set,
   data.name,
-  type,
   dataset,
   scale = T,
   grouping,
@@ -32,8 +31,6 @@ plot_heatmap(
 \item{observations.set}{set of observations}
 
 \item{data.name}{data name}
-
-\item{type}{data type}
 
 \item{dataset}{dataset}
 

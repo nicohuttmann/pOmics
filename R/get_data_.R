@@ -4,7 +4,6 @@
 #' @param variables selected variables
 #' @param observations selected observations
 #' @param observations.set set of observations
-#' @param type data type
 #' @param dataset dataset name or number
 #' @param tidy add data as tidy data frame or matrix
 #' @param name name to save in list
@@ -13,19 +12,14 @@
 #' @export
 #'
 #'
-get_data_ <- function(data.name, variables = "default", observations = "default", observations.set, type, dataset, tidy = T,
+get_data_ <- function(data.name, variables = "default", observations = "default", observations.set, dataset, tidy = T,
                       name = "raw_data") {
 
   # Checks correct name of dataset
   dataset <- get_dataset(dataset)
 
-  # Check data type
-  type <- get_data_type(type = type,
-                        dataset = dataset)
-
   # Check data type and name
   data.name <- get_data_name(name = data.name,
-                             type = type,
                              dataset = dataset)
 
   # Assemble variables
@@ -38,18 +32,20 @@ get_data_ <- function(data.name, variables = "default", observations = "default"
                                    dataset = dataset)
 
 
-  data <- .datasets[[dataset]][[type]][[data.name]]
+  data <- .datasets[[dataset]][[data.name]]
 
 
   # Add data to list
   if (!tidy)
-    analysis.list <- tibble::lst(!!name := data[intersect(rownames(data), observations),
-                                                intersect(colnames(data), variables)])
+    analysis.list <- tibble::lst(!!name := data %>%
+                                   dplyr::filter(observations %in% !!observations) %>%
+                                   dplyr::select(dplyr::any_of(variables)))
+
 
   else
-    analysis.list <- tibble::lst(!!name := data2tibble(data[intersect(rownames(data), observations),
-                                                            intersect(colnames(data), variables)],
-                                                       row.names = "observations"))
+    analysis.list <- tibble::lst(!!name := data %>%
+                                   dplyr::filter(observations %in% !!observations) %>%
+                                   dplyr::select(dplyr::any_of(variables)))
 
   # Return
   return(analysis.list)

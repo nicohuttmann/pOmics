@@ -5,7 +5,6 @@
 #' @param groups groups
 #' @param observations.set set of observations
 #' @param data.name data name
-#' @param type data type
 #' @param dataset dataset
 #' @param scale should data be scaled
 #' @param grouping should data be grouped
@@ -20,7 +19,7 @@
 #' @export
 #'
 #'
-plot_heatmap <- function(variables, observations, groups, observations.set, data.name, type, dataset,
+plot_heatmap <- function(variables, observations, groups, observations.set, data.name, dataset,
                          scale = T, grouping, clustering.method = "complete", variables.labels, observations.labels, variables.order = T,
                          observations.order = T, ratio = 3) {
 
@@ -31,7 +30,6 @@ plot_heatmap <- function(variables, observations, groups, observations.set, data
                    observations = !!dplyr::enquo(observations),
                    observations.set = observations.set,
                    data.name = data.name,
-                   type = type,
                    dataset = dataset,
                    tidy = F)
 

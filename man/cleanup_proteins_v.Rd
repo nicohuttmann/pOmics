@@ -4,7 +4,7 @@
 \alias{cleanup_proteins_v}
 \title{Removes proteins based on prefixes from vector}
 \usage{
-cleanup_proteins_v(vector, prefix = c("CON_", "REV_"))
+cleanup_proteins_v(vector, prefix = c("CON_", "REV_", "NA_"))
 }
 \arguments{
 \item{vector}{vector}

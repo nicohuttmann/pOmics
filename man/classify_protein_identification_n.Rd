@@ -4,19 +4,12 @@
 \alias{classify_protein_identification_n}
 \title{Classifies proteins based on identification threshold}
 \usage{
-classify_protein_identification_n(
-  data.eval,
-  lower.limit = 0,
-  dataset,
-  plot = T
-)
+classify_protein_identification_n(data.eval, lower.limit = 0, plot = T)
 }
 \arguments{
 \item{data.eval}{data from eval_ function}
 
 \item{lower.limit}{values above limit are considered positive/identified}
-
-\item{dataset}{dataset}
 
 \item{plot}{Plot venn diagram?}
 

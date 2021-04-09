@@ -1,11 +1,10 @@
 Package: pOmics
 Type: Package
 Title: Framework for proteomics data analysis
-Version: 0.6.0
-Author: Nico Huettmann <huttmann.nico@gmail.com>
+Version: 0.8.0
+Author: Nico Huettmann 
 Maintainer: Nico Huettmann <huttmann.nico@gmail.com>
-Description: Provides a framework for the analysis of proteomics data. Includes basic analysis methods plus sevaral network
-    analysis approaches for data from extracellular vesicles.
+Description: Provides a framework and functions for the analysis of proteomics data
 License: MIT
 Encoding: UTF-8
 LazyData: true
@@ -16,16 +15,17 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 Imports:
+    clusterProfiler,
     cowplot,
     disgenet2r,
+    dplyr,
     fastcluster,
     ggplot2,
     ggfortify,
     ggdendro,
+    magrittr,
     readxl,
     reshape2,
-    dplyr,
-    magrittr,
     rlang,
     tibble,
     topGO,

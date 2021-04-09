@@ -8,7 +8,6 @@
 #' @param name name of new data
 #' @param observations.set set of observations
 #' @param data.name data name
-#' @param type data type
 #' @param dataset dataset
 #' @param name name to be saved under
 #' @param view View results matrix?
@@ -20,7 +19,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-eval_data_grouped_var <- function(data, groups, expr, variables = "default", observations = "default", data.name, type = "LFQ", observations.set, dataset, name, view = F, save = F) {
+eval_data_grouped_var <- function(data, groups, expr, variables = "default", observations = "default", data.name, observations.set, dataset, name, view = F, save = F) {
 
   # Check data input
   if (!hasArg(data) && variables == "default" && observations == "default") stop("Provide data or specify variables and observations.")
@@ -50,8 +49,7 @@ eval_data_grouped_var <- function(data, groups, expr, variables = "default", obs
     data <- get_data(variables = variables,
                      observations = observations,
                      observations.set = observations.set,
-                     name = data.name,
-                     type = type,
+                     data.name = data.name,
                      dataset = dataset)
 
   }

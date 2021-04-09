@@ -4,12 +4,10 @@
 \alias{is_data_name}
 \title{Check if data name exists}
 \usage{
-is_data_name(name, type, dataset)
+is_data_name(name, dataset)
 }
 \arguments{
 \item{name}{data name}
-
-\item{type}{data type}
 
 \item{dataset}{dataset}
 }

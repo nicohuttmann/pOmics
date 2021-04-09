@@ -1,4 +1,4 @@
-#' Lines plot
+#' Lines plot fo rpublication in ggplot2
 #'
 #' @param data data
 #' @param group.column name of group column
@@ -7,6 +7,7 @@
 #' @param main.color color of lines
 #' @param highlight.color color of highlighted protein lines
 #' @param highlight.proteins vector giving containing proteins to highlight
+#' @param variables.label.fun function to transform accession IDs to labels
 #' @param alpha transparency of lines
 #' @param xlab x-axis label
 #' @param ylab y-axis label
@@ -16,10 +17,14 @@
 #'
 #' @import ggplot2
 #'
-plot_lines <- function(data, group.column = "groups", label.column = "labels", x.y.ratio = 1, main.color = "grey",
-                       highlight.color = "red", highlight.proteins = NULL, alpha = 0.8,
-                       xlab = NULL, ylab = NULL) {
+plot_lines <- function(data, group.column = "observations", label.column, x.y.ratio, main.color = "grey",
+                       highlight.color = "red", highlight.proteins = NULL, variables.label.fun = p2g,
+                       alpha = 0.8, xlab = NULL, ylab = NULL) {
 
+
+  # Rename groups column
+  data <- data %>%
+    dplyr::rename(groups_x = !!group.column)
 
   # Melt data frame
   data_melt <- suppressMessages(reshape2::melt(data = data))
@@ -38,7 +43,9 @@ plot_lines <- function(data, group.column = "groups", label.column = "labels", x
   #
   data_melt <- data_melt %>%
     dplyr::mutate(label = variables.label.fun(as.character(variable))) %>%
-    dplyr::mutate(label = ifelse(groups %in% last(levels(data_melt$groups)) & variable %in% highlight.proteins, label, NA))
+    dplyr::mutate(label = ifelse(groups_x %in% last(levels(data_melt$groups_x)) & variable %in% highlight.proteins,
+                                 label,
+                                 NA_character_))
 
 
 
@@ -55,7 +62,7 @@ plot_lines <- function(data, group.column = "groups", label.column = "labels", x
   lwf <- 1 / (ggplot2::.pt * 72.27 / 96)
 
   # Plot
-  p <- ggplot(data = data_melt, mapping = aes(x = groups, y = value, group = variable, color = color, label = label)) +
+  p <- ggplot(data = data_melt, mapping = aes(x = groups_x, y = value, group = variable, color = color, label = label)) +
     geom_path(alpha = alpha, size = 0.25 * lwf, lineend = "round", linejoin = "round") +
     scale_y_continuous(expand = rep(range * 0.01, 2)) +
     scale_x_discrete(expand = c(0.1, 0, 0, 2)) +
@@ -71,7 +78,6 @@ plot_lines <- function(data, group.column = "groups", label.column = "labels", x
           axis.line.x.bottom = element_line(size = 0.25 * lwf),
           axis.ticks = element_line(size = 0.25 * lwf),
           legend.position = "none") +
-    coord_fixed(ratio = x.y.ratio) +
     ggrepel::geom_text_repel(
       size = text.size / .pt,
       force        = 0.5,
@@ -83,7 +89,11 @@ plot_lines <- function(data, group.column = "groups", label.column = "labels", x
       segment.angle = 45
   )
 
-
+  #
+  if (hasArg(x.y.ratio)) {
+    p <- p +
+      coord_fixed(ratio = x.y.ratio)
+  }
 
 
   # Plot
