@@ -39,13 +39,13 @@ get_data_ <- function(data.name, variables = "default", observations = "default"
   if (!tidy)
     analysis.list <- tibble::lst(!!name := data %>%
                                    dplyr::filter(observations %in% !!observations) %>%
-                                   dplyr::select(dplyr::any_of(variables)))
+                                   dplyr::select(c(observations, dplyr::any_of(variables))))
 
 
   else
     analysis.list <- tibble::lst(!!name := data %>%
                                    dplyr::filter(observations %in% !!observations) %>%
-                                   dplyr::select(dplyr::any_of(variables)))
+                                   dplyr::select(c(observations, dplyr::any_of(variables))))
 
   # Return
   return(analysis.list)
