@@ -15,7 +15,7 @@ get_data_names <- function(dataset, print = T) {
   # Print
   if(print) {
 
-    message(paste0("  Data type: ", dataset))
+    message(paste0("  Dataset: ", dataset))
     print(setdiff(names(.datasets[[dataset]]), c("variables", "observations")))
 
   }

@@ -36,10 +36,10 @@ get_data <- function(data.name, variables = "default", observations = "default",
   # Return
   if (!tidy) return(data %>%
                       dplyr::filter(observations %in% !!observations) %>%
-                      dplyr::select(dplyr::any_of(variables)))
+                      dplyr::select(c(observations, dplyr::any_of(variables))))
 
   else return(data %>%
                 dplyr::filter(observations %in% !!observations) %>%
-                dplyr::select(dplyr::any_of(variables)))
+                dplyr::select(c(observations, dplyr::any_of(variables))))
 
 }

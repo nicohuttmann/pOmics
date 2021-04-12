@@ -18,7 +18,7 @@ get_variables_data <- function(name, variables, dataset) {
 
   # Variables
 
-  # No variables defines
+  # No variables defined
   if (!hasArg(variables)) {
 
     variables <- get_variables()
