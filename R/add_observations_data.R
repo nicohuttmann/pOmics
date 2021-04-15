@@ -37,7 +37,11 @@ add_observations_data <- function(data, name, observations.set, dataset, ignore.
 
 
   # Fill template with data
-  if (!ignore.names) {
+  if (is.factor(data) & all((names(data) == names(template)))) {
+    template <- data
+  } else if (is.factor(data)) {
+    stop("Please make sure all observations match when you provide factors.")
+  } else if (!ignore.names) {
     template[names(data)] <- data
   } else {
     template[] <- data

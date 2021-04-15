@@ -4,7 +4,7 @@
 \alias{set_default_dataset}
 \title{Updates default dataset}
 \usage{
-set_default_dataset(name, silent = T)
+set_default_dataset(name, silent = F)
 }
 \arguments{
 \item{name}{Name of dataset}

@@ -4,10 +4,7 @@
 \alias{get_datasets}
 \title{Prints or returns datasets}
 \usage{
-get_datasets(print = T)
-}
-\arguments{
-\item{print}{print}
+get_datasets()
 }
 \value{
 

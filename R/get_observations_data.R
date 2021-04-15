@@ -21,7 +21,7 @@ get_observations_data <- function(name, observations, observations.set, dataset)
 
   # Observations
 
-  # No observations defines
+  # No observations defined
   if (!hasArg(observations)) {
 
     observations <- get_observations()

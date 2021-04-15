@@ -1,26 +1,17 @@
 #' Prints or returns data names
 #'
 #' @param dataset dataset
-#' @param print print
 #'
 #' @return
 #' @export
 #'
 #'
-get_data_names <- function(dataset, print = T) {
+get_data_names <- function(dataset) {
 
   # dataset
   dataset <- get_dataset(dataset)
 
-  # Print
-  if(print) {
-
-    message(paste0("  Dataset: ", dataset))
-    print(setdiff(names(.datasets[[dataset]]), c("variables", "observations")))
-
-  }
-
-  # Return if datatype is specified
-  invisible(names(.datasets[[dataset]]))
+  # Return
+  return(setdiff(names(.datasets[[dataset]]), c("variables", "observations")))
 
 }

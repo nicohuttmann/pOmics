@@ -31,7 +31,7 @@ include_groups <- function(data, groups, control, observations.set, dataset) {
 
   # Get groups data
   group.vector <- .datasets[[dataset]][["observations"]][[observations.set]] %>%
-    dplyr::pull(!!dplyr::enquo(groups))
+    dplyr::pull(var = !!dplyr::enquo(groups), name = "observations")
 
 
   # Get observations

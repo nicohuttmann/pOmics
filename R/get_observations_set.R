@@ -19,6 +19,6 @@ get_observations_set <- function(observations.set, dataset) {
   if (observations.set %in% names(.datasets[[dataset]][["observations"]])) return(observations.set)
 
   # Not found; no number identification
-  stop("Given observation set name incorrect.")
+  stop("Given observation set could not be found. Check spelling or use get_observations_sets().")
 
 }

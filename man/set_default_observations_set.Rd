@@ -4,12 +4,12 @@
 \alias{set_default_observations_set}
 \title{Set default data set}
 \usage{
-set_default_observations_set(set, dataset, silent = TRUE)
+set_default_observations_set(set, dataset, silent = F)
 }
 \arguments{
 \item{set}{observations set name}
 
-\item{dataset}{datast}
+\item{dataset}{dataset}
 
 \item{silent}{Silent?}
 }
