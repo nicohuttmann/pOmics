@@ -7,7 +7,7 @@
 #' @export
 #'
 #'
-set_default_dataset <- function(name, silent = T) {
+set_default_dataset <- function(name, silent = F) {
 
   if((length(names(.datasets)) == 1) && is.na(names(.datasets))) {
     # Silent?

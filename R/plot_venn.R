@@ -66,11 +66,11 @@ plot_venn <- function(x, name, plot = T, export = F) {
 
   print(p)
   # Plot
-  pdf(ifelse(hasArg(name), paste0(name, ".pdf"), "test.pdf"), width = 4, height = 4)
+  #pdf(ifelse(hasArg(name), paste0(name, ".pdf"), "test.pdf"), width = 4, height = 4)
   # Print on canvas
-  print(p)
+  #print(p)
   #
-  dev.off()
+  #dev.off()
 
 
 

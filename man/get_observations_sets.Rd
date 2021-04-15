@@ -2,18 +2,16 @@
 % Please edit documentation in R/get_observations_sets.R
 \name{get_observations_sets}
 \alias{get_observations_sets}
-\title{Prints or returns observations sets}
+\title{Returns observations sets}
 \usage{
-get_observations_sets(dataset, print = T)
+get_observations_sets(dataset)
 }
 \arguments{
-\item{dataset}{dataset/s}
-
-\item{print}{print}
+\item{dataset}{dataset}
 }
 \value{
 
 }
 \description{
-Prints or returns observations sets
+Returns observations sets
 }

@@ -14,7 +14,7 @@ is_observations_set <- function(set, dataset) {
 
 
   # Exists
-  if (set %in% attr(.datasets[[dataset]], "observations_sets"))
+  if (set %in% names(.datasets[[dataset]][["observations"]]))
     return(TRUE)
 
   # Does not exist

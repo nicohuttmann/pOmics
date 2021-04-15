@@ -13,7 +13,7 @@ identify_observations <- function(x, pattern = ".") {
 
   tab <- sort(table(suffix))
 
-  tab <- tab[nchar(names(tab)) > 3]
+  tab <- tab[nchar(names(tab)) >= 3]
 
   tab <- tab[!names(tab) %in% c("Count", "IDs", "acid", "window", "position", "names")]
 

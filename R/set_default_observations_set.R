@@ -1,14 +1,14 @@
 #' Set default data set
 #'
 #' @param set observations set name
-#' @param dataset datast
+#' @param dataset dataset
 #' @param silent Silent?
 #'
 #' @return
 #' @export
 #'
 #'
-set_default_observations_set <- function(set, dataset, silent = TRUE) {
+set_default_observations_set <- function(set, dataset, silent = F) {
 
   # Check dataset
   dataset <- get_dataset(dataset)

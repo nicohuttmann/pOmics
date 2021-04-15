@@ -9,12 +9,12 @@
 do_hclust <- function(data) {
 
 
-  hc <- get_data(observations = All) %>%
+  data <- get_data(data.name = "LFQ.imp", dataset = 2) %>%
     include_groups(groups = groups) %>%
     scale_()
 
 
-  dendro.observations <- hc %>%
+  dendro.observations <- data %>%
     dplyr::select(where(is.numeric)) %>%
     dist() %>%
     hclust()

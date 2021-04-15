@@ -4,12 +4,10 @@
 \alias{get_data_names}
 \title{Prints or returns data names}
 \usage{
-get_data_names(dataset, print = T)
+get_data_names(dataset)
 }
 \arguments{
 \item{dataset}{dataset}
-
-\item{print}{print}
 }
 \value{
 
