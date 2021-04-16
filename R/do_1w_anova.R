@@ -1,8 +1,8 @@
-#' Title
+#' Performs one-way ANOVA
 #'
-#' @param analysis_list
-#' @param formula
-#' @param data.name
+#' @param analysis_list list containing raw_data
+#' @param formula formula given as string
+#' @param data.name data to use for analysis
 #'
 #' @return
 #' @export
@@ -108,8 +108,8 @@ do_1w_anova <- function(analysis_list, formula = "log2(x) ~ groups", data.name =
   # Correct log2fc
   posthoc.diff <- correct_log2fc_anova(posthoc.diff, data)
 
-  df <- dplyr::full_join(df, posthoc.diff, by = "variables")
 
+  df <- dplyr::full_join(df, posthoc.diff, by = "variables")
 
 
   analysis_list[["1w_anova_results"]] <- df

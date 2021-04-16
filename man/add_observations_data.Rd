@@ -9,6 +9,7 @@ add_observations_data(
   name,
   observations.set,
   dataset,
+  order.by = F,
   ignore.names = F,
   add.background.variable = T,
   replace
@@ -22,6 +23,8 @@ add_observations_data(
 \item{observations.set}{set of observations}
 
 \item{dataset}{dataset}
+
+\item{order.by}{orders observations data by given vector/factor levels}
 
 \item{ignore.names}{Assumes that data matches observations}
 

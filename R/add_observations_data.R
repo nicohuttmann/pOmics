@@ -4,6 +4,7 @@
 #' @param name name
 #' @param observations.set set of observations
 #' @param dataset dataset
+#' @param order.by orders observations data by given vector/factor levels
 #' @param ignore.names Assumes that data matches observations
 #' @param add.background.variable add name of column to the background variables for easy access
 #' @param replace replace existing column
@@ -14,7 +15,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-add_observations_data <- function(data, name, observations.set, dataset, ignore.names = F, add.background.variable = T,
+add_observations_data <- function(data, name, observations.set, dataset, order.by = F, ignore.names = F, add.background.variable = T,
                                   replace) {
 
   # Check dataset
@@ -91,6 +92,16 @@ add_observations_data <- function(data, name, observations.set, dataset, ignore.
   .datasets[[dataset]][["observations"]][[observations.set]] <<-
     .datasets[[dataset]][["observations"]][[observations.set]] %>%
     dplyr::mutate(!!name := template)
+
+
+  # Order observations data
+  if (order.by) {
+
+    .datasets[[dataset]][["observations"]][[observations.set]] <<-
+      .datasets[[dataset]][["observations"]][[observations.set]] %>%
+      dplyr::arrange(!!sym(eval(name)))
+
+  }
 
 
   # Add background variable

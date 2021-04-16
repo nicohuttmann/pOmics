@@ -2,7 +2,7 @@
 % Please edit documentation in R/do_1w_anova.R
 \name{do_1w_anova}
 \alias{do_1w_anova}
-\title{Title}
+\title{Performs one-way ANOVA}
 \usage{
 do_1w_anova(
   analysis_list,
@@ -11,11 +11,15 @@ do_1w_anova(
 )
 }
 \arguments{
-\item{data.name}{}
+\item{analysis_list}{list containing raw_data}
+
+\item{formula}{formula given as string}
+
+\item{data.name}{data to use for analysis}
 }
 \value{
 
 }
 \description{
-Title
+Performs one-way ANOVA
 }

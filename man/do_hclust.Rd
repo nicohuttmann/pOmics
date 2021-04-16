@@ -4,7 +4,12 @@
 \alias{do_hclust}
 \title{Performs hierarchical clustering on data frame}
 \usage{
-do_hclust(data, clustering.method)
+do_hclust(
+  data_,
+  group.column = "groups",
+  grouping.function = mean,
+  clustering.method
+)
 }
 \arguments{
 \item{data}{data}
