@@ -9,10 +9,12 @@
 #'
 #' @importFrom magrittr %>%
 #'
-classify_2w_anova_i <- function(data, p.value.threshold = 0.05, fc.threshold = 0.5) {
+eval_2w_anova_i <- function(analysis_list, p.value.threshold = 0.05, fc.threshold = 0.5) {
 
   # given analysis list
-  if (!is.data.frame(data)) data <- data[["results"]]
+  if (!"2w_anova_i_results" %in% names(analysis_list)) stop("Given list must contain '2w_anova_i_results' data frame.")
+
+  data <- analysis_list[["2w_anova_i_results"]]
 
   # Define test structure
   var1 <- colnames(data)[5]
@@ -115,9 +117,9 @@ classify_2w_anova_i <- function(data, p.value.threshold = 0.05, fc.threshold = 0
 
   }
 
+  analysis_list[["2w_anova_i_classes"]] <- list_classification
 
 
-
-  return(list_classification)
+  return(analysis_list)
 
 }

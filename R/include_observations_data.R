@@ -30,7 +30,7 @@ include_observations_data <- function(data, name, observations.set, dataset) {
 
   # Get observations data
   data.vector <- .datasets[[dataset]][["observations"]][[observations.set]] %>%
-    dplyr::pull(!!dplyr::enquo(name))
+    dplyr::pull(var = !!dplyr::enquo(name), name = "observations")
 
 
   # Get observations

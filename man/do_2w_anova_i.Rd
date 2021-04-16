@@ -7,7 +7,7 @@
 do_2w_anova_i(
   analysis_list,
   formula = "log2(x) ~ genotype * treatment",
-  data.name = "data",
+  data.name = "raw_data",
   balanced = T
 )
 }

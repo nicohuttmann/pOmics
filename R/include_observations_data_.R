@@ -12,7 +12,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-include_observations_data_ <- function(analysis_list, name, observations.set, dataset, target.data = "data") {
+include_observations_data_ <- function(analysis_list, name, observations.set, dataset, target.data = "raw_data") {
 
   # Check data input
   if (!hasArg(analysis_list)) stop("Please provide data input.")
@@ -36,7 +36,7 @@ include_observations_data_ <- function(analysis_list, name, observations.set, da
 
   # Get groups data
   data.vector <- .datasets[[dataset]][["observations"]][[observations.set]] %>%
-    dplyr::pull(!!dplyr::enquo(name))
+    dplyr::pull(var = !!dplyr::enquo(name), name = "observations")
 
 
   # Get observations

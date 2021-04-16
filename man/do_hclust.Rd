@@ -4,7 +4,7 @@
 \alias{do_hclust}
 \title{Performs hierarchical clustering on data frame}
 \usage{
-do_hclust(data)
+do_hclust(data, clustering.method)
 }
 \arguments{
 \item{data}{data}

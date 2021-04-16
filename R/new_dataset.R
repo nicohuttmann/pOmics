@@ -26,7 +26,7 @@ new_dataset <- function(import, name, data.origin, species, load.UniProt.ws = T,
 
 
   # Name
-  name <- ask_name(name = name, message = "Name of dataset: ", exclude = get_datasets(print = FALSE))
+  name <- ask_name(name = name, message = "Name of dataset: ", exclude = get_datasets())
 
   # Add name
   attr(import, "name") <- name

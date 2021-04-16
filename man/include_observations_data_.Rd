@@ -9,7 +9,7 @@ include_observations_data_(
   name,
   observations.set,
   dataset,
-  target.data = "data"
+  target.data = "raw_data"
 )
 }
 \arguments{

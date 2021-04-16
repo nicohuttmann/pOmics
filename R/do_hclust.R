@@ -6,11 +6,11 @@
 #' @export
 #'
 #'
-do_hclust <- function(data) {
+do_hclust <- function(data, clustering.method) {
 
 
-  data <- get_data(data.name = "LFQ.imp", dataset = 2) %>%
-    include_groups(groups = groups) %>%
+  data <- get_data(data.name = "LFQ.imp", observations = , dataset = ) %>%
+    include_groups(groups = groups, dataset = ) %>%
     scale_()
 
 
