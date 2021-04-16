@@ -1,17 +1,39 @@
 #' Performs hierarchical clustering on data frame
 #'
-#' @param data data
+#' @param data_
+#' @param scale Scale data (Z-score)?
+#' @param group.column
+#' @param grouping.function
+#' @param clustering.method
 #'
 #' @return
 #' @export
 #'
 #'
-do_hclust <- function(data_, group.column = "groups", grouping.function = mean, clustering.method) {
+do_hclust <- function(data_, scale = T, group.column = "groups", grouping.function = mean, clustering.method) {
 
-  set_default_dataset("DEN")
+  # Check input
+  if (!hasArg(data_)) stop("No data list given.")
 
-  data <- get_data(data.name = "LFQ.imp", observations = clean, dataset = ) %>%
-    include_groups(groups = groups, dataset = ) %>%
+  # Check input type
+  if (!is.list(data_)) stop("Given data is not a list.")
+
+  # Check data list
+  if (!data.name %in% names(data_)) stop("Data could not be found. Please specify correct 'data.name'.")
+
+
+  # Get data
+  data <- data_[[data.name]]
+
+  # Scale data
+  if (scale) data <- scale_(data)
+
+
+
+  set_default_dataset("Iron")
+
+  data <- get_data(data.name = "LFQ.imp", observations = All, dataset = ) %>%
+    include_groups(groups = group.column, dataset = ) %>%
     scale_()
 
 

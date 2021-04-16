@@ -6,13 +6,16 @@
 \usage{
 do_hclust(
   data_,
+  scale = T,
   group.column = "groups",
   grouping.function = mean,
   clustering.method
 )
 }
 \arguments{
-\item{data}{data}
+\item{scale}{Scale data (Z-score)?}
+
+\item{clustering.method}{}
 }
 \value{
 

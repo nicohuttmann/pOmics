@@ -1,34 +1,52 @@
-do_pca <- function(data, color = "groups") {
+#' Performs Principal Component Analysis using the prcomp function
+#'
+#' @param data_ data list
+#' @param scale Scale data (Z-scores)?
+#' @param data.name name of data to use for analysis
+#' @param plot plot results
+#' @param print.summary should summary be printed
+#'
+#' @return
+#' @export
+#'
+#'
+do_pca <- function(data_, scale = T, data.name = "raw_data", plot = T, print.summary = F) {
 
-  # Check data input
-  if (!color %in% colnames(data)) stop("Column indicationg individual or grouped coloring could not be found.")
+  # Check input
+  if (!hasArg(data_)) stop("No data list given.")
+
+  # Check input type
+  if (!is.list(data_)) stop("Given data is not a list.")
+
+  # Check data list
+  if (!data.name %in% names(data_)) stop("Data could not be found. Please specify correct 'data.name'.")
 
 
+  # Get data
+  data <- data_[[data.name]]
 
-  get_data(data.name = "LFQ.imp", variables = , observations = ) %>%
-    include_groups(groups = groups) -> data
+  # Scale data
+  if (scale) data <- scale_(data)
 
-
-
-  pca_data <- data %>%
-    scale_
-
-
-  pca <- pca_data %>%
+  # Compute PCA
+  data_[["pca_object"]] <- data %>%
     dplyr::select(where(is.numeric)) %>%
     prcomp()
 
+  # PCA summary
+  data_[["pca_summary"]] <- summary(data_[["pca_object"]])
 
-  pca_data <- as_tibble(pca[["x"]]) %>%
-    dplyr::bind_cols(pca_data)
+  # Print summary
+  if (print.summary) print(data_[["pca_summary"]])
 
-  pca_data <- pca_data %>%
-    dplyr::mutate(color = rlang::eval_tidy(rlang::parse_expr(color)), .before = where(is.numeric))
+  # PCA summary
+  data_[["pca_data"]] <- as_tibble(data_[["pca_object"]][["x"]]) %>%
+    dplyr::mutate(dplyr::select(data, -where(is.numeric)), .before = where(is.numeric))
 
+  # Plot
+  if (plot) data_ <- plot_gg_pca(data_)
 
-  ggplot(pca_data, aes(x = PC1, y = PC2, color = color)) +
-    geom_point()
-
-
+  # Return
+  invisible(data_)
 
 }

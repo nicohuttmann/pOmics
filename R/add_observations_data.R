@@ -101,6 +101,12 @@ add_observations_data <- function(data, name, observations.set, dataset, order.b
       .datasets[[dataset]][["observations"]][[observations.set]] %>%
       dplyr::arrange(!!sym(eval(name)))
 
+    for (i in get_data_names(dataset)) {
+
+      reorder_data(data.name = i, observations.set = observations.set, dataset = dataset, silent = TRUE)
+
+    }
+
   }
 
 
