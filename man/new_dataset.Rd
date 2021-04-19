@@ -10,8 +10,8 @@ new_dataset(
   data.origin,
   species,
   load.UniProt.ws = T,
-  identifier,
-  data.types
+  identifier = "Protein.IDs",
+  data.types = "Peptides"
 )
 }
 \arguments{

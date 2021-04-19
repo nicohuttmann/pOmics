@@ -15,8 +15,9 @@ identify_observations <- function(x, pattern = ".") {
 
   tab <- tab[nchar(names(tab)) >= 3]
 
-  tab <- tab[!names(tab) %in% c("Count", "IDs", "acid", "window", "position", "names")]
+  # Important: Excludion list for potential sample names
+  tab <- tab[!names(tab) %in% c("Count", "IDs", "acid", "window", "position", "names", "[%]")]
 
-  names(tab)[tab == max(tab)]
+  return(names(tab)[tab == max(tab)])
 
 }

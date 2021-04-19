@@ -13,7 +13,7 @@
 #'
 #' @importFrom magrittr %>%
 #'
-new_dataset <- function(import, name, data.origin, species, load.UniProt.ws = T, identifier, data.types) {
+new_dataset <- function(import, name, data.origin, species, load.UniProt.ws = T, identifier = "Protein.IDs", data.types = "Peptides") {
 
 
 

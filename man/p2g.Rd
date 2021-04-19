@@ -7,8 +7,6 @@
 p2g(proteins, dataset)
 }
 \arguments{
-\item{proteins}{}
-
 \item{dataset}{}
 }
 \value{
