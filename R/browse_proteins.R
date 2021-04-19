@@ -2,16 +2,15 @@
 #'
 #' @param proteins vector of protein accession Ids
 #' @param limit limit of proteins to be searched
-#' @param nolimit bypasses all restrictions
 #'
 #' @return
 #' @export
 #'
 #'
-browse_proteins <- function(proteins = "Q63HQ2", limit = 10, nolimit = F) {
+browse_proteins <- function(proteins = "Q63HQ2", limit = 10) {
 
   # Don't do it
-  if (nolimit) {
+  if (length(proteins) < 100) {
 
     for (protein in proteins) {
       browseURL(paste0("https://www.uniprot.org/uniprot/", protein))

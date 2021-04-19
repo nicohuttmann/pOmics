@@ -6,16 +6,28 @@
 \usage{
 do_hclust(
   data_,
+  data.name = "raw_data",
   scale = T,
   group.column = "groups",
   grouping.function = mean,
-  clustering.method
+  distance.method = "euclidean",
+  clustering.method = "complete"
 )
 }
 \arguments{
+\item{data_}{data list}
+
+\item{data.name}{name of data to use for analysis}
+
 \item{scale}{Scale data (Z-score)?}
 
-\item{clustering.method}{}
+\item{group.column}{column to use for combining groups}
+
+\item{grouping.function}{function to combine groups}
+
+\item{distance.method}{method to calculate distance; see ?dist for options}
+
+\item{clustering.method}{method to cluster columns and rows; see ?hclust for options}
 }
 \value{
 

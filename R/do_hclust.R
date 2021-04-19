@@ -1,16 +1,20 @@
 #' Performs hierarchical clustering on data frame
 #'
-#' @param data_
+#' @param data_ data list
+#' @param data.name name of data to use for analysis
 #' @param scale Scale data (Z-score)?
-#' @param group.column
-#' @param grouping.function
-#' @param clustering.method
+#' @param group.column column to use for combining groups
+#' @param grouping.function function to combine groups
+#' @param distance.method method to calculate distance; see ?dist for options
+#' @param clustering.method method to cluster columns and rows; see ?hclust for options
 #'
 #' @return
 #' @export
 #'
 #'
-do_hclust <- function(data_, scale = T, group.column = "groups", grouping.function = mean, clustering.method) {
+do_hclust <- function(data_, data.name = "raw_data", scale = T,
+                      group.column = "groups", grouping.function = mean,
+                      distance.method = "euclidean", clustering.method = "complete") {
 
   # Check input
   if (!hasArg(data_)) stop("No data list given.")
@@ -28,29 +32,34 @@ do_hclust <- function(data_, scale = T, group.column = "groups", grouping.functi
   # Scale data
   if (scale) data <- scale_(data)
 
-
-
-  set_default_dataset("Iron")
-
-  data <- get_data(data.name = "LFQ.imp", observations = All, dataset = ) %>%
-    include_groups(groups = group.column, dataset = ) %>%
-    scale_()
-
-
+  # Combine groups
   data <- collapse_groups(data = data, FUN = grouping.function, group.column = group.column)
 
+  # Save data
+  data_[["data"]] <- data
 
-  dendro.observations <- data %>%
+  #
+  data_[["dend_y"]] <- data %>%
     dplyr::select(c(!!group.column, where(is.numeric))) %>%
     tibble2matrix(row.names = group.column) %>%
-    dist(method = "euclidean") %>%
-    hclust(method = "complete")
-
-   plot(dendro.observations)
+    dist(method = distance.method) %>%
+    hclust(method = clustering.method)
 
 
-  # Variables
-  dendro.variables <- hclust(d = dist(x = t(data)), method = clustering.method)
 
+   # Variables
+   data_[["dend_x"]] <- data %>%
+     dplyr::select(c(!!group.column, where(is.numeric))) %>%
+     tibble2matrix(row.names = group.column) %>%
+     t() %>%
+     dist(method = distance.method) %>%
+     hclust(method = clustering.method)
+
+
+   # Plot
+   data_ <- plot_heatmap_dxy(data_ = data_)
+
+   # Return
+   invisible(data_)
 
 }

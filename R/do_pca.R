@@ -28,6 +28,9 @@ do_pca <- function(data_, scale = T, data.name = "raw_data", plot = T, print.sum
   # Scale data
   if (scale) data <- scale_(data)
 
+  # Save data
+  data_[["data"]] <- data
+
   # Compute PCA
   data_[["pca_object"]] <- data %>%
     dplyr::select(where(is.numeric)) %>%

@@ -20,15 +20,14 @@ plot_gg_pca <- function(data_, x = "PC1", y = "PC2", color = "groups") {
 
   # Check data list
   if (!"pca_data" %in% names(data_) | !"pca_summary" %in% names(data_))
-    stop("PCA related data could not be found..")
+    stop("PCA related data could not be found.")
 
 
   # Get data
   data <- data_[["pca_data"]]
 
 
-  data_[["pca_plot"]] <-
-    ggplot(data, aes_string(x = x, y = y, color = color)) +
+  p <- ggplot(data, aes_string(x = x, y = y, color = color)) +
     geom_point() +
     theme_classic() +
     theme(panel.border = element_rect(color = "black", fill = NA)) +
@@ -39,7 +38,10 @@ plot_gg_pca <- function(data_, x = "PC1", y = "PC2", color = "groups") {
                                  sum(data_[["pca_summary"]][["sdev"]]^2), digits = 1), "%)"))
 
   # Print to device
-  print(data_[["pca_plot"]])
+  print(p)
+
+  # Add to list
+  data_[[paste("pca_plot", x, y, sep = "_")]] <- p
 
   # Return
   invisible(data_)

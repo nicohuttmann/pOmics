@@ -12,7 +12,8 @@ cleanup <- function() {
                       ".datasets",
                       ".databases",
                       ".imports",
-                      ".info")),
+                      ".info",
+                      "Analysis")),
      pos = .GlobalEnv)
 
 }

@@ -4,14 +4,12 @@
 \alias{browse_proteins}
 \title{Opens UniProt page of given protein}
 \usage{
-browse_proteins(proteins = "Q63HQ2", limit = 10, nolimit = F)
+browse_proteins(proteins = "Q63HQ2", limit = 10)
 }
 \arguments{
 \item{proteins}{vector of protein accession Ids}
 
 \item{limit}{limit of proteins to be searched}
-
-\item{nolimit}{bypasses all restrictions}
 }
 \value{
 

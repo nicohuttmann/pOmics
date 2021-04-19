@@ -3,9 +3,7 @@
 #' @param data data
 #' @param dend_x x-axis dendrogram
 #' @param dend_y y-axis dendrogram
-#' @param scale should data be scaled
-#' @param transform should data be transformed
-#' @param clustering.method method to cluster variables and observations
+#' @param transpose should data be transformed
 #'
 #' @return
 #' @export
@@ -13,33 +11,40 @@
 #' @import ggplot2
 #' @importFrom magrittr %>%
 #'
-plot_heatmap_dxy <- function(data, dend_x, dend_y,
-                           scale = T, transform = T, clustering.method = "complete") {
+plot_heatmap_dxy <- function(data_, dend_x = T, dend_y = T, transpose = T) {
 
-  # Scale data (Z-scoring)
-  if (scale) data <- scale(data)
+  # Check input
+  if (!hasArg(data_)) stop("No data list given.")
 
-  # Transform data
-  if (transform) data <- t(data)
+  # Check input type
+  if (!is.list(data_)) stop("Given data is not a list.")
+
+  # Check data list
+  if (!"data" %in% names(data_)) stop("Data could not be found. Please specify correct 'data.name'.")
+
+
+  # Get data
+  data <- data_[["data"]]
+
+
+  # Transpose data
+  if (!transpose) data <- transpose_tibble(tibble = data, from.row.names = names(data)[1])
 
 
   # Save names
-  x_names <- colnames(data)
-  y_names <- rownames(data)
+  x_names <- colnames(data)[-1]
+  y_names <- data[[1]]
 
 
 
-  # x-axis dendrogram
-  if (!hasArg(dend_x)) {
-    dend_x <- data %>%
-      t() %>%
-      dist() %>%
-      hclust(method = "average") %>%
-      as.dendrogram()
-  }
 
   # Get dendrogram data
-  dend_data_x <- ggdendro::dendro_data(dend_x)
+  if (transpose) {
+    dend_data_x <- ggdendro::dendro_data(data_[["dend_y"]])
+  }  else {
+    dend_data_x <- ggdendro::dendro_data(data_[["dend_x"]])
+  }
+
 
   # Segment data for dendrogram plot
   segment_data_x <- with(ggdendro::segment(dend_data_x),
@@ -52,16 +57,13 @@ plot_heatmap_dxy <- function(data, dend_x, dend_y,
                                  width = 1))
 
 
-  # y-axis dendrogram
-  if (!hasArg(dend_y)) {
-    dend_y <- data %>%
-      dist() %>%
-      hclust(method = clustering.method) %>%
-      as.dendrogram()
-  }
 
   # Get dendrogram data
-  dend_data_y <- ggdendro::dendro_data(dend_y)
+  if (transpose) {
+    dend_data_y <- ggdendro::dendro_data(data_[["dend_x"]])
+  } else {
+    dend_data_y <- ggdendro::dendro_data(data_[["dend_y"]])
+  }
 
   # Invert layout observations
   segment_data_y <- with(ggdendro::segment(dend_data_y),
@@ -75,7 +77,8 @@ plot_heatmap_dxy <- function(data, dend_x, dend_y,
 
   # Construct heatmap df
   data_heatmap <- data %>%
-    reshape2::melt(value.name = "expr", varnames = c("y", "x")) %>%
+    reshape2::melt(value.name = "expr", id.vars = colnames(data)[1]) %>%
+    dplyr::rename(x = !!names(.[1]), y = !!names(.[2])) %>%
     dplyr::left_join(pos_table_x, by = "x") %>%
     dplyr::left_join(pos_table_y, by = "y")
 
@@ -94,10 +97,12 @@ plot_heatmap_dxy <- function(data, dend_x, dend_y,
   )
 
 
+  # List to save plots in
+  data_[["plots"]] <- tibble::lst()
 
 
   # Heatmap plot
-  p_heatmap <- ggplot(data_heatmap,
+  data_[["plots"]][["heatmap"]] <- ggplot(data_heatmap,
                      aes(x = x_center, y = y_center, fill = expr,
                          height = height, width = width)) +
     geom_tile() +
@@ -128,7 +133,7 @@ plot_heatmap_dxy <- function(data, dend_x, dend_y,
 
 
   # Dendrogram plot y
-  p_dend_y <- ggplot(segment_data_y) +
+  data_[["plots"]][["dend_y"]] <- ggplot(segment_data_y) +
     geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = 1.5/.pt) +
     scale_x_reverse(expand = c(0, 0)) +
     scale_y_continuous(breaks = pos_table_y$y_center,
@@ -150,7 +155,7 @@ plot_heatmap_dxy <- function(data, dend_x, dend_y,
 
 
   # Dendrogram plot x
-  p_dend_x <- ggplot(segment_data_x) +
+  data_[["plots"]][["dend_x"]] <- ggplot(segment_data_x) +
     geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = 1.5/.pt) +
     scale_y_continuous(expand = c(0, 0)) +
     scale_x_continuous(breaks = pos_table_x$x_center,
@@ -171,11 +176,19 @@ plot_heatmap_dxy <- function(data, dend_x, dend_y,
 
 
 
+  data_[["plots"]][["plot"]] <- cowplot::plot_grid(NULL,
+                     data_[["plots"]][["dend_x"]],
+                     data_[["plots"]][["dend_y"]],
+                     data_[["plots"]][["heatmap"]],
+                     align = 'hv', rel_widths = c(.2, 1), rel_heights = c(.1, 1))
 
-  cowplot::plot_grid(NULL, p_dend_x, p_dend_y, p_heatmap, align = 'hv',
-                     rel_widths = c(.2, 1), rel_heights = c(.1, 1))
+
+  # Plot
+  print(data_[["plots"]][["plot"]])
 
 
 
+  # Return
+  invisible(data_)
 
 }
