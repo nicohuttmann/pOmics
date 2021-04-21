@@ -20,7 +20,7 @@ plot_heatmap_dxy <- function(data_, dend_x = T, dend_y = T, transpose = T) {
   if (!is.list(data_)) stop("Given data is not a list.")
 
   # Check data list
-  if (!"data" %in% names(data_)) stop("Data could not be found. Please specify correct 'data.name'.")
+  if (!"data" %in% names(data_)) stop("Data could not be found. Please specify correct <data.name>.")
 
 
   # Get data

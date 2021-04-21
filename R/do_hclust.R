@@ -23,7 +23,7 @@ do_hclust <- function(data_, data.name = "raw_data", scale = T,
   if (!is.list(data_)) stop("Given data is not a list.")
 
   # Check data list
-  if (!data.name %in% names(data_)) stop("Data could not be found. Please specify correct 'data.name'.")
+  if (!data.name %in% names(data_)) stop("Data could not be found. Please specify correct <data.name>.")
 
 
   # Get data

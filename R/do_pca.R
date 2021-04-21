@@ -19,7 +19,7 @@ do_pca <- function(data_, scale = T, data.name = "raw_data", plot = T, print.sum
   if (!is.list(data_)) stop("Given data is not a list.")
 
   # Check data list
-  if (!data.name %in% names(data_)) stop("Data could not be found. Please specify correct 'data.name'.")
+  if (!data.name %in% names(data_)) stop("Data could not be found. Please specify correct <data.name>.")
 
 
   # Get data
