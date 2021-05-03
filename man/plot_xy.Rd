@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_xy.R
 \name{plot_xy}
 \alias{plot_xy}
-\title{Matches names and plots scattrplot of two variables}
+\title{Matches names and plots scatter plot of two variables}
 \usage{
 plot_xy(x, y, axis.title.x = "x", axis.title.y = "y")
 }
@@ -11,11 +11,13 @@ plot_xy(x, y, axis.title.x = "x", axis.title.y = "y")
 
 \item{y}{named y vector}
 
-\item{fit}{add fit}
+\item{axis.title.x}{title of x-axis}
+
+\item{axis.title.y}{title of y-axis}
 }
 \value{
 
 }
 \description{
-Matches names and plots scattrplot of two variables
+Matches names and plots scatter plot of two variables
 }

@@ -1,13 +1,13 @@
-#' Title
+#' Helps make nice axis limit breaks
 #'
-#' @param values
-#' @param break.space
+#' @param values data values
+#' @param break.space space between breaks
 #'
 #' @return
 #' @export
 #'
 #'
-axis_limits_breaks <- function(values, break.space = 2) {
+axis_limit_breaks <- function(values, break.space = 2) {
 
 
   output <- list()

@@ -7,7 +7,9 @@
 p2g(proteins, dataset)
 }
 \arguments{
-\item{dataset}{}
+\item{proteins}{UniProt protein Ids}
+
+\item{dataset}{dataset}
 }
 \value{
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_gg_volcano.R
 \name{plot_gg_volcano}
 \alias{plot_gg_volcano}
-\title{Plots a volcano plot using ggplot2}
+\title{Plots a volcano plot with ggplot2}
 \usage{
 plot_gg_volcano(
   data,
@@ -29,7 +29,19 @@ plot_gg_volcano(
 )
 }
 \arguments{
+\item{data}{data}
+
+\item{p.value.cutoff}{p-value limit for coloring}
+
+\item{pos.log2fc.cutoff}{positive log2 fold-change limit for coloring}
+
+\item{neg.log2fc.cutoff}{negative log2 fold-change limit for coloring}
+
 \item{highlight.variables}{variables to highlight by point.size}
+
+\item{x.axis.title}{title of x-axis}
+
+\item{y.axis.title}{title of y-axis}
 
 \item{text.size}{size of text in points (5-8)}
 
@@ -41,11 +53,27 @@ plot_gg_volcano(
 
 \item{highlight.point.size}{size of point of highlighted variables}
 
-\item{axis.text.size}{}
+\item{highlight.point.alpha}{transparency of points to be highlighted}
+
+\item{x.axis.breaks}{break size between ticks of x-axis}
+
+\item{y.axis.breaks}{break size between ticks of y-axis}
+
+\item{axis.line.size}{width of axes lines}
+
+\item{axis.color}{color of axes lines}
+
+\item{axis.ticks.size}{width of axis ticks}
+
+\item{axis.title.size}{size of axis title}
+
+\item{axis.text.size}{size of axis labels}
+
+\item{highligh.color}{color to use to highlight specified proteins}
 }
 \value{
 
 }
 \description{
-Plots a volcano plot using ggplot2
+Plots a volcano plot with ggplot2
 }

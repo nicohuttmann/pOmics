@@ -1,28 +1,28 @@
-#' Plots a volcano plot using ggplot2
+#' Plots a volcano plot with ggplot2
 #'
 #'
 #'
-#' @param data
-#' @param p.value.cutoff
-#' @param pos.log2fc.cutoff
-#' @param neg.log2fc.cutoff
+#' @param data data
+#' @param p.value.cutoff p-value limit for coloring
+#' @param pos.log2fc.cutoff positive log2 fold-change limit for coloring
+#' @param neg.log2fc.cutoff negative log2 fold-change limit for coloring
 #' @param highlight.variables variables to highlight by point.size
-#' @param highligh.color
-#' @param x.axis.title
-#' @param y.axis.title
+#' @param highligh.color color to use to highlight specified proteins
+#' @param x.axis.title title of x-axis
+#' @param y.axis.title title of y-axis
 #' @param text.size size of text in points (5-8)
 #' @param text.color color of text
 #' @param point.size point size (0.5-2)
 #' @param point.alpha transparency (0-1)
 #' @param highlight.point.size size of point of highlighted variables
-#' @param highlight.point.alpha
-#' @param x.axis.breaks
-#' @param y.axis.breaks
-#' @param axis.line.size
-#' @param axis.color
-#' @param axis.ticks.size
-#' @param axis.title.size
-#' @param axis.text.size
+#' @param highlight.point.alpha transparency of points to be highlighted
+#' @param x.axis.breaks break size between ticks of x-axis
+#' @param y.axis.breaks break size between ticks of y-axis
+#' @param axis.line.size width of axes lines
+#' @param axis.color color of axes lines
+#' @param axis.ticks.size width of axis ticks
+#' @param axis.title.size size of axis title
+#' @param axis.text.size size of axis labels
 #'
 #' @return
 #' @export
@@ -69,11 +69,11 @@ plot_gg_volcano <- function(data, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0, 
           axis.title = element_text(size = axis.title.size, color = text.color),
           legend.position = 0) +
     scale_color_manual(values = c("highlight" = highlight.color, "up" = "red", "down" = "blue", "not" = "grey")) +
-    scale_x_continuous(limits = axis_limits_breaks(values = data$log2.fc, break.space = x.axis.breaks)$limits,
-                       breaks = axis_limits_breaks(values = data$log2.fc, break.space = x.axis.breaks)$breaks,
+    scale_x_continuous(limits = axis_limit_breaks(values = data$log2.fc, break.space = x.axis.breaks)$limits,
+                       breaks = axis_limit_breaks(values = data$log2.fc, break.space = x.axis.breaks)$breaks,
                        expand = c(0, 0)) +
-    scale_y_continuous(limits = axis_limits_breaks(values = -log10(data$p.value), break.space = y.axis.breaks)$limits,
-                       breaks = axis_limits_breaks(values = -log10(data$p.value), break.space = y.axis.breaks)$breaks,
+    scale_y_continuous(limits = axis_limit_breaks(values = -log10(data$p.value), break.space = y.axis.breaks)$limits,
+                       breaks = axis_limit_breaks(values = -log10(data$p.value), break.space = y.axis.breaks)$breaks,
                        expand = c(0, 0)) +
     xlab(x.axis.title) +
     ylab(y.axis.title)

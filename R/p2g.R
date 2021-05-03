@@ -1,7 +1,7 @@
 #' Returns gene symbol from known proteins in dataset
 #'
-#' @param proteins
-#' @param dataset
+#' @param proteins UniProt protein Ids
+#' @param dataset dataset
 #'
 #' @return
 #' @export
@@ -30,10 +30,10 @@ p2g <- function(proteins, dataset) {
 
 
 
-  genes <- clusterProfiler::bitr(geneID = sig.proteins,
+  genes <- clusterProfiler::bitr(geneID = proteins,
                                  fromType = "UNIPROT",
                                  toType = "GENENAME",
-                                 OrgDb = "org.Mm.ege.db",
+                                 OrgDb = "org.Mm.eg.db",
                                  drop = FALSE)
 
   genes <- genes[!duplicated(genes[[1]]), ]

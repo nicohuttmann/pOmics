@@ -1,8 +1,9 @@
-#' Matches names and plots scattrplot of two variables
+#' Matches names and plots scatter plot of two variables
 #'
 #' @param x names x vector
 #' @param y named y vector
-#' @param fit add fit
+#' @param axis.title.x title of x-axis
+#' @param axis.title.y title of y-axis
 #'
 #' @return
 #' @export

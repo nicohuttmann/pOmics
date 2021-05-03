@@ -14,15 +14,12 @@ data2tibble <- function(data, row.names = "observations") {
     return(data)
 
   # Matrix
-  } else if (is.matrix(data)) {
-    return(matrix2tibble(matrix = data,
-                            row.names = row.names))
+  } else if (is.matrix(data) || is.data.frame(data)) {
 
-  # Data frame
-  } else if (is.data.frame(data)) {
-
-    return(data_frame2tibble(data.frame = data,
-                                row.names = row.names))
+    return(data %>%
+             {if (is.matrix(.)) as.data.frame(.) else .} %>%
+             {if (!all(rownames(.) == as.character(1:nrow(.)))) tibble::rownames_to_column(.data = ., var = row.names) else .} %>%
+             tibble::as_tibble())
 
   # Other data types
   } else {
