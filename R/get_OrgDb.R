@@ -13,14 +13,18 @@ get_OrgDb <- function(OrgDb, dataset) {
   dataset <- get_dataset(dataset)
   
   # 
-  if (!hasArg(OrgDb))
+  if (!hasArg(OrgDb)) {
+    
     OrgDb <- get_dataset_attr(which = "OrgDb", 
                               dataset = dataset)
+    
+  }
+    
   
   # If no OrgDb setup
   if (is.null(OrgDb)) {
     
-    cat("No organism database setup. Please use setup_annotations() to enable ID translation and functional enrichment.")
+    cat("No organism database set up. Please use setup_annotations() to enable ID translation and functional enrichment.")
     
     invisible(NULL)
     
@@ -29,6 +33,8 @@ get_OrgDb <- function(OrgDb, dataset) {
     
     # Attach package for clusterProfiler
     suppressPackageStartupMessages(library("org.Mm.eg.db", quietly = TRUE, character.only = TRUE))
+    
+    return(OrgDb)
     
   } else {
     

@@ -7,11 +7,11 @@
 #'
 #'
 get_variables_data_names <- function(dataset) {
-  
+
   # get_dataset
   dataset <- get_dataset(dataset)
-  
+
   # print
-  return(names(.datasets[[1]][["variables"]]))
-  
+  return(names(.datasets[[dataset]][["variables"]]))
+
 }

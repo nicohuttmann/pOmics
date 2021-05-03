@@ -10,7 +10,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-protein2taxID <- function(x, try = 1, silent = F) {
+identify_taxId <- function(x, try = 1, silent = F) {
 
   if (length(x) >= try) {
 
@@ -37,7 +37,7 @@ protein2taxID <- function(x, try = 1, silent = F) {
 
 
     if (taxonomy == 0) {
-      taxId <- protein2taxID(x = x, try = try + 1, silent = F)
+      taxId <- identify_taxId(x = x, try = try + 1, silent = F)
     }
 
 

@@ -15,8 +15,7 @@ do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", v
 
 
 
-  organism_code <- clusterProfiler::search_kegg_organism(get_dataset_attr(which = "species", dataset = dataset),
-                                                         by = "scientific_name")[1, 1]
+  organism_code <-
 
   sig.proteins <- names(proteins)[proteins == 1]
 

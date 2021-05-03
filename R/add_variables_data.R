@@ -39,7 +39,7 @@ add_variables_data <- function(data, name, dataset, set.default = F, add.backgro
 
 
   # Name already present in dataset
-  if (name %in% colnames(.datasets[[dataset]][["variables"]])) {
+  if (name %in% get_variables_data_names(dataset = dataset)) {
 
     # Argument replace given as TRUE
     if (hasArg(replace) && replace) {

@@ -11,8 +11,9 @@ translate_Ids(
   OrgDb,
   dataset,
   drop = F,
-  fill_missing = "initial",
-  save = T
+  fill.missing = "initial",
+  save = T,
+  silent = T
 )
 }
 \arguments{
@@ -28,9 +29,11 @@ translate_Ids(
 
 \item{drop}{drop missing translations}
 
-\item{fill_missing}{How to handle missing Ids. By default, given Ids are filled in, other characters or NA can be used}
+\item{fill.missing}{How to handle missing Ids. By default, given Ids are filled in, other characters or NA can be used}
 
-\item{save}{translated Ids in variables data frame for next time (all Ids in dataset will be   )}
+\item{save}{translated Ids in variables data frame for next time (all Ids in dataset will be translated)}
+
+\item{silent}{suppress all messages}
 }
 \value{
 

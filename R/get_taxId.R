@@ -22,7 +22,7 @@ get_taxId <- function(x) {
       id.list <- c(id.list,
                    keep_first(id.list))
 
-      taxId <- protein2taxID(id.list, silent = T)
+      taxId <- identify_taxId(id.list, silent = T)
 
 
 
