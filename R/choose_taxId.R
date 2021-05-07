@@ -1,12 +1,17 @@
+#' Helps to find taxonomy Id
+#'
+#' @return
+#' @export
+#'
+#' 
 choose_taxId <- function() {
   
   # 
   found <- FALSE
-   
-  # If not found from input
+
   while(!found) {
     
-    Id2name <- UniProt.ws::availableUniprotSpecies(readline("Enter a species name: "))
+    Id2name <- suppressMessages(UniProt.ws::availableUniprotSpecies(readline("Enter a species name: ")))
     
     name <- menu(Id2name$`Species name`,
                  title = "Select species:")
@@ -17,7 +22,7 @@ choose_taxId <- function() {
       
       found <- ifelse(menu(c("Yes", "No"),
                            title = paste0("Correct species? (",
-                                          UniProt.ws::lookupUniprotSpeciesFromTaxId(taxId),
+                                          suppressMessages(UniProt.ws::lookupUniprotSpeciesFromTaxId(taxId)),
                                           ")")) == 1,
                       TRUE,
                       FALSE)
@@ -28,6 +33,5 @@ choose_taxId <- function() {
   }
   
   return(taxId)
-  
   
 }

@@ -8,6 +8,7 @@ do_ORA_KEGG(
   proteins,
   pvalueCutoff = 0.05,
   pAdjustMethod = "none",
+  dataset,
   view = T,
   return.all = F,
   add.info = F
@@ -19,6 +20,8 @@ do_ORA_KEGG(
 \item{pvalueCutoff}{p-value cutoff for annotations}
 
 \item{pAdjustMethod}{one of "none","hochberg" (Benjamini-Hochberg correction), "bonferroni", "holm", "hommel", "BH", "BY", "fdr"}
+
+\item{dataset}{dataset}
 
 \item{view}{view results}
 

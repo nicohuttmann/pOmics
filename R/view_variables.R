@@ -6,13 +6,14 @@
 #' @export
 #'
 #'
-show_variables <- function(dataset) {
-  
+view_variables <- function(dataset) {
+
   # get_dataset
   dataset <- get_dataset(dataset)
-  
+
   # print
-  print(.datasets[[1]][["variables"]])
-  
-  
+  print(.datasets[[dataset]][["variables"]])
+  View(.datasets[[dataset]][["variables"]])
+
+
 }

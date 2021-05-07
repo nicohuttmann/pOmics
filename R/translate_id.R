@@ -1,6 +1,6 @@
 #' Translates biological IDs using annotations packages
 #'
-#' @param Ids ids
+#' @param Ids Ids
 #' @param fromType type of given Ids
 #' @param toType type Ids should be translated to
 #' @param OrgDb name of organism database to use; defined by setup_annotations()
@@ -37,7 +37,8 @@ translate_Ids <- function(Ids, fromType = "UNIPROT", toType, OrgDb, dataset, dro
   }
 
   # Annotation database for organism
-  OrgDb <- get_OrgDb(OrgDb, dataset)
+  OrgDb <- get_OrgDb(OrgDb = OrgDb,
+                     dataset = dataset)
 
   # If no organism database can be found
   if (is.null(OrgDb)) {
@@ -63,7 +64,7 @@ translate_Ids <- function(Ids, fromType = "UNIPROT", toType, OrgDb, dataset, dro
 
   if (silent) {
 
-    output <- clusterProfiler::bitr(geneID = proteins,
+    output <- clusterProfiler::bitr(geneID = Ids,
                                     fromType = fromType,
                                     toType = toType,
                                     OrgDb = OrgDb,
@@ -73,7 +74,7 @@ translate_Ids <- function(Ids, fromType = "UNIPROT", toType, OrgDb, dataset, dro
 
   } else {
 
-    output <- clusterProfiler::bitr(geneID = proteins,
+    output <- clusterProfiler::bitr(geneID = Ids,
                                     fromType = fromType,
                                     toType = toType,
                                     OrgDb = OrgDb,

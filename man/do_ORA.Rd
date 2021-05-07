@@ -4,7 +4,16 @@
 \alias{do_ORA}
 \title{Performs overexpression enrichment on logical protein vector with specified Ontology}
 \usage{
-do_ORA(proteins, database, algorithm, threshold, add.info = F)
+do_ORA(
+  proteins,
+  database,
+  algorithm,
+  threshold,
+  pAdjustMethod = "none",
+  dataset,
+  return.all = F,
+  add.info = F
+)
 }
 \arguments{
 \item{proteins}{character vector}
@@ -15,7 +24,13 @@ do_ORA(proteins, database, algorithm, threshold, add.info = F)
 
 \item{threshold}{p-value/confidence threshold to exclude terms}
 
-\item{add.info}{Add additional information (takes longer)}
+\item{pAdjustMethod}{one of "none","hochberg" (Benjamini-Hochberg correction), "bonferroni", "holm", "hommel", "BH", "BY", "fdr"}
+
+\item{dataset}{dataset}
+
+\item{return.all}{return enrichResult object; useful for further analysis of enrichment results}
+
+\item{add.info}{add additional information (takes longer)}
 }
 \value{
 

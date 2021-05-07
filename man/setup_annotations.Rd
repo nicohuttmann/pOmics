@@ -4,14 +4,14 @@
 \alias{setup_annotations}
 \title{Sets up annotaion database for biological Id translation and functional enrichment}
 \usage{
-setup_annotations(taxId, OrgDb, dataset)
+setup_annotations(dataset, taxId, OrgDb)
 }
 \arguments{
+\item{dataset}{dataset}
+
 \item{taxId}{taxonomy Id}
 
 \item{OrgDb}{name of annotation package from Bioconductor}
-
-\item{dataset}{dataset}
 }
 \value{
 

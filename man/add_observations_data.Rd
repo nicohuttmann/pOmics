@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_observations_data.R
 \name{add_observations_data}
 \alias{add_observations_data}
-\title{Adds data to observations dataframe}
+\title{Adds data to observations data frame}
 \usage{
 add_observations_data(
   data,
@@ -36,5 +36,5 @@ add_observations_data(
 
 }
 \description{
-Adds data to observations dataframe
+Adds data to observations data frame
 }

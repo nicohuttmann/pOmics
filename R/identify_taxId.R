@@ -29,7 +29,7 @@ identify_taxId <- function(x, try = 1, silent = F) {
       as.numeric()
 
     taxonomy <- tryCatch(
-      UniProt.ws::lookupUniprotSpeciesFromTaxId(taxId),
+      suppressMessages(UniProt.ws::lookupUniprotSpeciesFromTaxId(taxId)),
       error = function(cond) {
         0
         }

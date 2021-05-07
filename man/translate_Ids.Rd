@@ -17,7 +17,7 @@ translate_Ids(
 )
 }
 \arguments{
-\item{Ids}{ids}
+\item{Ids}{Ids}
 
 \item{fromType}{type of given Ids}
 

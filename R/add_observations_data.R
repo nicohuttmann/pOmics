@@ -1,4 +1,4 @@
-#' Adds data to observations dataframe
+#' Adds data to observations data frame
 #'
 #' @param data new data
 #' @param name name
@@ -38,10 +38,10 @@ add_observations_data <- function(data, name, observations.set, dataset, order.b
 
 
   # Fill template with data
-  if (is.factor(data) & all((names(data) == names(template)))) {
-    template <- data
+  if (is.factor(data) & length(names(data)) == length(data) & all((names(data) %in% names(template)))) {
+    template <- factor(data[names(template)])
   } else if (is.factor(data)) {
-    stop("Please make sure all observations match when you provide factors.")
+    stop("Please make sure all observations are named when you provide factors.")
   } else if (!ignore.names) {
     template[names(data)] <- data
   } else {

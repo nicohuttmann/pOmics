@@ -3,6 +3,7 @@
 #' @param proteins numeric/logical vector of proteins indicating group
 #' @param pvalueCutoff p-value cutoff for annotations
 #' @param pAdjustMethod one of "none","hochberg" (Benjamini-Hochberg correction), "bonferroni", "holm", "hommel", "BH", "BY", "fdr"
+#' @param dataset dataset
 #' @param view view results
 #' @param return.all return enrichResult object; useful for further analysis of enrichment results
 #' @param add.info add additional information to the results data frame
@@ -11,11 +12,13 @@
 #' @export
 #'
 #'
-do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", view = T, return.all = F, add.info = F) {
+do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", dataset,
+                        view = T, return.all = F, add.info = F) {
 
+  dataset <- get_dataset(dataset)
 
-
-  organism_code <-
+  kegg_code <- get_dataset_attr(which = "kegg_code",
+                                dataset = dataset)
 
   sig.proteins <- names(proteins)[proteins == 1]
 
@@ -25,7 +28,7 @@ do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", v
 
   kegg.results <- clusterProfiler::enrichKEGG(gene = sig.proteins,
                                               universe = background,
-                                              organism = organism_code,
+                                              organism = kegg_code,
                                               keyType = "uniprot",
                                               pAdjustMethod = pAdjustMethod,
                                               minGSSize = 10,

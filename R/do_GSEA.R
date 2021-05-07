@@ -20,6 +20,14 @@ do_GSEA <- function(proteins, inverse = F, database, algorithm, threshold, add.i
                                                                      algorithm = algorithm,
                                                                      threshold = threshold,
                                                                      add.info = add.info)
+
+  # KEGG
+  else if (database %in% c("Kegg", "KEGG", "kegg")) results <- do_GSEA_KEGG <- function(proteins,
+                                                                                        pvalueCutoff = 0.05,
+                                                                                        pAdjustMethod = "none",
+                                                                                        view = T,
+                                                                                        return.all = F,
+                                                                                        add.info = add.info)
   #
 
   # Return results

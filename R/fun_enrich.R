@@ -23,8 +23,8 @@ fun_enrich <- function(proteins, background = NULL, inverse = F, databases = "GO
   suppressMessages(require(topGO))
 
   # Check databases for functional enrichment
-  if (!"Functional enrichment databases" %in% names(.info)&& any(!databases %in% .info[["Functional enrichment databases"]]))
-    stop("No database setup for functional enrichment. Use setup_fun_enrich() to prepare databases.")
+  #if (!"Functional enrichment databases" %in% names(.info)&& any(!databases %in% .info[["Functional enrichment databases"]]))
+  #  stop("No database setup for functional enrichment. Use setup_fun_enrich() to prepare databases.")
 
 
 
@@ -67,7 +67,7 @@ fun_enrich <- function(proteins, background = NULL, inverse = F, databases = "GO
 
 
   # Check databases
-  databases <- databases[databases %in% .info[["Functional enrichment databases"]]]
+  #databases <- databases[databases %in% .info[["Functional enrichment databases"]]]
 
   #
   list.enrichment <- tibble::lst()
