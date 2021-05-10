@@ -28,11 +28,12 @@ translate_Ids <- function(Ids, fromType = "UNIPROT", toType, OrgDb, dataset, dro
   dataset <- get_dataset(dataset)
 
   # Given toType and saved variables data column
-  if (hasArg(toType) && toType %in% get_variables_data_names(dataset)) {
+  if (hasArg(toType) && toType %in% get_variables_data_names(dataset) && fromType %in% get_variables_data_names(dataset)) {
 
-    return(get_variables_data(name = toType,
-                              variables = Ids,
-                              dataset = dataset))
+    return(pull_variables_data(name = toType,
+                               variables = Ids,
+                               dataset = dataset,
+                               vector.names = fromType))
 
   }
 
@@ -54,11 +55,12 @@ translate_Ids <- function(Ids, fromType = "UNIPROT", toType, OrgDb, dataset, dro
   }
 
   # Check again if toType exists in variables data
-  if (toType %in% get_variables_data_names(dataset)) {
+  if (toType %in% get_variables_data_names(dataset) && fromType %in% get_variables_data_names(dataset)) {
 
-    return(get_variables_data(name = toType,
-                              variables = Ids,
-                              dataset = dataset))
+    return(pull_variables_data(name = toType,
+                               variables = Ids,
+                               dataset = dataset,
+                               vector.names = fromType))
 
   }
 
@@ -100,7 +102,7 @@ translate_Ids <- function(Ids, fromType = "UNIPROT", toType, OrgDb, dataset, dro
   output <- data2vector(output)
 
   # Save for next time
-  if (save) {
+  if (fromType == "UNIPROT" && save) {
 
     add_variables_data(data = translate_Ids(Ids = get_variables(variables = All, dataset = dataset),
                                             fromType = fromType,

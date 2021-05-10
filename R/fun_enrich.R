@@ -2,10 +2,15 @@
 #'
 #' @param proteins list of proteins/scores/protein groups
 #' @param background (optional) background genes
+#' @param database database(s) to use
+#' @param pvalueCutoff p-value cutoff for annotations
+#' @param pAdjustMethod one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"#' @param qvalueCutoff q-value cutoff for annotations
+#' @param minGSSize minimum number of proteins for annotation to be used for enrichment
+#' @param maxGSSize maximum number of proteins for annotation to be used for enrichment
 #' @param inverse scores: enriches for higher scores if TRUE
-#' @param databases databases to use
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
 #' @param threshold p-value/confidence threshold to exclude terms
+#' @param dataset dataset
 #' @param add.info Add additional information (takes longer)
 #' @param view View results?
 #'
@@ -13,10 +18,17 @@
 #' @export
 #'
 #'
-fun_enrich <- function(proteins, background = NULL, inverse = F, databases = "GO", algorithm = "weight01", threshold = 0.05, add.info = F, view = T) {
+fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutoff = 0.05, pAdjustMethod = "none", minGSSize = 10,
+                       maxGSSize = 120, inverse = F, algorithm = "classic", dataset, add.info = F, view = T) {
+
+
+
+  # Get dataset
+  dataset <- get_dataset(dataset)
+
 
   # Modify input
-  if (databases == "GO") databases <- c("CC", "BP", "MF")
+  if (database == "GO") database <- c("CC", "BP", "MF")
 
 
   #
@@ -69,28 +81,38 @@ fun_enrich <- function(proteins, background = NULL, inverse = F, databases = "GO
   # Check databases
   #databases <- databases[databases %in% .info[["Functional enrichment databases"]]]
 
-  #
+  # Prepare list
   list.enrichment <- tibble::lst()
 
-  for (database in databases) {
+  for (db in database) {
     # Single Fisher's exact test
     if (is.logical(allProteins)) list.enrichment[[database]] <- do_ORA(proteins = ifelse(allProteins, 1, 0),
-                                                                       database = database,
+                                                                       database = db,
+                                                                       pvalueCutoff = pvalueCutoff,
+                                                                       pAdjustMethod = pAdjustMethod,
+                                                                       minGSSize = minGSSize,
                                                                        algorithm = algorithm,
-                                                                       threshold = threshold,
+                                                                       dataset = dataset,
                                                                        add.info = add.info)
     # Multiple fisher's exact test
     if (is.character(allProteins)) list.enrichment[[database]] <- do_ORA_groups(proteins = allProteins,
-                                                                                database = database,
+                                                                                database = db,
+                                                                                pvalueCutoff = pvalueCutoff,
+                                                                                pAdjustMethod = pAdjustMethod,
+                                                                                minGSSize = minGSSize,
                                                                                 algorithm = algorithm,
-                                                                                threshold = threshold,
+                                                                                dataset = dataset,
                                                                                 add.info = add.info)
     # Kolmogorov-Smirnov test
     if (is.numeric(allProteins)) list.enrichment[[database]] <- do_GSEA(proteins = allProteins,
+                                                                        database = db,
                                                                         inverse = inverse,
-                                                                        database = database,
+                                                                        pvalueCutoff = pvalueCutoff,
+                                                                        pAdjustMethod = pAdjustMethod,
+                                                                        minGSSize = minGSSize,
+                                                                        maxGSSize = maxGSSize,
                                                                         algorithm = algorithm,
-                                                                        threshold = threshold,
+                                                                        dataset = dataset,
                                                                         add.info = add.info)
 
   }

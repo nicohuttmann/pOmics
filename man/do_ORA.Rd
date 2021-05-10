@@ -7,9 +7,12 @@
 do_ORA(
   proteins,
   database,
-  algorithm,
-  threshold,
+  pvalueCutoff = 0.05,
   pAdjustMethod = "none",
+  qvalueCutoff = 0.2,
+  minGSSize = 10,
+  maxGSSize = 500,
+  algorithm = "classic",
   dataset,
   return.all = F,
   add.info = F
@@ -20,11 +23,17 @@ do_ORA(
 
 \item{database}{database to use}
 
+\item{pvalueCutoff}{p-value/confidence threshold to exclude terms}
+
+\item{pAdjustMethod}{one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"}
+
+\item{qvalueCutoff}{q-value cutoff for annotations}
+
+\item{minGSSize}{minimum number of proteins for annotation to be used for enrichment}
+
+\item{maxGSSize}{maximum number of proteins for annotation to be used for enrichment}
+
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
-
-\item{threshold}{p-value/confidence threshold to exclude terms}
-
-\item{pAdjustMethod}{one of "none","hochberg" (Benjamini-Hochberg correction), "bonferroni", "holm", "hommel", "BH", "BY", "fdr"}
 
 \item{dataset}{dataset}
 

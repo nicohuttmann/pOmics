@@ -7,7 +7,7 @@
 #' @param k (optional) number of clusters
 #' @param l (optional) number of cluster to analyse specifically
 #' @param inverse scores: enriches for higher scores if TRUE
-#' @param databases databases for which to perform enrichment
+#' @param database databases for which to perform enrichment
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
 #' @param add.info Add additional information (takes longer)
 #' @param view View enrichment tables
@@ -16,7 +16,7 @@
 #' @export
 #'
 #'
-fun_enrich_ <- function(cor_list, name, k, l, inverse = F, databases = "GO", algorithm = "weight01", add.info = T, view = T) {
+fun_enrich_ <- function(cor_list, name, k, l, inverse = F, database = "GO", algorithm = "weight01", add.info = T, view = T) {
 
   # if enrichment name given
   if (hasArg(name)) {
@@ -29,7 +29,7 @@ fun_enrich_ <- function(cor_list, name, k, l, inverse = F, databases = "GO", alg
                                             k = cor_list[[paste0("dend.enrich_", name)]][["k"]]) ==
                    cor_list[[paste0("dend.enrich_", name)]][["l"]],
                    inverse = inverse,
-                   databases = databases,
+                   database = database,
                    algorithm = algorithm,
                    add.info = add.info,
                    view = view)
@@ -44,7 +44,7 @@ fun_enrich_ <- function(cor_list, name, k, l, inverse = F, databases = "GO", alg
 
       results <- fun_enrich(proteins = get_cluster_cut(cor_list = cor_list, k = k) == l,
                             inverse = inverse,
-                            databases = databases,
+                            database = database,
                             algorithm = algorithm,
                             add.info = add.info,
                             view = view)
@@ -59,7 +59,7 @@ fun_enrich_ <- function(cor_list, name, k, l, inverse = F, databases = "GO", alg
 
       results <- fun_enrich(proteins = proteins,
                             inverse = inverse,
-                            databases = databases,
+                            database = database,
                             algorithm = algorithm,
                             add.info = add.info,
                             view = view)

@@ -8,6 +8,10 @@ do_GSEA_KEGG(
   proteins,
   pvalueCutoff = 0.05,
   pAdjustMethod = "none",
+  qvalueCutoff = 0.2,
+  minGSSize = 10,
+  maxGSSize = 120,
+  dataset = dataset,
   view = T,
   return.all = F,
   add.info = F
@@ -18,7 +22,15 @@ do_GSEA_KEGG(
 
 \item{pvalueCutoff}{p-value cutoff for annotations}
 
-\item{pAdjustMethod}{one of "none","hochberg" (Benjamini-Hochberg correction), "bonferroni", "holm", "hommel", "BH", "BY", "fdr"}
+\item{pAdjustMethod}{one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"}
+
+\item{qvalueCutoff}{q-value cutoff for annotations}
+
+\item{minGSSize}{minimum number of proteins for annotation to be used for enrichment}
+
+\item{maxGSSize}{maximum number of proteins for annotation to be used for enrichment}
+
+\item{dataset}{dataset}
 
 \item{view}{view results}
 

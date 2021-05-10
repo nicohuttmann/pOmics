@@ -7,10 +7,14 @@
 fun_enrich(
   proteins,
   background = NULL,
+  database = "GO",
+  pvalueCutoff = 0.05,
+  pAdjustMethod = "none",
+  minGSSize = 10,
+  maxGSSize = 120,
   inverse = F,
-  databases = "GO",
-  algorithm = "weight01",
-  threshold = 0.05,
+  algorithm = "classic",
+  dataset,
   add.info = F,
   view = T
 )
@@ -20,17 +24,27 @@ fun_enrich(
 
 \item{background}{(optional) background genes}
 
-\item{inverse}{scores: enriches for higher scores if TRUE}
+\item{database}{database(s) to use}
 
-\item{databases}{databases to use}
+\item{pvalueCutoff}{p-value cutoff for annotations}
+
+\item{pAdjustMethod}{one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"#' @param qvalueCutoff q-value cutoff for annotations}
+
+\item{minGSSize}{minimum number of proteins for annotation to be used for enrichment}
+
+\item{maxGSSize}{maximum number of proteins for annotation to be used for enrichment}
+
+\item{inverse}{scores: enriches for higher scores if TRUE}
 
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 
-\item{threshold}{p-value/confidence threshold to exclude terms}
+\item{dataset}{dataset}
 
 \item{add.info}{Add additional information (takes longer)}
 
 \item{view}{View results?}
+
+\item{threshold}{p-value/confidence threshold to exclude terms}
 }
 \value{
 

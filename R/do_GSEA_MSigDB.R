@@ -2,7 +2,11 @@
 #'
 #' @param proteins numeric vector of proteins scores
 #' @param pvalueCutoff p-value cutoff for annotations
-#' @param pAdjustMethod one of "none","hochberg" (Benjamini-Hochberg correction), "bonferroni", "holm", "hommel", "BH", "BY", "fdr"
+#' @param pAdjustMethod one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"
+#' @param qvalueCutoff q-value cutoff for annotations
+#' @param minGSSize minimum number of proteins for annotation to be used for enrichment
+#' @param maxGSSize maximum number of proteins for annotation to be used for enrichment
+#' @param dataset dataset
 #' @param view view results
 #' @param return.all return enrichResult object; useful for further analysis of enrichment results
 #' @param add.info add additional information to the results data frame
@@ -11,7 +15,8 @@
 #' @export
 #'
 #'
-do_GSEA_MSigDB <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", view = T, return.all = F, add.info = F) {
+do_GSEA_MSigDB <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 10, maxGSSize = 120,
+                           dataset, view = T, return.all = F, add.info = F) {
 
   stop("FINISH")
 

@@ -1,10 +1,9 @@
 #' Performs gene set enrichment on numeric protein vector with specified Ontology
 #'
 #' @param proteins numeric score vector
-#' @param inverse enrich for terms in higher values/scores
 #' @param ontology GO ontology
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
-#' @param threshold p-value/confidence threshold to exclude terms
+#' @param pvalueCutoff p-value cutoff for annotations
 #' @param add.info Add additional information (takes longer)
 #'
 #' @return
@@ -13,14 +12,10 @@
 #' @importFrom magrittr %>%
 #'
 #'
-do_GSEA_GO <- function(proteins, inverse = F, ontology = "CC", algorithm = "classic", threshold = 0.05, add.info = F) {
+do_GSEA_GO <- function(proteins, ontology = "CC", algorithm = "classic", threshold = 0.05, add.info = F) {
 
   # Get and update GO object
-  if (!inverse) {
-    GOdata <- get_GOdata(proteins = proteins, ontology = ontology)
-  } else {
-    GOdata <- get_GOdata(proteins = -proteins, ontology = ontology)
-  }
+  GOdata <- get_GOdata(proteins = proteins, ontology = ontology)
 
 
   #
@@ -30,7 +25,7 @@ do_GSEA_GO <- function(proteins, inverse = F, ontology = "CC", algorithm = "clas
   results <- topGO::GenTable(GOdata,
                              p.value = ks,
                              orderBy = "ks",
-                             topNodes = sum(ks@score < 0.05)) %>%
+                             topNodes = sum(ks@score < pvalueCutoff)) %>%
     tibble::as_tibble() %>%
     dplyr::select(-c("Significant", "Expected"))
 

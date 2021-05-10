@@ -2,7 +2,10 @@
 #'
 #' @param proteins numeric/logical vector of proteins indicating group
 #' @param pvalueCutoff p-value cutoff for annotations
-#' @param pAdjustMethod one of "none","hochberg" (Benjamini-Hochberg correction), "bonferroni", "holm", "hommel", "BH", "BY", "fdr"
+#' @param pAdjustMethod one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"
+#' @param qvalueCutoff q-value cutoff for annotations
+#' @param minGSSize minimum number of proteins for annotation to be used for enrichment
+#' @param maxGSSize maximum number of proteins for annotation to be used for enrichment
 #' @param dataset dataset
 #' @param view view results
 #' @param return.all return enrichResult object; useful for further analysis of enrichment results
@@ -12,29 +15,34 @@
 #' @export
 #'
 #'
-do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", dataset,
-                        view = T, return.all = F, add.info = F) {
+do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 10, maxGSSize = 500,
+                        dataset, view = T, return.all = F, add.info = F) {
 
+  # Get dataset
   dataset <- get_dataset(dataset)
 
+  # Kegg organism code
   kegg_code <- get_dataset_attr(which = "kegg_code",
                                 dataset = dataset)
 
+  # Prepare protein vectors
   sig.proteins <- names(proteins)[proteins == 1]
 
   background <- names(proteins)
 
 
-
+  # Performing enrichment
   kegg.results <- clusterProfiler::enrichKEGG(gene = sig.proteins,
                                               universe = background,
                                               organism = kegg_code,
                                               keyType = "uniprot",
+                                              pvalueCutoff = pvalueCutoff,
                                               pAdjustMethod = pAdjustMethod,
-                                              minGSSize = 10,
-                                              pvalueCutoff = pvalueCutoff)
+                                              qvalueCutoff = qvalueCutoff,
+                                              minGSSize = minGSSize,
+                                              maxGSSize = maxGSSize)
 
-
+  # Prepare results data
   results <- tibble::as_tibble(kegg.results@result) %>%
     dplyr::filter(pvalue < 0.05) %>%
     dplyr::rowwise() %>%
@@ -43,7 +51,7 @@ do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", d
     dplyr::mutate(Genes = paste(p2g(strsplit(Proteins, split = ";")[[1]]), collapse = ";"), .before = Proteins)
 
   # View data frame immediately
-  if (view) View(results)
+  #if (view) View(results)
 
   # Return
   if (!return.all) invisible(results)

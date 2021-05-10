@@ -4,13 +4,17 @@
 #' @param ontology GO ontology
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
 #' @param threshold p-value/confidence threshold to exclude terms
+#' @param dataset dataset
 #' @param add.info Add additional information (takes longer)
 #'
 #' @return
 #' @export
 #'
 #'
-do_ORA_GO <- function(proteins, ontology = "CC", algorithm = "classic", threshold = 0.05, add.info = F) {
+do_ORA_GO <- function(proteins, ontology = "CC", algorithm = "classic", threshold = 0.05, dataset, add.info = F) {
+
+  # Get dataset
+  dataset <- get_dataset(dataset)
 
   # Get and update GO object
   GOdata <- get_GOdata(proteins = proteins, ontology = ontology)

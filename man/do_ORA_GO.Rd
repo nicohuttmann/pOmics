@@ -9,6 +9,7 @@ do_ORA_GO(
   ontology = "CC",
   algorithm = "classic",
   threshold = 0.05,
+  dataset,
   add.info = F
 )
 }
@@ -20,6 +21,8 @@ do_ORA_GO(
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 
 \item{threshold}{p-value/confidence threshold to exclude terms}
+
+\item{dataset}{dataset}
 
 \item{add.info}{Add additional information (takes longer)}
 }

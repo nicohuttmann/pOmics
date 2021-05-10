@@ -6,7 +6,6 @@
 \usage{
 do_GSEA_GO(
   proteins,
-  inverse = F,
   ontology = "CC",
   algorithm = "classic",
   threshold = 0.05,
@@ -16,15 +15,13 @@ do_GSEA_GO(
 \arguments{
 \item{proteins}{numeric score vector}
 
-\item{inverse}{enrich for terms in higher values/scores}
-
 \item{ontology}{GO ontology}
 
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 
-\item{threshold}{p-value/confidence threshold to exclude terms}
-
 \item{add.info}{Add additional information (takes longer)}
+
+\item{pvalueCutoff}{p-value cutoff for annotations}
 }
 \value{
 

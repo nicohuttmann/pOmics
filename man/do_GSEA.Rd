@@ -4,18 +4,40 @@
 \alias{do_GSEA}
 \title{Performs gene set enrichment on numeric protein vector with specified Ontology}
 \usage{
-do_GSEA(proteins, inverse = F, database, algorithm, threshold, add.info = F)
+do_GSEA(
+  proteins,
+  database,
+  inverse = F,
+  pvalueCutoff = 0.05,
+  pAdjustMethod = "none",
+  qvalueCutoff = 0.2,
+  minGSSize = 10,
+  maxGSSize = 120,
+  algorithm,
+  dataset,
+  add.info = F
+)
 }
 \arguments{
 \item{proteins}{numeric score vector}
 
+\item{database}{database to use}
+
 \item{inverse}{enrich for terms in higher values/scores}
 
-\item{database}{database to use}
+\item{pvalueCutoff}{p-value cutoff for annotations}
+
+\item{pAdjustMethod}{one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"}
+
+\item{qvalueCutoff}{q-value cutoff for annotations}
+
+\item{minGSSize}{minimum number of proteins for annotation to be used for enrichment}
+
+\item{maxGSSize}{maximum number of proteins for annotation to be used for enrichment}
 
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 
-\item{threshold}{p-value/confidence threshold to exclude terms}
+\item{dataset}{dataset}
 
 \item{add.info}{Add additional information (takes longer)}
 }
