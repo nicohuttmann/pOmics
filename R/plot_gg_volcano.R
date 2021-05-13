@@ -23,6 +23,7 @@
 #' @param axis.ticks.size width of axis ticks
 #' @param axis.title.size size of axis title
 #' @param axis.text.size size of axis labels
+#' @param aspect.ratio y/x ratio
 #'
 #' @return
 #' @export
@@ -35,7 +36,7 @@ plot_gg_volcano <- function(data, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0, 
                             point.size = 2, point.alpha = 0.8, highlight.point.size = 3, highlight.point.alpha = 0.8,
                             x.axis.breaks = 1, y.axis.breaks = 1,
                             axis.line.size = 0.5, axis.color = "black", axis.ticks.size = 0.3,
-                            axis.title.size = 8, axis.text.size = 6) {
+                            axis.title.size = 8, axis.text.size = 6, aspect.ratio = 0.8) {
 
   # Check input
   if (is.matrix(data)) data <- matrix2tibble(matrix = data, row.names = "variables")
@@ -61,7 +62,7 @@ plot_gg_volcano <- function(data, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0, 
   ggplot(data = data, aes(x = log2.fc, y = -log10(p.value), col = color, size = point.size)) +
     geom_point(alpha = point.alpha, shape = 16, stroke = 0) +
     scale_size(range = range(data$point.size)) +
-    theme(aspect.ratio = 0.8,
+    theme(aspect.ratio = aspect.ratio,
           axis.line = element_line(size = 0.5 * lwf, color = axis.color),
           panel.background = element_blank(),
           axis.text = element_text(size = axis.text.size, color = text.color),

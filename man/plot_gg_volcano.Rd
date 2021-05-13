@@ -25,7 +25,8 @@ plot_gg_volcano(
   axis.color = "black",
   axis.ticks.size = 0.3,
   axis.title.size = 8,
-  axis.text.size = 6
+  axis.text.size = 6,
+  aspect.ratio = 0.8
 )
 }
 \arguments{
@@ -68,6 +69,8 @@ plot_gg_volcano(
 \item{axis.title.size}{size of axis title}
 
 \item{axis.text.size}{size of axis labels}
+
+\item{aspect.ratio}{y/x ratio}
 
 \item{highligh.color}{color to use to highlight specified proteins}
 }

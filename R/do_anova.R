@@ -8,7 +8,7 @@
 #' @export
 #'
 #'
-do_1w_anova <- function(analysis_list, formula = "log2(x) ~ groups", data.name = "raw_data") {
+do_anova <- function(analysis_list, formula = "log2(x) ~ groups", data.name = "raw_data") {
 
   # Check input
   if (!data.name %in% names(analysis_list)) stop("Data could not be found in list.")
@@ -112,7 +112,7 @@ do_1w_anova <- function(analysis_list, formula = "log2(x) ~ groups", data.name =
   df <- dplyr::full_join(df, posthoc.diff, by = "variables")
 
 
-  analysis_list[["1w_anova_results"]] <- df
+  analysis_list[["anova"]] <- df
 
 
   # Return

@@ -42,7 +42,7 @@ do_GSEA_Reactome <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "non
 
 
   results <- tibble::as_tibble(kegg.results@result) %>%
-    dplyr::filter(pvalue < 0.05) %>%
+    dplyr::filter(p.adjust < pvalueCutoff) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(Proteins = paste(strsplit(core_enrichment, split = "/")[[1]], collapse = ";"), .before = core_enrichment) %>%
     dplyr::select(-c(core_enrichment, leading_edge, rank)) %>%

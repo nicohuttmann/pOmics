@@ -102,7 +102,7 @@ setup_annotations <- function(dataset, taxId, OrgDb) {
     set_dataset_attr(x = OrgDb, which = "OrgDb", dataset = dataset)
 
     #
-    add_variables_data(get_variables_data(name = variables), name = "UNIPROT", dataset = dataset)
+    add_variables_data(get_variables_data(name = "variables", variables = All, dataset = dataset), name = "UNIPROT", dataset = dataset)
 
     cat(paste0("Annotation database setup for ", scientific_name, "."))
 

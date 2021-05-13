@@ -16,8 +16,8 @@
 #' @export
 #'
 #'
-do_ORA_groups <- function(proteins, database, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 10, maxGSSize = 500, algorithm = "classic",
-                          dataset, return.all = F, add.info = F) {
+do_ORA_groups <- function(proteins, database, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 10,
+                          maxGSSize = 500, algorithm = "classic", dataset, return.all = F, add.info = F) {
 
   list.enrichment <- tibble::lst()
 
@@ -30,8 +30,10 @@ do_ORA_groups <- function(proteins, database, pvalueCutoff = 0.05, pAdjustMethod
                                                      pvalueCutoff = pvalueCutoff,
                                                      pAdjustMethod = pAdjustMethod,
                                                      minGSSize = minGSSize,
+                                                     maxGSSize = maxGSSize,
                                                      algorithm = algorithm,
                                                      dataset = dataset,
+                                                     return.all = return.all,
                                                      add.info = add.info)
   }
 

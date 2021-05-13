@@ -44,11 +44,12 @@ do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", q
 
   # Prepare results data
   results <- tibble::as_tibble(kegg.results@result) %>%
-    dplyr::filter(pvalue < 0.05) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(Proteins = paste(strsplit(geneID, split = "/")[[1]], collapse = ";"), .before = geneID) %>%
     dplyr::select(-c(geneID)) %>%
-    dplyr::mutate(Genes = paste(p2g(strsplit(Proteins, split = ";")[[1]]), collapse = ";"), .before = Proteins)
+    dplyr::mutate(Genes = paste(p2g(strsplit(Proteins, split = ";")[[1]]), collapse = ";"), .before = Proteins) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(p.adjust < pvalueCutoff)
 
   # View data frame immediately
   #if (view) View(results)
@@ -56,7 +57,7 @@ do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", q
   # Return
   if (!return.all) invisible(results)
 
-  else return(list(results = results,
-                   enrichResult = kegg.result))
+  else invisible(list(results = results,
+                      enrichResult = kegg.results))
 
 }

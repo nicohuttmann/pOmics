@@ -2,33 +2,48 @@
 % Please edit documentation in R/do_ORA_GO.R
 \name{do_ORA_GO}
 \alias{do_ORA_GO}
-\title{Performs overexpression enrichment on logical protein vector with specified GO ontology}
+\title{Performs over-representation analysis using Gene Ontology annotations}
 \usage{
 do_ORA_GO(
   proteins,
-  ontology = "CC",
-  algorithm = "classic",
-  threshold = 0.05,
+  pvalueCutoff = 0.05,
+  pAdjustMethod = "none",
+  qvalueCutoff = 0.2,
+  minGSSize = 10,
+  maxGSSize = 500,
+  database,
   dataset,
+  view = T,
+  return.all = F,
   add.info = F
 )
 }
 \arguments{
-\item{proteins}{character vector}
+\item{proteins}{numeric/logical vector of proteins indicating group}
 
-\item{ontology}{GO ontology}
+\item{pvalueCutoff}{p-value cutoff for annotations}
 
-\item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
+\item{pAdjustMethod}{one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"}
 
-\item{threshold}{p-value/confidence threshold to exclude terms}
+\item{qvalueCutoff}{q-value cutoff for annotations}
+
+\item{minGSSize}{minimum number of proteins for annotation to be used for enrichment}
+
+\item{maxGSSize}{maximum number of proteins for annotation to be used for enrichment}
+
+\item{database}{which GO database to use}
 
 \item{dataset}{dataset}
 
-\item{add.info}{Add additional information (takes longer)}
+\item{view}{view results}
+
+\item{return.all}{return enrichResult object; useful for further analysis of enrichment results}
+
+\item{add.info}{add additional information to the results data frame}
 }
 \value{
 
 }
 \description{
-Performs overexpression enrichment on logical protein vector with specified GO ontology
+Performs over-representation analysis using Gene Ontology annotations
 }

@@ -1,29 +1,30 @@
 #' Adds table representation of dendrogram
 #'
-#' @param cor_list cor_list object
+#' @param data_ data list
 #'
 #' @return
 #' @export
 #'
 #'
-dendrogram2table_ <- function(cor_list) {
+dendrogram2table_ <- function(data_, dendrogram = "dend_x") {
 
   #
-  dend_table <- tibble::tibble(variables = attr(cor_list, "variables"))
+  dend_table <- tibble::tibble(variables = data_[[dendrogram]]$labels)
 
 
   # Add branches to table
-  for (i in 1:length(attr(cor_list, "variables"))) {
+  for (i in seq_along(dend_table$variables)) {
 
     dend_table <- dend_table %>%
-      dplyr::mutate(new = cutree(cor_list[["dendrogram"]], k = i)) %>%
-      dplyr::rename(!!as.character(i) := "new")
+      dplyr::mutate(!!as.character(i) := cutree(data_[[dendrogram]], k = i))
 
   }
 
   # Add table
-  cor_list[["dend.table"]] <- dend_table
+  data_[["dend.table"]] <- dend_table
 
-  invisible(cor_list)
+  # Return
+  invisible(data_)
 
 }
+

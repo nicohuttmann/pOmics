@@ -6,7 +6,6 @@
 #' @param qvalueCutoff q-value cutoff for annotations
 #' @param minGSSize minimum number of proteins for annotation to be used for enrichment
 #' @param maxGSSize maximum number of proteins for annotation to be used for enrichment
-#' @param database which GO database to use
 #' @param dataset dataset
 #' @param view view results
 #' @param return.all return enrichResult object; useful for further analysis of enrichment results
@@ -16,17 +15,16 @@
 #' @export
 #'
 #'
-do_ORA_GO <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 10, maxGSSize = 500,
-                      database, dataset, view = T, return.all = F, add.info = F) {
+do_ORA_CORUM <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 3,
+                         maxGSSize = 500, dataset, view = T, return.all = F, add.info = F) {
 
   # Get dataset
   dataset <- get_dataset(dataset)
 
   # Annotation database for organism
-  OrgDb <- get_OrgDb(dataset = dataset)
+  TERM2GENE <- get_database(id = "TERM2GENE", type = "CORUM")
 
-  # Database
-  #if (database == "GO") database <- "ALL"
+  TERM2NAME <- get_database(id = "TERM2NAME", type = "CORUM")
 
   # Prepare protein vectors
   sig.proteins <- names(proteins)[proteins == 1]
@@ -35,25 +33,28 @@ do_ORA_GO <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qva
 
 
   # Performing enrichment
-  go.results <- clusterProfiler::enrichGO(gene = sig.proteins,
-                                          universe = background,
-                                          OrgDb = OrgDb,
-                                          ont = database,
-                                          keyType = "UNIPROT",
-                                          pvalueCutoff = pvalueCutoff,
-                                          pAdjustMethod = pAdjustMethod,
-                                          qvalueCutoff = qvalueCutoff,
-                                          minGSSize = minGSSize,
-                                          maxGSSize = maxGSSize)
+  corum.results <- clusterProfiler::enricher(gene = sig.proteins,
+                                             universe = background,
+                                             pvalueCutoff = pvalueCutoff,
+                                             pAdjustMethod = pAdjustMethod,
+                                             qvalueCutoff = qvalueCutoff,
+                                             minGSSize = 3,
+                                             maxGSSize = maxGSSize,
+                                             TERM2GENE = TERM2GENE,
+                                             TERM2NAME = TERM2NAME)
 
   # Prepare results data
-  results <- tibble::as_tibble(go.results@result) %>%
+  results <- tibble::as_tibble(corum.results@result) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(Proteins = paste(strsplit(geneID, split = "/")[[1]], collapse = ";"), .before = geneID) %>%
     dplyr::select(-c(geneID)) %>%
     dplyr::mutate(Genes = paste(p2g(strsplit(Proteins, split = ";")[[1]]), collapse = ";"), .before = Proteins) %>%
     dplyr::ungroup() %>%
-    dplyr::filter(p.adjust < pvalueCutoff)
+    dplyr::filter(p.adjust < pvalueCutoff) %>%
+    dplyr::filter(Count > 2)
+
+
+
 
   # View data frame immediately
   #if (view) View(results)
@@ -62,6 +63,6 @@ do_ORA_GO <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qva
   if (!return.all) invisible(results)
 
   else return(list(results = results,
-                   enrichResult = go.results))
+                   enrichResult = corum.results))
 
 }

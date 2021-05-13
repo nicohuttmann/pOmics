@@ -11,6 +11,7 @@
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
 #' @param threshold p-value/confidence threshold to exclude terms
 #' @param dataset dataset
+#' @param return.all Should the enrichObject be returned
 #' @param add.info Add additional information (takes longer)
 #' @param view View results?
 #'
@@ -19,7 +20,7 @@
 #'
 #'
 fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutoff = 0.05, pAdjustMethod = "none", minGSSize = 10,
-                       maxGSSize = 120, inverse = F, algorithm = "classic", dataset, add.info = F, view = T) {
+                       maxGSSize = 120, inverse = F, algorithm = "classic", dataset, return.all = F, add.info = F, view = T) {
 
 
 
@@ -28,7 +29,8 @@ fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutof
 
 
   # Modify input
-  if (database == "GO") database <- c("CC", "BP", "MF")
+  if (length(database) == 1 && database == "All") database <- c("CC", "BP", "MF", "Kegg", "Reactome", "CORUM")
+  database <- unlist(sapply(database, function(x) if(x == "GO") return(c("CC", "BP", "MF")) else return(x), USE.NAMES = FALSE))
 
 
   #
@@ -86,34 +88,35 @@ fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutof
 
   for (db in database) {
     # Single Fisher's exact test
-    if (is.logical(allProteins)) list.enrichment[[database]] <- do_ORA(proteins = ifelse(allProteins, 1, 0),
-                                                                       database = db,
+    if (is.logical(allProteins)) list.enrichment[[db]] <- do_ORA(proteins = ifelse(allProteins, 1, 0),
+                                                                 database = db,
+                                                                 pvalueCutoff = pvalueCutoff,
+                                                                 pAdjustMethod = pAdjustMethod,
+                                                                 minGSSize = minGSSize,
+                                                                 algorithm = algorithm,
+                                                                 dataset = dataset,
+                                                                 return.all = return.all,
+                                                                 add.info = add.info)
+    # Multiple fisher's exact test
+    else if (is.character(allProteins)) list.enrichment[[db]] <- do_ORA_groups(proteins = allProteins,database = db,
+                                                                               pvalueCutoff = pvalueCutoff,
+                                                                               pAdjustMethod = pAdjustMethod,
+                                                                               minGSSize = minGSSize,
+                                                                               algorithm = algorithm,
+                                                                               dataset = dataset,
+                                                                               return.all = return.all,
+                                                                               add.info = add.info)
+    # Kolmogorov-Smirnov test
+    else if (is.numeric(allProteins)) list.enrichment[[db]] <- do_GSEA(proteins = allProteins,database = db,
+                                                                       inverse = inverse,
                                                                        pvalueCutoff = pvalueCutoff,
                                                                        pAdjustMethod = pAdjustMethod,
                                                                        minGSSize = minGSSize,
+                                                                       maxGSSize = maxGSSize,
                                                                        algorithm = algorithm,
                                                                        dataset = dataset,
+                                                                       return.all = return.all,
                                                                        add.info = add.info)
-    # Multiple fisher's exact test
-    if (is.character(allProteins)) list.enrichment[[database]] <- do_ORA_groups(proteins = allProteins,
-                                                                                database = db,
-                                                                                pvalueCutoff = pvalueCutoff,
-                                                                                pAdjustMethod = pAdjustMethod,
-                                                                                minGSSize = minGSSize,
-                                                                                algorithm = algorithm,
-                                                                                dataset = dataset,
-                                                                                add.info = add.info)
-    # Kolmogorov-Smirnov test
-    if (is.numeric(allProteins)) list.enrichment[[database]] <- do_GSEA(proteins = allProteins,
-                                                                        database = db,
-                                                                        inverse = inverse,
-                                                                        pvalueCutoff = pvalueCutoff,
-                                                                        pAdjustMethod = pAdjustMethod,
-                                                                        minGSSize = minGSSize,
-                                                                        maxGSSize = maxGSSize,
-                                                                        algorithm = algorithm,
-                                                                        dataset = dataset,
-                                                                        add.info = add.info)
 
   }
 
@@ -125,3 +128,4 @@ fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutof
   invisible(list.enrichment)
 
 }
+

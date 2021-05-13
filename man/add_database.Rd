@@ -13,7 +13,7 @@ add_database(database, id, type, replace = F)
 
 \item{type}{database type}
 
-\item{replace}{Should existing dabase be replaced?}
+\item{replace}{Should existing database be replaced?}
 }
 \value{
 

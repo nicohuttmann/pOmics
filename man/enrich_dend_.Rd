@@ -15,7 +15,7 @@ enrich_dend_(
   plot.matrix = T,
   labels,
   fun.enrich = F,
-  databases = "GO",
+  database = "GO",
   algorithm = "weight01",
   add.info = F
 )
@@ -41,7 +41,7 @@ enrich_dend_(
 
 \item{fun.enrich}{Do functional enrichment}
 
-\item{databases}{databases to use for functional enrichment}
+\item{database}{databases to use for functional enrichment}
 
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 

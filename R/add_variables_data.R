@@ -61,11 +61,13 @@ add_variables_data <- function(data, name, dataset, set.default = F, add.backgro
                               require.confirmation = FALSE)
 
       } else {
-        stop("Column with same name already exists.")
+        cat("Column with same name already exists.")
+        invisible(FALSE)
       }
 
     } else {
-      stop("Column with same name already exists.")
+      cat("Column with same name already exists.")
+      invisible(FALSE)
     }
 
   }

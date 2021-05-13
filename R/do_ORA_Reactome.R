@@ -58,7 +58,6 @@ do_ORA_Reactome <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none
 
 
   results <- tibble::as_tibble(reactome.results@result) %>%
-    dplyr::filter(pvalue < 0.05) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(Proteins = paste(translate_Ids(strsplit(geneID, split = "/")[[1]],
                                                  fromType = "ENTREZID",
@@ -69,7 +68,9 @@ do_ORA_Reactome <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none
     dplyr::mutate(Genes = paste(translate_Ids(strsplit(Proteins, split = ";")[[1]],
                                     fromType = "UNIPROT",
                                     toType = "SYMBOL",
-                                    dataset = dataset), collapse = ";"), .before = Proteins)
+                                    dataset = dataset), collapse = ";"), .before = Proteins) %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(p.adjust < pvalueCutoff)
 
   # View data frame immediately
   #if (view) View(results)
@@ -78,6 +79,6 @@ do_ORA_Reactome <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none
   if (!return.all) return(results)
 
   else return(list(results = results,
-                   enrichResult = kegg.result))
+                   enrichResult = reactome.results))
 
 }

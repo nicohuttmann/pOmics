@@ -21,20 +21,50 @@ do_ORA <- function(proteins, database, pvalueCutoff = 0.05, pAdjustMethod = "non
 
   # Gene Ontology
   if (database %in% c("CC", "BP", "MF")) results <- do_ORA_GO(proteins = proteins,
-                                                              ontology = database,
                                                               pvalueCutoff = pvalueCutoff,
                                                               pAdjustMethod = pAdjustMethod,
-                                                              algorithm = algorithm,
+                                                              qvalueCutoff = qvalueCutoff,
+                                                              minGSSize = minGSSize,
+                                                              maxGSSize = maxGSSize,
+                                                              database = database,
+                                                              dataset = dataset,
+                                                              return.all = return.all,
                                                               add.info = add.info)
   # KEGG
   else if (database %in% c("Kegg", "KEGG", "kegg")) results <- do_ORA_KEGG(proteins = proteins,
                                                                            pvalueCutoff = pvalueCutoff,
                                                                            pAdjustMethod = pAdjustMethod,
+                                                                           qvalueCutoff = qvalueCutoff,
                                                                            minGSSize = minGSSize,
+                                                                           maxGSSize = maxGSSize,
                                                                            dataset = dataset,
                                                                            return.all = return.all,
                                                                            add.info = add.info)
 
+  # Reactome
+  else if (database %in% c("Reactome", "reactome", "REACTOME")) results <- do_ORA_Reactome(proteins = proteins,
+                                                                                           pvalueCutoff = pvalueCutoff,
+                                                                                           pAdjustMethod = pAdjustMethod,
+                                                                                           qvalueCutoff = qvalueCutoff,
+                                                                                           minGSSize = minGSSize,
+                                                                                           maxGSSize = maxGSSize,
+                                                                                           dataset = dataset,
+                                                                                           return.all = return.all,
+                                                                                           add.info = add.info)
+
+  # CORUM
+  else if (database %in% c("CORUM", "Corum", "corum")) results <- do_ORA_CORUM(proteins = proteins,
+                                                                               pvalueCutoff = pvalueCutoff,
+                                                                               pAdjustMethod = pAdjustMethod,
+                                                                               qvalueCutoff = qvalueCutoff,
+                                                                               minGSSize = minGSSize,
+                                                                               maxGSSize = maxGSSize,
+                                                                               dataset = dataset,
+                                                                               return.all = return.all,
+                                                                               add.info = add.info)
+
+  # unknown database
+  else return(NULL)
 
   # Return results
   return(results)

@@ -3,13 +3,16 @@
 #' @param database new database
 #' @param id database id
 #' @param type database type
-#' @param replace Should existing dabase be replaced?
+#' @param replace Should existing database be replaced?
 #'
 #' @return
 #' @export
 #'
 #'
 add_database <- function(database, id, type, replace = F) {
+
+  # Check databases list
+  new_databases_list()
 
   # Check input
   if (!hasArg(database) || !hasArg(id) || !hasArg(type)) stop("Incomplete call.")

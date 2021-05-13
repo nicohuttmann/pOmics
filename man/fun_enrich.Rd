@@ -15,6 +15,7 @@ fun_enrich(
   inverse = F,
   algorithm = "classic",
   dataset,
+  return.all = F,
   add.info = F,
   view = T
 )
@@ -39,6 +40,8 @@ fun_enrich(
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 
 \item{dataset}{dataset}
+
+\item{return.all}{Should the enrichObject be returned}
 
 \item{add.info}{Add additional information (takes longer)}
 

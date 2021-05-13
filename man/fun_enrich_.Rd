@@ -10,7 +10,7 @@ fun_enrich_(
   k,
   l,
   inverse = F,
-  databases = "GO",
+  database = "GO",
   algorithm = "weight01",
   add.info = T,
   view = T
@@ -27,7 +27,7 @@ fun_enrich_(
 
 \item{inverse}{scores: enriches for higher scores if TRUE}
 
-\item{databases}{databases for which to perform enrichment}
+\item{database}{databases for which to perform enrichment}
 
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 

@@ -4,10 +4,10 @@
 \alias{dendrogram2table_}
 \title{Adds table representation of dendrogram}
 \usage{
-dendrogram2table_(cor_list)
+dendrogram2table_(data_, dendrogram = "dend_x")
 }
 \arguments{
-\item{cor_list}{cor_list object}
+\item{data_}{data list}
 }
 \value{
 

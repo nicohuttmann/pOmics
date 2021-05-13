@@ -1,11 +1,10 @@
+#' Downloads CORUM database for functional enrichment
+#'
+#' @return
+#' @export
+#'
+#'
 setup_CORUM_annotations <- function() {
-
-
-
-
-
-
-
 
 
   download.file(url = "https://mips.helmholtz-muenchen.de/corum/download/allComplexes.txt.zip",
@@ -18,12 +17,12 @@ setup_CORUM_annotations <- function() {
 
 
 
-  download.file(url = "https://mips.helmholtz-muenchen.de/corum/download/coreComplexes.txt.zip",
-                destfile = "coreComplexes.txt.zip")
-
-  import_files("coreComplexes.txt.zip")
-
-  file.remove("coreComplexes.txt.zip")
+  # download.file(url = "https://mips.helmholtz-muenchen.de/corum/download/coreComplexes.txt.zip",
+  #               destfile = "coreComplexes.txt.zip")
+  #
+  # import_files("coreComplexes.txt.zip")
+  #
+  # file.remove("coreComplexes.txt.zip")
 
 
 
@@ -32,5 +31,33 @@ setup_CORUM_annotations <- function() {
 
 
 
+
+  TERM2GENE <- dplyr::select(.imports[["uniprot_corum_mapping"]], c(2, 1))
+
+  TERM2NAME <- dplyr::select(.imports[["allComplexes.txt"]], c(1, 2))
+
+
+  # Save databases
+  add_database(database = TERM2GENE, id = "TERM2GENE", type = "CORUM")
+
+  add_database(database = TERM2NAME, id = "TERM2NAME", type = "CORUM")
+
+
+
+
+  # Check
+  if (check_database(id = "TERM2GENE", type = "CORUM") && check_database(id = "TERM2NAME", type = "CORUM")) {
+
+    cat("CORUM annoations setup.")
+
+    invisible(TRUE)
+
+  } else {
+
+    cat("CORUM annotations could not set up. Check your internet conection or contact Nico.")
+
+    invisible(FALSE)
+
+  }
 
 }
