@@ -43,7 +43,7 @@ dendrogram_ <- function(cor_list, data = "adjacency", method = "average") {
   attr(cor_list, "clustering") <- method
 
   # Add table representation
-  cor_list <- dendrogram2table_(cor_list = cor_list)
+  cor_list <- dendrogram2table_(cor_list)
 
   # Return
   invisible(cor_list)

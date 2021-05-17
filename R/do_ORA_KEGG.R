@@ -42,6 +42,9 @@ do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", q
                                               minGSSize = minGSSize,
                                               maxGSSize = maxGSSize)
 
+  # If enrichment failed
+  if (is.null(kegg.results)) return(NULL)
+
   # Prepare results data
   results <- tibble::as_tibble(kegg.results@result) %>%
     dplyr::rowwise() %>%

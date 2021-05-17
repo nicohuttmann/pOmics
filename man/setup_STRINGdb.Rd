@@ -4,12 +4,19 @@
 \alias{setup_STRINGdb}
 \title{Sets up the STRING database}
 \usage{
-setup_STRINGdb(version = "11", score_threshold = 200, dataset)
+setup_STRINGdb(
+  version = "11",
+  score_threshold = 400,
+  dataset,
+  input_directory = getwd()
+)
 }
 \arguments{
 \item{version}{STRING database version}
 
-\item{dataset}{}
+\item{score_threshold}{minimum score for interaction}
+
+\item{dataset}{dataset}
 }
 \value{
 

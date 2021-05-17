@@ -2,9 +2,28 @@
 % Please edit documentation in R/plot_gg_pca.R
 \name{plot_gg_pca}
 \alias{plot_gg_pca}
-\title{Plots PCA using ggplot2}
+\title{Plots PCA with ggplot2}
 \usage{
-plot_gg_pca(data_, x = "PC1", y = "PC2", color = "groups")
+plot_gg_pca(
+  data_,
+  x = "PC1",
+  y = "PC2",
+  color = "groups",
+  include.variance = T,
+  point.size = 1,
+  point.transparency = 1,
+  custom.theme = theme_hjv_framed_no_axes,
+  aspect.ratio = 1,
+  plot.center,
+  axis.unit.ratio,
+  expand.x.axis = c(0, 0),
+  expand.y.axis = c(0, 0),
+  x.axis.breaks = 1,
+  y.axis.breaks = 1,
+  legend.title = "",
+  legend.position = "right",
+  ...
+)
 }
 \arguments{
 \item{data_}{data list}
@@ -14,10 +33,38 @@ plot_gg_pca(data_, x = "PC1", y = "PC2", color = "groups")
 \item{y}{Principal component to plot on y-axis}
 
 \item{color}{column to use for coloring data points}
+
+\item{include.variance}{add variance to axis titles}
+
+\item{point.size}{point size (pt)}
+
+\item{point.transparency}{transpacency (0-1)}
+
+\item{custom.theme}{theme to use for plot}
+
+\item{aspect.ratio}{absolute length of x-axis/y-axis}
+
+\item{plot.center}{vector for center of plot}
+
+\item{axis.unit.ratio}{ratio between x- and y-axis units}
+
+\item{expand.x.axis}{expand x.axis (see scale_x_continuous)}
+
+\item{expand.y.axis}{expand x.axis (see scale_y_continuous)}
+
+\item{legend.title}{title for legend}
+
+\item{legend.position}{position of legend}
+
+\item{...}{}
+
+\item{x.axis.break.size}{distance between x-axis breaks}
+
+\item{y.axis.break.size}{distance between y-axis breaks}
 }
 \value{
 
 }
 \description{
-Plots PCA using ggplot2
+Plots PCA with ggplot2
 }

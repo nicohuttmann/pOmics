@@ -45,13 +45,17 @@ do_ORA_MSigDB <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none",
 
 
 
-  kegg.results <- clusterProfiler::enrichKEGG(gene = sig.proteins,
+  MSigDB.results <- clusterProfiler::enrichKEGG(gene = sig.proteins,
                                               universe = background,
                                               organism = organism_code,
                                               keyType = "uniprot",
                                               pAdjustMethod = pAdjustMethod,
                                               minGSSize = 10,
                                               pvalueCutoff = pvalueCutoff)
+
+
+  # If enrichment failed
+  if (is.null(MSigDB.results)) return(NULL)
 
 
   results <- tibble::as_tibble(kegg.results@result) %>%

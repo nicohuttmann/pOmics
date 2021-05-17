@@ -43,6 +43,9 @@ do_ORA_CORUM <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", 
                                              TERM2GENE = TERM2GENE,
                                              TERM2NAME = TERM2NAME)
 
+  # If enrichment failed
+  if (is.null(corum.results)) return(NULL)
+
   # Prepare results data
   results <- tibble::as_tibble(corum.results@result) %>%
     dplyr::rowwise() %>%

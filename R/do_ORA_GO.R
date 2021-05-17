@@ -46,6 +46,9 @@ do_ORA_GO <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qva
                                           minGSSize = minGSSize,
                                           maxGSSize = maxGSSize)
 
+  # If enrichment failed
+  if (is.null(go.results)) return(NULL)
+
   # Prepare results data
   results <- tibble::as_tibble(go.results@result) %>%
     dplyr::rowwise() %>%

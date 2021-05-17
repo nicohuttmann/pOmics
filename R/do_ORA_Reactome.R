@@ -45,6 +45,7 @@ do_ORA_Reactome <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none
   organism <- get_dataset_attr(which = "common_name", dataset = dataset)
 
 
+
   reactome.results <- ReactomePA::enrichPathway(gene = sig.proteins.eg,
                                                 universe = background.eg,
                                                 organism = organism,
@@ -55,7 +56,8 @@ do_ORA_Reactome <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none
                                                 maxGSSize = maxGSSize,
                                                 readable = F)
 
-
+  # If enrichment failed
+  if (is.null(reactome.results)) return(NULL)
 
   results <- tibble::as_tibble(reactome.results@result) %>%
     dplyr::rowwise() %>%

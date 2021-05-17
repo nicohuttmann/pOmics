@@ -1,7 +1,5 @@
 #' Plots a volcano plot with ggplot2
 #'
-#'
-#'
 #' @param data data
 #' @param p.value.cutoff p-value limit for coloring
 #' @param pos.log2fc.cutoff positive log2 fold-change limit for coloring

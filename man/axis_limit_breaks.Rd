@@ -4,10 +4,10 @@
 \alias{axis_limit_breaks}
 \title{Helps make nice axis limit breaks}
 \usage{
-axis_limit_breaks(values, break.space = 2)
+axis_limit_breaks(plot_limits, break.space = 1)
 }
 \arguments{
-\item{values}{data values}
+\item{plot_limits}{vector containing plot limits}
 
 \item{break.space}{space between breaks}
 }

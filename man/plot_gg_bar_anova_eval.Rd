@@ -8,17 +8,14 @@ plot_gg_bar_anova_eval(
   data,
   columns,
   labels,
-  x.axis.title = "Group",
+  x.axis.title = "",
   y.axis.title = "Proteins",
-  text.size = 6,
-  text.color = "black",
-  y.axis.breaks = 1,
-  axis.line.size = 0.5,
-  axis.color = "black",
-  axis.ticks.size = 0.3,
-  axis.title.size = 8,
-  axis.text.size = 6,
-  aspect.ratio = 0.8
+  bar.width = 0.9,
+  y.axis.breaks,
+  aspect.ratio = 0.8,
+  legend.position = "right",
+  custom.theme = theme_hjv_half_open,
+  ...
 )
 }
 \arguments{
@@ -32,23 +29,15 @@ plot_gg_bar_anova_eval(
 
 \item{y.axis.title}{title of y-axis}
 
-\item{text.size}{size of text in points (5-8)}
-
-\item{text.color}{color of text}
-
 \item{y.axis.breaks}{break size between ticks of y-axis}
 
-\item{axis.line.size}{width of axes lines}
-
-\item{axis.color}{color of axes lines}
-
-\item{axis.ticks.size}{width of axis ticks}
-
-\item{axis.title.size}{size of axis title}
-
-\item{axis.text.size}{size of axis labels}
-
 \item{aspect.ratio}{y/x ratio}
+
+\item{legend.position}{where should the legend be printed}
+
+\item{custom.theme}{theme}
+
+\item{...}{}
 }
 \value{
 

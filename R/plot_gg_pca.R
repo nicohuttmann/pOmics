@@ -1,16 +1,35 @@
-#' Plots PCA using ggplot2
+#' Plots PCA with ggplot2
 #'
-#' @param data_ data list
+#'
+#' @param data_  data list
 #' @param x Principal component to plot on x-axis
 #' @param y Principal component to plot on y-axis
 #' @param color column to use for coloring data points
+#' @param include.variance add variance to axis titles
+#' @param point.size point size (pt)
+#' @param point.transparency transpacency (0-1)
+#' @param custom.theme theme to use for plot
+#' @param aspect.ratio absolute length of x-axis/y-axis
+#' @param plot.center vector for center of plot
+#' @param axis.unit.ratio ratio between x- and y-axis units
+#' @param expand.x.axis expand x.axis (see scale_x_continuous)
+#' @param expand.y.axis expand x.axis (see scale_y_continuous)
+#' @param x.axis.break.size distance between x-axis breaks
+#' @param y.axis.break.size distance between y-axis breaks
+#' @param legend.title title for legend
+#' @param legend.position position of legend
+#' @param ...
 #'
 #' @return
 #' @export
 #'
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot aes geom_point theme coord_equal xlab ylab labs guides
+#' @importFrom rlang .data
 #'
-plot_gg_pca <- function(data_, x = "PC1", y = "PC2", color = "groups") {
+plot_gg_pca <- function(data_, x = "PC1", y = "PC2", color = "groups", include.variance = T,
+                        point.size = 1, point.transparency = 1, custom.theme = theme_hjv_framed_no_axes,
+                        aspect.ratio = 1, plot.center, axis.unit.ratio, expand.x.axis = c(0, 0), expand.y.axis = c(0, 0),
+                        x.axis.breaks = 1, y.axis.breaks = 1, legend.title = "", legend.position = "right", ...) {
 
   # Check input
   if (!hasArg(data_)) stop("No data list given.")
@@ -27,18 +46,48 @@ plot_gg_pca <- function(data_, x = "PC1", y = "PC2", color = "groups") {
   data <- data_[["pca_data"]]
 
 
-  p <- ggplot(data, aes_string(x = x, y = y, color = color)) +
-    geom_point() +
-    theme_classic() +
-    theme(panel.border = element_rect(color = "black", fill = NA)) +
-    coord_equal() +
-    xlab(paste0(x, " (", round(100 * data_[["pca_summary"]][["sdev"]][as.numeric(substring(x, 3))]^2 /
+
+
+
+
+
+
+  p <- ggplot(data, aes(x = .data[[x]], y = .data[[y]], color = .data[[color]])) +
+    geom_point(size = point.size, alpha = point.transparency) +
+    custom.theme() +
+    theme(legend.position = legend.position) +
+    labs(color = legend.title) +
+    guides(color = guide_legend(nrow = 2, byrow = FALSE))
+
+  # Set plot axes size
+  p <- set_continuous_axes(p = p, aspect.ratio = aspect.ratio, plot.center = plot.center, axis.unit.ratio = axis.unit.ratio,
+                           expand.x.axis = expand.x.axis, expand.y.axis = expand.y.axis,
+                           x.axis.breaks = x.axis.breaks, y.axis.breaks = y.axis.breaks)
+
+
+
+  if (include.variance) {
+
+    p <- p +
+      xlab(paste0(x, " (", round(100 * data_[["pca_summary"]][["sdev"]][as.numeric(substring(x, 3))]^2 /
                                  sum(data_[["pca_summary"]][["sdev"]]^2), digits = 1), "%)")) +
-    ylab(paste0(y, " (", round(100 * data_[["pca_summary"]][["sdev"]][as.numeric(substring(y, 3))]^2 /
+      ylab(paste0(y, " (", round(100 * data_[["pca_summary"]][["sdev"]][as.numeric(substring(y, 3))]^2 /
                                  sum(data_[["pca_summary"]][["sdev"]]^2), digits = 1), "%)"))
+
+  } else {
+
+    p <- p +
+      xlab(x) +
+      ylab(y)
+
+  }
+
+
 
   # Print to device
   print(p)
+
+
 
   # Add to list
   data_[[paste("pca_plot", x, y, sep = "_")]] <- p
@@ -47,3 +96,4 @@ plot_gg_pca <- function(data_, x = "PC1", y = "PC2", color = "groups") {
   invisible(data_)
 
 }
+
