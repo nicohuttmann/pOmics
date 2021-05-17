@@ -23,6 +23,7 @@ Imports:
     ggplot2,
     ggfortify,
     ggdendro,
+    GOSemSim,
     magrittr,
     readxl,
     reshape2,
