@@ -4,7 +4,7 @@
 \alias{export_pdf}
 \title{Exports plot to pdf}
 \usage{
-export_pdf(p, file = "test.pdf", width = 4, height = 4)
+export_pdf(p, file = "test.pdf", width = 4, height = 4, open = T)
 }
 \arguments{
 \item{p}{plot}
@@ -14,6 +14,8 @@ export_pdf(p, file = "test.pdf", width = 4, height = 4)
 \item{width}{width}
 
 \item{height}{height}
+
+\item{open}{open pdf after export}
 }
 \value{
 

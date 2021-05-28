@@ -1,9 +1,10 @@
 #' Evaluates data cell-wise
 #'
 #' @param data_ data list
-#' @param expr expression to be applied to each cell (must contain x as variable)
+#' @param expr expression to be applied to each cell (must contain x as variable, e.g. x > 2)
 #' @param FUN function to be applied to each cell
-#' @param data.name name of data to use
+#' @param input if data_ is list: name of data to use
+#' @param output if data_ is list: name of output data to save in list under
 #'
 #' @return
 #' @export
@@ -11,20 +12,28 @@
 #' @importFrom magrittr %>%
 #'
 #'
-eval_data_ <- function(data_, expr, FUN, data.name = "raw_data") {
+eval_data <- function(data_, expr, FUN, input = "raw_data", output = "data") {
 
   # Check input
-  if (!hasArg(data_)) stop("No data list given.")
+  if (!hasArg(data_)) stop("No data given.")
 
-  # Check input type
-  if (!is.list(data_)) stop("Given data is not a list.")
+  # Check if list or dataframe given
+  list.input <- !is.data.frame(data_) & is.list(data_)
 
-  # Check data list
-  if (!data.name %in% names(data_)) stop("Data could not be found. Please specify correct <data.name>.")
+  #
+  if (list.input & !input %in% names(data_)) stop("Data could not be found. Please specify correct <input>.")
+
+
 
 
   # Get data
-  data <- data_[[data.name]]
+  if (list.input) data <- data_[[input]]
+
+  else data <- data_
+
+
+
+
 
   # Save dimensions of data frame
   dimension <- dim(data)
@@ -58,11 +67,15 @@ eval_data_ <- function(data_, expr, FUN, data.name = "raw_data") {
   }
 
 
-  data_[[data.name]] <- data
+
+  # Prepare return
+  if (list.input) data_[[output]] <- data
+
+  else data_ <- data
 
 
 
   # Return
-  invisible(data_)
+  return(data_)
 
 }

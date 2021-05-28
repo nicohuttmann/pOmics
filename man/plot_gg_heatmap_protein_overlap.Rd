@@ -8,22 +8,13 @@ plot_gg_heatmap_protein_overlap(
   data_,
   x,
   y,
-  font_size = 8,
+  font_size = 6,
   rel_small = 12/14,
   rel_tiny = 11/14,
   rel_large = 16/14,
-  aspect.ratio = 1,
-  point.size = c(0.5, 0.5, 1),
-  color.not = "grey",
-  color.up = "red",
-  color.down = "blue",
-  color.mixed = "violet",
-  x.axis.limits,
-  y.axis.limits,
-  x.axis.breaks = 1,
-  y.axis.breaks = 1,
-  custom.theme = theme_hjv_framed,
-  ...
+  add.text = T,
+  max.terms = 5,
+  custom.theme = theme_hjv_overlap_heatmap
 )
 }
 \arguments{
@@ -33,35 +24,19 @@ plot_gg_heatmap_protein_overlap(
 
 \item{y}{comparison on y-axis}
 
-\item{aspect.ratio}{absolute length of x-axis/y-axis}
+\item{font_size}{Overall font size.}
 
-\item{point.size}{vector specifying size of unsignificant, significant in 1, and significant in both proteins}
+\item{rel_small}{Relative size of small text (e.g., axis tick labels)}
 
-\item{color.not}{color of not significant proteins}
+\item{rel_tiny}{Relative size of tiny text (e.g., caption)}
 
-\item{color.up}{color of upregulated proteins}
+\item{rel_large}{Relative size of large text (e.g., title)}
 
-\item{color.down}{color of downregulated proteins}
+\item{add.text}{add terms in boxes}
 
-\item{color.mixed}{color of both up- and downregulated proteins}
-
-\item{x.axis.limits}{set limit of x-axis manually}
-
-\item{y.axis.limits}{sets limits of y-axis manually}
-
-\item{x.axis.breaks}{distance between breaks of x-axis ticks}
-
-\item{y.axis.breaks}{distance between breaks of y-axis ticks}
+\item{max.terms}{maximum number of terms per box}
 
 \item{custom.theme}{theme to use for plot}
-
-\item{...}{arguments for custom.theme}
-
-\item{x.threshold}{absolute value for fold-change threshold lines}
-
-\item{y.threshold}{absolute value for fold-change threshold lines}
-
-\item{plot.center}{position of plot center}
 }
 \value{
 

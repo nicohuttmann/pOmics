@@ -1,6 +1,6 @@
 #' Collapses groups of data frame by specified function and adds as list entry
 #'
-#' @param analysis_list analysis_list
+#' @param data_ data
 #' @param FUN function to combine groups
 #' @param group.column column specifying the groups
 #' @param data.name name of data frame entry
@@ -12,20 +12,19 @@
 #' @importFrom magrittr %>%
 #'
 #'
-collapse_groups_ <- function(analysis_list, FUN = mean, group.column = "groups", data.name = "raw_data", new.name = "grouped_data") {
+collapse_groups_ <- function(data_, FUN = mean, group.column = "groups", data.name = "raw_data", new.name = "grouped_data") {
 
   # Check input
-  if (!hasArg(analysis_list) | !is.list(analysis_list) | !tibble::is_tibble(analysis_list[[data.name]])) stop("Please provide a list with the respective tibble.")
+  if (!hasArg(data_) | !is.list(data_) | !tibble::is_tibble(data_[[data.name]])) stop("Please provide a list with the respective tibble.")
 
-  if (!group.column %in% names(analysis_list[[data.name]])) stop("Group column not found in data frame.")
+  if (!group.column %in% names(data_[[data.name]])) stop("Group column not found in data frame.")
 
   # Add new data frame
-  analysis_list[[new.name]] <- analysis_list[[data.name]] %>%
-    dplyr::group_by(rlang::eval_tidy(rlang::parse_expr(group.column))) %>%
-    dplyr::summarise(across(.cols = where(is.numeric), .fns = FUN)) %>%
-    dplyr::rename(!!group.column := "rlang::eval_tidy(rlang::parse_expr(group.column))")
+  data_[[new.name]] <- data_[[data.name]] %>%
+    dplyr::group_by(!!dplyr::sym(group.column)) %>%
+    dplyr::summarise(across(.cols = where(is.numeric) | where(is.logical), .fns = FUN))
 
   # Return
-  return(analysis_list)
+  return(data_)
 
 }

@@ -5,7 +5,7 @@
 \title{Collapses groups of data frame by specified function and adds as list entry}
 \usage{
 collapse_groups_(
-  analysis_list,
+  data_,
   FUN = mean,
   group.column = "groups",
   data.name = "raw_data",
@@ -13,7 +13,7 @@ collapse_groups_(
 )
 }
 \arguments{
-\item{analysis_list}{analysis_list}
+\item{data_}{data}
 
 \item{FUN}{function to combine groups}
 

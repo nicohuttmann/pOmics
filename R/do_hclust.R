@@ -38,8 +38,8 @@ do_hclust <- function(data_, data.name = "raw_data", scale = T,
   # Save data
   data_[["data"]] <- data
 
-  #
-  data_[["dend_y"]] <- data %>%
+  # Dendrogram for x-axis (observations mostly)
+  data_[["dend_x"]] <- data %>%
     dplyr::select(c(!!group.column, where(is.numeric))) %>%
     tibble2matrix(row.names = group.column) %>%
     dist(method = distance.method) %>%
@@ -47,8 +47,8 @@ do_hclust <- function(data_, data.name = "raw_data", scale = T,
 
 
 
-   # Variables
-   data_[["dend_x"]] <- data %>%
+  # Dendrogram for x-axis (variables mostly)
+   data_[["dend_y"]] <- data %>%
      dplyr::select(c(!!group.column, where(is.numeric))) %>%
      tibble2matrix(row.names = group.column) %>%
      t() %>%
@@ -57,7 +57,7 @@ do_hclust <- function(data_, data.name = "raw_data", scale = T,
 
 
    # Plot
-   data_ <- plot_heatmap_dxy(data_ = data_)
+   data_ <- plot_gg_heatmap(data_ = data_, export = F)
 
    # Return
    invisible(data_)

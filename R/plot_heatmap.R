@@ -20,8 +20,8 @@
 #'
 #'
 plot_heatmap <- function(variables, observations, groups, observations.set, data.name, dataset,
-                         scale = T, grouping, clustering.method = "complete", variables.labels, observations.labels, variables.order = T,
-                         observations.order = T, ratio = 3) {
+                         scale = T, grouping, clustering.method = "complete", variables.labels, observations.labels,
+                         variables.order = T, observations.order = T, ratio = 3) {
 
 
 

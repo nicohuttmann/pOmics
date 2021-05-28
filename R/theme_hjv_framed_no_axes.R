@@ -7,18 +7,20 @@
 #' @param rel_small Relative size of small text (e.g., axis tick labels)
 #' @param rel_tiny Relative size of tiny text (e.g., caption)
 #' @param rel_large Relative size of large text (e.g., title)
+#'
 #' @return The theme.
-#' 
+#' @export
+#'
 #' @importFrom ggplot2 margin theme_grey theme %+replace%
 #' @importFrom grid unit
-#' @export
-theme_hjv_framed_no_axes <- function(font_size = 8, font_family = "", line_size = .5, 
+#'
+theme_hjv_framed_no_axes <- function(font_size = 8, font_family = "", line_size = .5,
                                      rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14) {
   line_size_orig <- line_size
   line_size <- line_size / (ggplot2::.pt * 72.27 / 96)
   half_line <- font_size / 2
   small_size <- rel_small * font_size
-  
+
   # work off of theme_grey just in case some new theme element comes along
   theme_grey(base_size = font_size, base_family = font_family) %+replace%
     theme(
@@ -27,7 +29,7 @@ theme_hjv_framed_no_axes <- function(font_size = 8, font_family = "", line_size 
       text              = element_text(family = font_family, face = "plain", color = "black",
                                        size = font_size, hjust = 0.5, vjust = 0.5, angle = 0, lineheight = .9,
                                        margin = margin(), debug = FALSE),
-      
+
       axis.line         = element_blank(), #element_line(color = "black", size = line_size, lineend = "square"),
       axis.line.x       = NULL,
       axis.line.y       = NULL,
@@ -56,8 +58,8 @@ theme_hjv_framed_no_axes <- function(font_size = 8, font_family = "", line_size 
         margin = margin(l = half_line / 2),
         vjust = 0
       ),
-      
-      
+
+
       legend.background = element_blank(),
       legend.spacing    = unit(font_size, "pt"),
       legend.spacing.x  = NULL,
@@ -78,7 +80,7 @@ theme_hjv_framed_no_axes <- function(font_size = 8, font_family = "", line_size 
       legend.box.margin =  margin(0, 0, 0, 0),
       legend.box.background = element_blank(),
       legend.box.spacing = unit(font_size, "pt"),
-      
+
       panel.background  = element_blank(),
       panel.border      = element_rect(color = "black", size = line_size_orig),
       panel.grid        = element_blank(),
@@ -92,7 +94,7 @@ theme_hjv_framed_no_axes <- function(font_size = 8, font_family = "", line_size 
       panel.spacing.x   = NULL,
       panel.spacing.y   = NULL,
       panel.ontop       = FALSE,
-      
+
       strip.background  = element_rect(fill = "grey80"),
       strip.text        = element_text(
         size = rel(rel_small),
@@ -106,7 +108,7 @@ theme_hjv_framed_no_axes <- function(font_size = 8, font_family = "", line_size 
       strip.placement.y =  NULL,
       strip.switch.pad.grid = unit(half_line / 2, "pt"),
       strip.switch.pad.wrap = unit(half_line / 2, "pt"),
-      
+
       plot.background   = element_blank(),
       plot.title        = element_text(
         face = "bold",
@@ -130,7 +132,7 @@ theme_hjv_framed_no_axes <- function(font_size = 8, font_family = "", line_size 
       ),
       plot.tag.position = c(0, 1),
       plot.margin       = margin(half_line, half_line, half_line, half_line),
-      
+
       complete = TRUE
     )
 }

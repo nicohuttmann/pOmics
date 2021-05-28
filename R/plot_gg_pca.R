@@ -5,6 +5,8 @@
 #' @param x Principal component to plot on x-axis
 #' @param y Principal component to plot on y-axis
 #' @param color column to use for coloring data points
+#' @param fill fill
+#' @param shape shape
 #' @param include.variance add variance to axis titles
 #' @param point.size point size (pt)
 #' @param point.transparency transpacency (0-1)
@@ -26,7 +28,7 @@
 #' @importFrom ggplot2 ggplot aes geom_point theme coord_equal xlab ylab labs guides
 #' @importFrom rlang .data
 #'
-plot_gg_pca <- function(data_, x = "PC1", y = "PC2", color = "groups", include.variance = T,
+plot_gg_pca <- function(data_, x = "PC1", y = "PC2", color = "groups", fill, shape, include.variance = T,
                         point.size = 1, point.transparency = 1, custom.theme = theme_hjv_framed_no_axes,
                         aspect.ratio = 1, plot.center, axis.unit.ratio, expand.x.axis = c(0, 0), expand.y.axis = c(0, 0),
                         x.axis.breaks = 1, y.axis.breaks = 1, legend.title = "", legend.position = "right", ...) {
@@ -47,17 +49,28 @@ plot_gg_pca <- function(data_, x = "PC1", y = "PC2", color = "groups", include.v
 
 
 
+  groups <- unique(data[[color]])
 
 
 
+  # Fill
+  #fill <- c("white", "white", "black", "black")
+  names(fill) <- groups
+
+  # Shape
+  #shape <- c(21, 24, 21, 24)
+  names(shape) <- groups
 
 
-  p <- ggplot(data, aes(x = .data[[x]], y = .data[[y]], color = .data[[color]])) +
-    geom_point(size = point.size, alpha = point.transparency) +
+
+  p <- ggplot(data, aes(x = .data[[x]], y = .data[[y]], fill = .data[[color]], shape = .data[[color]])) +
+    geom_point(size = point.size, alpha = point.transparency, color = "black") +
     custom.theme() +
     theme(legend.position = legend.position) +
-    labs(color = legend.title) +
-    guides(color = guide_legend(nrow = 2, byrow = FALSE))
+    scale_fill_manual(name = legend.title, values = fill, guide = guide_legend(nrow = 2, byrow = FALSE)) +
+    scale_shape_manual(name = legend.title, values = shape)
+
+  p
 
   # Set plot axes size
   p <- set_continuous_axes(p = p, aspect.ratio = aspect.ratio, plot.center = plot.center, axis.unit.ratio = axis.unit.ratio,

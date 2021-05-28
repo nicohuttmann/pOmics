@@ -9,6 +9,8 @@ plot_gg_pca(
   x = "PC1",
   y = "PC2",
   color = "groups",
+  fill,
+  shape,
   include.variance = T,
   point.size = 1,
   point.transparency = 1,
@@ -33,6 +35,10 @@ plot_gg_pca(
 \item{y}{Principal component to plot on y-axis}
 
 \item{color}{column to use for coloring data points}
+
+\item{fill}{fill}
+
+\item{shape}{shape}
 
 \item{include.variance}{add variance to axis titles}
 

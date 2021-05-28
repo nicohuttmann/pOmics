@@ -17,17 +17,30 @@ simplify_GO_terms_semantic <- function(terms, similarity.measure = "Wang", simil
   # Get Organism database
   OrgDb <- get_OrgDb(dataset = dataset)
 
+  # taxonomy Id
+  taxId <- get_dataset_attr("taxId", dataset)
+
   # Get ontologies
-  ontology <- clusterProfiler::go2ont(terms)[, 2]
+  ontology <- sapply(terms, function(x) ifelse(length(clusterProfiler::go2ont(x)[, 2]) == 1,
+                                               clusterProfiler::go2ont(x)[, 2],
+                                               "not"))
+
 
   # vector to collect terms to keep
   terms.keep <- c()
 
 
   # Check and remove terms for ontologies separately
-  for (ont in unique(ontology)) {
+  for (ont in intersect(unique(ontology), c("CC", "BP", "MF"))) {
 
-    GO <- GOSemSim::godata(OrgDb = OrgDb, ont = ont, computeIC = ifelse(similarity.measure == "Wang", FALSE, TRUE))
+    # Check database
+    if (!check_database(id = taxId, type = paste("GO", ont, "SemSim", sep = "_"))) {
+
+      add_database(database = GOSemSim::godata(OrgDb = OrgDb, ont = ont, computeIC = T),
+                   id = taxId, type = paste("GO", ont, "SemSim", sep = "_"))
+    }
+
+    GO <- get_database(id = taxId, type = paste("GO", ont, "SemSim", sep = "_"))
 
     terms.test <- terms[ont == ontology]
 
@@ -67,6 +80,8 @@ simplify_GO_terms_semantic <- function(terms, similarity.measure = "Wang", simil
   names(return) <- terms
 
   return[terms.keep] <- TRUE
+
+  return[ontology == "not"] <- TRUE
 
   # Return
   return(return)

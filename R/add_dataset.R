@@ -44,7 +44,7 @@ add_dataset <- function(name) {
 
     attr(dataset, "default_observations_set") <- "raw"
     attr(dataset, "default_observations") <- "All"
-    attr(dataset, "default_labels") <- "observations"
+    attr(dataset, "default_observations_labels") <- "observations"
     attr(dataset, "default_groups") <- NA
 
     attr(dataset, "default_data_name") <- NA
