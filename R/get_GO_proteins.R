@@ -10,19 +10,7 @@
 get_GO_proteins <- function(terms, include.child.terms = F) {
 
 
-  # Check if database exists
-  if (check_database(id = "GO-ID", type = "Annotations")) {
-    database <- get_database(id = "GO-ID", type = "Annotations")
-    # Not set up
-  } else {
-    database <- new_annotations_data_UniProt(annotation = "GO-ID",
-                                             dataset = dataset,
-                                             save = T)
-  }
-
-
-  # Inverse database list
-  database <- topGO::inverseList(database)
+  database <- a
 
 
   # Names to GO-IDs

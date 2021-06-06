@@ -18,21 +18,21 @@ get_identifiers <- function(x, sep, identifier) {
 
 
   # Fill NAs
-  x <- x %>%
-    dplyr::mutate(across(.fns = function(x) {
-      for (i in seq_along(x)) {
-        if (is.na(x[i])) {
-          x[i] <- paste0("NA_", i)
-        }
-      }
-      x
-    }))
+  # x <- x %>%
+  #   dplyr::mutate(across(.fns = function(x) {
+  #     for (i in seq_along(x)) {
+  #       if (is.na(x[i])) {
+  #         x[i] <- paste0("NA_", i)
+  #       }
+  #     }
+  #     x
+  #   }))
 
 
   # No identifier specified; only test first column
   if (!hasArg(identifier)) {
     x1 <- x[, 1] %>%
-      as.character %>%
+      #as.character %>%
       keep_first(sep = sep)
 
     if (anyDuplicated(x1) == 0) {

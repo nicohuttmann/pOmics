@@ -4,7 +4,7 @@
 \alias{choose_GO_terms}
 \title{Interface for user to define a list of GO terms}
 \usage{
-choose_GO_terms(return.ID = F, graphics = T)
+choose_GO_terms(return.ID = F, graphics = F)
 }
 \arguments{
 \item{return.ID}{return GO ID or terms}

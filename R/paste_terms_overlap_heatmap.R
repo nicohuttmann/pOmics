@@ -16,7 +16,7 @@ paste_terms_overlap_heatmap <- function(terms, max = 5, include.count = F) {
 
   return <- ""
 
-  if (include.coount) {
+  if (include.count) {
 
     for (i in seq_along(terms)) {
 

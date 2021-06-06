@@ -8,9 +8,9 @@ setup_CORUM_annotations <- function() {
 
 
   download.file(url = "https://mips.helmholtz-muenchen.de/corum/download/allComplexes.txt.zip",
-                destfile = "allComplexes.txt.zip")
+                destfile = "allComplexes.txt.zip", quiet = T)
 
-  import_files("allComplexes.txt.zip")
+  import_files("allComplexes.txt.zip", silent = T)
 
   file.remove("allComplexes.txt.zip")
 
@@ -27,7 +27,7 @@ setup_CORUM_annotations <- function() {
 
 
   # Mapping
-  import_files("https://mips.helmholtz-muenchen.de/corum/download/uniprot_corum_mapping.txt")
+  import_files("https://mips.helmholtz-muenchen.de/corum/download/uniprot_corum_mapping.txt", silent = T)
 
 
 
@@ -38,15 +38,15 @@ setup_CORUM_annotations <- function() {
 
 
   # Save databases
-  add_database(database = TERM2GENE, id = "TERM2GENE", type = "CORUM")
+  add_database(database = TERM2GENE, id = "CORUM", type = "TERM2GENE")
 
-  add_database(database = TERM2NAME, id = "TERM2NAME", type = "CORUM")
+  add_database(database = TERM2NAME, id = "CORUM", type = "TERM2NAME")
 
 
 
 
   # Check
-  if (check_database(id = "TERM2GENE", type = "CORUM") && check_database(id = "TERM2NAME", type = "CORUM")) {
+  if (check_database(id = "CORUM", type = "TERM2GENE") && check_database(id = "CORUM", type = "TERM2NAME")) {
 
     cat("CORUM annoations setup.")
 

@@ -6,7 +6,7 @@
 \usage{
 do_hclust(
   data_,
-  data.name = "raw_data",
+  data.name = "data",
   scale = T,
   group.column = "groups",
   grouping.function = mean,

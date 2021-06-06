@@ -68,11 +68,15 @@ plot_gg_volcano <- function(data, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0, 
           axis.title = element_text(size = axis.title.size, color = text.color),
           legend.position = 0) +
     scale_color_manual(values = c("highlight" = highlight.color, "up" = "red", "down" = "blue", "not" = "grey")) +
-    scale_x_continuous(limits = axis_limit_breaks(values = data$log2.fc, break.space = x.axis.breaks)$limits,
-                       breaks = axis_limit_breaks(values = data$log2.fc, break.space = x.axis.breaks)$breaks,
+    scale_x_continuous(limits = axis_limit_breaks(plot_limits = range(data$log2.fc),
+                                                  break.space = x.axis.breaks)$limits,
+                       breaks = axis_limit_breaks(plot_limits = range(data$log2.fc),
+                                                  break.space = x.axis.breaks)$breaks,
                        expand = c(0, 0)) +
-    scale_y_continuous(limits = axis_limit_breaks(values = -log10(data$p.value), break.space = y.axis.breaks)$limits,
-                       breaks = axis_limit_breaks(values = -log10(data$p.value), break.space = y.axis.breaks)$breaks,
+    scale_y_continuous(limits = axis_limit_breaks(plot_limits = range(-log10(data$p.value)),
+                                                  break.space = y.axis.breaks)$limits,
+                       breaks = axis_limit_breaks(plot_limits = range(-log10(data$p.value)),
+                                                  break.space = y.axis.breaks)$breaks,
                        expand = c(0, 0)) +
     xlab(x.axis.title) +
     ylab(y.axis.title)

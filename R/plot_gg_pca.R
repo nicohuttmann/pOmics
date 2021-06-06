@@ -54,17 +54,27 @@ plot_gg_pca <- function(data_, x = "PC1", y = "PC2", color = "groups", fill, sha
 
 
   # Fill
+  if (!hasArg(fill)) {
+
+    fill <- RColorBrewer::brewer.pal(n = length(groups), name = "Paired")
+
+  }
   #fill <- c("white", "white", "black", "black")
   names(fill) <- groups
 
   # Shape
   #shape <- c(21, 24, 21, 24)
+  if (!hasArg(shape)) {
+
+    shape <- rep(21, length(groups))
+
+  }
   names(shape) <- groups
 
 
 
   p <- ggplot(data, aes(x = .data[[x]], y = .data[[y]], fill = .data[[color]], shape = .data[[color]])) +
-    geom_point(size = point.size, alpha = point.transparency, color = "black") +
+    geom_point(size = point.size, alpha = point.transparency, color = "white") +
     custom.theme() +
     theme(legend.position = legend.position) +
     scale_fill_manual(name = legend.title, values = fill, guide = guide_legend(nrow = 2, byrow = FALSE)) +

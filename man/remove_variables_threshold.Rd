@@ -2,7 +2,7 @@
 % Please edit documentation in R/remove_variables_threshold.R
 \name{remove_variables_threshold}
 \alias{remove_variables_threshold}
-\title{Removes columns from data frame based on minimum values above 0}
+\title{Removes columns from data frame based on minimum values above 0 (deprecated)}
 \usage{
 remove_variables_threshold(data, min = 0.5)
 }
@@ -15,5 +15,5 @@ remove_variables_threshold(data, min = 0.5)
 
 }
 \description{
-Removes columns from data frame based on minimum values above 0
+Removes columns from data frame based on minimum values above 0 (deprecated)
 }

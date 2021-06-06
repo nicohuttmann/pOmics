@@ -21,6 +21,7 @@ do_ORA_GO <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qva
 
   # Get dataset
   dataset <- get_dataset(dataset)
+  if (is_dataset("all")) dataset <- "all"
 
   # Annotation database for organism
   OrgDb <- get_OrgDb(dataset = dataset)
@@ -31,15 +32,29 @@ do_ORA_GO <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qva
   # Prepare protein vectors
   sig.proteins <- names(proteins)[proteins == 1]
 
+  sig.proteins.eg <- translate_Ids(Ids = sig.proteins,
+                                   fromType = "UNIPROT",
+                                   toType = "ENTREZID",
+                                   dataset = dataset,
+                                   drop = TRUE,
+                                   silent = TRUE)
+
   background <- names(proteins)
+
+  background.eg <- translate_Ids(Ids = background,
+                                 fromType = "UNIPROT",
+                                 toType = "ENTREZID",
+                                 dataset = dataset,
+                                 drop = TRUE,
+                                 silent = TRUE)
 
 
   # Performing enrichment
-  go.results <- clusterProfiler::enrichGO(gene = sig.proteins,
-                                          universe = background,
+  go.results <- clusterProfiler::enrichGO(gene = sig.proteins.eg,
+                                          universe = background.eg,
                                           OrgDb = OrgDb,
                                           ont = database,
-                                          keyType = "UNIPROT",
+                                          keyType = "ENTREZID",
                                           pvalueCutoff = pvalueCutoff,
                                           pAdjustMethod = pAdjustMethod,
                                           qvalueCutoff = qvalueCutoff,

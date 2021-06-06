@@ -15,16 +15,25 @@
 eval_data <- function(data_, expr, FUN, input = "raw_data", output = "data") {
 
   # Check input
-  if (!hasArg(data_)) stop("No data given.")
+  if (!hasArg(data_)) {
+
+    message("No data given.")
+
+    invisible(NULL)
+
+  }
 
   # Check if list or dataframe given
   list.input <- !is.data.frame(data_) & is.list(data_)
 
-  #
-  if (list.input & !input %in% names(data_)) stop("Data could not be found. Please specify correct <input>.")
+  # Check list input
+  if (list.input & !input %in% names(data_)) {
 
+    message("Data could not be found. Please specify correct <input>.")
 
+    invisible(data_)
 
+  }
 
   # Get data
   if (list.input) data <- data_[[input]]
@@ -72,8 +81,6 @@ eval_data <- function(data_, expr, FUN, input = "raw_data", output = "data") {
   if (list.input) data_[[output]] <- data
 
   else data_ <- data
-
-
 
   # Return
   return(data_)

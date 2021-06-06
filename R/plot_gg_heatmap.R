@@ -262,11 +262,11 @@ plot_gg_heatmap <- function(data_, transpose = F, label.proteins = T, dend.x.hei
 
 
     # Combine all plots together and crush graph density with rel_heights
-    first_row = plot_grid(NULL, data_[["plots"]][["dend_x"]], NULL, ncol = 3, rel_widths = c(dend.y.width, 1, labels.r))
+    first_row = cowplot::plot_grid(NULL, data_[["plots"]][["dend_x"]], NULL, ncol = 3, rel_widths = c(dend.y.width, 1, labels.r))
 
-    second_row = plot_grid(data_[["plots"]][["dend_y"]], data_[["plots"]][["heatmap"]], y.axis.labels, ncol = 3, rel_widths = c(dend.y.width, 1, labels.r), align = "h")
+    second_row = cowplot::plot_grid(data_[["plots"]][["dend_y"]], data_[["plots"]][["heatmap"]], y.axis.labels, ncol = 3, rel_widths = c(dend.y.width, 1, labels.r), align = "h")
 
-    perfect = plot_grid(first_row, second_row, ncol = 1, byrow = T, rel_heights = c(dend.x.height, 1, labels.r))
+    perfect = cowplot::plot_grid(first_row, second_row, ncol = 1, byrow = T, rel_heights = c(dend.x.height, 1, labels.r))
 
     perfect
 

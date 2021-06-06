@@ -12,7 +12,7 @@
 #' @export
 #'
 #'
-do_hclust <- function(data_, data.name = "raw_data", scale = T,
+do_hclust <- function(data_, data.name = "data", scale = T,
                       group.column = "groups", grouping.function = mean,
                       distance.method = "euclidean", clustering.method = "complete") {
 

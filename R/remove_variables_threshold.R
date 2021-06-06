@@ -1,4 +1,4 @@
-#' Removes columns from data frame based on minimum values above 0
+#' Removes columns from data frame based on minimum values above 0 (deprecated)
 #'
 #' @param data data
 #' @param min min. fraction of values above 0
@@ -9,6 +9,7 @@
 #'
 remove_variables_threshold <- function(data, min = 0.5) {
 
+  message("Will be removed soon. Use remove_variables() instead.")
 
   if (is.matrix(data)) {
 

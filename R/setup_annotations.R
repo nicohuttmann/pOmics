@@ -10,6 +10,9 @@
 #'
 setup_annotations <- function(dataset, taxId, OrgDb) {
 
+  # Get dataset
+  dataset <- get_dataset()
+
   # Taxonomy Id
   if (!hasArg(taxId)) {
     taxId <- identify_taxId(get_variables(dataset = dataset), silent = T)
@@ -35,6 +38,25 @@ setup_annotations <- function(dataset, taxId, OrgDb) {
 
   # Remove
   rm(kegg_species, pos = globalenv())
+
+  # Set attributes
+  set_dataset_attr(x = taxId, which = "taxId", dataset = dataset)
+
+  set_dataset_attr(x = scientific_name, which = "scientific_name", dataset = dataset)
+
+  set_dataset_attr(x = kegg_code, which = "kegg_code", dataset = dataset)
+
+  set_dataset_attr(x = common_name, which = "common_name", dataset = dataset)
+
+
+
+
+
+
+
+
+
+
 
   OrgDb_list <- list("Homo sapiens" = "org.Hs.eg.db",
                      "Mus musculus" = "org.Mm.eg.db")
@@ -91,18 +113,42 @@ setup_annotations <- function(dataset, taxId, OrgDb) {
     # Attach package for clusterProfiler
     suppressPackageStartupMessages(library(OrgDb, quietly = TRUE, character.only = TRUE))
 
-    set_dataset_attr(x = taxId, which = "taxId", dataset = dataset)
+    add_database(database = , id = , type = , replace = F)
 
-    set_dataset_attr(x = scientific_name, which = "scientific_name", dataset = dataset)
-
-    set_dataset_attr(x = kegg_code, which = "kegg_code", dataset = dataset)
-
-    set_dataset_attr(x = common_name, which = "common_name", dataset = dataset)
-
+    # save(?)
     set_dataset_attr(x = OrgDb, which = "OrgDb", dataset = dataset)
 
     #
-    add_variables_data(get_variables_data(name = "variables", variables = All, dataset = dataset), name = "UNIPROT", dataset = dataset)
+    add_variables_data(get_variables_data(name = "variables", variables = All, dataset = dataset),
+                       name = "UNIPROT",
+                       dataset = dataset)
+
+    if (dataset == "all") {
+
+      for (toType in columns(eval(parse(text = OrgDb)))) {
+
+        add_variables_data(translate_Ids(Ids = get_variables(All, dataset = dataset),
+                                       fromType = "UNIPROT",
+                                       toType = toType,
+                                       OrgDb = OrgDb,
+                                       dataset = "all",
+                                       drop = FALSE,
+                                       fill.missing = ,
+                                       save = F,
+                                       silent = T),
+                           name = toType,
+                           dataset = dataset,
+                           replace = TRUE)
+
+      }
+
+    }
+
+
+
+
+
+
 
     cat(paste0("Annotation database setup for ", scientific_name, "."))
 

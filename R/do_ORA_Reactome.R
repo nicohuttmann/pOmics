@@ -20,6 +20,7 @@ do_ORA_Reactome <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none
 
   # Get dataset
   dataset <- get_dataset(dataset)
+  if (is_dataset("all")) dataset <- "all"
 
   # Prepare protein vectors
   sig.proteins <- names(proteins)[proteins == 1]

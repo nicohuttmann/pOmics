@@ -1,15 +1,22 @@
 #' Checks and returns correct dataset identifier
 #'
 #' @param dataset dataset name or number
+#' @param try.all returns all if combined database exists
 #'
 #' @return
 #' @export
 #'
 #'
-get_dataset <- function(dataset) {
+get_dataset <- function(dataset, try.all = F) {
 
   # Default if not given
-  if (!hasArg(dataset)) return(get_default_dataset())
+  if (!hasArg(dataset)) {
+
+    if (try.all & is_dataset("all")) return("all")
+
+    else return(get_default_dataset())
+
+  }
 
   # Name correct
   if (dataset %in% names(.datasets)) return(dataset)

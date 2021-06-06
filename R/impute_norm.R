@@ -1,18 +1,37 @@
 #' Imputes values based on normal distribution
 #'
-#' @param data data (either a tibble, data frame or matrix)
+#' @param data_ data (either a tibble, data frame or matrix)
 #' @param shift shift in standard deviations
 #' @param width width in standard deviations
 #' @param seed seed
+#' @param input if data_ is list: name of data to use
+#' @param output if data_ is list: name of output data to save in list under
 #'
 #' @return
 #' @export
 #'
 #'
-impute_norm <- function(data, shift = 1.8, width = 0.3, seed = 123) {
+impute_norm <- function(data_, shift = 1.8, width = 0.3, seed = 123, input = "raw_data", output = "data") {
 
   # Check input
-  if (!hasArg(data)) stop("No data given.")
+  if (!hasArg(data_)) stop("No data given.")
+
+  # Check if list or dataframe given
+  list.input <- !is.data.frame(data_) & is.list(data_)
+
+  #
+  if (list.input & !input %in% names(data_)) stop("Data could not be found. Please specify correct <input>.")
+
+
+
+  # Get data
+  if (list.input) data <- data_[[input]]
+
+  else data <- data_
+
+
+
+
 
   # Set seed
   set.seed(seed = seed)
@@ -57,7 +76,14 @@ impute_norm <- function(data, shift = 1.8, width = 0.3, seed = 123) {
 
   }
 
+
+
+  # Prepare return
+  if (list.input) data_[[output]] <- data
+
+  else data_ <- data
+
   # Return
-  return(data)
+  return(data_)
 
 }

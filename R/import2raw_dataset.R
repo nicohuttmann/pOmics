@@ -13,12 +13,11 @@ import2raw_dataset <- function(import, identifier, add = T) {
   #
   sep <- identify_separator(x = import)
 
+  identifiers <- get_identifiers(x = import, sep = sep, identifier = identifier)
+
   # Define identifiers
   import <- import %>%
-    dplyr::mutate(variables = get_identifiers(x = import,
-                                              sep = sep,
-                                              identifier = identifier),
-                  .before = 1)
+    dplyr::mutate(variables = identifiers, .before = 1)
 
   # Build raw dataset
   raw_dataset <- import2grouped_data(import = import)

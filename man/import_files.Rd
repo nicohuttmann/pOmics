@@ -4,10 +4,18 @@
 \alias{import_files}
 \title{Imports any file type using the file extension and returns list}
 \usage{
-import_files(files)
+import_files(
+  files,
+  col_types = c(Reverse = "c", `Potential contaminant` = "c"),
+  silent = F
+)
 }
 \arguments{
 \item{files}{file paths}
+
+\item{col_types}{specific column types if misidentified}
+
+\item{silent}{suppresses messages}
 }
 \value{
 

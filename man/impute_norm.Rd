@@ -4,16 +4,27 @@
 \alias{impute_norm}
 \title{Imputes values based on normal distribution}
 \usage{
-impute_norm(data, shift = 1.8, width = 0.3, seed = 123)
+impute_norm(
+  data_,
+  shift = 1.8,
+  width = 0.3,
+  seed = 123,
+  input = "raw_data",
+  output = "data"
+)
 }
 \arguments{
-\item{data}{data (either a tibble, data frame or matrix)}
+\item{data_}{data (either a tibble, data frame or matrix)}
 
 \item{shift}{shift in standard deviations}
 
 \item{width}{width in standard deviations}
 
 \item{seed}{seed}
+
+\item{input}{if data_ is list: name of data to use}
+
+\item{output}{if data_ is list: name of output data to save in list under}
 }
 \value{
 
