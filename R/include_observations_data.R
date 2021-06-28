@@ -14,7 +14,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-include_observations_data_ <- function(data_, name, column.name, observations.set, dataset,
+include_observations_data <- function(data_, name, column.name, observations.set, dataset,
                                        input = "LFQ.intensity", output) {
 
   # Check data input

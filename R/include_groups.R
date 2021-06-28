@@ -14,7 +14,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-include_groups_ <- function(data_, groups, control, observations.set, dataset, input = "LFQ.intensity", output) {
+include_groups <- function(data_, groups, control, observations.set, dataset, input = "LFQ.intensity", output) {
 
   # Check data input
   if (!hasArg(data_)) stop("Please provide data input.")
