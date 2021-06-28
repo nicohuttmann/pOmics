@@ -19,7 +19,7 @@ eval_data <- function(data_, expr, FUN, input = "Peptides", output) {
 
     message("No data given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -31,7 +31,7 @@ eval_data <- function(data_, expr, FUN, input = "Peptides", output) {
 
     message("Data could not be found. Please specify correct <input>.")
 
-    invisible(data_)
+    return(invisible(data_))
 
   }
 

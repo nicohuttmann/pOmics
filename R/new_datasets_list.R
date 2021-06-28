@@ -13,8 +13,8 @@ new_datasets_list <- function(replace = F) {
     .datasets <<- tibble::lst()
 
     # Indicate if new datasets list was created
-    invisible(TRUE)
+    return(invisible(TRUE))
   } else {
-    invisible(FALSE)
+    return(invisible(FALSE))
   }
 }

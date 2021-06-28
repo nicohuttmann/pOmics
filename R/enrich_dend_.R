@@ -70,6 +70,6 @@ enrich_dend_ <- function(cor_list, proteins, n = 10, inverse = F, name, cut = T,
                                           add.info = add.info)
 
   # Return
-  invisible(cor_list)
+  return(invisible(cor_list))
 
 }

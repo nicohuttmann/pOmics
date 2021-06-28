@@ -40,6 +40,6 @@ summary_proteins <- function(proteins, sort.names = F, view = T) {
 
 
   # Return
-  invisible(table)
+  return(invisible(table))
 
 }

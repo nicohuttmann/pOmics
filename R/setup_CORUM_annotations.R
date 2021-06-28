@@ -50,13 +50,13 @@ setup_CORUM_annotations <- function() {
 
     cat("\nCORUM annoations setup.")
 
-    invisible(TRUE)
+    return(invisible(TRUE))
 
   } else {
 
     cat("CORUM annotations could not set up. Check your internet conection or contact Nico.")
 
-    invisible(FALSE)
+    return(invisible(FALSE))
 
   }
 

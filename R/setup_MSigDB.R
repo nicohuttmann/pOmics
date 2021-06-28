@@ -22,7 +22,7 @@ setup_MSigDB <- function(dataset, category) {
   if (is.na(scientific_name)) {
 
     message("No scientific name availale.")
-    invisible(FALSE)
+    return(invisible(FALSE))
 
   }
 
@@ -32,7 +32,7 @@ setup_MSigDB <- function(dataset, category) {
   if (!scientific_name %in% species$species_name) {
 
     message("Species not supported.")
-    invisible(FALSE)
+    return(invisible(FALSE))
 
   }
 

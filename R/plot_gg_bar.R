@@ -32,6 +32,6 @@ plot_gg_bar <- function(data, x = "observations", y = "count") {
 
 
   # Return
-  invisible(p)
+  return(invisible(p))
 
 }

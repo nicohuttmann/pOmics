@@ -79,6 +79,6 @@ classify_protein_identification_2 <- function(data.eval, conf.variables, lower.l
   }
 
   # Return
-  invisible(results.list)
+  return(invisible(results.list))
 
 }

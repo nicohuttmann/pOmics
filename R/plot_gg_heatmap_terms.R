@@ -569,6 +569,6 @@ plot_gg_heatmap_terms <- function(data_,
 
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 }

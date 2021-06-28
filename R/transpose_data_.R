@@ -19,7 +19,7 @@ transpose_data_ <- function(data_, from.row.names = "observations", to.row.names
 
     message("No data given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -31,7 +31,7 @@ transpose_data_ <- function(data_, from.row.names = "observations", to.row.names
 
     message("Data could not be found. Please specify correct <input>.")
 
-    invisible(data_)
+    return(invisible(data_))
 
   }
 

@@ -116,7 +116,7 @@ plot_gg_pca <- function(data_, x = "PC1", y = "PC2", color = "groups", fill, sha
   data_[[paste("pca_plot", x, y, sep = "_")]] <- p
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 }
 

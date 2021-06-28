@@ -30,7 +30,7 @@ setup_org_database <- function(dataset, OrgDb, taxId) {
     if (is.na(taxId)) {
       
       message("Use setup_taxonomy_information() to get a taxID.")
-      invisible(FALSE)
+      return(invisible(FALSE))
       
     }
     
@@ -47,7 +47,7 @@ setup_org_database <- function(dataset, OrgDb, taxId) {
     } else {
       
       message(paste0("No known annotation package for taxonomy Id: ", taxId, "."))
-      invisible(FALSE)
+      return(invisible(FALSE))
       
     }
     
@@ -85,12 +85,12 @@ setup_org_database <- function(dataset, OrgDb, taxId) {
     
     
     cat(paste0("Annotation database ", OrgDb, " set up.\n"))
-    invisible(TRUE)
+    return(invisible(TRUE))
     
   } else {
     
     cat("Annotation database not found. Make sure the Annotation package can be installed or install it manuall from Bioconductor.\n")
-    invisible(FALSE)
+    return(invisible(FALSE))
     
   }
   

@@ -63,7 +63,7 @@ do_ORA_TERM2GENE <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "non
   #if (view) View(results)
 
   # Return
-  if (!return.all) invisible(results)
+  if (!return.all) return(invisible(results))
 
   else return(list(results = results,
                    enrichResult = corum.results))

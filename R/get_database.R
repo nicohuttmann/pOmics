@@ -13,7 +13,7 @@ get_database <- function(id, type) {
   if (!hasArg(id) || !hasArg(type)) {
 
     message("Incomplete call.")
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -24,7 +24,7 @@ get_database <- function(id, type) {
   if (!check_database(id = id, type = type)) {
 
     message("Database not found.")
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 

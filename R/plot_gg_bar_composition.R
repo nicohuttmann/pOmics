@@ -19,7 +19,7 @@ plot_gg_bar_composition <- function(data_, TERMS = "mitochondrion", color, xlab 
 
     message("No data given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -31,7 +31,7 @@ plot_gg_bar_composition <- function(data_, TERMS = "mitochondrion", color, xlab 
 
     message("Data could not be found. Please specify correct <input>.")
 
-    invisible(data_)
+    return(invisible(data_))
 
   }
 
@@ -100,5 +100,5 @@ plot_gg_bar_composition <- function(data_, TERMS = "mitochondrion", color, xlab 
   else data_ <- p
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 }

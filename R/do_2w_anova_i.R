@@ -164,7 +164,7 @@ do_2w_anova_i <- function(analysis_list, formula = "log2(x) ~ genotype * treatme
 
 
   # Return
-  invisible(analysis_list)
+  return(invisible(analysis_list))
 
 
 

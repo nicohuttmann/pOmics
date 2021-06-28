@@ -35,7 +35,7 @@ setup_folders <- function(dir, silent = F) {
 
     cat("Working directory is not writable. Please select a different working directory.")
 
-    invisible(FALSE)
+    return(invisible(FALSE))
 
 
   } else {
@@ -68,7 +68,7 @@ setup_folders <- function(dir, silent = F) {
     if (!silent) cat("All folders created.\n")
 
     # Return
-    invisible(TRUE)
+    return(invisible(TRUE))
 
   }
 

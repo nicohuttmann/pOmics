@@ -21,7 +21,7 @@ plot_upset <- function(data_, order, nintersects = 10, transpose = T, from.row.n
 
     message("No data given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -33,7 +33,7 @@ plot_upset <- function(data_, order, nintersects = 10, transpose = T, from.row.n
 
     message("Data could not be found. Please specify correct <input>.")
 
-    invisible(data_)
+    return(invisible(data_))
 
   }
 
@@ -85,6 +85,6 @@ plot_upset <- function(data_, order, nintersects = 10, transpose = T, from.row.n
   else data_ <- p
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 }

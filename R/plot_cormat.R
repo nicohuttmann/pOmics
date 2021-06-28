@@ -21,6 +21,6 @@ plot_cormat <- function(cor_list, data = "adjacency", print = T) {
 
 
   # Return to pipe
-  invisible(cor_list)
+  return(invisible(cor_list))
 
 }

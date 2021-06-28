@@ -20,7 +20,7 @@ add_dataset <- function(name) {
     # Check if name is already present in datasets
     if (name %in% names(.datasets)) {
       message("Dataset or name already added.")
-      invisible(FALSE)
+      return(invisible(FALSE))
     }
 
 
@@ -62,12 +62,12 @@ add_dataset <- function(name) {
 
 
     # Indicate if new info list was created
-    invisible(TRUE)
+    return(invisible(TRUE))
 
   } else {
 
     message("No dataset name provided.")
-    invisible(FALSE)
+    return(invisible(FALSE))
   }
 
 }

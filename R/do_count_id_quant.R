@@ -31,6 +31,6 @@ do_count_id_quant <- function(data_, input.id = "Peptides", input.quant = "LFQ.i
 
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 }

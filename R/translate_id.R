@@ -20,7 +20,7 @@ translate_Ids <- function(Ids, fromType = "UNIPROT", toType, OrgDb, dataset, dro
 
     cat("No Ids given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -44,7 +44,7 @@ translate_Ids <- function(Ids, fromType = "UNIPROT", toType, OrgDb, dataset, dro
   # If no organism database can be found
   if (is.null(OrgDb)) {
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 

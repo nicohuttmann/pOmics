@@ -9,14 +9,14 @@
 #' @export
 #'
 #'
-do_nothing <- function(data_, ..., input = "raw_data", output) {
+do_nothing <- function(data_, ..., input = "LFQ.intensity", output) {
 
   # Check input
   if (!hasArg(data_)) {
 
     message("No data given.")
 
-    invisible(NULL)
+    return(return(invisible(NULL)))
 
   }
 
@@ -28,7 +28,7 @@ do_nothing <- function(data_, ..., input = "raw_data", output) {
 
     message("Data could not be found. Please specify correct <input>.")
 
-    invisible(data_)
+    return(invisible(data_))
 
   }
 

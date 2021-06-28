@@ -148,7 +148,7 @@ plot_gg_heatmap_protein_overlap <- function(data_, x, y, font_size = 6, rel_smal
   data_[[paste("plot_overlap_heatmap_", x, y, sep = "_")]] <- p
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 
 }

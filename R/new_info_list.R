@@ -18,10 +18,10 @@ new_info_list <- function(replace = F) {
 
 
     # Indicate if new info list was created
-    invisible(TRUE)
+    return(invisible(TRUE))
 
   } else {
-    invisible(FALSE)
+    return(invisible(FALSE))
   }
 
 }

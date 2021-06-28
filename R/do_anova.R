@@ -116,7 +116,7 @@ do_anova <- function(analysis_list, formula = "log2(x) ~ groups", data.name = "r
 
 
   # Return
-  invisible(analysis_list)
+  return(invisible(analysis_list))
 
 
 

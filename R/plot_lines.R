@@ -102,6 +102,6 @@ plot_lines <- function(data, group.column = "observations", label.column, x.y.ra
   #ggsave(filename = "plot.pdf", width = 3, height = 3, units = "in", dpi = "print")
 
   # Return
-  invisible(p)
+  return(invisible(p))
 
 }

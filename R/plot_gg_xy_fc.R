@@ -91,7 +91,7 @@ plot_gg_xy_fc <- function(data_, x, y, x.threshold = 0, y.threshold = 0, aspect.
   data_[[paste("plot", x, y, sep = "_")]] <- p
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 
 }

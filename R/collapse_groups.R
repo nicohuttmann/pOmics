@@ -19,7 +19,7 @@ collapse_groups <- function(data_, FUN = mean, group.column = "groups", input = 
 
     message("No data given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -31,7 +31,7 @@ collapse_groups <- function(data_, FUN = mean, group.column = "groups", input = 
 
     message("Data could not be found. Please specify correct <input>.")
 
-    invisible(data_)
+    return(invisible(data_))
 
   }
 
@@ -45,7 +45,7 @@ collapse_groups <- function(data_, FUN = mean, group.column = "groups", input = 
   if (!group.column %in% names(data)) {
 
     message("Group column not found in data frame.")
-    invisible(data_)
+    return(invisible(data_))
 
   }
 

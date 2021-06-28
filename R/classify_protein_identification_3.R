@@ -113,6 +113,6 @@ classify_protein_identification_3 <- function(data.eval, lower.limit = 0, datase
   }
 
   # Return
-  invisible(results.list)
+  return(invisible(results.list))
 
 }

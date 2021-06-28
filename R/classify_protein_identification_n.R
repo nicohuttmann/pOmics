@@ -100,6 +100,6 @@ classify_protein_identification_n <- function(data.eval, lower.limit = 0, plot =
 
 
   # Return
-  invisible(results.list)
+  return(invisible(results.list))
 
 }

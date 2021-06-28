@@ -13,8 +13,8 @@ new_databases_list <- function(replace = F) {
     .databases <<- tibble::lst()
     
     # Indicate if new databases list was created
-    invisible(TRUE)
+    return(invisible(TRUE))
   } else {
-    invisible(FALSE)
+    return(invisible(FALSE))
   }
 }

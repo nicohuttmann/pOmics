@@ -156,7 +156,7 @@ choose_terms <- function(proteins, TERM2GENE, graphics) {
 
     # Return NULL as no action
   } else {
-    invisible(NULL)
+    return(invisible(NULL))
   }
 
 }

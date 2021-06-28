@@ -87,6 +87,6 @@ plot_gg_count_id_quant2 <- function(data_, input = "data_count_id_quant", color.
   data_[[output]] <- p
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 }

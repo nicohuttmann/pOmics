@@ -123,7 +123,7 @@ fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutof
   if (view) save2cache(data = list.enrichment, view = TRUE, new = FALSE)
 
   # Return
-  invisible(list.enrichment)
+  return(invisible(list.enrichment))
 
 }
 

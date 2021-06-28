@@ -291,6 +291,6 @@ plot_gg_heatmap <- function(data_, transpose = F, label.proteins = T, dend.x.hei
 
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 }

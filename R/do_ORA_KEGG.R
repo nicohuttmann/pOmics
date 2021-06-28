@@ -57,7 +57,7 @@ do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", q
 
   # Return
   # if (!return.all)
-  invisible(kegg.results)
+  return(invisible(kegg.results))
 
   # else invisible(list(results = results,
   #                     enrichResult = kegg.results))

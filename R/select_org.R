@@ -17,7 +17,7 @@ select_org <- function(keys, columns, output = "vector.keep", keytype, OrgDb, da
   if (!hasArg(keys)) {
 
     cat("No keys given.")
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 

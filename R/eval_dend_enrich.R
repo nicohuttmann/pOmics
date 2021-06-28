@@ -55,6 +55,6 @@ eval_dend_enrich <- function(dend.enrich, cut = T) {
   dend.enrich[["proteins"]] <- which_names(dend.enrich[["dend.table.cluster"]][, k] == l)
 
   # Return
-  invisible(dend.enrich)
+  return(invisible(dend.enrich))
 
 }

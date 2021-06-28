@@ -20,7 +20,7 @@ do_t.test <- function(data_, paired = F, var.equal = T, group.column = "groups",
 
     message("No data given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -32,7 +32,7 @@ do_t.test <- function(data_, paired = F, var.equal = T, group.column = "groups",
 
     message("Data could not be found. Please specify correct <input>.")
 
-    invisible(data_)
+    return(invisible(data_))
 
   }
 

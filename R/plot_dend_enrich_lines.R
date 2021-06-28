@@ -55,6 +55,6 @@ plot_dend_enrich_lines <- function(dend.table.pvalue, dend.table.cluster, title,
   if (print) print(p)
 
   # Return
-  invisible(p)
+  return(invisible(p))
 
 }

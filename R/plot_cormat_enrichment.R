@@ -163,6 +163,6 @@ plot_cormat_enrichment <- function(cor_list, name, print = T) {
 
 
   # Return
-  invisible(cor_list)
+  return(invisible(cor_list))
 
 }

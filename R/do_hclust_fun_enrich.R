@@ -13,7 +13,7 @@ do_hclust_fun_enrich <- function(data_, max.k = 8, simplify = F, database = "BP"
 
     message("No data given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -25,7 +25,7 @@ do_hclust_fun_enrich <- function(data_, max.k = 8, simplify = F, database = "BP"
 
     message("Data could not be found. Please specify correct <input>.")
 
-    invisible(data_)
+    return(invisible(data_))
 
   }
 

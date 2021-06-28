@@ -51,6 +51,6 @@ import_files <- function(files, col_types = c(Reverse = "c", `Potential contamin
 
   # Return list or one data frame
 
-  invisible(list.import)
+  return(invisible(list.import))
 
 }

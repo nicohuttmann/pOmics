@@ -13,9 +13,9 @@ new_imports_list <- function(replace = F) {
     .imports <<- tibble::lst()
 
     # Indicate if new info list was created
-    invisible(TRUE)
+    return(invisible(TRUE))
   } else {
-    invisible(FALSE)
+    return(invisible(FALSE))
   }
 
 }

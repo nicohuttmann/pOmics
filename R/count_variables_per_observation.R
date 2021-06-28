@@ -39,6 +39,6 @@ count_variables_per_observation <- function(data_, data.name = "raw_data", plot 
 
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 }

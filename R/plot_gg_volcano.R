@@ -42,7 +42,7 @@ plot_gg_volcano <- function(data_, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0,
 
     message("No data given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -54,7 +54,7 @@ plot_gg_volcano <- function(data_, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0,
 
     message("Data could not be found. Please specify correct <input>.")
 
-    invisible(data_)
+    return(invisible(data_))
 
   }
 
@@ -109,7 +109,7 @@ plot_gg_volcano <- function(data_, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0,
 
   print(data_[[output]])
 
-  invisible(data_)
+  return(invisible(data_))
 
 
 }

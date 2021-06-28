@@ -58,6 +58,6 @@ do_annotation_composition <- function(list_, TERM2GENE, correct.fractions.by, ou
     dplyr::arrange(desc(.data[[colnames(data)[2]]]))
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 }

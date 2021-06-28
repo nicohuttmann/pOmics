@@ -88,7 +88,7 @@ do_ORA_GO <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qva
 
   # Return
   #if (!return.all)
-  invisible(go.results)
+  return(invisible(go.results))
 
   # else return(list(results = results,
   #                  enrichResult = go.results))

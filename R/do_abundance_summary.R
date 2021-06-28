@@ -23,7 +23,7 @@ do_abundance_summary <- function(data_, xlab = "Protein rank", ylab = "median lo
 
     message("No data given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -35,7 +35,7 @@ do_abundance_summary <- function(data_, xlab = "Protein rank", ylab = "median lo
 
     message("Data could not be found. Please specify correct <input>.")
 
-    invisible(data_)
+    return(invisible(data_))
 
   }
 

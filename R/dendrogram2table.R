@@ -24,7 +24,7 @@ dendrogram2table <- function(data_, dendrogram = "dend_x") {
   data_[["dend.table"]] <- dend_table
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 }
 

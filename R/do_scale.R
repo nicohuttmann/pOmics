@@ -19,7 +19,7 @@ do_scale <- function(data_, input = "LFQ.intensity", output) {
 
     message("No data given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -31,7 +31,7 @@ do_scale <- function(data_, input = "LFQ.intensity", output) {
 
     message("Data could not be found. Please specify correct <input>.")
 
-    invisible(data_)
+    return(invisible(data_))
 
   }
 

@@ -117,6 +117,6 @@ plot_volcano <- function(data, markers = "default", size = 4, opacity = 0.8, axi
 
   if (print) print(p)
 
-  invisible(p)
+  return(invisible(p))
 
 }

@@ -103,6 +103,6 @@ plot_gg_count_id_quant <- function(data_, color.id = "#6BAED6", color.quant = "#
   data_[[output]] <- p
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 }

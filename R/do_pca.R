@@ -50,6 +50,6 @@ do_pca <- function(data_, scale = T, data.name = "raw_data", plot = T, print.sum
   if (plot) data_ <- plot_gg_pca(data_)
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 }

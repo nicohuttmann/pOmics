@@ -69,9 +69,9 @@ do_ORA_MSigDB <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none",
   if (view) View(results)
 
   # Return
-  if (!return.all) invisible(results)
+  if (!return.all) return(invisible(results))
 
   else return(list(results = results,
-                   enrichResult = kegg.results))
+                   enrichResult = MSigDB.results))
 
 }

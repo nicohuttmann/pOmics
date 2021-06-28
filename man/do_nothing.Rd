@@ -4,7 +4,7 @@
 \alias{do_nothing}
 \title{Template for functions that accept either a data frame or a list}
 \usage{
-do_nothing(data_, ..., input = "raw_data", output)
+do_nothing(data_, ..., input = "LFQ.intensity", output)
 }
 \arguments{
 \item{data_}{list or tibble}

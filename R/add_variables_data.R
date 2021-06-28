@@ -62,12 +62,12 @@ add_variables_data <- function(data, name, dataset, set.default = F, add.backgro
 
       } else {
         cat("Column with same name already exists.")
-        invisible(FALSE)
+        return(invisible(FALSE))
       }
 
     } else {
       cat("Column with same name already exists.")
-      invisible(FALSE)
+      return(invisible(FALSE))
     }
 
   }

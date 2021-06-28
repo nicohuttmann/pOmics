@@ -15,7 +15,7 @@ data2vector <- function(data, values, names) {
 
     cat("No data frame given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 

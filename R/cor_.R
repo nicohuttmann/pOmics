@@ -29,6 +29,6 @@ cor_ <- function(data, method = "pearson", set.diag.0 = F) {
   attr(cor_list, "correlation") <- method
 
   # Return
-  invisible(cor_list)
+  return(invisible(cor_list))
 
 }

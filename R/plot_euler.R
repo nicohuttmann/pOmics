@@ -21,7 +21,7 @@ plot_euler <- function(data_, fontsize = 8, transpose = T, from.row.names = "obs
 
     message("No data given.")
 
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 
@@ -33,7 +33,7 @@ plot_euler <- function(data_, fontsize = 8, transpose = T, from.row.names = "obs
 
     message("Data could not be found. Please specify correct <input>.")
 
-    invisible(data_)
+    return(invisible(data_))
 
   }
 
@@ -58,7 +58,7 @@ plot_euler <- function(data_, fontsize = 8, transpose = T, from.row.names = "obs
   if (typeof(data[[1]]) != "character" || any(unlist(lapply(data[-1], typeof)) != "logical")) {
 
     message("Dataframe must consist of one character and n logical columns.")
-    invisible(data_)
+    return(invisible(data_))
 
   }
 
@@ -83,6 +83,6 @@ plot_euler <- function(data_, fontsize = 8, transpose = T, from.row.names = "obs
   else data_ <- p
 
   # Return
-  invisible(data_)
+  return(invisible(data_))
 
 }

@@ -70,7 +70,7 @@ get_data <- function(which, variables = "default", observations = "default", out
     message(paste0("Output type <",
                    output.type,
                    "> not supported. Use <list>, <tibble>, <data.frame> or <matrix> instead."))
-    invisible(NULL)
+    return(invisible(NULL))
 
   }
 

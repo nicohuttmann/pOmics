@@ -84,6 +84,6 @@ do_hclust <- function(data_, scale = T, group.column = "groups", grouping.functi
    data_ <- plot_gg_heatmap(data_ = data_, export = F, input = output)
 
    # Return
-   invisible(data_)
+   return(invisible(data_))
 
 }

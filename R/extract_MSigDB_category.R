@@ -18,7 +18,7 @@ extract_MSigDB_category <- function(category, dataset) {
   # Check if database exists
   if (!check_database(10090, "MSigDB")) {
 
-    if (!setup_MSigDB(dataset = dataset)) invisible(NULL)
+    if (!setup_MSigDB(dataset = dataset)) return(invisible(NULL))
 
   }
 
