@@ -5,29 +5,29 @@
 \title{Assemble data from dataset and return in list}
 \usage{
 get_data_(
-  data.name,
+  which,
   variables = "default",
   observations = "default",
+  output,
+  output.type = "list",
   observations.set,
-  dataset,
-  tidy = T,
-  name = "raw_data"
+  dataset
 )
 }
 \arguments{
-\item{data.name}{specific name of data type}
+\item{which}{specific name of data type}
 
 \item{variables}{selected variables}
 
 \item{observations}{selected observations}
 
+\item{output}{name to save in list}
+
+\item{output.type}{output type ("list" (default), "tibble", "data.frame", "matrix")}
+
 \item{observations.set}{set of observations}
 
 \item{dataset}{dataset name or number}
-
-\item{tidy}{add data as tidy data frame or matrix}
-
-\item{name}{name to save in list}
 }
 \value{
 

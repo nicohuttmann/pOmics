@@ -12,9 +12,7 @@ do_ORA_KEGG(
   minGSSize = 10,
   maxGSSize = 500,
   dataset,
-  view = T,
-  return.all = F,
-  add.info = F
+  view = F
 )
 }
 \arguments{
@@ -33,10 +31,6 @@ do_ORA_KEGG(
 \item{dataset}{dataset}
 
 \item{view}{view results}
-
-\item{return.all}{return enrichResult object; useful for further analysis of enrichment results}
-
-\item{add.info}{add additional information to the results data frame}
 }
 \value{
 

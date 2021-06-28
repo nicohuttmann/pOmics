@@ -13,6 +13,9 @@
 #'
 do_ORA_topGO <- function(proteins, ontology = "CC", algorithm = "classic", threshold = 0.05, dataset, add.info = F) {
 
+
+  suppressMessages(require(topGO))
+
   # Get dataset
   dataset <- get_dataset(dataset)
 

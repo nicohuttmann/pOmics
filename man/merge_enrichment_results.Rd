@@ -7,7 +7,8 @@
 merge_enrichment_results(
   enrichment_list,
   order.by = "p.adjust",
-  descending = F
+  descending = F,
+  append.name = T
 )
 }
 \arguments{
@@ -16,6 +17,8 @@ merge_enrichment_results(
 \item{order.by}{column name by which to order}
 
 \item{descending}{order in descending order}
+
+\item{append.name}{}
 }
 \value{
 

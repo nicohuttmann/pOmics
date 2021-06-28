@@ -14,6 +14,7 @@ plot_gg_heatmap(
   export = T,
   height = 6,
   ratio = 3,
+  input = "data_hclust",
   file = "heatmap.pdf"
 )
 }

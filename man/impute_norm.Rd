@@ -9,8 +9,8 @@ impute_norm(
   shift = 1.8,
   width = 0.3,
   seed = 123,
-  input = "raw_data",
-  output = "data"
+  input = "LFQ.intensity",
+  output
 )
 }
 \arguments{

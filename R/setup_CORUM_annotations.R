@@ -48,7 +48,7 @@ setup_CORUM_annotations <- function() {
   # Check
   if (check_database(id = "CORUM", type = "TERM2GENE") && check_database(id = "CORUM", type = "TERM2NAME")) {
 
-    cat("CORUM annoations setup.")
+    cat("\nCORUM annoations setup.")
 
     invisible(TRUE)
 

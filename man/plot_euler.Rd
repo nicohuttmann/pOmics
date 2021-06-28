@@ -4,12 +4,31 @@
 \alias{plot_euler}
 \title{Plots Euler diagram from dataframe}
 \usage{
-plot_euler(data, view = T)
+plot_euler(
+  data_,
+  fontsize = 8,
+  transpose = T,
+  from.row.names = "observations",
+  to.row.names = "variables",
+  view = T,
+  input = "Peptides",
+  output = "plot_euler"
+)
 }
 \arguments{
-\item{data}{dataframe}
+\item{data_}{data_ list}
+
+\item{transpose}{transpose data frame}
+
+\item{from.row.names}{row names column of initial data frame}
+
+\item{to.row.names}{row names column after transposing (must be variables)}
 
 \item{view}{view plot}
+
+\item{input}{name of input data}
+
+\item{output}{name of output data}
 }
 \value{
 

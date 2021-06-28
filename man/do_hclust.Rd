@@ -6,18 +6,17 @@
 \usage{
 do_hclust(
   data_,
-  data.name = "data",
   scale = T,
   group.column = "groups",
   grouping.function = mean,
   distance.method = "euclidean",
-  clustering.method = "complete"
+  clustering.method = "complete",
+  input = "LFQ.intensity",
+  output = "data_hclust"
 )
 }
 \arguments{
 \item{data_}{data list}
-
-\item{data.name}{name of data to use for analysis}
 
 \item{scale}{Scale data (Z-score)?}
 
@@ -28,6 +27,8 @@ do_hclust(
 \item{distance.method}{method to calculate distance; see ?dist for options}
 
 \item{clustering.method}{method to cluster columns and rows; see ?hclust for options}
+
+\item{input}{name of data to use for analysis}
 }
 \value{
 

@@ -12,6 +12,10 @@ transpose_tibble(
 }
 \arguments{
 \item{tibble}{tibble}
+
+\item{from.row.names}{row names column of initial data frame}
+
+\item{to.row.names}{row names column after transposing}
 }
 \value{
 

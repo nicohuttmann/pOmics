@@ -16,7 +16,7 @@
 #'
 #'
 do_ORA_MSigDB <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 10,
-                          maxGSSize = 500, dataset, view = T, return.all = F, add.info = F) {
+                          maxGSSize = 500, dataset, view = F, return.all = F, add.info = F) {
 
 
 

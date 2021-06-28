@@ -13,9 +13,7 @@ do_ORA(
   minGSSize = 10,
   maxGSSize = 500,
   algorithm = "classic",
-  dataset,
-  return.all = F,
-  add.info = F
+  dataset
 )
 }
 \arguments{
@@ -36,10 +34,6 @@ do_ORA(
 \item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 
 \item{dataset}{dataset}
-
-\item{return.all}{return enrichResult object; useful for further analysis of enrichment results}
-
-\item{add.info}{add additional information (takes longer)}
 }
 \value{
 

@@ -9,15 +9,13 @@
 #' @param database which GO database to use
 #' @param dataset dataset
 #' @param view view results
-#' @param return.all return enrichResult object; useful for further analysis of enrichment results
-#' @param add.info add additional information to the results data frame
 #'
 #' @return
 #' @export
 #'
 #'
 do_ORA_GO <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 10, maxGSSize = 500,
-                      database, dataset, view = T, return.all = F, add.info = F) {
+                      database, dataset, view = F) {
 
   # Get dataset
   dataset <- get_dataset(dataset)
@@ -32,54 +30,67 @@ do_ORA_GO <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qva
   # Prepare protein vectors
   sig.proteins <- names(proteins)[proteins == 1]
 
-  sig.proteins.eg <- translate_Ids(Ids = sig.proteins,
-                                   fromType = "UNIPROT",
-                                   toType = "ENTREZID",
-                                   dataset = dataset,
-                                   drop = TRUE,
-                                   silent = TRUE)
+
 
   background <- names(proteins)
 
-  background.eg <- translate_Ids(Ids = background,
-                                 fromType = "UNIPROT",
-                                 toType = "ENTREZID",
-                                 dataset = dataset,
-                                 drop = TRUE,
-                                 silent = TRUE)
 
 
   # Performing enrichment
-  go.results <- clusterProfiler::enrichGO(gene = sig.proteins.eg,
-                                          universe = background.eg,
+  go.results <- clusterProfiler::enrichGO(gene = sig.proteins,
+                                          universe = background,
                                           OrgDb = OrgDb,
                                           ont = database,
-                                          keyType = "ENTREZID",
+                                          keyType = "UNIPROT",
                                           pvalueCutoff = pvalueCutoff,
                                           pAdjustMethod = pAdjustMethod,
                                           qvalueCutoff = qvalueCutoff,
                                           minGSSize = minGSSize,
-                                          maxGSSize = maxGSSize)
+                                          maxGSSize = maxGSSize,
+                                          readable = T)
 
   # If enrichment failed
   if (is.null(go.results)) return(NULL)
 
-  # Prepare results data
-  results <- tibble::as_tibble(go.results@result) %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(Proteins = paste(strsplit(geneID, split = "/")[[1]], collapse = ";"), .before = geneID) %>%
-    dplyr::select(-c(geneID)) %>%
-    dplyr::mutate(Genes = paste(p2g(strsplit(Proteins, split = ";")[[1]]), collapse = ";"), .before = Proteins) %>%
-    dplyr::ungroup() %>%
-    dplyr::filter(p.adjust < pvalueCutoff)
+  # # Re-mapping of entrezids
+  # mapping.eg2p <- select_org(keys = sig.proteins.eg,
+  #                            columns = "UNIPROT",
+  #                            output = "mapping.na",
+  #                            keytype = "ENTREZID",
+  #                            OrgDb = OrgDb,
+  #                            dataset = dataset)
+  #
+  # mapping.eg2p <- mapping.eg2p[mapping.eg2p[, 2] %in% sig.proteins, ]
+  #
+  # mapping.eg2p <- data2vector(mapping.eg2p)
+
+  # # Mapping to Symbols
+  # mapping.p2g <- select_org(keys = sig.proteins,
+  #                            columns = "SYMBOL",
+  #                            output = "vector.keep",
+  #                            #keytype = "UNIPROT",
+  #                            OrgDb = OrgDb,
+  #                            dataset = dataset)
+
+
+
+  # # Prepare results data
+  # results <- tibble::as_tibble(go.results@result) %>%
+  #   dplyr::rowwise() %>%
+  #   dplyr::mutate(Proteins = paste(mapping.eg2p[strsplit(geneID, split = "/")[[1]]], collapse = ";"), .before = geneID) %>%
+  #   dplyr::select(-c(geneID)) %>%
+  #   dplyr::mutate(Genes = paste(mapping.p2g[strsplit(Proteins, split = ";")[[1]]], collapse = ";"), .before = Proteins) %>%
+  #   dplyr::ungroup() %>%
+  #   dplyr::filter(p.adjust < pvalueCutoff)
 
   # View data frame immediately
-  #if (view) View(results)
+  if (view) View(go.results@result)
 
   # Return
-  if (!return.all) invisible(results)
+  #if (!return.all)
+  invisible(go.results)
 
-  else return(list(results = results,
-                   enrichResult = go.results))
+  # else return(list(results = results,
+  #                  enrichResult = go.results))
 
 }

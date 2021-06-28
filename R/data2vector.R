@@ -7,28 +7,28 @@
 #' @return
 #' @export
 #'
-#' 
+#'
 data2vector <- function(data, values, names) {
-  
+
   # Check input
   if (!hasArg(data)) {
-    
+
     cat("No data frame given.")
-    
+
     invisible(NULL)
-    
-  } 
-  
+
+  }
+
   # Check values and names column
-  if (!hasArg(values)) 
-    values <- 2
-  
-  if (!hasArg(names)) 
-    names <- 1
-  
+  if (!hasArg(values))
+    values <- colnames(data)[2]
+
+  if (!hasArg(names))
+    names <- colnames(data)[1]
+
   # Transform DF to tibble
-  return(data %>% 
-    data2tibble() %>% 
+  return(data %>%
+    data2tibble() %>%
     dplyr::pull(var = !!values, name = !!names))
-  
+
 }

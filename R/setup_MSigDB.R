@@ -39,7 +39,7 @@ setup_MSigDB <- function(dataset, category) {
   add_database(database = msigdbr::msigdbr(species = scientific_name),
                id = taxId,
                type = "MSigDB",
-               replace = F)
+               replace = T)
 
 
 

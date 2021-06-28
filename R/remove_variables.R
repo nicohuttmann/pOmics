@@ -9,37 +9,40 @@
 #' @export
 #'
 #'
-remove_variables <- function(data_, min = 0.5, input = "raw_data", output = "data") {
-  
-  
+remove_variables <- function(data_, min = 0.5, input = "LFQ.intensity", output) {
+
+
   # Check input
   if (!hasArg(data_)) stop("No data given.")
-  
+
   # Check if list or dataframe given
   list.input <- !is.data.frame(data_) & is.list(data_)
-  
+
   #
   if (list.input & !input %in% names(data_)) stop("Data could not be found. Please specify correct <input>.")
-  
-  
+
+
+
+
   # Get data
   if (list.input) data <- data_[[input]]
-  
+
   else data <- data_
-  
-  
-  
+
+
+
   # Remove columns
   data <- dplyr::select(data, -where(function(x) is.numeric(x) & mean(x > 0) < min))
-  
-  
-  
+
+
+  if (!hasArg(output)) output <- input
+
   # Prepare return
   if (list.input) data_[[output]] <- data
-  
+
   else data_ <- data
-  
+
   # Return
   return(data_)
-  
+
 }

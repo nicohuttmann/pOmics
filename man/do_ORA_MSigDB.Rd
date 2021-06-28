@@ -12,7 +12,7 @@ do_ORA_MSigDB(
   minGSSize = 10,
   maxGSSize = 500,
   dataset,
-  view = T,
+  view = F,
   return.all = F,
   add.info = F
 )

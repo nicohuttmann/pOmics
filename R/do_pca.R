@@ -26,7 +26,7 @@ do_pca <- function(data_, scale = T, data.name = "raw_data", plot = T, print.sum
   data <- data_[[data.name]]
 
   # Scale data
-  if (scale) data <- scale_(data)
+  if (scale) data <- do_scale(data)
 
   # Save data
   data_[["data"]] <- data

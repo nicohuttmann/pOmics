@@ -18,7 +18,7 @@
 #' @importFrom magrittr %>%
 #'
 plot_gg_heatmap <- function(data_, transpose = F, label.proteins = T, dend.x.height = 0.05, dend.y.width = 0.2, labels.r = 0.3,
-                             export = T, height = 6, ratio = 3, file = "heatmap.pdf") {
+                             export = T, height = 6, ratio = 3, input = "data_hclust", file = "heatmap.pdf") {
 
   # Check input
   if (!hasArg(data_)) stop("No data list given.")
@@ -27,11 +27,11 @@ plot_gg_heatmap <- function(data_, transpose = F, label.proteins = T, dend.x.hei
   if (!is.list(data_)) stop("Given data is not a list.")
 
   # Check data list
-  if (!"data" %in% names(data_)) stop("Data could not be found. Please specify correct <data.name>.")
+  if (!input %in% names(data_)) stop("Data could not be found. Please specify correct <data.name>.")
 
 
   # Get data
-  data <- data_[["data"]]
+  data <- data_[[input]]
 
 
 
@@ -167,7 +167,7 @@ plot_gg_heatmap <- function(data_, transpose = F, label.proteins = T, dend.x.hei
                        expand = c(0, 0), position = "right") +
     theme_hjv_heatmap_only() #+
     #coord_fixed(ratio = ratio.hm) +
-    theme(axis.text.x = element_blank(), #, hjust = 1, angle = 45
+    theme(axis.text.x = element_text(hjust = 1, angle = 45),
           axis.text.y.right = element_blank(),
           # margin: top, right, bottom, and left
           plot.margin = unit(c(0, 0, 0, 0), "cm"), # unit(c(1, 0.2, 0.2, -0.7)
@@ -213,7 +213,7 @@ plot_gg_heatmap <- function(data_, transpose = F, label.proteins = T, dend.x.hei
     # Dendrogram plot x
     data_[["plots"]][["dend_x"]] <-
     ggplot(segment_data_x) +
-      geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = 0.5 / (ggplot2::.pt * 72.27 / 96)) +
+      geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = gg_size(0.5)) +
       scale_y_continuous(limits = with(segment_data_x, c(0, max(y) * 1.01)),
                          expand = c(0, 0)) +
       scale_x_continuous(breaks = pos_table_x$x_center,
@@ -238,7 +238,7 @@ plot_gg_heatmap <- function(data_, transpose = F, label.proteins = T, dend.x.hei
   # Dendrogram plot y
   data_[["plots"]][["dend_y"]] <-
     ggplot(segment_data_y) +
-    geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = 0.5 / (ggplot2::.pt * 72.27 / 96)) +
+    geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = gg_size(0.5)) +
     scale_x_reverse(limits = with(segment_data_y, c(max(x) * 1.01, 0 - max(x) * 0.01)),
                     expand = c(0, 0)) +
     scale_y_continuous(breaks = pos_table_y$y_center,

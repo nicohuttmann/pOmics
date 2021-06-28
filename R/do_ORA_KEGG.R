@@ -8,15 +8,13 @@
 #' @param maxGSSize maximum number of proteins for annotation to be used for enrichment
 #' @param dataset dataset
 #' @param view view results
-#' @param return.all return enrichResult object; useful for further analysis of enrichment results
-#' @param add.info add additional information to the results data frame
 #'
 #' @return
 #' @export
 #'
 #'
 do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 10, maxGSSize = 500,
-                        dataset, view = T, return.all = F, add.info = F) {
+                        dataset, view = F) {
 
   # Get dataset
   dataset <- get_dataset(dataset)
@@ -45,22 +43,23 @@ do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", q
   # If enrichment failed
   if (is.null(kegg.results)) return(NULL)
 
-  # Prepare results data
-  results <- tibble::as_tibble(kegg.results@result) %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(Proteins = paste(strsplit(geneID, split = "/")[[1]], collapse = ";"), .before = geneID) %>%
-    dplyr::select(-c(geneID)) %>%
-    dplyr::mutate(Genes = paste(p2g(strsplit(Proteins, split = ";")[[1]]), collapse = ";"), .before = Proteins) %>%
-    dplyr::ungroup() %>%
-    dplyr::filter(p.adjust < pvalueCutoff)
+  # # Prepare results data
+  # results <- tibble::as_tibble(kegg.results@result) %>%
+  #   dplyr::rowwise() %>%
+  #   dplyr::mutate(Proteins = paste(strsplit(geneID, split = "/")[[1]], collapse = ";"), .before = geneID) %>%
+  #   dplyr::select(-c(geneID)) %>%
+  #   dplyr::mutate(Genes = paste(p2g(strsplit(Proteins, split = ";")[[1]]), collapse = ";"), .before = Proteins) %>%
+  #   dplyr::ungroup() %>%
+  #   dplyr::filter(p.adjust < pvalueCutoff)
 
   # View data frame immediately
-  #if (view) View(results)
+  if (view) View(kegg.results@result)
 
   # Return
-  if (!return.all) invisible(results)
+  # if (!return.all)
+  invisible(kegg.results)
 
-  else invisible(list(results = results,
-                      enrichResult = kegg.results))
+  # else invisible(list(results = results,
+  #                     enrichResult = kegg.results))
 
 }

@@ -5,11 +5,11 @@
 \title{Plots a volcano plot with ggplot2}
 \usage{
 plot_gg_volcano(
-  data,
+  data_,
   p.value.cutoff = 0.05,
   pos.log2fc.cutoff = 0,
   neg.log2fc.cutoff = 0,
-  highlight.variables,
+  highlight.variables = NULL,
   highlight.color = "black",
   x.axis.title = "log2 fold-change",
   y.axis.title = "-log10(p-value)",
@@ -26,12 +26,12 @@ plot_gg_volcano(
   axis.ticks.size = 0.3,
   axis.title.size = 8,
   axis.text.size = 6,
-  aspect.ratio = 0.8
+  aspect.ratio = 0.8,
+  input = "data_t.test",
+  output = "plot_t.test"
 )
 }
 \arguments{
-\item{data}{data}
-
 \item{p.value.cutoff}{p-value limit for coloring}
 
 \item{pos.log2fc.cutoff}{positive log2 fold-change limit for coloring}
@@ -71,6 +71,8 @@ plot_gg_volcano(
 \item{axis.text.size}{size of axis labels}
 
 \item{aspect.ratio}{y/x ratio}
+
+\item{data}{data}
 
 \item{highligh.color}{color to use to highlight specified proteins}
 }

@@ -11,7 +11,7 @@
 #' @export
 #'
 #'
-impute_norm <- function(data_, shift = 1.8, width = 0.3, seed = 123, input = "raw_data", output = "data") {
+impute_norm <- function(data_, shift = 1.8, width = 0.3, seed = 123, input = "LFQ.intensity", output) {
 
   # Check input
   if (!hasArg(data_)) stop("No data given.")
@@ -76,7 +76,7 @@ impute_norm <- function(data_, shift = 1.8, width = 0.3, seed = 123, input = "ra
 
   }
 
-
+  if (!hasArg(output)) output <- input
 
   # Prepare return
   if (list.input) data_[[output]] <- data

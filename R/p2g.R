@@ -11,6 +11,6 @@ p2g <- function(proteins, dataset) {
 
   dataset <- get_dataset(dataset, try.all = TRUE)
 
-  return(translate_Ids(Ids = proteins, fromType = "UNIPROT", toType = "SYMBOL", dataset = dataset))
+  return(select_org(keys = proteins, columns = "SYMBOL", output = "vector.keep", dataset = dataset))
 
 }

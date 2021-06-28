@@ -30,7 +30,7 @@ save_results <- function(data, name, replace) {
       todo <- menu(c("Rename new analysis", "Replace old analysis", "Stop"))
 
       # Abort mission
-      if (todo %in% c(0, 3)) stop("Manually stopped.")
+      if (todo %in% c(0, 3)) invisible(data)
 
 
       # No replace so indicate that name must be changed

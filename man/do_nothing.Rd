@@ -4,16 +4,16 @@
 \alias{do_nothing}
 \title{Template for functions that accept either a data frame or a list}
 \usage{
-do_nothing(data_, ..., input = "raw_data", output = "data")
+do_nothing(data_, ..., input = "raw_data", output)
 }
 \arguments{
 \item{data_}{list or tibble}
 
 \item{...}{specific arguments}
 
-\item{input}{name of input}
+\item{input}{name of input data}
 
-\item{output}{name of output}
+\item{output}{name of output data}
 }
 \value{
 

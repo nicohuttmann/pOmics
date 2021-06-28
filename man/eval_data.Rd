@@ -4,7 +4,7 @@
 \alias{eval_data}
 \title{Evaluates data cell-wise}
 \usage{
-eval_data(data_, expr, FUN, input = "raw_data", output = "data")
+eval_data(data_, expr, FUN, input = "Peptides", output)
 }
 \arguments{
 \item{data_}{data list}

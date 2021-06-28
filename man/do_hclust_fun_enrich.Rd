@@ -4,7 +4,13 @@
 \alias{do_hclust_fun_enrich}
 \title{Title}
 \usage{
-do_hclust_fun_enrich(data_, max.k = 2, input = "dend_x")
+do_hclust_fun_enrich(
+  data_,
+  max.k = 8,
+  simplify = F,
+  database = "BP",
+  input = "dend_y"
+)
 }
 \arguments{
 \item{data_}{}

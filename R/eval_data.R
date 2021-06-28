@@ -12,7 +12,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-eval_data <- function(data_, expr, FUN, input = "raw_data", output = "data") {
+eval_data <- function(data_, expr, FUN, input = "Peptides", output) {
 
   # Check input
   if (!hasArg(data_)) {
@@ -78,7 +78,7 @@ eval_data <- function(data_, expr, FUN, input = "raw_data", output = "data") {
 
 
   # Prepare return
-  if (list.input) data_[[output]] <- data
+  if (list.input) data_[[ifelse(hasArg(output), output, input)]] <- data
 
   else data_ <- data
 

@@ -27,17 +27,43 @@
 #' @export
 #'
 #'
-plot_gg_volcano <- function(data, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0, neg.log2fc.cutoff = 0,
-                            highlight.variables, highlight.color = "black",
+plot_gg_volcano <- function(data_, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0, neg.log2fc.cutoff = 0,
+                            highlight.variables = NULL, highlight.color = "black",
                             x.axis.title = "log2 fold-change", y.axis.title = "-log10(p-value)",
                             text.size = 6, text.color = "black",
                             point.size = 2, point.alpha = 0.8, highlight.point.size = 3, highlight.point.alpha = 0.8,
                             x.axis.breaks = 1, y.axis.breaks = 1,
                             axis.line.size = 0.5, axis.color = "black", axis.ticks.size = 0.3,
-                            axis.title.size = 8, axis.text.size = 6, aspect.ratio = 0.8) {
+                            axis.title.size = 8, axis.text.size = 6, aspect.ratio = 0.8,
+                            input = "data_t.test", output = "plot_t.test") {
 
   # Check input
-  if (is.matrix(data)) data <- matrix2tibble(matrix = data, row.names = "variables")
+  if (!hasArg(data_)) {
+
+    message("No data given.")
+
+    invisible(NULL)
+
+  }
+
+  # Check if list or dataframe given
+  list.input <- !is.data.frame(data_) & is.list(data_)
+
+  # Check list input
+  if (list.input & !input %in% names(data_)) {
+
+    message("Data could not be found. Please specify correct <input>.")
+
+    invisible(data_)
+
+  }
+
+  # Get data
+  if (list.input) data <- data_[[input]]
+
+  else data <- data_
+
+
 
   # Add color column☺
   data <- data %>%
@@ -45,7 +71,7 @@ plot_gg_volcano <- function(data, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0, 
     dplyr::mutate(color = "not") %>%
     dplyr::mutate(color = ifelse(log2.fc > pos.log2fc.cutoff, "up", color)) %>%
     dplyr::mutate(color = ifelse(log2.fc < neg.log2fc.cutoff, "down", color)) %>%
-    dplyr::mutate(color = ifelse(p.value < p.value.cutoff, color, "not")) %>%
+    dplyr::mutate(color = ifelse(p.adjust < p.value.cutoff, color, "not")) %>%
     dplyr::mutate(color = ifelse(variables %in% highlight.variables, "highlight", color)) %>%
     dplyr::mutate(point.size = ifelse(variables %in% highlight.variables, highlight.point.size, !!point.size)) %>%
     dplyr::arrange(point.size, -p.value)
@@ -57,7 +83,7 @@ plot_gg_volcano <- function(data, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0, 
   lwf <- 1 / (ggplot2::.pt * 72.27 / 96)
 
 
-  ggplot(data = data, aes(x = log2.fc, y = -log10(p.value), col = color, size = point.size)) +
+  data_[[output]] <- ggplot(data = data, aes(x = log2.fc, y = -log10(p.value), col = color, size = point.size)) +
     geom_point(alpha = point.alpha, shape = 16, stroke = 0) +
     scale_size(range = range(data$point.size)) +
     theme(aspect.ratio = aspect.ratio,
@@ -81,6 +107,9 @@ plot_gg_volcano <- function(data, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0, 
     xlab(x.axis.title) +
     ylab(y.axis.title)
 
+  print(data_[[output]])
+
+  invisible(data_)
 
 
 }

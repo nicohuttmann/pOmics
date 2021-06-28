@@ -15,8 +15,8 @@
 #' @export
 #'
 #'
-do_ORA_CORUM <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 3,
-                         maxGSSize = 500, dataset, view = T, return.all = F, add.info = F) {
+do_ORA_TERM2GENE <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 3,
+                         maxGSSize = 500, dataset, view = F, return.all = F, add.info = F) {
 
   # Get dataset
   dataset <- get_dataset(dataset)

@@ -9,15 +9,13 @@
 #' @param maxGSSize maximum number of proteins for annotation to be used for enrichment
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
 #' @param dataset dataset
-#' @param return.all return enrichResult object; useful for further analysis of enrichment results
-#' @param add.info add additional information (takes longer)
 #'
 #' @return
 #' @export
 #'
 #'
 do_ORA <- function(proteins, database, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 10,
-                   maxGSSize = 500, algorithm = "classic", dataset, return.all = F, add.info = F) {
+                   maxGSSize = 500, algorithm = "classic", dataset) {
 
   # Gene Ontology
   if (database %in% c("CC", "BP", "MF")) results <- do_ORA_GO(proteins = proteins,
@@ -27,9 +25,7 @@ do_ORA <- function(proteins, database, pvalueCutoff = 0.05, pAdjustMethod = "non
                                                               minGSSize = minGSSize,
                                                               maxGSSize = maxGSSize,
                                                               database = database,
-                                                              dataset = dataset,
-                                                              return.all = return.all,
-                                                              add.info = add.info)
+                                                              dataset = dataset)
   # KEGG
   else if (database %in% c("Kegg", "KEGG", "kegg")) results <- do_ORA_KEGG(proteins = proteins,
                                                                            pvalueCutoff = pvalueCutoff,
@@ -37,9 +33,7 @@ do_ORA <- function(proteins, database, pvalueCutoff = 0.05, pAdjustMethod = "non
                                                                            qvalueCutoff = qvalueCutoff,
                                                                            minGSSize = minGSSize,
                                                                            maxGSSize = maxGSSize,
-                                                                           dataset = dataset,
-                                                                           return.all = return.all,
-                                                                           add.info = add.info)
+                                                                           dataset = dataset)
 
   # Reactome
   else if (database %in% c("Reactome", "reactome", "REACTOME")) results <- do_ORA_Reactome(proteins = proteins,
@@ -48,9 +42,7 @@ do_ORA <- function(proteins, database, pvalueCutoff = 0.05, pAdjustMethod = "non
                                                                                            qvalueCutoff = qvalueCutoff,
                                                                                            minGSSize = minGSSize,
                                                                                            maxGSSize = maxGSSize,
-                                                                                           dataset = dataset,
-                                                                                           return.all = return.all,
-                                                                                           add.info = add.info)
+                                                                                           dataset = dataset)
 
   # CORUM
   else if (database %in% c("CORUM", "Corum", "corum")) results <- do_ORA_CORUM(proteins = proteins,
@@ -59,9 +51,7 @@ do_ORA <- function(proteins, database, pvalueCutoff = 0.05, pAdjustMethod = "non
                                                                                qvalueCutoff = qvalueCutoff,
                                                                                minGSSize = minGSSize,
                                                                                maxGSSize = maxGSSize,
-                                                                               dataset = dataset,
-                                                                               return.all = return.all,
-                                                                               add.info = add.info)
+                                                                               dataset = dataset)
 
   # unknown database
   else return(NULL)

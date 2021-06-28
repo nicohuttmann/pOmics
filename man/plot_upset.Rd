@@ -4,14 +4,33 @@
 \alias{plot_upset}
 \title{Visualizes identification data as UpSet plot}
 \usage{
-plot_upset(data, order, view = T)
+plot_upset(
+  data_,
+  order,
+  nintersects = 10,
+  transpose = T,
+  from.row.names = "observations",
+  view = T,
+  input = "Peptides",
+  output = "plot_upset"
+)
 }
 \arguments{
-\item{data}{data frame}
+\item{data_}{data_ list}
 
 \item{order}{order of samples}
 
+\item{nintersects}{number of bars representing intersects}
+
+\item{transpose}{transpose data frame}
+
+\item{from.row.names}{row names column}
+
 \item{view}{view plot}
+
+\item{input}{input data}
+
+\item{output}{output plot name}
 }
 \value{
 

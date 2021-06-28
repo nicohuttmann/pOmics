@@ -15,7 +15,7 @@ add_database <- function(database, id, type, replace = F) {
   new_databases_list()
 
   # Check input
-  if (!hasArg(database) || !hasArg(id) || !hasArg(type)) stop("Incomplete call.")
+  if (!hasArg(database) || !hasArg(id) || !hasArg(type)) stop("No database given.")
 
   # Check if name already exists
   if (check_database(id = id, type = type)) {

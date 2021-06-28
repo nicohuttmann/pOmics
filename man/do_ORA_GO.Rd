@@ -13,9 +13,7 @@ do_ORA_GO(
   maxGSSize = 500,
   database,
   dataset,
-  view = T,
-  return.all = F,
-  add.info = F
+  view = F
 )
 }
 \arguments{
@@ -36,10 +34,6 @@ do_ORA_GO(
 \item{dataset}{dataset}
 
 \item{view}{view results}
-
-\item{return.all}{return enrichResult object; useful for further analysis of enrichment results}
-
-\item{add.info}{add additional information to the results data frame}
 }
 \value{
 

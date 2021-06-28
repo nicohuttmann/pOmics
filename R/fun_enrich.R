@@ -11,8 +11,6 @@
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
 #' @param threshold p-value/confidence threshold to exclude terms
 #' @param dataset dataset
-#' @param return.all Should the enrichObject be returned
-#' @param add.info Add additional information (takes longer)
 #' @param view View results?
 #'
 #' @return
@@ -20,7 +18,7 @@
 #'
 #'
 fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutoff = 0.05, pAdjustMethod = "none", minGSSize = 10,
-                       maxGSSize = 120, inverse = F, algorithm = "classic", dataset, return.all = F, add.info = F, view = T) {
+                       maxGSSize = 500, inverse = F, algorithm = "classic", dataset, view = T) {
 
 
 
@@ -34,7 +32,7 @@ fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutof
 
 
   #
-  suppressMessages(require(topGO))
+
 
   # Check databases for functional enrichment
   #if (!"Functional enrichment databases" %in% names(.info)&& any(!databases %in% .info[["Functional enrichment databases"]]))
@@ -76,7 +74,9 @@ fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutof
     allProteins[names(proteins)[!is.na(proteins)]] <- TRUE
     #
   } else {
+
     stop("Something went wrong.")
+
   }
 
 
@@ -93,30 +93,28 @@ fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutof
                                                                  pvalueCutoff = pvalueCutoff,
                                                                  pAdjustMethod = pAdjustMethod,
                                                                  minGSSize = minGSSize,
+                                                                 maxGSSize = maxGSSize,
                                                                  algorithm = algorithm,
-                                                                 dataset = dataset,
-                                                                 return.all = return.all,
-                                                                 add.info = add.info)
+                                                                 dataset = dataset)
     # Multiple fisher's exact test
-    else if (is.character(allProteins)) list.enrichment[[db]] <- do_ORA_groups(proteins = allProteins,database = db,
+    else if (is.character(allProteins)) list.enrichment[[db]] <- do_ORA_groups(proteins = allProteins,
+                                                                               database = db,
                                                                                pvalueCutoff = pvalueCutoff,
                                                                                pAdjustMethod = pAdjustMethod,
                                                                                minGSSize = minGSSize,
+                                                                               maxGSSize = maxGSSize,
                                                                                algorithm = algorithm,
-                                                                               dataset = dataset,
-                                                                               return.all = return.all,
-                                                                               add.info = add.info)
+                                                                               dataset = dataset)
     # Kolmogorov-Smirnov test
-    else if (is.numeric(allProteins)) list.enrichment[[db]] <- do_GSEA(proteins = allProteins,database = db,
+    else if (is.numeric(allProteins)) list.enrichment[[db]] <- do_GSEA(proteins = allProteins,
+                                                                       database = db,
                                                                        inverse = inverse,
                                                                        pvalueCutoff = pvalueCutoff,
                                                                        pAdjustMethod = pAdjustMethod,
                                                                        minGSSize = minGSSize,
                                                                        maxGSSize = maxGSSize,
                                                                        algorithm = algorithm,
-                                                                       dataset = dataset,
-                                                                       return.all = return.all,
-                                                                       add.info = add.info)
+                                                                       dataset = dataset)
 
   }
 
