@@ -6,6 +6,7 @@
 #' @param dend.x.height relative height of x-axis dendrogram
 #' @param dend.y.width relative width of y-axis dendrogram
 #' @param labels.r width of labels (must be optimized)
+#' @param x.labels.angle angle of x-axis labels
 #' @param export export plot as pdf
 #' @param height plot height in inch for export
 #' @param ratio y/x ratio of heat map
@@ -17,8 +18,10 @@
 #' @import ggplot2
 #' @importFrom magrittr %>%
 #'
-plot_gg_heatmap <- function(data_, transpose = F, label.proteins = T, dend.x.height = 0.05, dend.y.width = 0.2, labels.r = 0.3,
-                             export = T, height = 6, ratio = 3, input = "data_hclust", file = "heatmap.pdf") {
+plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, observations.labels,
+                            dend.x.height = 0.05, dend.y.width = 0.2,
+                            labels.r = 0.3, x.labels.angle = 45, export = F, height = 6, ratio = 3,
+                            input = "data_hclust", file = "heatmap.pdf") {
 
   # Check input
   if (!hasArg(data_)) stop("No data list given.")
@@ -111,33 +114,26 @@ plot_gg_heatmap <- function(data_, transpose = F, label.proteins = T, dend.x.hei
 
 
 
-  if (label.proteins) {
-
-    if (transpose) {
-
-      labels.x <- p2g(pos_table_x$x)
-
-    } else {
-
-      labels.y <- p2g(pos_table_y$y)
-
-    }
+  # x-labels
+  observations.labels.column <- get_labels_column(data = data,
+                                                  labels = observations.labels,
+                                                  dataset = dataset)
 
 
-  } else {
 
+  if (transpose) {
 
-    if (transpose) {
+      labels.x <- protein.label.FUN(pos_table_x$x)
 
-      labels.x <- rep("", nrow(pos_table_x))
+      labels.y <- dplyr::pull(!!observations.labels.column, "observations")[pos_table_y$y]
 
     } else {
 
-      labels.y <- rep("", nrow(pos_table_y))
+      labels.y <- protein.label.FUN(pos_table_y$y)
 
+      labels.x <- dplyr::pull(data, !!observations.labels.column, "observations")[pos_table_x$x]
     }
 
-  }
 
 
 
@@ -158,16 +154,16 @@ plot_gg_heatmap <- function(data_, transpose = F, label.proteins = T, dend.x.hei
     geom_tile() +
     scale_fill_gradient2("expr", high = "darkred", mid = "white", low = "darkblue") + #low = "navyblue", mid = "white", high = "red4"
     scale_x_continuous(breaks = pos_table_x$x_center,
-                       labels = pos_table_x$x,
+                       labels = labels.x,
                        limits = axis_limits_x,
                        expand = c(0, 0)) +
     scale_y_continuous(breaks = pos_table_y[, "y_center"],
                        labels = labels.y,
                        limits = axis_limits_y,
                        expand = c(0, 0), position = "right") +
-    theme_hjv_heatmap_only() #+
+    theme_hjv_heatmap_only() +
     #coord_fixed(ratio = ratio.hm) +
-    theme(axis.text.x = element_text(hjust = 1, angle = 45),
+    theme(axis.text.x = element_text(hjust = 1, angle = x.labels.angle),
           axis.text.y.right = element_blank(),
           # margin: top, right, bottom, and left
           plot.margin = unit(c(0, 0, 0, 0), "cm"), # unit(c(1, 0.2, 0.2, -0.7)
@@ -275,7 +271,7 @@ plot_gg_heatmap <- function(data_, transpose = F, label.proteins = T, dend.x.hei
     ratio.plot <- (1 + dend.y.width + labels.r) / (1 + dend.x.height) / ratio
 
 
-    if (export) export_pdf(p = perfect, file = file, width = height * ratio.plot, height = height, open = F)
+    #if (export) export_pdf(p = perfect, file = file, width = height * ratio.plot, height = height, open = F)
 
 
 

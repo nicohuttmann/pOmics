@@ -7,11 +7,13 @@
 plot_gg_heatmap(
   data_,
   transpose = F,
-  label.proteins = T,
+  protein.label.FUN = p2g,
+  observations.labels,
   dend.x.height = 0.05,
   dend.y.width = 0.2,
   labels.r = 0.3,
-  export = T,
+  x.labels.angle = 45,
+  export = F,
   height = 6,
   ratio = 3,
   input = "data_hclust",
@@ -23,13 +25,13 @@ plot_gg_heatmap(
 
 \item{transpose}{should data be transformed}
 
-\item{label.proteins}{should proteins be labeled on the y-axis?}
-
 \item{dend.x.height}{relative height of x-axis dendrogram}
 
 \item{dend.y.width}{relative width of y-axis dendrogram}
 
 \item{labels.r}{width of labels (must be optimized)}
+
+\item{x.labels.angle}{angle of x-axis labels}
 
 \item{export}{export plot as pdf}
 
@@ -38,6 +40,8 @@ plot_gg_heatmap(
 \item{ratio}{y/x ratio of heat map}
 
 \item{file}{}
+
+\item{label.proteins}{should proteins be labeled on the y-axis?}
 }
 \value{
 

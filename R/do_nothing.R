@@ -16,7 +16,7 @@ do_nothing <- function(data_, ..., input = "LFQ.intensity", output) {
 
     message("No data given.")
 
-    return(return(invisible(NULL)))
+    return(invisible(NULL))
 
   }
 

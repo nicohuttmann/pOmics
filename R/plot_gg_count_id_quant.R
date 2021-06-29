@@ -5,7 +5,7 @@
 #' @param color.id color for identified proteins bar
 #' @param color.quant color for quantified proteins bar
 #' @param labels column name for labels
-#' @param order.by order.by factor levels of speciefied column
+#' @param order.by order.by factor levels of specified column
 #' @param xlab label of x-axis
 #' @param ylab label of y-axis
 #' @param limit.y.top upper limit of y-axis
@@ -25,36 +25,14 @@ plot_gg_count_id_quant <- function(data_, color.id = "#6BAED6", color.quant = "#
                                    dataset, input = "data_count_id_quant", output = "plot_count_id_quant", View = T) {
 
 
-  # Check data
-
 
   # Label vector
   data <- data_[[input]]
 
-
-  if (!hasArg(labels)) {
-
-    dataset <- get_dataset(dataset)
-
-    default_labels <- get_dataset_attr(which = "default_observations_labels",
-                                       dataset = dataset)
-
-    if (!is.na(default_labels) && default_labels %in% colnames(data)) {
-
-      labels <- default_labels
-
-    } else if ("observations" %in% colnames(data)) {
-
-      labels <- "observations"
-
-    } else {
-
-      labels <- colnames(data)[match("character", lapply(data, typeof) %>% unlist())]
-
-    }
-
-
-  }
+  # Get labels column
+  labels <- get_labels_column(data = data,
+                              labels = labels,
+                              dataset = dataset)
 
   x.labels <- as.character(data[[labels]])
 

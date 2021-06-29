@@ -16,7 +16,7 @@ impute_missForest <- function(data_, input = "LFQ.intensity", output, ...) {
 
     message("No data given.")
 
-    return(return(invisible(NULL)))
+    return(invisible(NULL))
 
   }
 
@@ -28,7 +28,7 @@ impute_missForest <- function(data_, input = "LFQ.intensity", output, ...) {
 
     message("Data could not be found. Please specify correct <input>.")
 
-    return(return(invisible(data_)))
+    return(invisible(data_))
 
   }
 
@@ -44,7 +44,7 @@ impute_missForest <- function(data_, input = "LFQ.intensity", output, ...) {
     tibble2matrix() %>%
     missForest::missForest(...) %>%
     purrr::pluck("ximp") %>%
-    tibble2matrix()
+    matrix2tibble()
 
 
   # Output name

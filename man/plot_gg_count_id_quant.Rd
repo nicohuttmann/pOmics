@@ -29,7 +29,7 @@ plot_gg_count_id_quant(
 
 \item{labels}{column name for labels}
 
-\item{order.by}{order.by factor levels of speciefied column}
+\item{order.by}{order.by factor levels of specified column}
 
 \item{xlab}{label of x-axis}
 
