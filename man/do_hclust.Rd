@@ -7,10 +7,9 @@
 do_hclust(
   data_,
   scale = T,
-  group.column = "groups",
-  grouping.function = mean,
   distance.method = "euclidean",
   clustering.method = "complete",
+  plot = T,
   input = "LFQ.intensity",
   output = "data_hclust"
 )
@@ -20,15 +19,15 @@ do_hclust(
 
 \item{scale}{Scale data (Z-score)?}
 
-\item{group.column}{column to use for combining groups}
-
-\item{grouping.function}{function to combine groups}
-
 \item{distance.method}{method to calculate distance; see ?dist for options}
 
 \item{clustering.method}{method to cluster columns and rows; see ?hclust for options}
 
-\item{input}{name of data to use for analysis}
+\item{plot}{generate default plot with plot_gg_heatmap()}
+
+\item{input}{name of input data}
+
+\item{output}{name of output data}
 }
 \value{
 
