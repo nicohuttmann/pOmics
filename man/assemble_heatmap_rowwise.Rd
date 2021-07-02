@@ -12,7 +12,8 @@ assemble_heatmap_rowwise(
   rel_labels_y,
   rel_annot_layer_x,
   rel_annot_layer_y,
-  rel_legends
+  rel_legends,
+  rel_legends_space
 )
 }
 \arguments{
@@ -30,7 +31,9 @@ assemble_heatmap_rowwise(
 
 \item{rel_annot_layer_y}{relative width/s of y-axis annotation layers (either one number or vector with number for each)}
 
-\item{rel_legends}{name of plot elements for which a legend should be included (full names must be used, e.g. c("annot_layer_x_groups", "heatmap")}
+\item{rel_legends}{relative width of legends area}
+
+\item{rel_legends_space}{realtive space between plot and legends}
 }
 \value{
 

@@ -15,6 +15,7 @@ plot_gg_heatmap(
   dend_y = T,
   annot_layer_x,
   annot_layer_y,
+  legends,
   ratio = 3,
   rel_dend_x = 0.1,
   rel_dend_y = 0.2,
@@ -22,14 +23,15 @@ plot_gg_heatmap(
   rel_labels_y = 0.2,
   rel_annot_layer_x = 0.05,
   rel_annot_layer_y = 0.1,
+  rel_legends = 0.25,
+  rel_legends_space = 0.05,
   axis.text.x.angle = 45,
   annotation.colors = list(),
-  legends,
-  rel_legends = 0.25,
   heatmap.legend.title = "",
   export = F,
   height = 6,
   dataset,
+  print = T,
   input = "data_hclust",
   output = "plot_hclust",
   file = "heatmap.pdf"
@@ -56,6 +58,8 @@ plot_gg_heatmap(
 
 \item{annot_layer_y}{(character) data columns to be included as annotation layers on y-axis}
 
+\item{legends}{name of plot elements for which a legend should be included (full names must be used, e.g. c("annot_layer_x_groups", "heatmap")}
+
 \item{ratio}{y/x ratio of heat map}
 
 \item{rel_dend_x}{relative height of x-axis dendrogram}
@@ -70,13 +74,13 @@ plot_gg_heatmap(
 
 \item{rel_annot_layer_y}{relative width/s of y-axis annotation layers (either one number or vector with number for each)}
 
+\item{rel_legends}{relative width of legends layer to complete heatmap}
+
+\item{rel_legends_space}{realtive space between plot and legends}
+
 \item{axis.text.x.angle}{angle of x-axis labels}
 
 \item{annotation.colors}{(optional) named list containing color vector for annotation layers}
-
-\item{legends}{name of plot elements for which a legend should be included (full names must be used, e.g. c("annot_layer_x_groups", "heatmap")}
-
-\item{rel_legends}{relative width of legends layer to complete heatmap}
 
 \item{heatmap.legend.title}{title of heatmap legend}
 
@@ -86,7 +90,11 @@ plot_gg_heatmap(
 
 \item{dataset}{dataset}
 
+\item{print}{print plot}
+
 \item{input}{input data name}
+
+\item{output}{output data name}
 
 \item{file}{file name}
 }

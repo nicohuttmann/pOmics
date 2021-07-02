@@ -21,11 +21,14 @@
 #' @param annotation.colors (optional) named list containing color vector for annotation layers
 #' @param legends name of plot elements for which a legend should be included (full names must be used, e.g. c("annot_layer_x_groups", "heatmap")
 #' @param rel_legends relative width of legends layer to complete heatmap
+#' @param rel_legends_space realtive space between plot and legends
 #' @param heatmap.legend.title title of heatmap legend
 #' @param export export plot as pdf
 #' @param height plot height in inch for export
 #' @param dataset dataset
+#' @param print print plot
 #' @param input input data name
+#' @param output output data name
 #' @param file file name
 #'
 #' @return
@@ -35,13 +38,14 @@
 #' @importFrom magrittr %>%
 #'
 plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, observation.labels,
-                            labels_x = T, labels_y = F, dend_x = T, dend_y = T, annot_layer_x, annot_layer_y,
+                            labels_x = T, labels_y = F, dend_x = T, dend_y = T, annot_layer_x, annot_layer_y, legends,
                             ratio = 3,
                             rel_dend_x = 0.1, rel_dend_y = 0.2, rel_labels_x = 0.2, rel_labels_y = 0.2,
                             rel_annot_layer_x = 0.05, rel_annot_layer_y = 0.1,
+                            rel_legends = 0.25, rel_legends_space = 0.05,
                             axis.text.x.angle = 45,
-                            annotation.colors = list(), legends, rel_legends = 0.25, heatmap.legend.title = "",
-                            export = F, height = 6, dataset,
+                            annotation.colors = list(), heatmap.legend.title = "",
+                            export = F, height = 6, dataset, print = T,
                             input = "data_hclust", output = "plot_hclust", file = "heatmap.pdf") {
 
   # Check input
@@ -159,6 +163,7 @@ plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, obser
   # Calculate ratio of tiles
   ratio.hm <- nrow(data) / (ncol(data) - 1) * ratio
 
+
   # Construct heatmap df
   data_heatmap <- data %>%
     dplyr::select(c(colnames(.)[1], dend_data_y[["labels"]][["label"]])) %>%
@@ -192,7 +197,10 @@ plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, obser
   ### Main heatmap labels
 
   # Plot labels x
-  plot.list[["labels_x"]] <- ggplot(data_heatmap,
+
+  if (labels_x) {
+
+    plot.list[["labels_x"]] <- ggplot(data_heatmap,
                                     aes(x = x_center, y = 0, fill = expr,
                                         height = 0, width = width)) +
     geom_blank() +
@@ -206,9 +214,16 @@ plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, obser
     theme_iDC_heatmap_labels_x() +
     theme(axis.text.x = element_text(angle = axis.text.x.angle, hjust = 1), plot.margin = unit(c(0, 0, 2, 0), "cm"))
 
+  }
+
+
+
 
   # Plot labels y
-  plot.list[["labels_y"]] <- ggplot(data_heatmap,
+
+  if (labels_y) {
+
+    plot.list[["labels_y"]] <- ggplot(data_heatmap,
          aes(x = 0, y = y_center, fill = expr,
              height = height, width = 0)) +
     geom_blank() +
@@ -221,11 +236,17 @@ plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, obser
                        position = "left") +
     theme_iDC_heatmap_labels_y()
 
+  }
+
+
 
   ### Dendrograms
 
   # Dendrogram plot x
-  plot.list[["dend_x"]] <-
+
+  if (dend_x) {
+
+    plot.list[["dend_x"]] <-
     ggplot(segment_data_x) +
     geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = gg_size(0.5)) +
     scale_y_continuous(limits = with(segment_data_x, c(0, max(y) * 1.01)),
@@ -236,9 +257,16 @@ plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, obser
                        expand = c(0, 0)) +
     theme_iDC_dendrogram()
 
+  }
+
+
+
 
   # Dendrogram plot y
-  plot.list[["dend_y"]] <-
+
+  if (dend_y) {
+
+    plot.list[["dend_y"]] <-
     ggplot(segment_data_y) +
     geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = gg_size(0.5)) +
     scale_x_reverse(limits = with(segment_data_y, c(max(x) * 1.01, 0 - max(x) * 0.01)),
@@ -248,6 +276,10 @@ plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, obser
                        limits = axis_limits_y,
                        expand = c(0, 0)) +
     theme_iDC_dendrogram()
+
+  }
+
+
 
 
   # Annotation layers
@@ -369,7 +401,8 @@ plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, obser
                                   rel_labels_y = rel_labels_y,
                                   rel_annot_layer_x = rel_annot_layer_x,
                                   rel_annot_layer_y = rel_annot_layer_y,
-                                  rel_legends = rel_legends)
+                                  rel_legends = rel_legends,
+                                  rel_legends_space = rel_legends_space)
 
 
 
@@ -399,9 +432,11 @@ plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, obser
     }
 
 
-
-
     data_[[output]] <- list(plot = p, subplots = plot.list)
+
+    # Print plot
+    if (print) print(data_[[output]][["plot"]])
+
 
   # Return
   return(invisible(data_))

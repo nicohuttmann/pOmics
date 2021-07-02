@@ -40,10 +40,14 @@ do_hclust_fun_enrich <- function(data_, max.k = 8, simplify = F, database = "BP"
 
   for (k in 2:max.k) {
 
-    cluster_list[[as.character(k)]] <- data %>%
+    cluster_list[[as.character(k)]]
+
+    clusters <- data %>%
       cutree_(k = k) %>%
       fun_enrich(database = database, view = F) %>%
       merge_enrichment_results_recursive()
+
+
 
   }
 

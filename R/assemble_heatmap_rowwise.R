@@ -7,7 +7,8 @@
 #' @param rel_labels_y relative width of y-axis labels
 #' @param rel_annot_layer_x relative height/s of x-axis annotation layers (either one number or vector with number for each)
 #' @param rel_annot_layer_y relative width/s of y-axis annotation layers (either one number or vector with number for each)
-#' @param rel_legends name of plot elements for which a legend should be included (full names must be used, e.g. c("annot_layer_x_groups", "heatmap")
+#' @param rel_legends relative width of legends area
+#' @param rel_legends_space realtive space between plot and legends
 #'
 #' @return
 #' @export
@@ -15,7 +16,7 @@
 #'
 assemble_heatmap_rowwise <- function(plot.list,
                                      rel_dend_x, rel_dend_y, rel_labels_x, rel_labels_y,
-                                     rel_annot_layer_x, rel_annot_layer_y, rel_legends) {
+                                     rel_annot_layer_x, rel_annot_layer_y, rel_legends, rel_legends_space) {
 
 
   plot.list.n <- names(plot.list)
@@ -63,13 +64,13 @@ assemble_heatmap_rowwise <- function(plot.list,
     1 + # Heatmap
     "dend_x" %in% names(plot.list) + # Dendrogram above
     "labels_x" %in% names(plot.list) + # Axis.text.x
-    sum(grepl("annot_layer_x", names(plot.list))) # Annotation layers
+    sum(regexpr("annot_layer_x", names(plot.list)) == 1) # Annotation layers
 
   n.col <-
     1 + # Heatmap
     "dend_y" %in% names(plot.list) + # Dendrogram above
     "labels_y" %in% names(plot.list) + # Axis.text.x
-    sum(grepl("annot_layer_y", names(plot.list))) # Annotation layers
+    sum(regexpr("annot_layer_y", names(plot.list)) == 1) # Annotation layers
 
 
 
@@ -114,7 +115,7 @@ assemble_heatmap_rowwise <- function(plot.list,
   # Annotation layers x-axis
   if (annot_layer_x_ > 0) {
 
-    for (i in grep("annot_layer_x", plot.list.n)) {
+    for (i in which(regexpr("annot_layer_x", plot.list.n) == 1)) {
 
       row <- nulllist(n = n.col)
 
@@ -217,9 +218,11 @@ assemble_heatmap_rowwise <- function(plot.list,
                                    ncol = 1)
 
     # Combine heatmap with legends
-    p.grid <- cowplot::plot_grid(p.grid, p.legend,
-                                 ncol = 2,
-                                 rel_widths = c(1, rel_legends))
+    p.grid <- cowplot::plot_grid(p.grid,
+                                 NULL,
+                                 p.legend,
+                                 ncol = 3,
+                                 rel_widths = c(1, rel_legends_space, rel_legends))
   }
 
 
