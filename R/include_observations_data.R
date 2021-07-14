@@ -1,12 +1,12 @@
 #' Adds group vector to data frame
 #'
 #' @param data_ data frame
-#' @param name observations data
+#' @param which observations data
 #' @param column.name name of new column
 #' @param observations.set which observations.set to use
 #' @param dataset dataset
 #' @param input data frame to be modified
-#' @param output dataframe to return in list
+#' @param output data frame to return in list
 #'
 #' @return
 #' @export
@@ -14,16 +14,18 @@
 #' @importFrom magrittr %>%
 #'
 #'
-include_observations_data <- function(data_, name, column.name, observations.set, dataset,
-                                       input = "LFQ.intensity", output) {
+include_observations_data <- function(data_, which, column.name, observations.set, dataset, input, output) {
 
-  # Check data input
-  if (!hasArg(data_)) stop("Please provide data input.")
+  # Handle input
+  input_list <- data_input(data_ = data_, input = input)
 
-  if (!input %in% names(data_)) stop("Target data frame not found.")
+  if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-  # Extract data
-  data <- data_[[input]]
+  else {
+    data <- input_list[["data"]]
+    input <- input_list[["input"]]
+    list.input <- input_list[["list.input"]]
+  }
 
   # Matrix to tibble
   if (!tibble::is_tibble(data)) data <- data2tibble(data = data, row.names = "observations")
@@ -39,7 +41,7 @@ include_observations_data <- function(data_, name, column.name, observations.set
 
   # Get groups data
   data.vector <- .datasets[[dataset]][["observations"]][[observations.set]] %>%
-    dplyr::pull(var = !!dplyr::enquo(name), name = "observations")
+    dplyr::pull(var = !!dplyr::enquo(which), name = "observations")
 
 
   # Get observations
@@ -57,26 +59,33 @@ include_observations_data <- function(data_, name, column.name, observations.set
   # Use input as name for new column
   if (!hasArg(column.name)) {
 
-    if (!tryCatch(is.character(name),
+    if (!tryCatch(is.character(which),
                   error = function(cond) FALSE)) {
 
-      column.name <- deparse(substitute(name))
+      column.name <- deparse(substitute(which))
 
     } else {
 
-      column.name <- name
+      column.name <- which
 
     }
 
   }
 
 
-  if (!hasArg(output)) output <- input
-
   # Add groups
-  data_[[output]] <- data %>%
+  data <- data %>%
     dplyr::mutate(!!column.name := data.vector, .after = observations)
 
+
+
+  # Output name
+  if (!hasArg(output)) output <- input
+
+  # Prepare return
+  if (list.input) data_[[output]] <- data
+
+  else data_ <- data
 
   # Return
   return(data_)

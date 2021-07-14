@@ -11,34 +11,18 @@
 #' @importFrom magrittr %>%
 #'
 #'
-do_scale <- function(data_, input = "LFQ.intensity", output) {
+do_scale <- function(data_, input, output) {
 
+  # Handle input
+  input_list <- data_input(data_ = data_, input = input)
 
-  # Check input
-  if (!hasArg(data_)) {
+  if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-    message("No data given.")
-
-    return(invisible(NULL))
-
+  else {
+    data <- input_list[["data"]]
+    input <- input_list[["input"]]
+    list.input <- input_list[["list.input"]]
   }
-
-  # Check if list or dataframe given
-  list.input <- !is.data.frame(data_) & is.list(data_)
-
-  # Check list input
-  if (list.input & !input %in% names(data_)) {
-
-    message("Data could not be found. Please specify correct <input>.")
-
-    return(invisible(data_))
-
-  }
-
-  # Get data
-  if (list.input) data <- data_[[input]]
-
-  else data <- data_
 
 
 

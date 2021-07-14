@@ -10,7 +10,7 @@ do_abundance_summary(
   ylab = "median log10 LFQ",
   point.size = 1,
   view = T,
-  input = "LFQ.intensity",
+  input,
   output.data = "data_abundance",
   output.plot = "plot_abundance"
 )

@@ -21,7 +21,7 @@ get_variables_data <- function(name, variables, dataset) {
   # No variables defined
   if (!hasArg(variables)) {
 
-    variables <- get_variables()
+    variables <- get_variables(dataset = dataset)
 
   # Variables defined
   } else {

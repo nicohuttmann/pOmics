@@ -15,34 +15,19 @@
 #'
 do_abundance_summary <- function(data_, xlab = "Protein rank", ylab = "median log10 LFQ",
                                  point.size = 1,
-                                 view = T, input = "LFQ.intensity", output.data = "data_abundance",
+                                 view = T, input, output.data = "data_abundance",
                                  output.plot = "plot_abundance") {
 
-  # Check input
-  if (!hasArg(data_)) {
+  # Handle input
+  input_list <- data_input(data_ = data_, input = input)
 
-    message("No data given.")
+  if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-    return(invisible(NULL))
-
+  else {
+    data <- input_list[["data"]]
+    input <- input_list[["input"]]
+    list.input <- input_list[["list.input"]]
   }
-
-  # Check if list or dataframe given
-  list.input <- !is.data.frame(data_) & is.list(data_)
-
-  # Check list input
-  if (list.input & !input %in% names(data_)) {
-
-    message("Data could not be found. Please specify correct <input>.")
-
-    return(invisible(data_))
-
-  }
-
-  # Get data
-  if (list.input) data <- data_[[input]]
-
-  else data <- data_
 
 
   median.abundance <- lapply(X = data[, -1], FUN = function(x) {median(x[x>0])}) %>%

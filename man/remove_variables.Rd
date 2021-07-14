@@ -4,7 +4,7 @@
 \alias{remove_variables}
 \title{Removes columns from data frame based on minimum values above 0}
 \usage{
-remove_variables(data_, min = 0.5, input = "LFQ.intensity", output)
+remove_variables(data_, min = 0.5, input, output)
 }
 \arguments{
 \item{data_}{data}

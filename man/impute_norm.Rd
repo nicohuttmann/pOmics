@@ -4,14 +4,7 @@
 \alias{impute_norm}
 \title{Imputes values based on normal distribution}
 \usage{
-impute_norm(
-  data_,
-  shift = 1.8,
-  width = 0.3,
-  seed = 123,
-  input = "LFQ.intensity",
-  output
-)
+impute_norm(data_, shift = 1.8, width = 0.3, seed = 123, input, output)
 }
 \arguments{
 \item{data_}{data (either a tibble, data frame or matrix)}

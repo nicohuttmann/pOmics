@@ -6,11 +6,11 @@
 \usage{
 include_groups(
   data_,
-  groups,
+  groups = "default",
   control,
   observations.set,
   dataset,
-  input = "LFQ.intensity",
+  input,
   output
 )
 }
@@ -25,9 +25,9 @@ include_groups(
 
 \item{dataset}{dataset}
 
-\item{input}{input data}
+\item{input}{name of input data}
 
-\item{output}{output data}
+\item{output}{name of output data}
 }
 \value{
 

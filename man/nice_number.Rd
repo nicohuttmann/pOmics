@@ -4,7 +4,15 @@
 \alias{nice_number}
 \title{Help make nice number in R Markdown}
 \usage{
-nice_number(x, round = T, digits = 0, format = "d", big.mark = ",")
+nice_number(
+  x,
+  round = T,
+  digits = 0,
+  format = "d",
+  big.mark = ",",
+  sci.digits,
+  output = "numeric"
+)
 }
 \arguments{
 \item{x}{number}
@@ -16,6 +24,10 @@ nice_number(x, round = T, digits = 0, format = "d", big.mark = ",")
 \item{format}{number format (see formatC())}
 
 \item{big.mark}{separotor between 3 digits; remove with ""}
+
+\item{sci.digits}{digits after decimal point for scientific notation (format = "e)}
+
+\item{output}{type of output vector}
 }
 \value{
 

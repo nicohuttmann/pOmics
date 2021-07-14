@@ -1,11 +1,11 @@
 #' Plots a volcano plot with ggplot2
 #'
-#' @param data data
+#' @param data_ data_
 #' @param p.value.cutoff p-value limit for coloring
 #' @param pos.log2fc.cutoff positive log2 fold-change limit for coloring
 #' @param neg.log2fc.cutoff negative log2 fold-change limit for coloring
 #' @param highlight.variables variables to highlight by point.size
-#' @param highligh.color color to use to highlight specified proteins
+#' @param highlight.color color to use to highlight proteins
 #' @param x.axis.title title of x-axis
 #' @param y.axis.title title of y-axis
 #' @param text.size size of text in points (5-8)
@@ -22,6 +22,9 @@
 #' @param axis.title.size size of axis title
 #' @param axis.text.size size of axis labels
 #' @param aspect.ratio y/x ratio
+#' @param view view plot
+#' @param input name of input data
+#' @param output name of output data
 #'
 #' @return
 #' @export
@@ -35,33 +38,18 @@ plot_gg_volcano <- function(data_, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0,
                             x.axis.breaks = 1, y.axis.breaks = 1,
                             axis.line.size = 0.5, axis.color = "black", axis.ticks.size = 0.3,
                             axis.title.size = 8, axis.text.size = 6, aspect.ratio = 0.8,
-                            input = "data_t.test", output = "plot_t.test") {
+                            view = T, input = "data_t.test", output = "plot_t.test") {
 
-  # Check input
-  if (!hasArg(data_)) {
+  # Handle input
+  input_list <- data_input(data_ = data_, input = input)
 
-    message("No data given.")
+  if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-    return(invisible(NULL))
-
+  else {
+    data <- input_list[["data"]]
+    input <- input_list[["input"]]
+    list.input <- input_list[["list.input"]]
   }
-
-  # Check if list or dataframe given
-  list.input <- !is.data.frame(data_) & is.list(data_)
-
-  # Check list input
-  if (list.input & !input %in% names(data_)) {
-
-    message("Data could not be found. Please specify correct <input>.")
-
-    return(invisible(data_))
-
-  }
-
-  # Get data
-  if (list.input) data <- data_[[input]]
-
-  else data <- data_
 
 
 
@@ -107,7 +95,7 @@ plot_gg_volcano <- function(data_, p.value.cutoff = 0.05, pos.log2fc.cutoff = 0,
     xlab(x.axis.title) +
     ylab(y.axis.title)
 
-  print(data_[[output]])
+  if (view) print(data_[[output]])
 
   return(invisible(data_))
 

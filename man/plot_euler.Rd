@@ -11,7 +11,7 @@ plot_euler(
   from.row.names = "observations",
   to.row.names = "variables",
   view = T,
-  input = "Peptides",
+  input,
   output = "plot_euler"
 )
 }

@@ -11,14 +11,14 @@
 #' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
 #' @param threshold p-value/confidence threshold to exclude terms
 #' @param dataset dataset
-#' @param view View results?
+#' @param view View results
 #'
 #' @return
 #' @export
 #'
 #'
-fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutoff = 0.05, pAdjustMethod = "none", minGSSize = 10,
-                       maxGSSize = 500, inverse = F, algorithm = "classic", dataset, view = T) {
+fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutoff = 0.05, pAdjustMethod = "none",
+                       minGSSize = 10, maxGSSize = 500, inverse = F, algorithm = "classic", dataset, view = T) {
 
 
 

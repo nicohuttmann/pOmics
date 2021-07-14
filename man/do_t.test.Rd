@@ -11,7 +11,7 @@ do_t.test(
   group.column = "groups",
   control.group,
   pAdjustMethod = "BH",
-  input = "LFQ.intensity",
+  input,
   output = "data_t.test"
 )
 }

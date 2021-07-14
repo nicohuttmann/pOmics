@@ -6,18 +6,18 @@
 \usage{
 include_observations_data(
   data_,
-  name,
+  which,
   column.name,
   observations.set,
   dataset,
-  input = "LFQ.intensity",
+  input,
   output
 )
 }
 \arguments{
 \item{data_}{data frame}
 
-\item{name}{observations data}
+\item{which}{observations data}
 
 \item{column.name}{name of new column}
 
@@ -27,7 +27,7 @@ include_observations_data(
 
 \item{input}{data frame to be modified}
 
-\item{output}{dataframe to return in list}
+\item{output}{data frame to return in list}
 }
 \value{
 

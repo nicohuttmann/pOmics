@@ -27,11 +27,14 @@ plot_gg_volcano(
   axis.title.size = 8,
   axis.text.size = 6,
   aspect.ratio = 0.8,
+  view = T,
   input = "data_t.test",
   output = "plot_t.test"
 )
 }
 \arguments{
+\item{data_}{data_}
+
 \item{p.value.cutoff}{p-value limit for coloring}
 
 \item{pos.log2fc.cutoff}{positive log2 fold-change limit for coloring}
@@ -39,6 +42,8 @@ plot_gg_volcano(
 \item{neg.log2fc.cutoff}{negative log2 fold-change limit for coloring}
 
 \item{highlight.variables}{variables to highlight by point.size}
+
+\item{highlight.color}{color to use to highlight proteins}
 
 \item{x.axis.title}{title of x-axis}
 
@@ -72,9 +77,11 @@ plot_gg_volcano(
 
 \item{aspect.ratio}{y/x ratio}
 
-\item{data}{data}
+\item{view}{view plot}
 
-\item{highligh.color}{color to use to highlight specified proteins}
+\item{input}{name of input data}
+
+\item{output}{name of output data}
 }
 \value{
 

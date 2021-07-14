@@ -2,18 +2,18 @@
 % Please edit documentation in R/p2n.R
 \name{p2n}
 \alias{p2n}
-\title{Returns names from known proteins in dataset}
+\title{Returns names from known proteins}
 \usage{
 p2n(proteins, dataset)
 }
 \arguments{
-\item{proteins}{}
+\item{proteins}{UniProt protein Ids}
 
-\item{dataset}{}
+\item{dataset}{dataset}
 }
 \value{
 
 }
 \description{
-Returns names from known proteins in dataset
+Returns names from known proteins
 }

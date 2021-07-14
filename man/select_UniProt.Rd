@@ -15,7 +15,7 @@ select_UniProt(keys, columns, keytype = "UNIPROTKB", x, modify = T)
 
 \item{x}{UniProt data base}
 
-\item{modify}{(recommended) Should output values be modified to to singluar entries?}
+\item{modify}{(recommended) Should output values be modified to to singular entries?}
 }
 \value{
 

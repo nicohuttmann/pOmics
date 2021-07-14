@@ -26,10 +26,10 @@
 #' @param export export plot as pdf
 #' @param height plot height in inch for export
 #' @param dataset dataset
-#' @param print print plot
+#' @param file file name
+#' @param view print plot
 #' @param input input data name
 #' @param output output data name
-#' @param file file name
 #'
 #' @return
 #' @export
@@ -37,32 +37,33 @@
 #' @import ggplot2
 #' @importFrom magrittr %>%
 #'
-plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, observation.labels,
-                            labels_x = T, labels_y = F, dend_x = T, dend_y = T, annot_layer_x, annot_layer_y, legends,
-                            ratio = 3,
-                            rel_dend_x = 0.1, rel_dend_y = 0.2, rel_labels_x = 0.2, rel_labels_y = 0.2,
-                            rel_annot_layer_x = 0.05, rel_annot_layer_y = 0.1,
-                            rel_legends = 0.25, rel_legends_space = 0.05,
-                            axis.text.x.angle = 45,
-                            annotation.colors = list(), heatmap.legend.title = "",
-                            export = F, height = 6, dataset, print = T,
-                            input = "data_hclust", output = "plot_hclust", file = "heatmap.pdf") {
+plot_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, observation.labels,
+                         labels_x = T, labels_y = F, dend_x = T, dend_y = T, annot_layer_x, annot_layer_y, legends,
+                         ratio = 3,
+                         rel_dend_x = 0.1, rel_dend_y = 0.2, rel_labels_x = 0.2, rel_labels_y = 0.2,
+                         rel_annot_layer_x = 0.05, rel_annot_layer_y = 0.1,
+                         rel_legends = 0.25, rel_legends_space = 0.05,
+                         axis.text.x.angle = 45,
+                         annotation.colors = list(), heatmap.legend.title = "",
+                         export = F, height = 6, dataset, file = "heatmap.pdf", view = T,
+                         input = "data_hclust", output = "plot_hclust") {
 
-  # Check input
-  if (!hasArg(data_)) stop("No data list given.")
+  # Handle input
+  input_list <- data_input(data_ = data_, input = input)
 
-  # Check input type
-  if (!is.list(data_)) stop("Given data is not a list.")
+  if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-  # Check data list
-  if (!input %in% names(data_)) stop("Data could not be found. Please specify correct <data.name>.")
+  else {
+    data <- input_list[["data"]]
+    input <- input_list[["input"]]
+    list.input <- input_list[["list.input"]]
+  }
+
+
+
 
   # Get dataset
   dataset <- get_dataset(dataset)
-
-
-  # Get data
-  data <- data_[[input]]
 
 
 
@@ -344,76 +345,70 @@ plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, obser
     # perfect
 
 
+  if (!dend_x) rel_dend_x <- 0
+
+  if (!dend_y) rel_dend_y <- 0
+
+
+  if (!labels_x) rel_labels_x <- 0
+
+  if (!labels_y) rel_labels_y <- 0
+
+
+  if (!hasArg(annot_layer_x)) rel_annot_layer_x <- 0
+
+  else {
+
+    if (length(annot_layer_x) != length(rel_annot_layer_x))
+      rel_annot_layer_x <- rep(rel_annot_layer_x[1], length(annot_layer_x))
+
+  }
+
+  if (!hasArg(annot_layer_y)) rel_annot_layer_y <- 0
+
+  else {
+
+    if (length(annot_layer_y) != length(rel_annot_layer_y))
+      rel_annot_layer_y <- rep(rel_annot_layer_y[1], length(annot_layer_y))
+
+  }
 
 
 
+  # Add legends
+  if (hasArg(legends)) {
 
+    for (l in legends) {
 
-
-    if (!dend_x) rel_dend_x <- 0
-
-    if (!dend_y) rel_dend_y <- 0
-
-
-    if (!labels_x) rel_labels_x <- 0
-
-    if (!labels_y) rel_labels_y <- 0
-
-
-    if (!hasArg(annot_layer_x)) rel_annot_layer_x <- 0
-
-    else {
-
-      if (length(annot_layer_x) != length(rel_annot_layer_x))
-        rel_annot_layer_x <- rep(rel_annot_layer_x[1], length(annot_layer_x))
-
-    }
-
-    if (!hasArg(annot_layer_y)) rel_annot_layer_y <- 0
-
-    else {
-
-      if (length(annot_layer_y) != length(rel_annot_layer_y))
-        rel_annot_layer_y <- rep(rel_annot_layer_y[1], length(annot_layer_y))
-
-    }
-
-
-
-    # Add legends
-    if (hasArg(legends)) {
-
-      for (l in legends) {
-
-        plot.list[[paste0("legend_", l)]] <- gg_extract_legend(plot.list[[l]])
-
-      }
+      plot.list[[paste0("legend_", l)]] <- gg_extract_legend(plot.list[[l]])
 
     }
 
-
-    # Assemble heatmap list
-
-    p <- assemble_heatmap_rowwise(plot.list = plot.list,
-                                  rel_dend_x = rel_dend_x,
-                                  rel_dend_y = rel_dend_y,
-                                  rel_labels_x = rel_labels_x,
-                                  rel_labels_y = rel_labels_y,
-                                  rel_annot_layer_x = rel_annot_layer_x,
-                                  rel_annot_layer_y = rel_annot_layer_y,
-                                  rel_legends = rel_legends,
-                                  rel_legends_space = rel_legends_space)
+  }
 
 
+  # Assemble heatmap list
 
-
+  p <- assemble_heatmap_rowwise(plot.list = plot.list,
+                                rel_dend_x = rel_dend_x,
+                                rel_dend_y = rel_dend_y,
+                                rel_labels_x = rel_labels_x,
+                                rel_labels_y = rel_labels_y,
+                                rel_annot_layer_x = rel_annot_layer_x,
+                                rel_annot_layer_y = rel_annot_layer_y,
+                                rel_legends = rel_legends,
+                                rel_legends_space = rel_legends_space)
 
 
 
 
-    if (export) {
 
-      ratio.plot <-
+
+
+
+  if (export) {
+
+    ratio.plot <-
       # Summed width of columns
       (1 +
          rel_dend_y +
@@ -427,16 +422,21 @@ plot_gg_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, obser
 
       ratio
 
-      export_pdf(p = perfect, file = file, width = height * ratio.plot, height = height, open = F)
+    export_pdf(p = perfect, file = file, width = height * ratio.plot, height = height, open = F)
 
-    }
+  }
 
 
-    data_[[output]] <- list(plot = p, subplots = plot.list)
+  data <- list(plot = p, subplots = plot.list)
 
-    # Print plot
-    if (print) print(data_[[output]][["plot"]])
+  # Print plot
+  if (view) print(p)
 
+
+  # Prepare return
+  if (list.input) data_[[output]] <- data
+
+  else data_ <- data
 
   # Return
   return(invisible(data_))

@@ -1,14 +1,16 @@
-#' Returns names from known proteins in dataset
+#' Returns names from known proteins
 #'
-#' @param proteins 
-#' @param dataset 
+#' @param proteins UniProt protein Ids
+#' @param dataset dataset
 #'
 #' @return
 #' @export
 #'
 #'
 p2n <- function(proteins, dataset) {
-  
-  return(genes <- get_variables_data(name = "PROTEIN-NAMES", variables = proteins, dataset = dataset))
-  
+
+  dataset <- get_dataset(dataset, try.all = TRUE)
+
+  return(select_org(keys = proteins, columns = "GENENAME", output = "vector.keep", dataset = dataset))
+
 }

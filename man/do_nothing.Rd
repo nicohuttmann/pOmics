@@ -4,12 +4,14 @@
 \alias{do_nothing}
 \title{Template for functions that accept either a data frame or a list}
 \usage{
-do_nothing(data_, ..., input = "LFQ.intensity", output)
+do_nothing(data_, ..., dataset, input, output)
 }
 \arguments{
 \item{data_}{list or tibble}
 
 \item{...}{specific arguments}
+
+\item{dataset}{dataset}
 
 \item{input}{name of input data}
 

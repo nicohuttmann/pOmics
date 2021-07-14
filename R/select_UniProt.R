@@ -4,7 +4,7 @@
 #' @param columns data to query
 #' @param keytype type of key
 #' @param x UniProt data base
-#' @param modify (recommended) Should output values be modified to to singluar entries?
+#' @param modify (recommended) Should output values be modified to to singular entries?
 #'
 #' @return
 #' @export

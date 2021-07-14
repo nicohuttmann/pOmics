@@ -19,11 +19,27 @@ plot_gg_bar_composition(
 )
 }
 \arguments{
-\item{data}{data to plot}
+\item{data_}{data_}
 
-\item{x}{column name of x axis labels}
+\item{TERMS}{TERMS to plot}
 
-\item{y}{numeric value to be represented}
+\item{color}{names vector of colors}
+
+\item{xlab}{labels of x-axis}
+
+\item{ylab}{label of y-axis}
+
+\item{legend.name}{name of lagend}
+
+\item{legend.position}{position of legend ("none", "right", "bottom", "top", "left")}
+
+\item{aspect.ratio}{aspect ratio of x- and y-axis}
+
+\item{view}{view plot after generation}
+
+\item{input}{name of input data}
+
+\item{output}{name of output data}
 }
 \value{
 

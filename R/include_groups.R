@@ -5,8 +5,8 @@
 #' @param control (optional) which group is control
 #' @param observations.set which observations.set to use
 #' @param dataset dataset
-#' @param input input data
-#' @param output output data
+#' @param input name of input data
+#' @param output name of output data
 #'
 #' @return
 #' @export
@@ -14,15 +14,18 @@
 #' @importFrom magrittr %>%
 #'
 #'
-include_groups <- function(data_, groups, control, observations.set, dataset, input = "LFQ.intensity", output) {
+include_groups <- function(data_, groups = "default", control, observations.set, dataset, input, output) {
 
-  # Check data input
-  if (!hasArg(data_)) stop("Please provide data input.")
+  # Handle input
+  input_list <- data_input(data_ = data_, input = input)
 
-  if (!input %in% names(data_)) stop("Target data frame not found.")
+  if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-  # Extract data
-  data <- data_[[input]]
+  else {
+    data <- input_list[["data"]]
+    input <- input_list[["input"]]
+    list.input <- input_list[["list.input"]]
+  }
 
   # Matrix to tibble
   if (!tibble::is_tibble(data)) data <- data2tibble(data = data, row.names = "observations")
@@ -36,7 +39,7 @@ include_groups <- function(data_, groups, control, observations.set, dataset, in
 
 
   # Default groups
-  if (!hasArg(groups)) {
+  if (groups == "default") {
 
     groups <- get_dataset_attr(which = "default_groups", dataset = dataset)
 
@@ -92,12 +95,18 @@ include_groups <- function(data_, groups, control, observations.set, dataset, in
   }
 
 
-  if (!hasArg(output)) output <- input
-
   # Add groups
-  data_[[output]] <- data %>%
+  data <- data %>%
     dplyr::mutate(groups = group.factors, .after = observations)
 
+
+  # Output name
+  if (!hasArg(output)) output <- input
+
+  # Prepare return
+  if (list.input) data_[[output]] <- data
+
+  else data_ <- data
 
   # Return
   return(data_)

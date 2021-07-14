@@ -13,20 +13,18 @@
 #'
 #'
 do_hclust <- function(data_, scale = T, distance.method = "euclidean", clustering.method = "complete", plot = T,
-                      input = "LFQ.intensity", output = "data_hclust") {
+                      input, output = "data_hclust") {
 
-  # Check input
-  if (!hasArg(data_)) stop("No data list given.")
+  # Handle input
+  input_list <- data_input(data_ = data_, input = input)
 
-  # Check input type
-  if (!is.list(data_)) stop("Given data is not a list.")
+  if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-  # Check data list
-  if (!input %in% names(data_)) stop("Data could not be found. Please specify correct <input>.")
-
-
-  # Get data
-  data <- data_[[input]]
+  else {
+    data <- input_list[["data"]]
+    input <- input_list[["input"]]
+    list.input <- input_list[["list.input"]]
+  }
 
   # Scale data
   if (scale) data <- do_scale(data)

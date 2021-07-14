@@ -1,8 +1,16 @@
 #' Plots data as bar plot with ggplot2
 #'
-#' @param data data to plot
-#' @param x column name of x axis labels
-#' @param y numeric value to be represented
+#' @param data_ data_
+#' @param TERMS TERMS to plot
+#' @param color names vector of colors
+#' @param xlab labels of x-axis
+#' @param ylab label of y-axis
+#' @param legend.name name of lagend
+#' @param legend.position position of legend ("none", "right", "bottom", "top", "left")
+#' @param aspect.ratio aspect ratio of x- and y-axis
+#' @param view view plot after generation
+#' @param input name of input data
+#' @param output name of output data
 #'
 #' @return
 #' @export
@@ -13,33 +21,16 @@ plot_gg_bar_composition <- function(data_, TERMS = "mitochondrion", color, xlab 
                                     legend.name = "", legend.position = "right", aspect.ratio = 1, view = T,
                                     input = "data_annotation_composition", output = "plot_annotation_composition") {
 
+  # Handle input
+  input_list <- data_input(data_ = data_, input = input)
 
-  # Check input
-  if (!hasArg(data_)) {
+  if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-    message("No data given.")
-
-    return(invisible(NULL))
-
+  else {
+    data <- input_list[["data"]]
+    input <- input_list[["input"]]
+    list.input <- input_list[["list.input"]]
   }
-
-  # Check if list or dataframe given
-  list.input <- !is.data.frame(data_) & is.list(data_)
-
-  # Check list input
-  if (list.input & !input %in% names(data_)) {
-
-    message("Data could not be found. Please specify correct <input>.")
-
-    return(invisible(data_))
-
-  }
-
-  # Get data
-  if (list.input) data <- data_[[input]]
-
-  else data <- data_
-
 
 
   data.melt_1 <- data %>%

@@ -9,25 +9,18 @@
 #' @export
 #'
 #'
-remove_variables <- function(data_, min = 0.5, input = "LFQ.intensity", output) {
+remove_variables <- function(data_, min = 0.5, input, output) {
 
+  # Handle input
+  input_list <- data_input(data_ = data_, input = input)
 
-  # Check input
-  if (!hasArg(data_)) stop("No data given.")
+  if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-  # Check if list or dataframe given
-  list.input <- !is.data.frame(data_) & is.list(data_)
-
-  #
-  if (list.input & !input %in% names(data_)) stop("Data could not be found. Please specify correct <input>.")
-
-
-
-
-  # Get data
-  if (list.input) data <- data_[[input]]
-
-  else data <- data_
+  else {
+    data <- input_list[["data"]]
+    input <- input_list[["input"]]
+    list.input <- input_list[["list.input"]]
+  }
 
 
 

@@ -2,24 +2,24 @@
 % Please edit documentation in R/do_pca.R
 \name{do_pca}
 \alias{do_pca}
-\title{Performs Principal Component Analysis using the prcomp function}
+\title{Template for functions that accept either a data frame or a list}
 \usage{
-do_pca(data_, scale = T, data.name = "raw_data", plot = T, print.summary = F)
+do_pca(data_, scale = T, dataset, input, output = "data_pca")
 }
 \arguments{
-\item{data_}{data list}
+\item{data_}{list or tibble}
 
-\item{scale}{Scale data (Z-scores)?}
+\item{scale}{scale data}
 
-\item{data.name}{name of data to use for analysis}
+\item{dataset}{dataset}
 
-\item{plot}{plot results}
+\item{input}{name of input data}
 
-\item{print.summary}{should summary be printed}
+\item{output}{name of output data}
 }
 \value{
 
 }
 \description{
-Performs Principal Component Analysis using the prcomp function
+Template for functions that accept either a data frame or a list
 }

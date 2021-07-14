@@ -4,7 +4,7 @@
 \alias{do_scale}
 \title{Scales data (Z-scores) from tibbles or analysis_list containing a tibble}
 \usage{
-do_scale(data_, input = "LFQ.intensity", output)
+do_scale(data_, input, output)
 }
 \arguments{
 \item{data_}{data_ list}

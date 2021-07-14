@@ -11,7 +11,7 @@ plot_upset(
   transpose = T,
   from.row.names = "observations",
   view = T,
-  input = "Peptides",
+  input,
   output = "plot_upset"
 )
 }
@@ -28,9 +28,9 @@ plot_upset(
 
 \item{view}{view plot}
 
-\item{input}{input data}
+\item{input}{name of input data}
 
-\item{output}{output plot name}
+\item{output}{name of output plot}
 }
 \value{
 

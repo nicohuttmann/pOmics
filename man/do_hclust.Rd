@@ -10,7 +10,7 @@ do_hclust(
   distance.method = "euclidean",
   clustering.method = "complete",
   plot = T,
-  input = "LFQ.intensity",
+  input,
   output = "data_hclust"
 )
 }

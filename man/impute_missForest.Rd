@@ -4,7 +4,7 @@
 \alias{impute_missForest}
 \title{Imputes missing values based on a Random Forest algorithm}
 \usage{
-impute_missForest(data_, input = "LFQ.intensity", output, ...)
+impute_missForest(data_, input, output, ...)
 }
 \arguments{
 \item{data_}{list or tibble}

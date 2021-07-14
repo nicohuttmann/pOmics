@@ -28,8 +28,14 @@ select_org <- function(keys, columns, output = "vector.keep", keytype, OrgDb, da
   if (!hasArg(OrgDb))
     OrgDb <- get_dataset_attr(which = "OrgDb", dataset = dataset)
 
-  if (is.null(OrgDb))
-    stop("No annotation database setup. Use setup_annotations().")
+  if (is.null(OrgDb)) {
+
+    message("No annotation database setup. Use setup_annotations().")
+
+    return(keys)
+
+  }
+
 
   if (!require(OrgDb, character.only = T))
     stop(paste0("Annotations package ", OrgDb, " could not be installed."))
@@ -96,64 +102,14 @@ select_org <- function(keys, columns, output = "vector.keep", keytype, OrgDb, da
     suppressMessages()
 
 
-  # Process data
-  if (output == "vector.keep") {
-
-    if (ncol(output.data) > 2)
-      message(paste0("Query resulted in more than one mapped column. Vector contains ", colnames(output.data)[2], "."))
-
-    output.data <- output.data[!duplicated(output.data[, 1]), ]
-
-    output.data[is.na(output.data[, 2]), 2] <- output.data[is.na(output.data[, 2]), 1]
-
-    output.data <- data2vector(output.data)
-
-    output.data <- output.data[keys]
-
-  } else if (output == "vector.na") {
-
-    if (ncol(output.data) > 2)
-      message(paste0("Query resulted in more than one mapped column. Vector contains ", colnames(output.data)[2], "."))
-
-    output.data <- output.data[!duplicated(output.data[, 1]), ]
-
-    output.data <- data2vector(output.data)
-
-    output.data <- output.data[keys]
-
-  } else if (output == "vector.rm") {
-
-    if (ncol(output.data) > 2)
-      message(paste0("Query resulted in more than one mapped column. Vector contains ", colnames(output.data)[2], "."))
-
-    output.data <- output.data[!is.na(output.data[, 2]), ]
-
-    output.data <- output.data[!duplicated(output.data[, 1]), ]
-
-    output.data <- data2vector(output.data)
-
-    output.data <- output.data[intersect(keys, names(output.data))]
-
-  } else if (output == "mapping.na") {
-
-    output.data <- output.data
+  # Format output
+  output.data <- select2output(output.data = output.data,
+                               keys = keys,
+                               output = output,
+                               dataset = dataset,
+                               ...)
 
 
-  } else if (output == "mapping.rm") {
-
-    output.data <- output.data[!is.na(output.data[, 2]), ]
-
-
-  } else if (output == "TERM2GENE") {
-
-    output.data <- select_org_2_TERM2GENE(mapping = output.data, dataset = dataset, ...)
-
-
-  } else {
-
-    stop("Given output type not supported.")
-
-  }
 
   # Return
   return(output.data)

@@ -39,7 +39,7 @@ fun_enrich(
 
 \item{dataset}{dataset}
 
-\item{view}{View results?}
+\item{view}{View results}
 
 \item{threshold}{p-value/confidence threshold to exclude terms}
 }

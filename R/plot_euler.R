@@ -14,33 +14,18 @@
 #' @importFrom magrittr %>%
 #'
 plot_euler <- function(data_, fontsize = 8, transpose = T, from.row.names = "observations", to.row.names = "variables", view = T,
-                       input = "Peptides", output = "plot_euler") {
+                       input, output = "plot_euler") {
 
-  # Check input
-  if (!hasArg(data_)) {
+  # Handle input
+  input_list <- data_input(data_ = data_, input = input)
 
-    message("No data given.")
+  if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-    return(invisible(NULL))
-
+  else {
+    data <- input_list[["data"]]
+    input <- input_list[["input"]]
+    list.input <- input_list[["list.input"]]
   }
-
-  # Check if list or dataframe given
-  list.input <- !is.data.frame(data_) & is.list(data_)
-
-  # Check list input
-  if (list.input & !input %in% names(data_)) {
-
-    message("Data could not be found. Please specify correct <input>.")
-
-    return(invisible(data_))
-
-  }
-
-  # Get data
-  if (list.input) data <- data_[[input]]
-
-  else data <- data_
 
 
 
