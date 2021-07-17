@@ -9,7 +9,6 @@ new_dataset(
   name,
   data.origin,
   species,
-  load.UniProt.ws = T,
   identifier = "Protein.IDs",
   data.types = "Peptides"
 )
@@ -23,11 +22,11 @@ new_dataset(
 
 \item{species}{protein origin (T or F or UniProt taxonomy ID)}
 
-\item{load.UniProt.ws}{(optional) Should UniProt data be loaded}
-
 \item{identifier}{(optional) specific vector of identifier column/s}
 
 \item{data.types}{(optional) types of data to extract; uses defaults if not specified}
+
+\item{load.UniProt.ws}{(optional) Should UniProt data be loaded}
 }
 \value{
 
