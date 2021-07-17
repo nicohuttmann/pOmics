@@ -9,7 +9,7 @@
 #'
 #' @importFrom magrittr %>%
 #'
-get_identifiers <- function(x, sep, identifier) {
+identify_variables <- function(x, sep, identifier) {
 
   # Generate separators if not given
   if (!hasArg(sep)) {
@@ -78,7 +78,10 @@ get_identifiers <- function(x, sep, identifier) {
 
     identifier <- c()
     # Select columns for identifiers
-    identifier <- select.list(choices = colnames(x), multiple = T, graphics = T, title = "Choose column/s as identifiers: ")
+    identifier <- select.list(choices = colnames(x),
+                              multiple = T,
+                              graphics = T,
+                              title = "Choose column/s as identifiers: ")
 
     if (length(identifier) > 0) {
 

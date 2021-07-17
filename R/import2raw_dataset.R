@@ -13,7 +13,9 @@ import2raw_dataset <- function(import, identifier, add = T) {
   #
   sep <- identify_separator(x = import)
 
-  identifiers <- get_identifiers(x = import, sep = sep, identifier = identifier)
+  identifiers <- identify_variables(x = import,
+                                    sep = sep,
+                                    identifier = identifier)
 
   # Define identifiers
   import <- import %>%
@@ -27,7 +29,8 @@ import2raw_dataset <- function(import, identifier, add = T) {
   # Set separator
   attr(x = raw_dataset, which = "separator") <- sep
 
-  if (add) add_raw_dataset(raw_dataset = raw_dataset, name = attr(import, "name"))
+  if (add)
+    add_raw_dataset(raw_dataset = raw_dataset, name = attr(import, "name"))
 
   return(raw_dataset)
 

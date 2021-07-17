@@ -23,6 +23,13 @@ transfer_data_frames <- function(name, data.type) {
   # Check which columns are available
   data.type <- data.type[data.type %in% names(.info[["raw_datasets"]][[name]][["data.frames"]])]
 
+  if (length(data.type) == 0) {
+
+    print("No data types found.")
+    return(invisible(FALSE))
+
+  }
+
   for(type in data.type) {
 
     data <- .info[["raw_datasets"]][[name]][["data.frames"]][[type]] %>%
@@ -40,5 +47,8 @@ transfer_data_frames <- function(name, data.type) {
     set_default_data_name(name = data.type[1],
                           dataset = name)
   }
+
+  # Return
+  return(invisible(TRUE))
 
 }
