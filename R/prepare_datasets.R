@@ -37,11 +37,9 @@ prepare_datasets <- function(imports, data.origin, species, load.UniProt.ws = F,
     # Make datasets
     new_dataset(import = imports[[i]],
                 name = names(imports)[i],
-                data.origin = data.origin,
-                species = species,
-                load.UniProt.ws = load.UniProt.ws,
+                data.type = data.origin,
                 identifier = identifier,
-                data.types = data.types)
+                data.columns = data.types)
     Sys.sleep(3)
   }
 

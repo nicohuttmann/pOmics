@@ -4,14 +4,14 @@
 \alias{identify_variables}
 \title{Finds feasible identifier columns}
 \usage{
-identify_variables(x, sep, identifier)
+identify_variables(x, identifier, sep)
 }
 \arguments{
 \item{x}{data frame}
 
-\item{sep}{separator}
-
 \item{identifier}{vector of identifier columns}
+
+\item{sep}{separator}
 }
 \value{
 

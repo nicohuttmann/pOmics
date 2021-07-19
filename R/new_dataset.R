@@ -2,40 +2,56 @@
 #'
 #' @param import imported raw data frame
 #' @param name name of dataset
-#' @param data.origin Identify origin software of data
-#' @param species protein origin (T or F or UniProt taxonomy ID)
-#' @param load.UniProt.ws (optional) Should UniProt data be loaded
+#' @param data.type output type from MaxQuant
 #' @param identifier (optional) specific vector of identifier column/s
-#' @param data.types (optional) types of data to extract; uses defaults if not specified
+#' @param data.columns (optional) types of data to extract; uses defaults if not specified
 #'
 #' @return
 #' @export
 #'
 #' @importFrom magrittr %>%
 #'
-new_dataset <- function(import, name, data.origin, species,
-                        identifier = "Protein.IDs", data.types = "Peptides") {
+new_dataset <- function(import, name, data.type,
+                        identifier, data.columns) {
 
   # Create lists for data storage
   initialize_data_structure()
 
 
-  # Name
-  name <- ask_name(name = name,
-                   message = "Name of dataset: ",
-                   exclude = get_datasets())
-
   # Add name
-  attr(import, "name") <- name
+  if (hasArg(name)) {
+
+    attr(import, "name") <- name
+
+  } else {
+
+    name <- attr(import, "name")
+
+  }
 
 
+  if (!hasArg(data.type)) {
+    data.type <- data.type = attr(import, "data.type")
+  }
+
+  default_parameters <-
+    MaxQuant_import_defaults(data.type = data.type)
+
+
+  if (!hasArg(identifier)) {
+    identifier <- default_parameters[["identifier"]]
+  }
+
+  if (!hasArg(data.columns)) {
+    data.columns <- default_parameters[["data.columns"]]
+  }
 
   # Save whole dataset to .info list
   raw_dataset <- import2raw_dataset(import = import, identifier = identifier)
 
 
   # Add dataset
-  dataset(name = name)
+  add_dataset(name = name)
 
   # Variables
   transfer_variables_data(name = name,

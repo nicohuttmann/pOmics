@@ -4,29 +4,18 @@
 \alias{new_dataset}
 \title{Sorts raw data into data list with attributes}
 \usage{
-new_dataset(
-  import,
-  name,
-  data.origin,
-  species,
-  identifier = "Protein.IDs",
-  data.types = "Peptides"
-)
+new_dataset(import, name, data.type, identifier, data.columns)
 }
 \arguments{
 \item{import}{imported raw data frame}
 
 \item{name}{name of dataset}
 
-\item{data.origin}{Identify origin software of data}
-
-\item{species}{protein origin (T or F or UniProt taxonomy ID)}
+\item{data.type}{output type from MaxQuant}
 
 \item{identifier}{(optional) specific vector of identifier column/s}
 
-\item{data.types}{(optional) types of data to extract; uses defaults if not specified}
-
-\item{load.UniProt.ws}{(optional) Should UniProt data be loaded}
+\item{data.columns}{(optional) types of data to extract; uses defaults if not specified}
 }
 \value{
 

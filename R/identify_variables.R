@@ -1,15 +1,15 @@
 #' Finds feasible identifier columns
 #'
 #' @param x data frame
-#' @param sep separator
 #' @param identifier vector of identifier columns
+#' @param sep separator
 #'
 #' @return
 #' @export
 #'
 #' @importFrom magrittr %>%
 #'
-identify_variables <- function(x, sep, identifier) {
+identify_variables <- function(x, identifier, sep) {
 
   # Generate separators if not given
   if (!hasArg(sep)) {
@@ -18,15 +18,21 @@ identify_variables <- function(x, sep, identifier) {
 
 
   # Fill NAs
-  # x <- x %>%
-  #   dplyr::mutate(across(.fns = function(x) {
-  #     for (i in seq_along(x)) {
-  #       if (is.na(x[i])) {
-  #         x[i] <- paste0("NA_", i)
-  #       }
-  #     }
-  #     x
-  #   }))
+  if (hasArg(identifier)) {
+
+    x <- x %>%
+      dplyr::mutate(across(.cols = !!identifier,
+                           .fns = function(x) {
+        for (i in seq_along(x)) {
+          if (is.na(x[i])) {
+            x[i] <- paste0("NA_", i)
+          }
+        }
+        x
+      }))
+
+  }
+
 
 
   # No identifier specified; only test first column
@@ -51,13 +57,16 @@ identify_variables <- function(x, sep, identifier) {
         as.character %>%
         keep_first(sep = sep)
       if (length(identifier) > 1) {
-        for (i in identifier[-1])
-        x1 <- paste(x1,
-                    x %>%
-                    dplyr::pull(i) %>%
-                    as.character %>%
-                    keep_first(sep = sep),
-                    sep = "_")
+        for (i in identifier[-1]) {
+
+          x1 <- paste(x1,
+                      x %>%
+                        dplyr::pull(i) %>%
+                        as.character %>%
+                        keep_first(sep = sep),
+                      sep = "_")
+
+        }
 
       }
       # test identifier feasibility
