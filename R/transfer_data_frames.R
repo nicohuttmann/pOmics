@@ -1,13 +1,13 @@
 #' Transfers data from raw_dataset to .datasets
 #'
 #' @param name dataset name
-#' @param data.type data frames to transfer
+#' @param data.columns data frames to transfer
 #'
 #' @return
 #' @export
 #'
 #'
-transfer_data_frames <- function(name, data.type) {
+transfer_data_frames <- function(name, data.columns) {
 
   # Check data
   if (!is_dataset(name) | !is_raw_dataset(name)) stop("Dataset or raw dataset missing.")
@@ -21,16 +21,16 @@ transfer_data_frames <- function(name, data.type) {
   }
 
   # Check which columns are available
-  data.type <- data.type[data.type %in% names(.info[["raw_datasets"]][[name]][["data.frames"]])]
+  data.columns <- data.columns[data.columns %in% names(.info[["raw_datasets"]][[name]][["data.frames"]])]
 
-  if (length(data.type) == 0) {
+  if (length(data.columns) == 0) {
 
     print("No data types found.")
     return(invisible(FALSE))
 
   }
 
-  for(type in data.type) {
+  for(type in data.columns) {
 
     data <- .info[["raw_datasets"]][[name]][["data.frames"]][[type]] %>%
       as.matrix() %>%
@@ -44,7 +44,7 @@ transfer_data_frames <- function(name, data.type) {
 
   # Set default data type
   if (is.na(get_default_data_name(name))) {
-    set_default_data_name(name = data.type[1],
+    set_default_data_name(name = data.columns[1],
                           dataset = name)
   }
 

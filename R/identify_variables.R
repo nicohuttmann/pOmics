@@ -20,16 +20,14 @@ identify_variables <- function(x, identifier, sep) {
   # Fill NAs
   if (hasArg(identifier)) {
 
-    x <- x %>%
-      dplyr::mutate(across(.cols = !!identifier,
-                           .fns = function(x) {
-        for (i in seq_along(x)) {
-          if (is.na(x[i])) {
-            x[i] <- paste0("NA_", i)
-          }
-        }
-        x
-      }))
+    for (i in identifier) {
+
+      x <- x %>%
+        dplyr::mutate(dplyr::across(-where(is.character), as.character))
+
+      x[is.na(x[, i]), i] <- paste0("NA_", 1:nrow(x))[is.na(x[[i]])]
+
+    }
 
   }
 

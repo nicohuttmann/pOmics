@@ -7,7 +7,7 @@
 transfer_observations(name)
 }
 \arguments{
-\item{name}{dataset name}
+\item{name}{dataset}
 }
 \value{
 

@@ -4,12 +4,12 @@
 \alias{view_observations}
 \title{Prints observations data frame}
 \usage{
-view_observations(observations.set, dataset)
+view_observations(dataset, observations.set)
 }
 \arguments{
-\item{observations.set}{observations set}
-
 \item{dataset}{dataset}
+
+\item{observations.set}{observations set}
 }
 \value{
 

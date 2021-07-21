@@ -4,12 +4,12 @@
 \alias{transfer_variables_data}
 \title{Transfers variables data from raw_dataset to .datasets}
 \usage{
-transfer_variables_data(name, columns)
+transfer_variables_data(name, data.columns)
 }
 \arguments{
 \item{name}{dataset name}
 
-\item{columns}{columns to transfer}
+\item{data.columns}{columns to transfer}
 }
 \value{
 

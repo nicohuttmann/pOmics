@@ -24,6 +24,8 @@ add_dataset <- function(name) {
     }
 
 
+    # Get raw dataset for attributes
+    raw_dataset <- .info[["raw_datasets"]][[name]]
 
     # Build dataset list
     # Start list
@@ -31,9 +33,12 @@ add_dataset <- function(name) {
 
 
     # Preset attributes
-    attr(dataset, "name") <- NA
-    attr(dataset, "data_origin") <- NA
-    attr(dataset, "separator") <- NA
+    attr(dataset, "name") <- attr(raw_dataset, "name")
+    attr(dataset, "project") <- attr(raw_dataset, "project")
+    attr(dataset, "data.type") <- attr(raw_dataset, "data.type")
+    attr(dataset, "path") <- attr(raw_dataset, "path")
+    attr(dataset, "time") <- attr(raw_dataset, "time")
+    attr(dataset, "separator") <- attr(raw_dataset, "separator")
 
     attr(dataset, "taxId") <- NA
     attr(dataset, "species") <- NA

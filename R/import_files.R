@@ -1,14 +1,15 @@
 #' Imports any file type using the file extension and returns list
 #'
 #' @param files file paths
+#' @param dir directory to import files from
+#' @param ext specific file extensions to imports
 #' @param silent suppresses messages
 #'
 #' @return
 #' @export
 #'
 #'
-import_files <- function(files, dir, silent = F) {
-
+import_files <- function(files, dir, ext, silent = F) {
 
   # Select files if no path given
   if (!hasArg(files) & !hasArg(dir)) {
@@ -19,13 +20,21 @@ import_files <- function(files, dir, silent = F) {
 
     files <- list_files(dir = dir)
 
+    if (hasArg(ext)) {
+
+      files <- files[tools::file_ext(files) %in% ext]
+
+    }
+
   }
 
 
   # Create list to store imported files
   list.import <- list()
 
-  col_types <- c(Reverse = "c", `Potential contaminant` = "c")
+  col_types <- c(Reverse = "c",
+                 `Potential contaminant` = "c",
+                 id = "c")
 
 
   # Import all files
@@ -61,35 +70,31 @@ import_files <- function(files, dir, silent = F) {
   while((lapply(file.names, first_element) %>%
          unlist() %>%
          unique() %>%
-         length() == 1)) {
+         length() == 1) & length(file.names[[1]]) > 1) {
 
     file.names <- lapply(file.names, function(x) x[-1])
 
   }
 
-  # Add project attribute if length of list elements is > 1
-  if (length(file.names[[1]]) > 1) {
+  # Add file data
+  for (i in seq_along(list.import)) {
 
-    for (i in seq_along(list.import)) {
+    # project name based on folder structure
+    attr(list.import[[i]], "project") <-
+      file.names[[i]][-length(file.names[[i]])] %>%
+      paste(collapse = "_")
 
-      # project name based on folder structure
-      attr(list.import[[i]], "project") <-
-        file.names[[i]][-length(file.names[[i]])] %>%
-        paste(collapse = "_")
+    # Full name including project
+    attr(list.import[[i]], "name") <-
+      file.names[[i]] %>%
+      unlist() %>%
+      paste(collapse = "_") %>%
+      tools::file_path_sans_ext()
 
-      # Full name including project
-      attr(list.import[[i]], "name") <-
-        file.names[[i]] %>%
-        unlist() %>%
-        paste(collapse = "_") %>%
-        tools::file_path_sans_ext()
-
-      # Filename from MaxQuant output
-      attr(list.import[[i]], "datatype") <-
-        file.names[[i]][length(file.names[[i]])] %>%
-        tools::file_path_sans_ext()
-
-    }
+    # Filename from MaxQuant output
+    attr(list.import[[i]], "data.type") <-
+      file.names[[i]][length(file.names[[i]])] %>%
+      tools::file_path_sans_ext()
 
   }
 

@@ -31,11 +31,11 @@ new_dataset <- function(import, name, data.type,
 
 
   if (!hasArg(data.type)) {
-    data.type <- data.type = attr(import, "data.type")
+    data.type <- attr(import, "data.type")
   }
 
   default_parameters <-
-    MaxQuant_import_defaults(data.type = data.type)
+    get_MaxQuant_defaults(data.type = data.type)
 
 
   if (!hasArg(identifier)) {
@@ -55,8 +55,8 @@ new_dataset <- function(import, name, data.type,
 
   # Variables
   transfer_variables_data(name = name,
-                          columns =
-                            data.types[data.types %in%
+                          data.columns =
+                            data.columns[data.columns %in%
                             colnames(raw_dataset[["variables.data"]])])
 
 
@@ -65,10 +65,8 @@ new_dataset <- function(import, name, data.type,
 
   # Transfer data frames
   transfer_data_frames(name = name,
-                       data.type =
-                         data.types[data.types %in%
+                       data.columns =
+                         data.columns[data.columns %in%
                                       names(raw_dataset[["data.frames"]])])
-
-
 
 }

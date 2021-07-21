@@ -1,6 +1,6 @@
 #' Transfers observations from raw_dataset to .datasets
 #'
-#' @param name dataset name
+#' @param name dataset
 #'
 #' @return
 #' @export

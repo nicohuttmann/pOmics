@@ -1,13 +1,13 @@
 #' Prints observations data frame
 #'
-#' @param observations.set observations set
 #' @param dataset dataset
+#' @param observations.set observations set
 #'
 #' @return
 #' @export
 #'
 #'
-view_observations <- function(observations.set, dataset) {
+view_observations <- function(dataset, observations.set) {
 
   # Get dataset
   dataset <- get_dataset(dataset)

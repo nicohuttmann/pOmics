@@ -4,12 +4,12 @@
 \alias{transfer_data_frames}
 \title{Transfers data from raw_dataset to .datasets}
 \usage{
-transfer_data_frames(name, data.type)
+transfer_data_frames(name, data.columns)
 }
 \arguments{
 \item{name}{dataset name}
 
-\item{data.type}{data frames to transfer}
+\item{data.columns}{data frames to transfer}
 }
 \value{
 

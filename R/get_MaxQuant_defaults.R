@@ -5,9 +5,9 @@
 #' @return
 #' @export
 #'
-#' 
+#'
 get_MaxQuant_defaults <- function(data.type) {
-  
+
   defaults <- list(
     # proteinGroups
     proteinGroups = list(identifier = c("Protein.IDs"),
@@ -20,29 +20,31 @@ get_MaxQuant_defaults <- function(data.type) {
                                           "Potential.contaminant",
                                           "Reverse")),
     # peptides
-    peptides = list(identifier = c("Leading.razor.protein", 
-                                   "Start.position", 
+    peptides = list(identifier = c("Leading.razor.protein",
+                                   "Start.position",
                                    "End.position"),
-                    data.columns = c("LFQ.intensity", 
-                                     "Experiment", 
+                    data.columns = c("LFQ.intensity",
+                                     "Experiment",
                                      "Protein.group.IDs",
-                                     "id", 
+                                     "id",
                                      "Potential.contaminant",
                                      "Reverse")),
     # modificationSpecificPeptides
-    modificationSpecificPeptides = list(identifier = c("Proteins", 
-                                                       "ids"),
+    modificationSpecificPeptides = list(identifier = c("Proteins",
+                                                       "id"),
                                         data.columns = c("Proteins",
                                                          "Protein.Groups",
+                                                         "Experiment",
+                                                         "id",
                                                          "Potential.contaminant",
-                                                         "Reverse",
-                                                         "Experiment")),
+                                                         "Reverse")),
     # Sites
-    Sites = list(identifier = c(c("Proteins", 
-                                  "Positions.within.proteins", 
+    Sites = list(identifier = c(c("Proteins",
+                                  "Positions.within.proteins",
                                   "id")),
                  data.columns = c("Proteins",
                                   "Localization.prob",
+                                  "id",
                                   "Potential.contaminant",
                                   "Reverse"))
     # proteinGroups = list(identifier = c(),
@@ -50,29 +52,29 @@ get_MaxQuant_defaults <- function(data.type) {
     # proteinGroups = list(identifier = c(),
     #                      data.columns = c()),
   )
-  
-  
+
+
   # Match name
   if (data.type %in% names(defaults)) {
-    
+
     return(defaults[[data.type]])
-    
+
   } else {
-    
+
     for (i in names(defaults)) {
-      
+
       if (regexpr(pattern = i, text = data.type) != -1) {
-        
+
         return(defaults[[i]])
-        
+
       }
-      
+
     }
-    
+
   }
-  
+
   print("No default data type found. Make sure not to modify the output file names or contact Nico.")
-  
+
   return(list(identifier = NULL, data.columns = NULL))
-  
+
 }

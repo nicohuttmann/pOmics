@@ -4,10 +4,14 @@
 \alias{import_files}
 \title{Imports any file type using the file extension and returns list}
 \usage{
-import_files(files, dir, silent = F)
+import_files(files, dir, ext, silent = F)
 }
 \arguments{
 \item{files}{file paths}
+
+\item{dir}{directory to import files from}
+
+\item{ext}{specific file extensions to imports}
 
 \item{silent}{suppresses messages}
 }

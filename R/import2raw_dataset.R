@@ -26,7 +26,9 @@ import2raw_dataset <- function(import, identifier, add = T) {
 
   attr(x = raw_dataset, which = "name") <- attr(import, "name")
   attr(x = raw_dataset, which = "project") <- attr(import, "project")
-  attr(x = raw_dataset, which = "datatype") <- attr(import, "datatype")
+  attr(x = raw_dataset, which = "data.type") <- attr(import, "data.type")
+  attr(x = raw_dataset, which = "path") <- attr(import, "path")
+  attr(x = raw_dataset, which = "time") <- attr(import, "time")
 
   # Set separator
   attr(x = raw_dataset, which = "separator") <- sep
