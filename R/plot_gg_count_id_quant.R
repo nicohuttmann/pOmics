@@ -20,9 +20,12 @@
 #' @importFrom magrittr %>%
 #'
 #'
-plot_gg_count_id_quant <- function(data_, color.id = "#6BAED6", color.quant = "#2171B5", labels, order.by,
-                                   xlab = NULL, ylab = "Proteins", limit.y.top, aspect.ratio = 0.66,
-                                   dataset, input = "data_count_id_quant", output = "plot_count_id_quant", View = T) {
+plot_gg_count_id_quant <- function(data_, color.id = "#6BAED6",
+                                   color.quant = "#2171B5", labels, order.by,
+                                   xlab = NULL, ylab = "Proteins",
+                                   limit.y.top, aspect.ratio = 0.66,
+                                   dataset, input = "data_count_id_quant",
+                                   output = "plot_count_id_quant", View = T) {
 
 
 
@@ -41,7 +44,9 @@ plot_gg_count_id_quant <- function(data_, color.id = "#6BAED6", color.quant = "#
   # Order x-axis
   if (hasArg(order.by)) {
 
-    data$observations <- factor(data$observations, levels = data$observations[order(data[[order.by]])])
+    data$observations <-
+      factor(data$observations,
+             levels = data$observations[order(data[[order.by]])])
     x.labels <- x.labels[order(data[[order.by]])]
 
   }
@@ -61,10 +66,13 @@ plot_gg_count_id_quant <- function(data_, color.id = "#6BAED6", color.quant = "#
 
 
   p <- ggplot(data = data.plot) +
-    geom_bar(mapping = aes(x = observations, y = value, fill = variable), stat = "identity", position = "stack") +
+    geom_bar(mapping = aes(x = observations, y = value, fill = variable),
+             stat = "identity", position = "stack") +
     scale_y_continuous(expand = c(0, 0),
                        limits = c(0, limit.y.top)) +
-    scale_fill_manual(name = "", values = c(Identified = color.id, Quantified = color.quant)) +
+    scale_fill_manual(name = "",
+                      values = c(Identified = color.id,
+                                 Quantified = color.quant)) +
     scale_x_discrete(labels = x.labels) +
     theme_hjv_half_open() +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),

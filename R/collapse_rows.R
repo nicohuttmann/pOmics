@@ -36,10 +36,25 @@ collapse_rows <- function(data_, FUN = mean, by = "All", input, output) {
 
   }
 
+  # Keep initial data frame for later
+  data0 <- data
+
   # Add new data frame
   data <- data %>%
     dplyr::group_by(!!dplyr::sym(by)) %>%
-    dplyr::summarise(across(.cols = where(is.numeric) | where(is.logical), .fns = FUN))
+    dplyr::summarise(across(.cols = where(is.numeric) | where(is.logical),
+                            .fns = FUN))
+
+  # Collapse character and
+  data0 <- data0 %>%
+    dplyr::group_by(!!dplyr::sym(by)) %>%
+    dplyr::summarise(across(.cols = where(is.character) | where(is.factor),
+                            .fns = function(x) if (length(unique(x)) == 1) x[1]
+                                               else NA)) %>%
+    dplyr::select(where(~!any(is.na(.))))
+
+  # Combine data frames
+  data <- dplyr::full_join(data0, data, by = by)
 
 
   # Output name
