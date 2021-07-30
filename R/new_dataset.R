@@ -54,17 +54,17 @@ new_dataset <- function(import, name, data.type,
   add_dataset(name = name)
 
   # Variables
-  transfer_variables_data(name = name,
+  transfer_variables_data(dataset = name,
                           data.columns =
                             data.columns[data.columns %in%
                             colnames(raw_dataset[["variables.data"]])])
 
 
   # Observations
-  transfer_observations(name)
+  transfer_observations(dataset = name)
 
   # Transfer data frames
-  transfer_data_frames(name = name,
+  transfer_data_frames(dataset = name,
                        data.columns =
                          data.columns[data.columns %in%
                                       names(raw_dataset[["data.frames"]])])

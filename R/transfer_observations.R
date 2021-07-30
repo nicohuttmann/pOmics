@@ -1,19 +1,23 @@
 #' Transfers observations from raw_dataset to .datasets
 #'
-#' @param name dataset
+#' @param dataset dataset
 #'
 #' @return
 #' @export
 #'
 #'
-transfer_observations <- function(name) {
+transfer_observations <- function(dataset) {
 
   # Check data
-  if (!is_dataset(name) | !is_raw_dataset(name)) stop("Dataset or raw dataset missing.")
+  if (!is_dataset(dataset) | !is_raw_dataset(dataset))
+    stop("Dataset or raw dataset missing.")
 
   # Add observations data frame
-  .datasets[[name]][["observations"]] <<- tibble::lst()
-  .datasets[[name]][["observations"]][["raw"]] <<- tibble::tibble(observations = colnames(get_raw_dataset(name)[["data.frames"]][[1]])) %>%
+  .datasets[[dataset]][["observations"]] <<- tibble::lst()
+  .datasets[[dataset]][["observations"]][["raw"]] <<-
+    tibble::tibble(observations =
+                     coldatasets(get_raw_dataset(dataset)
+                                 [["data.frames"]][[1]])) %>%
     dplyr::mutate(All = TRUE)
 
 }

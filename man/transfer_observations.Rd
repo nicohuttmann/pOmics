@@ -4,10 +4,10 @@
 \alias{transfer_observations}
 \title{Transfers observations from raw_dataset to .datasets}
 \usage{
-transfer_observations(name)
+transfer_observations(dataset)
 }
 \arguments{
-\item{name}{dataset}
+\item{dataset}{dataset}
 }
 \value{
 
