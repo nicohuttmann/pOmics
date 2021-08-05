@@ -1,9 +1,8 @@
 #' Adds group vector to data frame
 #'
 #' @param data_ data frame
-#' @param which observations data
+#' @param which variables data
 #' @param column.name name of new column
-#' @param observations.set which observations.set to use
 #' @param dataset dataset
 #' @param input data frame to be modified
 #' @param output data frame to return in list
@@ -14,8 +13,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-include_observations_data <- function(data_, which, column.name,
-                                      observations.set,
+include_variables_data <- function(data_, which, column.name,
                                       dataset, input, output) {
 
   # Handle input
@@ -30,34 +28,29 @@ include_observations_data <- function(data_, which, column.name,
   }
 
   # Matrix to tibble
-  if (!tibble::is_tibble(data))
-    data <- data2tibble(data = data, row.names = "observations")
+  if (!tibble::is_tibble(data)) data <- data2tibble(data = data, row.names = "variables")
 
   # Check dataset
   dataset <- get_dataset(dataset)
 
-  # Check observations set
-  observations.set <- get_observations_set(observations.set = observations.set,
-                                           dataset = dataset)
 
 
-
-  # Get groups data
-  data.vector <- .datasets[[dataset]][["observations"]][[observations.set]] %>%
-    dplyr::pull(var = !!dplyr::enquo(which), name = "observations")
-
-
-  # Get observations
-  observations <- dplyr::pull(data, var = observations)
+  # Get variables data
+  data.vector <- .datasets[[dataset]][["variables"]]%>%
+    dplyr::pull(var = !!dplyr::enquo(which), name = "variables")
 
 
-  # Check observations and groups
-  if (any(!observations %in% names(data.vector)))
-    stop("Data does not contain all observations.")
+  # Get variables
+  variables <- dplyr::pull(data, var = variables)
 
 
-  # Remove observations
-  data.vector <- data.vector[observations]
+  # Check variables and groups
+  if (any(!variables %in% names(data.vector)))
+    stop("Data does not contain all variables.")
+
+
+  # Remove variables
+  data.vector <- data.vector[variables]
 
 
   # Use input as name for new column
@@ -79,7 +72,7 @@ include_observations_data <- function(data_, which, column.name,
 
   # Add groups
   data <- data %>%
-    dplyr::mutate(!!column.name := data.vector, .after = observations)
+    dplyr::mutate(!!column.name := data.vector, .after = variables)
 
 
 

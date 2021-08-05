@@ -1,6 +1,6 @@
 #' Return variables data
 #'
-#' @param name name of data
+#' @param which which variables data to pull
 #' @param variables (optional) vector of variables or expression
 #' @param dataset dataset
 #'
@@ -10,7 +10,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-get_variables_data <- function(name, variables, dataset) {
+get_variables_data <- function(which, variables, dataset) {
 
   # check dataset
   dataset <- get_dataset(dataset)
@@ -46,7 +46,7 @@ get_variables_data <- function(name, variables, dataset) {
 
 
   data <- .datasets[[dataset]][["variables"]] %>%
-    dplyr::pull(var = !!dplyr::enquo(name), name = 1)
+    dplyr::pull(var = !!dplyr::enquo(which), name = 1)
 
   return(data[variables])
 

@@ -25,9 +25,9 @@ collapse_rows <- function(data_, FUN = mean, by = "All", input, output) {
     list.input <- input_list[["list.input"]]
   }
 
-
-
-  if (by == "All" & !(by %in% names(data))) data <- dplyr::mutate(data, All = T)
+  # Add dummy variable for all
+  if (by == "All" & !(by %in% names(data)))
+    data <- dplyr::mutate(data, All = "all")
 
   if (!by %in% names(data)) {
 
@@ -56,6 +56,9 @@ collapse_rows <- function(data_, FUN = mean, by = "All", input, output) {
   # Combine data frames
   data <- dplyr::full_join(data0, data, by = by)
 
+  # Rename grouping column to observations
+  data <- data %>%
+    dplyr::rename("observations" := !!by)
 
   # Output name
   if (!hasArg(output)) output <- input

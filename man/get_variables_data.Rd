@@ -4,10 +4,10 @@
 \alias{get_variables_data}
 \title{Return variables data}
 \usage{
-get_variables_data(name, variables, dataset)
+get_variables_data(which, variables, dataset)
 }
 \arguments{
-\item{name}{name of data}
+\item{which}{which variables data to pull}
 
 \item{variables}{(optional) vector of variables or expression}
 

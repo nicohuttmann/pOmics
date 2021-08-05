@@ -77,13 +77,17 @@ plot_cormat_enrichment_labels <- function(cor_list, name, labels, print = T) {
 
 
   # Add p-values to branches
-  segment_data_y <- add_segment_pvalue(segment = segment_data_y, dend.enrich = cor_list[[paste0("dend.enrich_", name)]])
+  segment_data_y <- add_segment_pvalue(
+    segment = segment_data_y,
+    dend.enrich = cor_list[[paste0("dend.enrich_", name)]])
 
 
 
 
   # Indicate highest enrichment cluster
-  protein.cluster.pos <- pos_table_x[pos_table_x[, 2] %in% cor_list[[paste0("dend.enrich_", name)]][["proteins"]], 1]
+  protein.cluster.pos <-
+    pos_table_x[pos_table_x[, 2] %in%
+                  cor_list[[paste0("dend.enrich_", name)]][["proteins"]], 1]
   cluster_table <- tibble(xmin = min(protein.cluster.pos) - 0.5,
                           xmax = max(protein.cluster.pos) + 0.5,
                           ymin = min(protein.cluster.pos) - 0.5,
@@ -92,9 +96,10 @@ plot_cormat_enrichment_labels <- function(cor_list, name, labels, print = T) {
 
 
   # Define y-axis labels
-  ylabels <- get_variables_data(variables = rev(y_names),
-                               name = get_dataset_attr(which = "default_variables_labels", get_dataset()),
-                               dataset = get_dataset())
+  ylabels <- get_variables_data(
+    which = get_dataset_attr(which = "default_variables_labels", get_dataset()),
+    variables = rev(y_names),
+    dataset = get_dataset())
 
   ylabels[is.na(ylabels)] <- ""
 
@@ -112,8 +117,12 @@ plot_cormat_enrichment_labels <- function(cor_list, name, labels, print = T) {
     geom_tile() +
     geom_rect(data = cluster_table,
               aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
-              fill = NA, colour = "#cc5500", size = 4/.pt, inherit.aes = FALSE) +
-    scale_fill_gradientn("expr", values = c(0, 0.5, 1), colors = c("darkblue", "white", "darkred")) + #low = "navyblue", mid = "white", high = "red4"
+              fill = NA,
+              colour = "#cc5500",
+              size = 4/.pt,
+              inherit.aes = FALSE) +
+    scale_fill_gradientn("expr", values = c(0, 0.5, 1),
+                         colors = c("darkblue", "white", "darkred")) +
     scale_x_reverse(breaks = rev(pos_table_x$x_center),
                     #labels = pos_table_x$x,
                     #limits = axis_limits_x,
@@ -161,7 +170,8 @@ plot_cormat_enrichment_labels <- function(cor_list, name, labels, print = T) {
           plot.margin = unit(c(0, 0, 0, 0), "cm"),
           legend.position = "left") +
     scale_color_gradient(low = "#ffe670", high = "#cc5500") + #800020
-    geom_segment(aes(x = x, y = y, xend = xend, yend = yend, color = logpvalue), size = 1.5/.pt)
+    geom_segment(aes(x = x, y = y, xend = xend, yend = yend, color = logpvalue),
+                 size = 1.5/.pt)
 
 
 

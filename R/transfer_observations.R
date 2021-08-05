@@ -16,7 +16,7 @@ transfer_observations <- function(dataset) {
   .datasets[[dataset]][["observations"]] <<- tibble::lst()
   .datasets[[dataset]][["observations"]][["raw"]] <<-
     tibble::tibble(observations =
-                     coldatasets(get_raw_dataset(dataset)
+                     colnames(get_raw_dataset(dataset)
                                  [["data.frames"]][[1]])) %>%
     dplyr::mutate(All = TRUE)
 

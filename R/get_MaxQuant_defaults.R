@@ -40,10 +40,12 @@ get_MaxQuant_defaults <- function(data.type) {
                                                          "Reverse")),
     # Sites
     Sites = list(identifier = c(c("Proteins",
-                                  "Positions.within.proteins",
-                                  "id")),
+                                  "Amino.acid",
+                                  "Positions.within.proteins")),
                  data.columns = c("Proteins",
                                   "Localization.prob",
+                                  "Amino.acid",
+                                  "Positions.within.proteins",
                                   "id",
                                   "Potential.contaminant",
                                   "Reverse"))

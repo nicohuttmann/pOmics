@@ -34,10 +34,13 @@ get_variables <- function(variables, dataset) {
   } else if (length(variables) == 1 && variables == "default") {
 
     # No default
-    if (is.na(get_dataset_attr(which = "default_variables", dataset = dataset))) stop("No default variables set.")
+    if (is.na(get_dataset_attr(which = "default_variables", dataset = dataset)))
+      stop("No default variables set.")
 
-    variables.data <- get_variables_data(variables = All,
-                                         name = get_dataset_attr(which = "default_variables", dataset = dataset),
+    variables.data <-
+      get_variables_data(which = get_dataset_attr(which = "default_variables",
+                                                  dataset = dataset),
+                                         variables = All,
                                          dataset = dataset) %>%
       na.omit()
 

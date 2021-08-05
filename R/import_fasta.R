@@ -12,14 +12,15 @@
 import_fasta <- function(file, add.proteome = T, extract.all = T, replace = F) {
 
 
-  if (!hasArg(file)) file <- choose.files()
+  if (!hasArg(file)) file <- file.choose()
 
   fasta <- Biostrings::readAAStringSet(filepath = file)
 
 
   if (add.proteome) {
 
-    proteome <- sapply(X = names(fasta), FUN = function(x) strsplit_(x, "\\|")[2], USE.NAMES = F)
+    proteome <- sapply(X = names(fasta),
+                       FUN = function(x) strsplit_(x, "\\|")[2], USE.NAMES = F)
 
   taxIds <- sapply(X = names(fasta),
                    FUN = function(x)
