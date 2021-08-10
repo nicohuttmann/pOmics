@@ -1,6 +1,7 @@
 #' Imports fasta file and saves proteome
 #'
 #' @param file fasta file path
+#' @param name (optional) name to save information under
 #' @param add.proteome add all accessions of proteme
 #' @param extract.all extract all information from fasta headers
 #' @param replace replace existing databases
@@ -8,8 +9,9 @@
 #' @return
 #' @export
 #'
+#' @importFrom magrittr %>%
 #'
-import_fasta <- function(file, add.proteome = T, extract.all = T, replace = F) {
+import_fasta <- function(file, name, add.proteome = T, extract.all = T, replace = F) {
 
 
   if (!hasArg(file)) file <- file.choose()
@@ -31,15 +33,18 @@ import_fasta <- function(file, add.proteome = T, extract.all = T, replace = F) {
                    },
                    USE.NAMES = F)
 
-  taxId <- taxIds %>%
+  attr(x = proteome, which = "taxIds") <- taxIds %>%
     table %>%
     sort(decreasing = T) %>%
-    names %>%
-    first_element()
+    names()
 
 
   add_database(database = proteome,
-               id = taxId,
+               id = ifelse(hasArg(name), name, taxIds %>%
+                             table %>%
+                             sort(decreasing = T) %>%
+                             names %>%
+                             first_element()),
                type = "Proteome",
                replace = replace)
 
@@ -101,7 +106,11 @@ import_fasta <- function(file, add.proteome = T, extract.all = T, replace = F) {
 
 
     add_database(database = fasta.df,
-                 id = paste(unique(fasta.df$taxId), collapse = "_"),
+                 id = ifelse(hasArg(name), name, taxIds %>%
+                               table %>%
+                               sort(decreasing = T) %>%
+                               names %>%
+                               first_element()),
                  type = "fasta_information",
                  replace = replace)
 

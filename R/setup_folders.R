@@ -47,7 +47,7 @@ setup_folders <- function(dir, silent = F) {
 
     # Folder for raw data
     dir.create(paste0(dir, "/Data"))
-    cat("Place all your data here. You can use different folders for sets of experiments.",
+    cat("Place all your data here. You can use different folders for sets of experiments or to keep file types such as fasta files separate.",
         file = paste0(dir, "/Data/README.txt"))
 
     # Folder for RData

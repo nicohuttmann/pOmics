@@ -4,10 +4,12 @@
 \alias{import_fasta}
 \title{Imports fasta file and saves proteome}
 \usage{
-import_fasta(file, add.proteome = T, extract.all = T, replace = F)
+import_fasta(file, name, add.proteome = T, extract.all = T, replace = F)
 }
 \arguments{
 \item{file}{fasta file path}
+
+\item{name}{(optional) name to save information under}
 
 \item{add.proteome}{add all accessions of proteme}
 
