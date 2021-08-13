@@ -6,7 +6,7 @@
 #' @export
 #'
 #'
-print_code_vector_string <- function(...) {
+cat_vector_string <- function(...) {
 
     cat(paste0('c("',
            paste(..., collapse = '",\n"'),
