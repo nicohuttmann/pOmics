@@ -38,7 +38,8 @@ get_variables_data <- function(which, variables, dataset) {
 
     # if variables input is vector
     if (!vector.input) {
-      variables <- get_variables(variables = !!dplyr::enquo(variables), dataset = dataset)
+      variables <- get_variables(variables = !!dplyr::enquo(variables),
+                                 dataset = dataset)
     }
 
   }

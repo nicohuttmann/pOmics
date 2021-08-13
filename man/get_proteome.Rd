@@ -4,10 +4,10 @@
 \alias{get_proteome}
 \title{Returns all proteome accession numbers of given sepcies}
 \usage{
-get_proteome(taxId, dataset)
+get_proteome(id, dataset)
 }
 \arguments{
-\item{taxId}{taxonomy identifier}
+\item{id}{id of proteome}
 
 \item{dataset}{dataset}
 }

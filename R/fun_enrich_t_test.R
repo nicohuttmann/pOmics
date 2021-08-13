@@ -1,8 +1,7 @@
 #' Functional enrichment of t.test results
 #'
 #' @param data_ list or tibble
-#' @param pValueThreshold threshold for t.test p-value
-#' @param log2fcThreshold abs. threshold for log2 fold-change
+#' @param ... additional arguments to fun_enrich
 #' @param view view results
 #' @param dataset dataset
 #' @param input name of input data
@@ -12,7 +11,12 @@
 #' @export
 #'
 #'
-fun_enrich_t.test <- function(data_, pValueThreshold = 0.05, log2fcThreshold = 0, ..., view = F, dataset, input = "data_t.test", output = "fun_enrich_t.test") {
+fun_enrich_t.test <- function(data_,
+                              ...,
+                              view = F,
+                              dataset,
+                              input = "data_t.test",
+                              output = "fun_enrich_t.test") {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -32,25 +36,21 @@ fun_enrich_t.test <- function(data_, pValueThreshold = 0.05, log2fcThreshold = 0
 
   data_fun_enrich[["up"]] <- fun_enrich(
     proteins = data %>%
-      dplyr::filter(p.adjust < pValueThreshold) %>%
-      dplyr::filter(log2.fc > log2fcThreshold) %>%
+      dplyr::filter(regulated == "up") %>%
       pull("variables"),
     background = data %>%
       pull("variables"),
     view = view,
-    ...
-  )
+    ...)
 
   data_fun_enrich[["down"]] <- fun_enrich(
     proteins = data %>%
-      dplyr::filter(p.adjust < pValueThreshold) %>%
-      dplyr::filter(log2.fc < log2fcThreshold) %>%
+      dplyr::filter(regulated == "down") %>%
       pull("variables"),
     background = data %>%
       pull("variables"),
     view = view,
-    ...
-  )
+    ...)
 
   #barplot(data_fun_enrich[["down"]][["KEGG"]])
 

@@ -6,8 +6,6 @@
 \usage{
 fun_enrich_t.test(
   data_,
-  pValueThreshold = 0.05,
-  log2fcThreshold = 0,
   ...,
   view = F,
   dataset,
@@ -18,9 +16,7 @@ fun_enrich_t.test(
 \arguments{
 \item{data_}{list or tibble}
 
-\item{pValueThreshold}{threshold for t.test p-value}
-
-\item{log2fcThreshold}{abs. threshold for log2 fold-change}
+\item{...}{additional arguments to fun_enrich}
 
 \item{view}{view results}
 

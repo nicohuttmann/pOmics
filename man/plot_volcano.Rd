@@ -2,39 +2,96 @@
 % Please edit documentation in R/plot_volcano.R
 \name{plot_volcano}
 \alias{plot_volcano}
-\title{Plot volcano plot with plotly}
+\title{Plots a volcano plot with ggplot2}
 \usage{
 plot_volcano(
-  data,
-  markers = "default",
-  size = 4,
-  opacity = 0.8,
-  axis.title.x = "log2 fold-change",
-  axis.title.y = "-log10 p-value",
-  add.protein.function = F,
-  print = T
+  data_,
+  color = "regulated",
+  p.value.cutoff = 0.05,
+  pos.log2fc.cutoff = 0,
+  neg.log2fc.cutoff = 0,
+  highlight.variables = NULL,
+  highlight.color = "black",
+  x.axis.title = "log2 fold-change",
+  y.axis.title = "-log10(p-value)",
+  text.size = 6,
+  text.color = "black",
+  point.size = 2,
+  point.alpha = 0.8,
+  highlight.point.size = 3,
+  highlight.point.alpha = 0.8,
+  x.axis.breaks = 1,
+  y.axis.breaks = 1,
+  axis.line.size = 0.5,
+  axis.color = "black",
+  axis.ticks.size = 0.3,
+  axis.title.size = 8,
+  axis.text.size = 6,
+  aspect.ratio = 0.8,
+  use.plotly,
+  view = T,
+  input = "data_t.test",
+  output = "plot_t.test"
 )
 }
 \arguments{
-\item{data}{ttest data frame}
+\item{data_}{data_}
 
-\item{markers}{specific proteins to highlight}
+\item{color}{column for color of points}
 
-\item{size}{size of dots}
+\item{p.value.cutoff}{p-value limit for coloring}
 
-\item{opacity}{opacity of dots}
+\item{pos.log2fc.cutoff}{positive log2 fold-change limit for coloring}
 
-\item{axis.title.x}{x-axis title}
+\item{neg.log2fc.cutoff}{negative log2 fold-change limit for coloring}
 
-\item{axis.title.y}{y-axis title}
+\item{highlight.variables}{variables to highlight by point.size}
 
-\item{add.protein.function}{add protein function as hover information}
+\item{highlight.color}{color to use to highlight proteins}
 
-\item{print}{print plot to device}
+\item{x.axis.title}{title of x-axis}
+
+\item{y.axis.title}{title of y-axis}
+
+\item{text.size}{size of text in points (5-8)}
+
+\item{text.color}{color of text}
+
+\item{point.size}{point size (0.5-2)}
+
+\item{point.alpha}{transparency (0-1)}
+
+\item{highlight.point.size}{size of point of highlighted variables}
+
+\item{highlight.point.alpha}{transparency of points to be highlighted}
+
+\item{x.axis.breaks}{break size between ticks of x-axis}
+
+\item{y.axis.breaks}{break size between ticks of y-axis}
+
+\item{axis.line.size}{width of axes lines}
+
+\item{axis.color}{color of axes lines}
+
+\item{axis.ticks.size}{width of axis ticks}
+
+\item{axis.title.size}{size of axis title}
+
+\item{axis.text.size}{size of axis labels}
+
+\item{aspect.ratio}{y/x ratio}
+
+\item{use.plotly}{make interactive plots with ggplotly() (default: T if html document)}
+
+\item{view}{view plot}
+
+\item{input}{name of input data}
+
+\item{output}{name of output data}
 }
 \value{
 
 }
 \description{
-Plot volcano plot with plotly
+Plots a volcano plot with ggplot2
 }

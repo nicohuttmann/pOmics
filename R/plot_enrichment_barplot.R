@@ -39,7 +39,8 @@ plot_enrichment_barplot <- function(data, x = "Count", color = "p.adjust", showC
                font.size = font.size,
                title = title,
                label_format = label_format) +
-    theme_hjv_half_open(font_size = font.size)
+    theme_hjv_half_open(font_size = font.size) +
+    ggplot2::xlab(x)
 
   if (inverse) p <- p + scale_x_reverse() + scale_y_discrete(position = "right") + theme(legend.position = "left")
 

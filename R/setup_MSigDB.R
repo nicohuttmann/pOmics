@@ -1,19 +1,22 @@
 #' Downloads and prepares MSigDB annotations
 #'
 #' @param dataset dataset
-#' @param category categories to extract for enrichment
 #'
 #' @return
 #' @export
 #'
 #'
-setup_MSigDB <- function(dataset, category) {
+setup_msigdb <- function(dataset,
+                         keep.loaded = F,
+                         save = T,
+                         dir = "Data/Databases/") {
 
   # Get dataset
   dataset <- get_dataset(dataset)
 
   # Get scientific_name to load database
-  scientific_name <- get_dataset_attr(which = "scientific_name", dataset = dataset)
+  scientific_name <- get_dataset_attr(which = "scientific_name",
+                                      dataset = dataset)
 
   # Get taxId
   taxId <- get_dataset_attr(which = "taxId", dataset = dataset)
@@ -36,20 +39,51 @@ setup_MSigDB <- function(dataset, category) {
 
   }
 
-  add_database(database = msigdbr::msigdbr(species = scientific_name),
-               id = taxId,
-               type = "MSigDB",
-               replace = T)
+  # Retrieve database
+  msigdb <- msigdbr::msigdbr(species = scientific_name)
 
 
+  # Keep database loaded in R
+  if(keep.loaded) {
 
-  if (hasArg(categories)) {
+    for (i in sort(unique(dplyr::pull(msigdb, gs_cat)))) {
 
+      add_database(database = dplyr::filter(msigdb, gs_cat == !!i),
+                   id = i,
+                   type = paste0("MSigDB_", taxId),
+                   replace = T)
 
+    }
+
+    message("MSigDB loaded.")
 
   }
 
+  #
+  if (save) {
 
+    # Check folder
+    if (!dir.exists(dir)) {
+      dir.create(dir, recursive = T)
+    }
 
+    # Write
+    for (i in sort(unique(dplyr::pull(msigdb, gs_cat)))) {
+
+      vroom::vroom_write(x = dplyr::filter(msigdb, gs_cat == !!i),
+                         file = paste0("Data/Databases/MSigDB_",
+                                       taxId,
+                                       "_",
+                                       i,
+                                       ".tsv.gz"),
+                         progress = F)
+    }
+
+    message("MSigDB saved in ", dir, ".")
+
+  }
+
+  # Return
+  return(invisible(TRUE))
 
 }

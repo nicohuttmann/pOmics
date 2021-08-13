@@ -27,7 +27,7 @@ fun_enrich(
 
 \item{pvalueCutoff}{p-value cutoff for annotations}
 
-\item{pAdjustMethod}{one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"#' @param qvalueCutoff q-value cutoff for annotations}
+\item{pAdjustMethod}{one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"}
 
 \item{minGSSize}{minimum number of proteins for annotation to be used for enrichment}
 
@@ -40,6 +40,8 @@ fun_enrich(
 \item{dataset}{dataset}
 
 \item{view}{View results}
+
+\item{qvalueCutoff}{q-value cutoff for annotations}
 
 \item{threshold}{p-value/confidence threshold to exclude terms}
 }

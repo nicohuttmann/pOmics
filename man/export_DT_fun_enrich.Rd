@@ -4,12 +4,10 @@
 \alias{export_DT_fun_enrich}
 \title{Formats table for nice output (R Markdown)}
 \usage{
-export_DT_fun_enrich(data, dataset)
+export_DT_fun_enrich(data)
 }
 \arguments{
-\item{data}{enrichResult}
-
-\item{dataset}{dataset}
+\item{data}{data from fun_enrich (enrichResult)}
 }
 \value{
 

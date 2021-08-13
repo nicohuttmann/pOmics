@@ -17,9 +17,9 @@
 #'
 #' @import ggplot2
 #'
-plot_gg_bar_composition <- function(data_, TERMS = "mitochondrion", color, xlab = "Fraction of Proteins", ylab = "",
-                                    legend.name = "", legend.position = "right", aspect.ratio = 1, view = T,
-                                    input = "data_annotation_composition", output = "plot_annotation_composition") {
+plot_bar_composition <- function(data_, TERMS = "mitochondrion", color, xlab = "Fraction of Proteins", ylab = "",
+                                 legend.name = "", legend.position = "right", aspect.ratio = 1, view = T,
+                                 input = "data_annotation_composition", output = "plot_annotation_composition") {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)

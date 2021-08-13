@@ -13,8 +13,14 @@
 #' @export
 #'
 #'
-do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 10, maxGSSize = 500,
-                        dataset, view = F) {
+do_ORA_KEGG <- function(proteins,
+                        pvalueCutoff = 0.05,
+                        pAdjustMethod = "none",
+                        qvalueCutoff = 0.2,
+                        minGSSize = 10,
+                        maxGSSize = 500,
+                        dataset,
+                        view = F) {
 
   # Get dataset
   dataset <- get_dataset(dataset)
@@ -41,7 +47,17 @@ do_ORA_KEGG <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", q
                                               maxGSSize = maxGSSize)
 
   # If enrichment failed
-  if (is.null(kegg.results)) return(NULL)
+  # if (is.null(kegg.results)) return(
+  #   new("enrichResult",
+  #       result = data.frame(ID = character(),
+  #                           Description = character(),
+  #                           GeneRatio = character(),
+  #                           BgRatio = character(),
+  #                           pvalue = double(),
+  #                           p.adjust = double(),
+  #                           qvalue = double(),
+  #                           geneID = character(),
+  #                           Count = double())))
 
   # # Prepare results data
   # results <- tibble::as_tibble(kegg.results@result) %>%

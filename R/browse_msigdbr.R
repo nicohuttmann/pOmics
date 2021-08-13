@@ -7,10 +7,12 @@
 #'
 #'
 browse_msigdbr <- function(names = "MODULE_212") {
-  
-  # 
-  for (i in name) {
-    browseURL(paste0("https://www.gsea-msigdb.org/gsea/msigdb/", i))
+
+  #
+  for (i in names) {
+    browseURL(paste0("https://www.gsea-msigdb.org/gsea/msigdb/cards/",
+                     i,
+                     ".html"))
   }
-  
+
 }

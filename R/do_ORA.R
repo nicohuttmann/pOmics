@@ -17,6 +17,9 @@
 do_ORA <- function(proteins, database, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 10,
                    maxGSSize = 500, algorithm = "classic", dataset) {
 
+  # Check if any significant proteins are present
+  if (sum(proteins) == 0) return(NULL)
+
   # Gene Ontology
   if (database %in% c("CC", "BP", "MF")) results <- do_ORA_GO(proteins = proteins,
                                                               pvalueCutoff = pvalueCutoff,

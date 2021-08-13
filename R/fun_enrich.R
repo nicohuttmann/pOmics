@@ -4,7 +4,8 @@
 #' @param background (optional) background genes
 #' @param database database(s) to use
 #' @param pvalueCutoff p-value cutoff for annotations
-#' @param pAdjustMethod one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"#' @param qvalueCutoff q-value cutoff for annotations
+#' @param pAdjustMethod one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"
+#' @param qvalueCutoff q-value cutoff for annotations
 #' @param minGSSize minimum number of proteins for annotation to be used for enrichment
 #' @param maxGSSize maximum number of proteins for annotation to be used for enrichment
 #' @param inverse scores: enriches for higher scores if TRUE
@@ -17,8 +18,17 @@
 #' @export
 #'
 #'
-fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutoff = 0.05, pAdjustMethod = "none",
-                       minGSSize = 10, maxGSSize = 500, inverse = F, algorithm = "classic", dataset, view = T) {
+fun_enrich <- function(proteins,
+                       background = NULL,
+                       database = "GO",
+                       pvalueCutoff = 0.05,
+                       pAdjustMethod = "none",
+                       minGSSize = 10,
+                       maxGSSize = 500,
+                       inverse = F,
+                       algorithm = "classic",
+                       dataset,
+                       view = T) {
 
 
 
@@ -84,37 +94,50 @@ fun_enrich <- function(proteins, background = NULL, database = "GO", pvalueCutof
   #databases <- databases[databases %in% .info[["Functional enrichment databases"]]]
 
   # Prepare list
-  list.enrichment <- tibble::lst()
+  list.enrichment <- nulllist(n = length(database))
+
+  names(list.enrichment) <- database
 
   for (db in database) {
     # Single Fisher's exact test
-    if (is.logical(allProteins)) list.enrichment[[db]] <- do_ORA(proteins = ifelse(allProteins, 1, 0),
-                                                                 database = db,
-                                                                 pvalueCutoff = pvalueCutoff,
-                                                                 pAdjustMethod = pAdjustMethod,
-                                                                 minGSSize = minGSSize,
-                                                                 maxGSSize = maxGSSize,
-                                                                 algorithm = algorithm,
-                                                                 dataset = dataset)
+    if (is.logical(allProteins)) dummy <-
+        do_ORA(proteins = ifelse(allProteins, 1, 0),
+               database = db,
+               pvalueCutoff = pvalueCutoff,
+               pAdjustMethod = pAdjustMethod,
+               minGSSize = minGSSize,
+               maxGSSize = maxGSSize,
+               algorithm = algorithm,
+               dataset = dataset)
+
+    if (!is.null(dummy)) list.enrichment[[db]] <- dummy
+
     # Multiple fisher's exact test
-    else if (is.character(allProteins)) list.enrichment[[db]] <- do_ORA_groups(proteins = allProteins,
-                                                                               database = db,
-                                                                               pvalueCutoff = pvalueCutoff,
-                                                                               pAdjustMethod = pAdjustMethod,
-                                                                               minGSSize = minGSSize,
-                                                                               maxGSSize = maxGSSize,
-                                                                               algorithm = algorithm,
-                                                                               dataset = dataset)
+    else if (is.character(allProteins)) dummy <-
+        do_ORA_groups(proteins = allProteins,
+                      database = db,
+                      pvalueCutoff = pvalueCutoff,
+                      pAdjustMethod = pAdjustMethod,
+                      minGSSize = minGSSize,
+                      maxGSSize = maxGSSize,
+                      algorithm = algorithm,
+                      dataset = dataset)
+
+    if (!is.null(dummy)) list.enrichment[[db]] <- dummy
+
     # Kolmogorov-Smirnov test
-    else if (is.numeric(allProteins)) list.enrichment[[db]] <- do_GSEA(proteins = allProteins,
-                                                                       database = db,
-                                                                       inverse = inverse,
-                                                                       pvalueCutoff = pvalueCutoff,
-                                                                       pAdjustMethod = pAdjustMethod,
-                                                                       minGSSize = minGSSize,
-                                                                       maxGSSize = maxGSSize,
-                                                                       algorithm = algorithm,
-                                                                       dataset = dataset)
+    else if (is.numeric(allProteins)) dummy <-
+        do_GSEA(proteins = allProteins,
+                database = db,
+                inverse = inverse,
+                pvalueCutoff = pvalueCutoff,
+                pAdjustMethod = pAdjustMethod,
+                minGSSize = minGSSize,
+                maxGSSize = maxGSSize,
+                algorithm = algorithm,
+                dataset = dataset)
+
+    if (!is.null(dummy)) list.enrichment[[db]] <- dummy
 
   }
 
