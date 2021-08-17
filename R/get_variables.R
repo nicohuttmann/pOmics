@@ -1,4 +1,4 @@
-#' Return variables data
+#' Return variables
 #'
 #' @param variables vector of variables
 #' @param dataset dataset
@@ -38,9 +38,9 @@ get_variables <- function(variables, dataset) {
       stop("No default variables set.")
 
     variables.data <-
-      get_variables_data(which = get_dataset_attr(which = "default_variables",
+      get_variables_data(variables = All,
+                         which = get_dataset_attr(which = "default_variables",
                                                   dataset = dataset),
-                                         variables = All,
                                          dataset = dataset) %>%
       na.omit()
 
@@ -59,3 +59,17 @@ get_variables <- function(variables, dataset) {
 
 
 }
+
+#' Return variables
+#'
+#' @param variables vector of variables
+#' @param dataset dataset
+#'
+#' @return
+#' @export
+#'
+#' @importFrom magrittr %>%
+#'
+#'
+
+get_var <- get_variables

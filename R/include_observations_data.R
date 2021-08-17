@@ -14,9 +14,13 @@
 #' @importFrom magrittr %>%
 #'
 #'
-include_observations_data <- function(data_, which, column.name,
+include_observations_data <- function(data_,
+                                      which,
+                                      column.name,
                                       observations.set,
-                                      dataset, input, output) {
+                                      dataset,
+                                      input,
+                                      output) {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)

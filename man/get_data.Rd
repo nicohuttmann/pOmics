@@ -5,9 +5,9 @@
 \title{Assemble data from dataset and return in list}
 \usage{
 get_data(
-  which,
   variables = "default",
   observations = "default",
+  which,
   output,
   output.type = "list",
   observations.set,
@@ -15,11 +15,11 @@ get_data(
 )
 }
 \arguments{
-\item{which}{specific name of data type}
-
 \item{variables}{selected variables}
 
 \item{observations}{selected observations}
+
+\item{which}{specific name of data type}
 
 \item{output}{name to save in list}
 

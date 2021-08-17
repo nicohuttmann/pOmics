@@ -97,8 +97,8 @@ plot_cormat_enrichment_labels <- function(cor_list, name, labels, print = T) {
 
   # Define y-axis labels
   ylabels <- get_variables_data(
-    which = get_dataset_attr(which = "default_variables_labels", get_dataset()),
     variables = rev(y_names),
+    which = get_dataset_attr(which = "default_variables_labels", get_dataset()),
     dataset = get_dataset())
 
   ylabels[is.na(ylabels)] <- ""

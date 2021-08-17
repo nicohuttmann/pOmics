@@ -1,8 +1,8 @@
 #' Assemble data from dataset and return in list
 #'
-#' @param which specific name of data type
 #' @param variables selected variables
 #' @param observations selected observations
+#' @param which specific name of data type
 #' @param output name to save in list
 #' @param output.type output type ("list" (default), "tibble", "data.frame", "matrix")
 #' @param observations.set set of observations
@@ -12,8 +12,13 @@
 #' @export
 #'
 #'
-get_data <- function(which, variables = "default", observations = "default", output, output.type = "list",
-                      observations.set, dataset) {
+get_data <- function(variables = "default",
+                     observations = "default",
+                     which,
+                     output,
+                     output.type = "list",
+                     observations.set,
+                     dataset) {
 
   # Checks correct name of dataset
   dataset <- get_dataset(dataset)

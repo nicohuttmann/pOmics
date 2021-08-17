@@ -15,6 +15,8 @@ put_data(
 )
 }
 \arguments{
+\item{data_}{data_ list}
+
 \item{which}{specific name of data type}
 
 \item{variables}{selected variables}

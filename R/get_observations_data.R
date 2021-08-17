@@ -1,7 +1,7 @@
 #' Return observations data
 #'
-#' @param which which observations data to pull
 #' @param observations (optional) vector of observations or expression
+#' @param which which observations data to pull
 #' @param observations.set observations data frame
 #' @param dataset dataset
 #'
@@ -11,7 +11,9 @@
 #' @importFrom magrittr %>%
 #'
 #'
-get_observations_data <- function(which, observations, observations.set,
+get_observations_data <- function(observations,
+                                  which,
+                                  observations.set,
                                   dataset) {
 
   # check dataset
@@ -59,3 +61,18 @@ get_observations_data <- function(which, observations, observations.set,
   return(data[observations])
 
 }
+
+#' Return observations data
+#'
+#' @param which which observations data to pull
+#' @param observations (optional) vector of observations or expression
+#' @param observations.set observations data frame
+#' @param dataset dataset
+#'
+#' @return
+#' @export
+#'
+#' @importFrom magrittr %>%
+#'
+#'
+get_obs_data <- get_observations_data

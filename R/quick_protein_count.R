@@ -19,15 +19,15 @@ quick_protein_count <- function(variables, observations, observations.set, datas
 
   observations <- get_observations({{observations}}, observations.set, dataset)
 
-  return(get_data(which = "Peptides",
-                  variables = variables,
-                  observations = observations,
+  return(get_data(variables = variables,
+                  observations = observations,which = "Peptides",
+
                   observations.set = observations.set,
                   dataset = dataset) %>%
     eval_data(expr = x > 0, input = "Peptides") %>%
-    put_data(which = "LFQ.intensity",
-             variables = variables,
-             observations = observations,
+    put_data(variables = variables,
+             observations = observations,which = "LFQ.intensity",
+
              observations.set = observations.set,
              dataset = dataset) %>%
     eval_data(expr = x > 0, input = "LFQ.intensity") %>%

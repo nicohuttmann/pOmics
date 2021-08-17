@@ -75,7 +75,7 @@ do_hclust_fun_enrich <- function(data_, max.k = 8, simplify = F, database = "BP"
                                          "mitochondrion",
                                          "carboxylic acid metabolic process"),
                                TERM2GENE,
-                               observations.order = get_observations_data(groups) %>% unique() %>% as.character(),
+                               observations.order = get_observations_data(which = groups) %>% unique() %>% as.character(),
 
                                label.proteins = F,
                                label.observations = T,

@@ -13,6 +13,12 @@ g2p <- function(genes, dataset) {
   dataset <- get_dataset(dataset)
 
   # Return (sorry about the function)
-  return(names(get_variables_data(which = "GENES", dataset = dataset))[match(genes, get_variables_data(which = "GENES", dataset = dataset))])
+  return(
+    names(
+      get_variables_data(
+        which = "GENES",
+        dataset = dataset))[match(genes,
+                                  get_variables_data(which = "GENES",
+                                                     dataset = dataset))])
 
 }

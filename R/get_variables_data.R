@@ -1,7 +1,7 @@
 #' Return variables data
 #'
-#' @param which which variables data to pull
 #' @param variables (optional) vector of variables or expression
+#' @param which which variables data to pull
 #' @param dataset dataset
 #'
 #' @return
@@ -10,7 +10,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-get_variables_data <- function(which, variables, dataset) {
+get_variables_data <- function(variables, which, dataset) {
 
   # check dataset
   dataset <- get_dataset(dataset)
@@ -52,3 +52,18 @@ get_variables_data <- function(which, variables, dataset) {
   return(data[variables])
 
 }
+
+#' Return variables data
+#'
+#' @param which which variables data to pull
+#' @param variables (optional) vector of variables or expression
+#' @param dataset dataset
+#'
+#' @return
+#' @export
+#'
+#' @importFrom magrittr %>%
+#'
+#'
+get_var_data <- get_variables_data
+

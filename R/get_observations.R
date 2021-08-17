@@ -1,4 +1,4 @@
-#' Return observations data
+#' Return observations
 #'
 #' @param observations vector of observations
 #' @param observations.set observations data frame
@@ -43,9 +43,13 @@ get_observations <- function(observations, observations.set, dataset) {
       stop("No default observations set.")
 
     observations.data <-
-      get_observations_data(which = get_dataset_attr(
-        which = "default_observations", dataset = dataset),
+      get_observations_data(
         observations = All,
+        which =
+          get_dataset_attr(
+            which = "default_observations",
+            dataset = dataset),
+        observations.set = observations.set,
         dataset = dataset) %>%
       na.omit()
 
@@ -64,3 +68,17 @@ get_observations <- function(observations, observations.set, dataset) {
 
 
 }
+
+#' Return observations
+#'
+#' @param observations vector of observations
+#' @param observations.set observations data frame
+#' @param dataset dataset
+#'
+#' @return
+#' @export
+#'
+#' @importFrom magrittr %>%
+#'
+#'
+get_obs <- get_observations

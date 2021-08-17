@@ -28,7 +28,9 @@ translate_Ids <- function(Ids, fromType = "UNIPROT", toType, OrgDb, dataset, dro
   dataset <- get_dataset(dataset, try.all = T)
 
   # Given toType and saved variables data column
-  if (hasArg(toType) && toType %in% get_variables_data_names(dataset) && fromType %in% get_variables_data_names(dataset)) {
+  if (hasArg(toType) &&
+      toType %in% get_variables_data_names(dataset) &&
+      fromType %in% get_variables_data_names(dataset)) {
 
     return(pull_variables_data(name = toType,
                                variables = Ids,

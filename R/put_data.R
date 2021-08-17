@@ -1,5 +1,6 @@
 #' Assemble data from dataset and return in list
 #'
+#' @param data_ data_ list
 #' @param which specific name of data type
 #' @param variables selected variables
 #' @param observations selected observations
@@ -11,8 +12,13 @@
 #' @export
 #'
 #'
-put_data <- function(data_, which, variables = "default", observations = "default", observations.set, dataset,
-                      output) {
+put_data <- function(data_,
+                     which,
+                     variables = "default",
+                     observations = "default",
+                     observations.set,
+                     dataset,
+                     output) {
 
   # Check input
   if (!hasArg(data_) || !is.list(data_)) stop("No list given to which data can be added.")

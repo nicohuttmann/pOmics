@@ -17,8 +17,9 @@ summary_proteins <- function(proteins, sort.names = F, view = T) {
   if (is.vector(proteins)) table <- tibble::tibble(Protein = proteins)
 
   # Matrix
-  else if (is.matrix(proteins)) table <- tibble::tibble(Protein = rownames(proteins),
-                                                        tibble::as_tibble(proteins))
+  else if (is.matrix(proteins)) table <-
+      tibble::tibble(Protein = rownames(proteins),
+                     tibble::as_tibble(proteins))
 
   # Tibble
   else if (tibble::is_tibble(proteins)) table <- proteins %>%
@@ -26,9 +27,12 @@ summary_proteins <- function(proteins, sort.names = F, view = T) {
 
   # Add gene and protein names
   table <- table %>%
-    dplyr::mutate(Gene = get_variables_data("GENES", Protein)) %>%
-    dplyr::mutate(Name = get_variables_data("PROTEIN-NAMES", Protein)) %>%
-    dplyr::mutate(dplyr::across(where(is.numeric), function(x) {signif(x = x, digits = 3)}))
+    dplyr::mutate(Gene = get_variables_data(variables = Protein,
+                                            which = "GENES")) %>%
+    dplyr::mutate(Name = get_variables_data(variables = Protein,
+                                            which = "PROTEIN-NAMES")) %>%
+    dplyr::mutate(dplyr::across(where(is.numeric),
+                                function(x) {signif(x = x, digits = 3)}))
 
   # sort
   if (sort.names) {
