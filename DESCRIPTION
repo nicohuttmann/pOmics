@@ -20,6 +20,7 @@ Imports:
     disgenet2r,
     fastcluster,
     ggdendro,
+    ggplot2,
     GOSemSim,
     reshape2,
     tidyverse,

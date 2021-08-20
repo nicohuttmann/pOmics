@@ -22,7 +22,7 @@ select2output <- function(output.data, keys, output, dataset, ...) {
 
     output.data[is.na(output.data[, 2]), 2] <- output.data[is.na(output.data[, 2]), 1]
 
-    output.data <- data2vector(output.data)
+    output.data <- pull_data(output.data)
 
     output.data <- output.data[keys]
 
@@ -33,7 +33,7 @@ select2output <- function(output.data, keys, output, dataset, ...) {
 
     output.data <- output.data[!duplicated(output.data[, 1]), ]
 
-    output.data <- data2vector(output.data)
+    output.data <- pull_data(output.data)
 
     output.data <- output.data[keys]
 
@@ -46,7 +46,7 @@ select2output <- function(output.data, keys, output, dataset, ...) {
 
     output.data <- output.data[!duplicated(output.data[, 1]), ]
 
-    output.data <- data2vector(output.data)
+    output.data <- pull_data(output.data)
 
     output.data <- output.data[intersect(keys, names(output.data))]
 

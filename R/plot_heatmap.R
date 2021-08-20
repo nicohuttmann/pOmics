@@ -37,16 +37,36 @@
 #' @import ggplot2
 #' @importFrom magrittr %>%
 #'
-plot_heatmap <- function(data_, transpose = F, protein.label.FUN = p2g, observation.labels,
-                         labels_x = T, labels_y = F, dend_x = T, dend_y = T, annot_layer_x, annot_layer_y, legends,
+plot_heatmap <- function(data_,
+                         transpose = F,
+                         protein.label.FUN = p2g,
+                         observation.labels,
+                         labels_x = T,
+                         labels_y = F,
+                         dend_x = T,
+                         dend_y = T,
+                         annot_layer_x,
+                         annot_layer_y,
+                         legends,
                          ratio = 3,
-                         rel_dend_x = 0.1, rel_dend_y = 0.2, rel_labels_x = 0.2, rel_labels_y = 0.2,
-                         rel_annot_layer_x = 0.05, rel_annot_layer_y = 0.1,
-                         rel_legends = 0.25, rel_legends_space = 0.05,
+                         rel_dend_x = 0.1,
+                         rel_dend_y = 0.2,
+                         rel_labels_x = 0.2,
+                         rel_labels_y = 0.2,
+                         rel_annot_layer_x = 0.05,
+                         rel_annot_layer_y = 0.1,
+                         rel_legends = 0.25,
+                         rel_legends_space = 0.05,
                          axis.text.x.angle = 45,
-                         annotation.colors = list(), heatmap.legend.title = "",
-                         export = F, height = 6, dataset, file = "heatmap.pdf", view = T,
-                         input = "data_hclust", output = "plot_hclust") {
+                         annotation.colors = list(),
+                         heatmap.legend.title = "",
+                         export = F,
+                         height = 6,
+                         dataset,
+                         file = "heatmap.pdf",
+                         view = T,
+                         input = "data_hclust",
+                         output = "plot_hclust") {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)

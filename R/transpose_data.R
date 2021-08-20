@@ -10,7 +10,7 @@
 #' @export
 #'
 #'
-transpose_data <- function(data_, from.row.names = "observations", to.row.names = "variables", input, output) {
+transpose_data <- function(data_, from.row.names, to.row.names, input, output) {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -23,6 +23,20 @@ transpose_data <- function(data_, from.row.names = "observations", to.row.names 
     list.input <- input_list[["list.input"]]
   }
 
+
+  # Determine from rownames
+  if (!hasArg(from.row.names)) from.row.names <- colnames(data)[1]
+
+  # Determine to.row.names
+  if (!hasArg(to.row.names)) {
+    if (from.row.names == "observations") {
+      to.row.names <- "variables"
+    } else if (from.row.names == "variabels") {
+      to.row.names <- "observations"
+    } else {
+      to.row.names <- "names"
+    }
+  }
 
   # Transpose data
   data <- transpose_tibble(tibble = data,

@@ -8,7 +8,7 @@
 #'
 #' @importFrom magrittr %>%
 #'
-data_frame2tibble <- function(data.frame, row.names = "observations") {
+data.frame2tibble <- function(data.frame, row.names = "observations") {
 
   # Transform and return
   return(data.frame %>%

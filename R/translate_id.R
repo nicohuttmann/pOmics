@@ -32,10 +32,10 @@ translate_Ids <- function(Ids, fromType = "UNIPROT", toType, OrgDb, dataset, dro
       toType %in% get_variables_data_names(dataset) &&
       fromType %in% get_variables_data_names(dataset)) {
 
-    return(pull_variables_data(name = toType,
-                               variables = Ids,
-                               dataset = dataset,
-                               vector.names = fromType))
+    return(pull_variables_data(variables = Ids,
+                               which = toType,
+                               names = fromType,
+                               dataset = dataset))
 
   }
 
@@ -59,10 +59,10 @@ translate_Ids <- function(Ids, fromType = "UNIPROT", toType, OrgDb, dataset, dro
   # Check again if toType exists in variables data
   if (toType %in% get_variables_data_names(dataset) && fromType %in% get_variables_data_names(dataset)) {
 
-    return(pull_variables_data(name = toType,
-                               variables = Ids,
-                               dataset = dataset,
-                               vector.names = fromType))
+    return(pull_variables_data(variables = Ids,
+                               which = toType,
+                               names = fromType,
+                               dataset = dataset))
 
   }
 

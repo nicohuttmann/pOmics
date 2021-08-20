@@ -2,13 +2,12 @@
 #'
 #' @param dataset dataset
 #' @param taxId taxonomy Id
-#' @param OrgDb name of annotation package from Bioconductor
 #'
 #' @return
 #' @export
 #'
 #'
-setup_taxonomy_information <- function(dataset, taxId, OrgDb) {
+setup_taxonomy_information <- function(dataset, taxId) {
 
   # Get dataset
   dataset <- get_dataset(dataset)

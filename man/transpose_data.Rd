@@ -4,13 +4,7 @@
 \alias{transpose_data}
 \title{Transposes tibble and uses first column as column names}
 \usage{
-transpose_data(
-  data_,
-  from.row.names = "observations",
-  to.row.names = "variables",
-  input,
-  output
-)
+transpose_data(data_, from.row.names, to.row.names, input, output)
 }
 \arguments{
 \item{data_}{data_ list}

@@ -13,7 +13,8 @@
 #' @export
 #'
 #'
-plot_upset <- function(data_, order, nintersects = 10, transpose = T, from.row.names = "observations",
+plot_upset <- function(data_, order, nintersects = 10, transpose,
+                       from.row.names,
                        view = T, input, output = "plot_upset") {
 
   # Handle input
@@ -29,17 +30,22 @@ plot_upset <- function(data_, order, nintersects = 10, transpose = T, from.row.n
 
 
   # Transpose data frame
+  if (!hasArg(transpose)) {
+    if ("observations" %in% colnames(data)) {
+      transpose <- TRUE
+    } else {
+      transpose <- FALSE
+    }
+  }
+
   if (transpose) {
-
     data <- transpose_tibble(tibble = data,
-                           from.row.names = from.row.names,
-                           to.row.names = "variables")
-
+                             from.row.names = from.row.names)
   }
 
 
   # Transform dataframe to list
-  data.list <- logical_df2list(data)
+  data.list <- data2list(data)
 
 
   # Make plot

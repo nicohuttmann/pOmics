@@ -8,8 +8,8 @@ plot_upset(
   data_,
   order,
   nintersects = 10,
-  transpose = T,
-  from.row.names = "observations",
+  transpose,
+  from.row.names,
   view = T,
   input,
   output = "plot_upset"
