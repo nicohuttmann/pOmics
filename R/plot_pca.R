@@ -33,13 +33,32 @@
 #' @import ggplot2
 #' @importFrom rlang .data
 #'
-plot_pca <- function(data_, x = "PC1", y = "PC2", include.variance = T, fill.by = "observations", fill,
-                     shape.by, shape = 21, point.size = 1, point.transparency = 1,
+plot_pca <- function(data_,
+                     x = "PC1",
+                     y = "PC2",
+                     include.variance = T,
+                     fill.by = "observations",
+                     fill,
+                     shape.by,
+                     shape = 21,
+                     point.size = 1,
+                     point.transparency = 1,
                      custom.theme = theme_hjv_framed_no_axes,
-                     aspect.ratio = 1, plot.center, axis.unit.ratio, expand.x.axis = c(0, 0), expand.y.axis = c(0, 0),
-                     x.axis.breaks = 1, y.axis.breaks = 1,
-                     legend.title.fill = "", legend.title.shape = "", legend.position = "right", legend.rows,
-                     view = T, input = "data_pca", output = "plot_pca", ...) {
+                     aspect.ratio = 1,
+                     plot.center,
+                     axis.unit.ratio,
+                     expand.x.axis = c(0, 0),
+                     expand.y.axis = c(0, 0),
+                     x.axis.breaks = 1,
+                     y.axis.breaks = 1,
+                     legend.title.fill = "",
+                     legend.title.shape = "",
+                     legend.position = "right",
+                     legend.rows,
+                     view = T,
+                     input = "data_pca",
+                     output = "plot_pca",
+                     ...) {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -52,6 +71,11 @@ plot_pca <- function(data_, x = "PC1", y = "PC2", include.variance = T, fill.by 
     list.input <- input_list[["list.input"]]
   }
 
+
+  #
+  if (!hasArg(fill.by) || !(fill.by %in% names(data))) {
+    fill.by <- NA
+  }
 
 
   groups <- unique(data[[fill.by]])
@@ -75,9 +99,9 @@ plot_pca <- function(data_, x = "PC1", y = "PC2", include.variance = T, fill.by 
 
   }
 
-  if (!hasArg(shape.by) & length(shape) != length(groups)) {
+  if (!hasArg(shape.by) && length(shape) != length(groups)) {
 
-    shape <- rep(shape[1], length(groups))
+    shape <- rep(shapes[1], length(groups))
 
     names(shape) <- groups
 
@@ -90,22 +114,28 @@ plot_pca <- function(data_, x = "PC1", y = "PC2", include.variance = T, fill.by 
   if (!hasArg(legend.rows)) legend.rows <- length(groups)
 
 
-  p <- ggplot(data, aes(x = .data[[x]], y = .data[[y]], color = .data[[fill.by]],
-                        shape = .data[[ifelse(hasArg(shape.by), shape.by, fill.by)]])) +
+  p <- ggplot(data, aes(x = .data[[x]],
+                        y = .data[[y]],
+                        color = .data[[fill.by]],
+                        shape = .data[[ifelse(hasArg(shape.by),
+                                              shape.by, fill.by)]])) +
     geom_point(size = point.size, alpha = point.transparency) +
     custom.theme() +
     theme(legend.position = legend.position) +
     scale_color_manual(values = fill) +
     scale_shape_manual(values = shape) +
-    guides(color = guide_legend(title = legend.title.fill, nrow = legend.rows, byrow = FALSE),
-           shape = if(hasArg(shape.by)) guide_legend(legend.title.shape) else "none")
+    guides(color = guide_legend(title = legend.title.fill,
+                                nrow = legend.rows, byrow = FALSE),
+           shape =
+             if(hasArg(shape.by)) guide_legend(legend.title.shape)
+              else "none")
 
 
   # Set plot axes size
   p <- set_continuous_axes(p = p,
                            aspect.ratio = aspect.ratio,
-                           plot.center = plot.center,
-                           axis.unit.ratio = axis.unit.ratio,
+                           plot.center = ,
+                           axis.unit.ratio = ,
                            expand.x.axis = expand.x.axis,
                            expand.y.axis = expand.y.axis,
                            x.axis.breaks = x.axis.breaks,
@@ -116,16 +146,22 @@ plot_pca <- function(data_, x = "PC1", y = "PC2", include.variance = T, fill.by 
   if (include.variance) {
 
     p <- p +
-      xlab(paste0(x, " (", round(100 *
-                                   data_[["data_prcomp"]][["sdev"]][as.numeric(substring(x, 3))]^2 /
-                                   sum(data_[["data_prcomp"]][["sdev"]]^2),
-                                 digits = 1),
-                  "%)")) +
-      ylab(paste0(y, " (", round(100 *
-                                   data_[["data_prcomp"]][["sdev"]][as.numeric(substring(y, 3))]^2 /
-                                   sum(data_[["data_prcomp"]][["sdev"]]^2),
-                                 digits = 1),
-                  "%)"))
+      xlab(paste0(
+        x,
+        " (",
+        round(
+          100 *
+            data_[["data_prcomp"]][["sdev"]][as.numeric(substring(x, 3))]^2 /
+            sum(data_[["data_prcomp"]][["sdev"]]^2),
+          digits = 1), "%)")) +
+      ylab(paste0(
+        y,
+        " (",
+        round(
+          100 *
+            data_[["data_prcomp"]][["sdev"]][as.numeric(substring(y, 3))]^2 /
+            sum(data_[["data_prcomp"]][["sdev"]]^2),
+          digits = 1), "%)"))
 
   } else {
 
