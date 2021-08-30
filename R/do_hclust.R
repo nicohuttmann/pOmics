@@ -3,8 +3,9 @@
 #' @param data_ data list
 #' @param scale Scale data (Z-score)?
 #' @param distance.method method to calculate distance; see ?dist for options
-#' @param clustering.method method to cluster columns and rows; see ?hclust for options
-#' @param plot generate default plot with plot_gg_heatmap()
+#' @param clustering.method method to cluster columns and rows; see ?hclust for
+#' options
+#' @param plot generate default plot with plot_heatmap()
 #' @param input name of input data
 #' @param output name of output data
 #'
@@ -12,8 +13,13 @@
 #' @export
 #'
 #'
-do_hclust <- function(data_, scale = T, distance.method = "euclidean", clustering.method = "complete", plot = T,
-                      input, output = "data_hclust") {
+do_hclust <- function(data_,
+                      scale = T,
+                      distance.method = "euclidean",
+                      clustering.method = "complete",
+                      plot = T,
+                      input,
+                      output = "data_hclust") {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -28,8 +34,6 @@ do_hclust <- function(data_, scale = T, distance.method = "euclidean", clusterin
 
   # Scale data
   if (scale) data <- do_scale(data)
-
-
 
 
   # Dendrogram for x-axis (observations mostly)
@@ -48,13 +52,10 @@ do_hclust <- function(data_, scale = T, distance.method = "euclidean", clusterin
     hclust(method = clustering.method)
 
 
-
    # Save data
    data_[[output]] <- data %>%
      dplyr::arrange(match(!!dplyr::sym(colnames(.)[1]), dend_x[["labels"]][dend_x[["order"]]])) #%>%
      #dplyr::select(c(colnames(.)[1], dend_y[["labels"]][dend_y[["order"]]]))
-
-
 
 
    data_[["dend_x"]] <- data_[[output]] %>%
@@ -72,9 +73,8 @@ do_hclust <- function(data_, scale = T, distance.method = "euclidean", clusterin
      hclust(method = clustering.method)
 
 
-
    # Plot
-   if (plot) data_ <- plot_gg_heatmap(data_ = data_, export = F, input = output)
+   if (plot) data_ <- plot_heatmap(data_ = data_, export = F, input = output)
 
    # Return
    return(invisible(data_))

@@ -2,18 +2,18 @@
 % Please edit documentation in R/similarity.R
 \name{similarity}
 \alias{similarity}
-\title{calculates similarity from correlation}
+\title{Calculates similarity from correlation}
 \usage{
-similarity(data, method)
+similarity(data, method = "none")
 }
 \arguments{
 \item{data}{correlation matrix}
 
-\item{method}{similarity function}
+\item{method}{similarity function ("absolute", "preserve", "none")}
 }
 \value{
 
 }
 \description{
-calculates similarity from correlation
+Calculates similarity from correlation
 }

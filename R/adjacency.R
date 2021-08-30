@@ -1,7 +1,7 @@
-#' calculates adjacency matrix from similarity matrix
+#' Calculates adjacency matrix from similarity matrix
 #'
-#' @param data fimilarity matrix
-#' @param method adjacency function
+#' @param data similarity matrix
+#' @param method adjacency function ("sigmoid", "power", "none")
 #' @param alpha alpha parameter for sigmoid function
 #' @param theta theta parameter for sigmoid function
 #' @param beta beta parameter for power function
@@ -13,7 +13,8 @@
 adjacency <- function(data, method, alpha, theta, beta) {
 
   #
-  if (!method %in% c("sigmoid", "power", "none")) stop("Adjacency function not known")
+  if (!method %in% c("sigmoid", "power", "none"))
+  stop("Adjacency function not known. Use sigmoid, power or none.")
 
   # Set diagonal to 0
   data[col(data) == row(data)] <- 0
@@ -33,6 +34,7 @@ adjacency <- function(data, method, alpha, theta, beta) {
   } else if(method == "none") {
 
     data <- data
+
   } else {
     stop("Wrong AF name or parameter missing.")
   }

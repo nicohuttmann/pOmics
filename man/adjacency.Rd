@@ -2,14 +2,14 @@
 % Please edit documentation in R/adjacency.R
 \name{adjacency}
 \alias{adjacency}
-\title{calculates adjacency matrix from similarity matrix}
+\title{Calculates adjacency matrix from similarity matrix}
 \usage{
 adjacency(data, method, alpha, theta, beta)
 }
 \arguments{
-\item{data}{fimilarity matrix}
+\item{data}{similarity matrix}
 
-\item{method}{adjacency function}
+\item{method}{adjacency function ("sigmoid", "power", "none")}
 
 \item{alpha}{alpha parameter for sigmoid function}
 
@@ -21,5 +21,5 @@ adjacency(data, method, alpha, theta, beta)
 
 }
 \description{
-calculates adjacency matrix from similarity matrix
+Calculates adjacency matrix from similarity matrix
 }

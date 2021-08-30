@@ -21,9 +21,10 @@ do_hclust(
 
 \item{distance.method}{method to calculate distance; see ?dist for options}
 
-\item{clustering.method}{method to cluster columns and rows; see ?hclust for options}
+\item{clustering.method}{method to cluster columns and rows; see ?hclust for
+options}
 
-\item{plot}{generate default plot with plot_gg_heatmap()}
+\item{plot}{generate default plot with plot_heatmap()}
 
 \item{input}{name of input data}
 
