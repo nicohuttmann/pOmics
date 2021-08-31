@@ -28,11 +28,11 @@ plot_heatmap(
   axis.text.x.angle = 45,
   annotation.colors = list(),
   heatmap.legend.title = "",
-  export = F,
-  height = 6,
   dataset,
-  file = "heatmap.pdf",
   view = T,
+  export = F,
+  file = "heatmap.pdf",
+  height = 6,
   input = "data_hclust",
   output = "plot_hclust"
 )
@@ -54,11 +54,14 @@ plot_heatmap(
 
 \item{dend_y}{(logical) plot y-axis dendrogram}
 
-\item{annot_layer_x}{(character) data columns to be included as annotation layers on x-axis}
+\item{annot_layer_x}{(character) data columns to be included as annotation
+layers on x-axis}
 
-\item{annot_layer_y}{(character) data columns to be included as annotation layers on y-axis}
+\item{annot_layer_y}{(character) data columns to be included as annotation
+layers on y-axis}
 
-\item{legends}{name of plot elements for which a legend should be included (full names must be used, e.g. c("annot_layer_x_groups", "heatmap")}
+\item{legends}{name of plot elements for which a legend should be included
+(full names must be used, e.g. c("annot_layer_x_groups", "heatmap"))}
 
 \item{ratio}{y/x ratio of heat map}
 
@@ -70,29 +73,32 @@ plot_heatmap(
 
 \item{rel_labels_y}{relative width of y-axis labels}
 
-\item{rel_annot_layer_x}{relative height/s of x-axis annotation layers (either one number or vector with number for each)}
+\item{rel_annot_layer_x}{relative height/s of x-axis annotation layers
+(either one number or vector with number for each)}
 
-\item{rel_annot_layer_y}{relative width/s of y-axis annotation layers (either one number or vector with number for each)}
+\item{rel_annot_layer_y}{relative width/s of y-axis annotation layers
+(either one number or vector with number for each)}
 
 \item{rel_legends}{relative width of legends layer to complete heatmap}
 
-\item{rel_legends_space}{realtive space between plot and legends}
+\item{rel_legends_space}{relative space between plot and legends}
 
 \item{axis.text.x.angle}{angle of x-axis labels}
 
-\item{annotation.colors}{(optional) named list containing color vector for annotation layers}
+\item{annotation.colors}{(optional) named list containing color vector for
+annotation layers}
 
 \item{heatmap.legend.title}{title of heatmap legend}
 
-\item{export}{export plot as pdf}
-
-\item{height}{plot height in inch for export}
-
 \item{dataset}{dataset}
+
+\item{view}{print plot}
+
+\item{export}{export plot as pdf}
 
 \item{file}{file name}
 
-\item{view}{print plot}
+\item{height}{plot height in inch for export}
 
 \item{input}{input data name}
 

@@ -8,26 +8,32 @@
 #' @param labels_y (logical) plot y-axis labels
 #' @param dend_x (logical) plot x-axis dendrogram
 #' @param dend_y (logical) plot y-axis dendrogram
-#' @param annot_layer_x (character) data columns to be included as annotation layers on x-axis
-#' @param annot_layer_y (character) data columns to be included as annotation layers on y-axis
+#' @param annot_layer_x (character) data columns to be included as annotation
+#' layers on x-axis
+#' @param annot_layer_y (character) data columns to be included as annotation
+#' layers on y-axis
 #' @param ratio y/x ratio of heat map
 #' @param rel_dend_x relative height of x-axis dendrogram
 #' @param rel_dend_y relative width of y-axis dendrogram
 #' @param rel_labels_x relative height of x-axis labels
 #' @param rel_labels_y relative width of y-axis labels
-#' @param rel_annot_layer_x relative height/s of x-axis annotation layers (either one number or vector with number for each)
-#' @param rel_annot_layer_y relative width/s of y-axis annotation layers (either one number or vector with number for each)
+#' @param rel_annot_layer_x relative height/s of x-axis annotation layers
+#' (either one number or vector with number for each)
+#' @param rel_annot_layer_y relative width/s of y-axis annotation layers
+#' (either one number or vector with number for each)
 #' @param axis.text.x.angle angle of x-axis labels
-#' @param annotation.colors (optional) named list containing color vector for annotation layers
-#' @param legends name of plot elements for which a legend should be included (full names must be used, e.g. c("annot_layer_x_groups", "heatmap")
+#' @param annotation.colors (optional) named list containing color vector for
+#' annotation layers
+#' @param legends name of plot elements for which a legend should be included
+#' (full names must be used, e.g. c("annot_layer_x_groups", "heatmap"))
 #' @param rel_legends relative width of legends layer to complete heatmap
-#' @param rel_legends_space realtive space between plot and legends
+#' @param rel_legends_space relative space between plot and legends
 #' @param heatmap.legend.title title of heatmap legend
-#' @param export export plot as pdf
-#' @param height plot height in inch for export
 #' @param dataset dataset
 #' @param file file name
 #' @param view print plot
+#' @param export export plot as pdf
+#' @param height plot height in inch for export
 #' @param input input data name
 #' @param output output data name
 #'
@@ -60,11 +66,11 @@ plot_heatmap <- function(data_,
                          axis.text.x.angle = 45,
                          annotation.colors = list(),
                          heatmap.legend.title = "",
-                         export = F,
-                         height = 6,
                          dataset,
-                         file = "heatmap.pdf",
                          view = T,
+                         export = F,
+                         file = "heatmap.pdf",
+                         height = 6,
                          input = "data_hclust",
                          output = "plot_hclust") {
 
@@ -92,7 +98,8 @@ plot_heatmap <- function(data_,
     data <- transpose_tibble(tibble = data, from.row.names = names(data)[1])
 
   # Manually transpose
-  if (transpose) transpose_tibble(tibble = data, from.row.names = names(data)[1])
+  if (transpose) transpose_tibble(tibble = data,
+                                  from.row.names = names(data)[1])
 
 
 
@@ -154,28 +161,22 @@ plot_heatmap <- function(data_,
 
       labels.x <- protein.label.FUN(pos_table_x$x)
 
-      labels.y <- dplyr::pull(!!observation.labels.column, "observations")[pos_table_y$y]
+      labels.y <- dplyr::pull(!!observation.labels.column,
+                              "observations")[pos_table_y$y]
 
     } else {
 
       labels.y <- protein.label.FUN(pos_table_y$y)
 
-      labels.x <- dplyr::pull(data, !!observation.labels.column, "observations")[pos_table_x$x]
+      labels.x <- dplyr::pull(data, !!observation.labels.column,
+                              "observations")[pos_table_x$x]
     }
-
-
-
-
 
 
 
 
   # List to save plots in
   plot.list <- tibble::lst()
-
-
-
-
 
 
 
@@ -200,7 +201,10 @@ plot_heatmap <- function(data_,
                      aes(x = x_center, y = y_center, fill = expr,
                          height = height, width = width)) +
     geom_tile() +
-    scale_fill_gradient2(name = heatmap.legend.title, high = "darkred", mid = "white", low = "darkblue") +
+    scale_fill_gradient2(name = heatmap.legend.title,
+                         high = "darkred",
+                         mid = "white",
+                         low = "darkblue") +
     scale_x_continuous(breaks = pos_table_x$x_center,
                        labels = labels.x,
                        limits = axis_limits_x,
@@ -233,7 +237,8 @@ plot_heatmap <- function(data_,
     scale_y_continuous(limits = c(0, 0),
                        expand = c(0, 0)) +
     theme_iDC_heatmap_labels_x() +
-    theme(axis.text.x = element_text(angle = axis.text.x.angle, hjust = 1), plot.margin = unit(c(0, 0, 2, 0), "cm"))
+    theme(axis.text.x = element_text(angle = axis.text.x.angle, hjust = 1),
+          plot.margin = unit(c(0, 0, 2, 0), "cm"))
 
   }
 
@@ -269,7 +274,11 @@ plot_heatmap <- function(data_,
 
     plot.list[["dend_x"]] <-
     ggplot(segment_data_x) +
-    geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = gg_size(0.5)) +
+    geom_segment(aes(x = x,
+                     y = y,
+                     xend = xend,
+                     yend = yend),
+                 size = gg_size(0.5)) +
     scale_y_continuous(limits = with(segment_data_x, c(0, max(y) * 1.01)),
                        expand = c(0, 0)) +
     scale_x_continuous(breaks = pos_table_x$x_center,
@@ -289,8 +298,10 @@ plot_heatmap <- function(data_,
 
     plot.list[["dend_y"]] <-
     ggplot(segment_data_y) +
-    geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = gg_size(0.5)) +
-    scale_x_reverse(limits = with(segment_data_y, c(max(x) * 1.01, 0 - max(x) * 0.01)),
+    geom_segment(aes(x = x, y = y, xend = xend, yend = yend),
+                 size = gg_size(0.5)) +
+    scale_x_reverse(limits = with(segment_data_y,
+                                  c(max(x) * 1.01, 0 - max(x) * 0.01)),
                     expand = c(0, 0)) +
     scale_y_continuous(breaks = pos_table_y$y_center,
                        #                   labels = pos_table_y$y,
@@ -310,7 +321,9 @@ plot_heatmap <- function(data_,
 
     for (layer in layers) {
 
-      if (is.numeric(data[[layer]])) plot.list[[paste0("annot_layer_x_", layers)]] <- NA #annot_layer_continuous_x()
+      if (is.numeric(data[[layer]]))
+        plot.list[[paste0("annot_layer_x_", layers)]] <- NA
+      #annot_layer_continuous_x()?
 
       else plot.list[[paste0("annot_layer_x_", layers)]] <-
           annot_layer_discrete_x(data = data,
@@ -325,44 +338,6 @@ plot_heatmap <- function(data_,
 
   }
 
-
-
-
-
-    # # Combine all plots together and crush graph density with rel_heights
-    # first_row = cowplot::plot_grid(NULL,
-    #                                plot.list[["dend_x"]],
-    #                                NULL,
-    #                                ncol = 3,
-    #                                rel_widths = c(rel_dend_y, 1, rel_labels_y))
-    #
-    # second_row = cowplot::plot_grid(NULL,
-    #                    gg_legend.position(plot.list[["annot_layer_x_groups"]]),
-    #                    NULL,
-    #                    ncol = 3,
-    #                    rel_widths = c(rel_dend_y, 1, rel_labels_y))
-    #
-    # third_row = cowplot::plot_grid(plot.list[["dend_y"]],
-    #                                gg_legend.position(plot.list[["heatmap"]]),
-    #                                plot.list[["labels_y"]],
-    #                                ncol = 3,
-    #                                rel_widths = c(rel_dend_y, 1, rel_labels_y), align = "h")
-    #
-    # forth_row = cowplot::plot_grid(NULL,
-    #                                plot.list[["labels_x"]],
-    #                                NULL,
-    #                                ncol = 3,
-    #                                rel_widths = c(rel_dend_y, 1, rel_labels_y))
-    #
-    # perfect = cowplot::plot_grid(first_row,
-    #                              second_row,
-    #                              third_row,
-    #                              forth_row,
-    #                              ncol = 1,
-    #                              byrow = T, align = "v",
-    #                              rel_heights = c(rel_dend_x, rel_annot_layer_x, 1, rel_labels_x))
-    #
-    # perfect
 
 
   if (!dend_x) rel_dend_x <- 0
@@ -408,7 +383,6 @@ plot_heatmap <- function(data_,
 
 
   # Assemble heatmap list
-
   p <- assemble_heatmap_rowwise(plot.list = plot.list,
                                 rel_dend_x = rel_dend_x,
                                 rel_dend_y = rel_dend_y,
@@ -421,11 +395,7 @@ plot_heatmap <- function(data_,
 
 
 
-
-
-
-
-
+  # Export pdf
   if (export) {
 
     ratio.plot <-
@@ -442,7 +412,11 @@ plot_heatmap <- function(data_,
 
       ratio
 
-    export_pdf(p = perfect, file = file, width = height * ratio.plot, height = height, open = F)
+    export_pdf(p = p,
+               file = file,
+               width = height * ratio.plot,
+               height = height,
+               open = F)
 
   }
 

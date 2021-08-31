@@ -65,8 +65,6 @@ do_cor_matrix <- function(data_,
     hclust(method = clustering.method)
 
 
-  # Output name
-  if (!hasArg(output)) output <- input
 
   # Prepare return
   if (list.input) {
@@ -79,7 +77,7 @@ do_cor_matrix <- function(data_,
 
   # Plot cor matrix
   if (plot) {
-    data_ <- plot_cor_matrix()
+    data_ <- plot_cor_matrix(data_ = data_, view = T)
   }
 
 
