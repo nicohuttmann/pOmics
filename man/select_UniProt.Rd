@@ -4,7 +4,7 @@
 \alias{select_UniProt}
 \title{Improved select function for UniProt databases}
 \usage{
-select_UniProt(keys, columns, keytype = "UNIPROTKB", x, modify = T)
+select_UniProt(keys, columns, keytype = "UNIPROTKB", x, modify = T, dataset)
 }
 \arguments{
 \item{keys}{keys}
@@ -15,7 +15,10 @@ select_UniProt(keys, columns, keytype = "UNIPROTKB", x, modify = T)
 
 \item{x}{UniProt data base}
 
-\item{modify}{(recommended) Should output values be modified to to singular entries?}
+\item{modify}{(recommended) Should output values be modified to to singular
+entries?}
+
+\item{dataset}{dataset}
 }
 \value{
 

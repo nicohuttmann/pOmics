@@ -28,7 +28,8 @@ add_observations_data(
 
 \item{ignore.names}{Assumes that data matches observations}
 
-\item{add.background.variable}{add name of column to the background variables for easy access}
+\item{add.background.variable}{add name of column to the background
+variables for easy access}
 
 \item{replace}{replace existing column}
 }

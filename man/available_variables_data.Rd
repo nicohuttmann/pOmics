@@ -4,12 +4,14 @@
 \alias{available_variables_data}
 \title{Shows available raw variables data and returns them or prints a transfer call}
 \usage{
-available_variables_data(dataset, return = F, print.call = F)
+available_variables_data(dataset, view = T, return = F, print.call = F)
 }
 \arguments{
 \item{dataset}{dataset}
 
-\item{return}{return variables data names}
+\item{view}{View?}
+
+\item{return}{return all variables data names}
 
 \item{print.call}{print call for transferring variables data}
 }

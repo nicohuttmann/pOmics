@@ -5,25 +5,27 @@
 \title{Assemble data from dataset and return in list}
 \usage{
 get_data(
+  which,
   variables = "default",
   observations = "default",
-  which,
   output,
-  output.type = "list",
+  output.type = "tibble_inlist",
   observations.set,
   dataset
 )
 }
 \arguments{
+\item{which}{specific name of data type}
+
 \item{variables}{selected variables}
 
 \item{observations}{selected observations}
 
-\item{which}{specific name of data type}
-
 \item{output}{name to save in list}
 
-\item{output.type}{output type ("list" (default), "tibble", "data.frame", "matrix")}
+\item{output.type}{output type (default = "tibble_inlist"; combination of
+"tibble", "data.frame" or "matrix" to define data type and "_inlist" or ""
+if data should be put into a list or not)}
 
 \item{observations.set}{set of observations}
 

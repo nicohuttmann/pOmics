@@ -9,7 +9,8 @@
 #' @export
 #'
 #'
-quick_protein_count <- function(variables, observations, observations.set, dataset) {
+quick_protein_count <- function(variables, observations, observations.set,
+                                dataset) {
 
   dataset <- get_dataset(dataset)
 
@@ -19,15 +20,15 @@ quick_protein_count <- function(variables, observations, observations.set, datas
 
   observations <- get_observations({{observations}}, observations.set, dataset)
 
-  return(get_data(variables = variables,
-                  observations = observations,which = "Peptides",
-
+  return(get_data(which = "Peptides",
+                  variables = variables,
+                  observations = observations,
                   observations.set = observations.set,
                   dataset = dataset) %>%
     eval_data(expr = x > 0, input = "Peptides") %>%
-    put_data(variables = variables,
-             observations = observations,which = "LFQ.intensity",
-
+    put_data(which = "LFQ.intensity",
+             variables = variables,
+             observations = observations,
              observations.set = observations.set,
              dataset = dataset) %>%
     eval_data(expr = x > 0, input = "LFQ.intensity") %>%

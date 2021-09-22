@@ -1,6 +1,7 @@
 #' Shows available raw data frames and returns them or prints a transfer call
 #'
 #' @param dataset dataset
+#' @param view View?
 #' @param return return data frame names
 #' @param print.call print call for transferring data frames
 #'
@@ -8,7 +9,8 @@
 #' @export
 #'
 #'
-available_data_frames <- function(dataset, return = F, print.call = F) {
+available_data_frames <- function(dataset, view = T, return = F,
+                                  print.call = F) {
 
   # Dataset
   dataset <- get_dataset(dataset)
@@ -17,23 +19,21 @@ available_data_frames <- function(dataset, return = F, print.call = F) {
   data.frames <- names(.info[["raw_datasets"]][[dataset]][["data.frames"]])
 
   # View
-  View(data.frame(data.frames))
+  if (view) View(data.frame(data.frames))
 
-  # Select data.columns
-  if (return | print.call) {
-
-    data.frames <- select.list(data.frames, multiple = T, graphics = F)
-
-  }
 
   # Print call
   if (print.call) {
 
+    data.frames.sel <- select.list(data.frames,
+                                   multiple = T,
+                                   graphics = F)
+
     cat(paste0('transfer_data_frames(dataset = "',
                dataset,
                '",\n\t',
-               'data.columns = c(\n\t"',
-               paste(data.frames, collapse = '",\n\t\t"'),
+               'data.columns = c("',
+               paste(data.frames.sel, collapse = '",\n\t\t"'),
                '"))'))
 
   #  Return data frames names

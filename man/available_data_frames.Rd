@@ -4,10 +4,12 @@
 \alias{available_data_frames}
 \title{Shows available raw data frames and returns them or prints a transfer call}
 \usage{
-available_data_frames(dataset, return = F, print.call = F)
+available_data_frames(dataset, view = T, return = F, print.call = F)
 }
 \arguments{
 \item{dataset}{dataset}
+
+\item{view}{View?}
 
 \item{return}{return data frame names}
 

@@ -1,14 +1,16 @@
 #' Shows available raw variables data and returns them or prints a transfer call
 #'
 #' @param dataset dataset
-#' @param return return variables data names
+#' @param view View?
+#' @param return return all variables data names
 #' @param print.call print call for transferring variables data
 #'
 #' @return
 #' @export
 #'
 #'
-available_variables_data <- function(dataset, return = F, print.call = F) {
+available_variables_data <- function(dataset, view = T, return = F,
+                                     print.call = F) {
 
   # Dataset
   dataset <- get_dataset(dataset)
@@ -18,23 +20,22 @@ available_variables_data <- function(dataset, return = F, print.call = F) {
     names(.info[["raw_datasets"]][[dataset]][["variables.data"]])
 
   # View
-  View(data.frame(variables.data))
+  if (view) View(data.frame(variables.data))
 
-  # Select data.columns
-  if (return | print.call) {
 
-    variables.data <- select.list(variables.data, multiple = T, graphics = F)
-
-  }
 
   # Print call
   if (print.call) {
 
+    variables.data.sel <- select.list(variables.data,
+                                      multiple = T,
+                                      graphics = F)
+
     cat(paste0('transfer_variables_data(dataset = "',
                dataset,
                '",\n\t',
-               'data.columns = c(\n\t"',
-               paste(variables.data, collapse = '",\n\t\t"'),
+               'data.columns = c("',
+               paste(variables.data.sel, collapse = '",\n\t\t"'),
                '"))'))
 
 

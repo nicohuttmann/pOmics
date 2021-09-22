@@ -4,14 +4,21 @@
 \alias{eval_data}
 \title{Evaluates data cell-wise}
 \usage{
-eval_data(data_, expr, FUN, input, output)
+eval_data(data_, expr, FUN, modify, ignore, input, output)
 }
 \arguments{
 \item{data_}{data list}
 
-\item{expr}{expression to be applied to each cell (must contain x as variable, e.g. x > 2)}
+\item{expr}{expression to be applied to each cell (must contain x as
+variable, e.g. x > 2)}
 
 \item{FUN}{function to be applied to each cell}
+
+\item{modify}{specify which columns to modify (default: all)
+provide either names of columns or function to identify them (
+e.g. modify = is.numeric)}
+
+\item{ignore}{columns to ignore while evaluating data (ignores)}
 
 \item{input}{if data_ is list: name of data to use}
 

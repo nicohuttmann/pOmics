@@ -11,7 +11,6 @@
 #'
 #' @importFrom rlang sym
 #' @import ggplot2
-#' @import dplyr
 #' @import ggvenn
 #'
 plot_venn <- function(x, name, plot = T, export = F) {
@@ -27,10 +26,14 @@ plot_venn <- function(x, name, plot = T, export = F) {
 
     venn <- tibble::tibble(variables = unique(unlist(x)))
 
+    if (is.null(names(x))) {
+      names(x) <- seq_along(x)
+    }
+
     # Add logical columns
     for (column in names(x)) {
       venn <- venn %>%
-        mutate(!!column := variables %in% x[[column]])
+        dplyr::mutate(!!column := variables %in% x[[column]])
     }
 
   }

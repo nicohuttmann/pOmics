@@ -9,7 +9,7 @@
 cat_vector_string <- function(...) {
 
     cat(paste0('c("',
-           paste(..., collapse = '",\n"'),
+           paste(..., collapse = '",\n\t"'),
            '")'))
 
 }

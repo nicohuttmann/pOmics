@@ -2,18 +2,22 @@
 % Please edit documentation in R/strsplit_.R
 \name{strsplit_}
 \alias{strsplit_}
-\title{Same as strsplit but returns vector}
+\title{Same as strsplit but option to return as vector and to convert to numeric}
 \usage{
-strsplit_(string, split = ";")
+strsplit_(x, split, output.type = "vector", as_numeric = T)
 }
 \arguments{
-\item{string}{string}
+\item{x}{string}
 
 \item{split}{split character}
+
+\item{output.type}{output type (default = "vector"; other option is "list")}
+
+\item{as.numeric}{try to convert to numeric}
 }
 \value{
 
 }
 \description{
-Same as strsplit but returns vector
+Same as strsplit but option to return as vector and to convert to numeric
 }

@@ -12,7 +12,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-match_variables_data <- function(variables.data,
+map_variables_data <- function(variables.data,
                                  which,
                                  match.to,
                                  unique.matches = T,

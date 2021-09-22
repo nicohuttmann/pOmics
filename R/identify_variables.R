@@ -37,7 +37,7 @@ identify_variables <- function(x, identifier, sep) {
   if (!hasArg(identifier)) {
     x1 <- x[, 1] %>%
       #as.character %>%
-      keep_first(sep = sep)
+      keep_first(split = sep)
 
     if (anyDuplicated(x1) == 0) {
       return(x1)
@@ -53,7 +53,7 @@ identify_variables <- function(x, identifier, sep) {
       x1 <- x %>%
         dplyr::pull(identifier[1]) %>%
         as.character %>%
-        keep_first(sep = sep)
+        keep_first(split = sep)
       if (length(identifier) > 1) {
         for (i in identifier[-1]) {
 
@@ -61,7 +61,7 @@ identify_variables <- function(x, identifier, sep) {
                       x %>%
                         dplyr::pull(i) %>%
                         as.character %>%
-                        keep_first(sep = sep),
+                        keep_first(split = sep),
                       sep = "_")
 
         }
@@ -95,12 +95,12 @@ identify_variables <- function(x, identifier, sep) {
       # Build identifiers vector; join columns if multiple specified
       x1 <- x[, identifier[1]] %>%
         as.character %>%
-        keep_first(sep = sep)
+        keep_first(split = sep)
       if (length(identifier > 1)) {
         for (i in identifier[-1])
           x1 <- paste(x1, x[, i] %>%
                       as.character() %>%
-                      keep_first(sep = sep),
+                      keep_first(split = sep),
                       sep = "_")
 
       }

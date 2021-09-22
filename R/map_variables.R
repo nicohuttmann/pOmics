@@ -11,10 +11,10 @@
 #' @importFrom magrittr %>%
 #'
 #'
-match_variables <- function(variables.data,
-                            match.to,
-                            unique.matches = T,
-                            dataset) {
+map_variables <- function(variables.data,
+                          match.to,
+                          unique.matches = T,
+                          dataset) {
 
   # check dataset
   dataset <- get_dataset(dataset)
@@ -104,6 +104,5 @@ match_variables <- function(variables.data,
          Please either provide a list or a vector of variables data.")
 
   }
-
 
 }

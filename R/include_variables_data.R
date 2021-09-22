@@ -13,8 +13,12 @@
 #' @importFrom magrittr %>%
 #'
 #'
-include_variables_data <- function(data_, which, column.name,
-                                      dataset, input, output) {
+include_variables_data <- function(data_,
+                                   which,
+                                   column.name,
+                                   dataset,
+                                   input,
+                                   output) {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -28,7 +32,8 @@ include_variables_data <- function(data_, which, column.name,
   }
 
   # Matrix to tibble
-  if (!tibble::is_tibble(data)) data <- data2tibble(data = data, row.names = "variables")
+  if (!tibble::is_tibble(data)) data <- data2tibble(data = data,
+                                                    row.names = "variables")
 
   # Check dataset
   dataset <- get_dataset(dataset)

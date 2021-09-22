@@ -4,7 +4,7 @@
 \alias{view_data}
 \title{Shows all data lists}
 \usage{
-view_data()
+view_data(which = c(".imports", ".info", ".databases", ".datasets"))
 }
 \value{
 

@@ -227,7 +227,7 @@ plot_gg_heatmap_terms <- function(data_,
     cluster <- cluster_enrichment %>%
       dplyr::filter(Description == data_rect[[1]][i]) %>%
       dplyr::pull("from") %>%
-      keep_firstn(n = 2, sep = "_")
+      keep_firstn(n = 2, split = "_")
 
     sig.proteins <- which_names(cutree_(data_[["dend_y"]], k = cluster[1]) == cluster[2])
 

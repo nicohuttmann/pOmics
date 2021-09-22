@@ -64,8 +64,8 @@ get_observations_data <- function(observations,
 
 #' Return observations data
 #'
-#' @param which which observations data to pull
 #' @param observations (optional) vector of observations or expression
+#' @param which which observations data to pull
 #' @param observations.set observations data frame
 #' @param dataset dataset
 #'

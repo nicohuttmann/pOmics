@@ -7,6 +7,13 @@
 get_default_dataset <- function() {
 
   # Return
-  return(.info[["default_dataset"]])
+  dataset <- .info[["default_dataset"]]
+
+  if (dataset == "dynamic") {
+    dataset <- names(.datasets)[menu(names(.datasets),
+                                     title = "Select dataset: ")]
+  }
+
+  return(dataset)
 
 }

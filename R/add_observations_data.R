@@ -6,7 +6,8 @@
 #' @param dataset dataset
 #' @param order.by orders observations data by given vector/factor levels
 #' @param ignore.names Assumes that data matches observations
-#' @param add.background.variable add name of column to the background variables for easy access
+#' @param add.background.variable add name of column to the background
+#' variables for easy access
 #' @param replace replace existing column
 #'
 #' @return
@@ -15,103 +16,140 @@
 #' @importFrom magrittr %>%
 #'
 #'
-add_observations_data <- function(data, name, observations.set, dataset, order.by = F, ignore.names = F, add.background.variable = T,
+add_observations_data <- function(data,
+                                  name,
+                                  observations.set,
+                                  dataset,
+                                  order.by = F,
+                                  ignore.names = F,
+                                  add.background.variable = T,
                                   replace) {
 
-  # Check dataset
-  dataset <- get_dataset(dataset)
-
-  # Check observation set
-  observations.set <- get_observations_set(observations.set = observations.set,
-                                           dataset = dataset)
-
-
-  # Get template
-  template <- get_observations_template(observations.set = observations.set,
-                                        dataset = dataset)
-
-
-  # Check data
-  if (!hasArg(data)) stop("No data given.")
-
-  if (is.null(names(data)) && !ignore.names) stop("Data must be named.")
-
-
-  # Fill template with data
-  if (is.factor(data) & length(names(data)) == length(data) & all((names(data) %in% names(template)))) {
-    template <- factor(data[names(template)])
-  } else if (is.factor(data)) {
-    stop("Please make sure all observations are named when you provide factors.")
-  } else if (!ignore.names) {
-    template[names(data)] <- data
+  # Add: Multiple datasets given
+  if (hasArg(dataset) && length(dataset) > 1) {
+    for (i in dataset) {
+      add_observations_data(data = data,
+                            name = name,
+                            observations.set = observations.set,
+                            dataset = i,
+                            order.by = order.by,
+                            ignore.names = ignore.names,
+                            add.background.variable = add.background.variable,
+                            replace = replace)
+    }
   } else {
-    template[] <- data
-  }
+
+    # Check dataset
+    dataset <- get_dataset(dataset)
+
+    # Check observation set
+    observations.set <- get_observations_set(observations.set = observations.set,
+                                             dataset = dataset)
 
 
-  # check name
-  name <- ask_name(name, "Name for new data: ")
+    # Get template
+    template <- get_observations_template(observations.set = observations.set,
+                                          dataset = dataset)
 
 
-  # Name already present in dataset
-  if (name %in% colnames(.datasets[[dataset]][["observations"]][[observations.set]])) {
+    # Check data
+    if (!hasArg(data)) {
+      message("No data given.")
+      return(invisible(FALSE))
+    }
 
-    # Argument replace given as TRUE
-    if (hasArg(replace) && replace) {
+    if (is.null(names(data)) && !ignore.names) {
+      message("Data must be named.")
+      return(invisible(FALSE))
+    }
 
-      remove_observations_data(name = name,
-                               observations.set = observations.set,
-                               dataset = dataset,
-                               require.confirmation = FALSE)
 
-    # No argument given for replace
-    } else if (!hasArg(replace)) {
+    # Fill template with data
+    if (is.factor(data) &
+        length(names(data)) == length(data) &
+        all((names(data) %in% names(template)))) {
+      template <- factor(data[names(template)])
+    } else if (is.factor(data)) {
+      message("Make sure all observations are named when you provide factors.")
+    } else if (!ignore.names) {
+      template[names(data)] <- data
+    } else {
+      template[] <- data
+    }
 
-      # Ask
-      message("")
-      message(paste0("Column <", name, "> already in observations data."))
-      if (menu(choices = c("Yes", "No"), title = "Should column be replaced? ") == 1) {
+
+    # check name
+    name <- ask_name(name, "Name for new data: ")
+
+
+    # Name already present in dataset
+    if (name %in%
+        colnames(.datasets[[dataset]][["observations"]][[observations.set]])) {
+
+      # Argument replace given as TRUE
+      if (hasArg(replace) && replace) {
 
         remove_observations_data(name = name,
                                  observations.set = observations.set,
                                  dataset = dataset,
                                  require.confirmation = FALSE)
 
+        # No argument given for replace
+      } else if (!hasArg(replace)) {
+
+        # Ask
+        message(paste0("Column <", name, "> already in observations data."))
+
+        if (menu(choices = c("Yes", "No"),
+                 title = "Should column be replaced? ") == 1) {
+
+          remove_observations_data(name = name,
+                                   observations.set = observations.set,
+                                   dataset = dataset,
+                                   require.confirmation = FALSE)
+
+        } else {
+          message("Existing data has not been overwritten.")
+          return(invisible(FALSE))
+        }
+
       } else {
-        stop("Column with same name already exists.")
+        message(paste0("Column <", name, "> already in observations data."))
+        return(invisible(FALSE))
       }
 
-    } else {
-      stop("Column with same name already exists.")
     }
 
-  }
 
-
-  # Add
-  .datasets[[dataset]][["observations"]][[observations.set]] <<-
-    .datasets[[dataset]][["observations"]][[observations.set]] %>%
-    dplyr::mutate(!!name := template)
-
-
-  # Order observations data
-  if (order.by) {
-
+    # Add
     .datasets[[dataset]][["observations"]][[observations.set]] <<-
       .datasets[[dataset]][["observations"]][[observations.set]] %>%
-      dplyr::arrange(!!sym(eval(name)))
+      dplyr::mutate(!!name := template)
 
-    for (i in get_data_names(dataset)) {
 
-      reorder_data(data.name = i, observations.set = observations.set, dataset = dataset, silent = TRUE)
+    # Order observations data
+    if (order.by) {
+
+      .datasets[[dataset]][["observations"]][[observations.set]] <<-
+        .datasets[[dataset]][["observations"]][[observations.set]] %>%
+        dplyr::arrange(!!sym(eval(name)))
+
+      for (i in get_data_names(dataset)) {
+
+        reorder_data(data.name = i,
+                     observations.set = observations.set,
+                     dataset = dataset,
+                     silent = TRUE)
+
+      }
 
     }
 
+
+    # Add background variable
+    if (add.background.variable) add_background_variable(name)
+
   }
-
-
-  # Add background variable
-  if (add.background.variable) add_background_variable(name)
 
 
 }

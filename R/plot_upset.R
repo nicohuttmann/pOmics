@@ -13,9 +13,14 @@
 #' @export
 #'
 #'
-plot_upset <- function(data_, order, nintersects = 10, transpose,
+plot_upset <- function(data_,
+                       order,
+                       nintersects = 10,
+                       transpose,
                        from.row.names,
-                       view = T, input, output = "plot_upset") {
+                       view = T,
+                       input,
+                       output = "plot_upset") {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -33,6 +38,7 @@ plot_upset <- function(data_, order, nintersects = 10, transpose,
   if (!hasArg(transpose)) {
     if ("observations" %in% colnames(data)) {
       transpose <- TRUE
+      from.row.names <- "observations"
     } else {
       transpose <- FALSE
     }

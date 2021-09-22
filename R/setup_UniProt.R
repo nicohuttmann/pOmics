@@ -1,18 +1,36 @@
 #' Loads the species specific UniProt.ws to the .GlobalEnv
 #'
 #' @param taxId taxonomy Id
+#' @param dataset dataset
 #'
 #' @return
 #' @export
 #'
 #'
-load_UniProt <- function(taxId = get_taxId()) {
+setup_UniProt <- function(taxId, dataset) {
 
   # Check if data base list exists
   if (!exists(".databases")) {
 
     .databases <<- list()
 
+  }
+
+
+  # Get dataset
+  if (hasArg(dataset)) {
+    dataset <- get_dataset(dataset)
+  }
+
+
+
+  # tax ID
+  if (hasArg(taxId)) {
+    taxId <- get_taxId(taxId)
+  } else if (hasArg(dataset)) {
+    taxId <- get_taxId(.datasets[[dataset]][["variables"]])
+  } else {
+    taxId <- get_taxId()
   }
 
 

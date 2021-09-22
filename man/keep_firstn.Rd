@@ -2,20 +2,22 @@
 % Please edit documentation in R/keep_firstn.R
 \name{keep_firstn}
 \alias{keep_firstn}
-\title{Removes multiple entries separated by a character}
+\title{Performs strsplit and keeps first n elements of each string}
 \usage{
-keep_firstn(x, n, sep)
+keep_firstn(x, n = 1, split, as_numeric = T)
 }
 \arguments{
 \item{x}{vector}
 
 \item{n}{number of elements to keep from beginning}
 
-\item{sep}{separator}
+\item{split}{separator}
+
+\item{as_numeric}{try to convert to numeric}
 }
 \value{
 
 }
 \description{
-Removes multiple entries separated by a character
+Performs strsplit and keeps first n elements of each string
 }

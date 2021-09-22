@@ -4,14 +4,22 @@
 \alias{get_var_data}
 \title{Return variables data}
 \usage{
-get_var_data(variables, which, names = "variables", dataset)
+get_var_data(variables, which, output.type = "vector", FUN, ..., dataset)
 }
 \arguments{
 \item{variables}{(optional) vector of variables or expression}
 
-\item{which}{which variables data to pull}
+\item{which}{which variables data to pull (multiple supported)}
 
-\item{names}{column to use as names of vector}
+\item{output.type}{output type (default = "vector" or "tibble_inlist" for
+multiple arguments; combination of "vector", "list", "tibble", or
+"data.frame" to define data type and "_inlist" or "" if data should be put
+into a list or not)}
+
+\item{FUN}{function to apply to variables data (examples are strsplit,
+keep_first, keep_firstn)}
+
+\item{...}{arguments for FUN function}
 
 \item{dataset}{dataset}
 }

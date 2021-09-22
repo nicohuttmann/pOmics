@@ -2,18 +2,20 @@
 % Please edit documentation in R/keep_first.R
 \name{keep_first}
 \alias{keep_first}
-\title{Removes multiple entries separated by a character}
+\title{Performs strsplit and keeps first element of each string}
 \usage{
-keep_first(x, sep)
+keep_first(x, split, as_numeric = T)
 }
 \arguments{
 \item{x}{vector}
 
-\item{sep}{separator}
+\item{split}{separator}
+
+\item{as_numeric}{try to convert to numeric}
 }
 \value{
 
 }
 \description{
-Removes multiple entries separated by a character
+Performs strsplit and keeps first element of each string
 }

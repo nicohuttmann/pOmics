@@ -36,7 +36,8 @@ collapse_columns <- function(data_, FUN = sum, name, input, output) {
   data <- data %>%
     dplyr::rowwise() %>%
     mutate(count = FUN(c_across(cols = where(is.logical) | where(is.logical))),
-           .before = where(is.logical) | where(is.logical))
+           .before = where(is.logical) | where(is.logical)) %>%
+    dplyr::ungroup()
 
 
 

@@ -33,7 +33,8 @@ add_variables_data <- function(data, name, dataset, set.default = F, add.backgro
     template[data] <- T
     # Stop
   } else {
-    stop("Data cannot be added.")
+    message("Data cannot be added.")
+    return(invisible(FALSE))
   }
 
 
@@ -52,7 +53,6 @@ add_variables_data <- function(data, name, dataset, set.default = F, add.backgro
     } else if (!hasArg(replace)) {
 
       # Ask
-      message("")
       message(paste0("Column <", name, "> already in variables data."))
       if (menu(choices = c("Yes", "No"), title = "Should column be replaced? ") == 1) {
 
@@ -61,12 +61,12 @@ add_variables_data <- function(data, name, dataset, set.default = F, add.backgro
                               require.confirmation = FALSE)
 
       } else {
-        cat("Column with same name already exists.")
+        message("Existing data has not been overwritten.")
         return(invisible(FALSE))
       }
 
     } else {
-      cat("Column with same name already exists.")
+      message(paste0("Column <", name, "> already in variables data."))
       return(invisible(FALSE))
     }
 
