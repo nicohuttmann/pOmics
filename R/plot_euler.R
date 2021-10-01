@@ -13,7 +13,9 @@
 #'
 #' @importFrom magrittr %>%
 #'
-plot_euler <- function(data_, fontsize = 8, transpose = T, from.row.names = "observations", to.row.names = "variables", view = T,
+plot_euler <- function(data_, fontsize = 8, transpose = T,
+                       from.row.names = "observations",
+                       to.row.names = "variables", view = T,
                        input, output = "plot_euler") {
 
   # Handle input
@@ -23,8 +25,8 @@ plot_euler <- function(data_, fontsize = 8, transpose = T, from.row.names = "obs
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+
   }
 
 
@@ -40,7 +42,8 @@ plot_euler <- function(data_, fontsize = 8, transpose = T, from.row.names = "obs
 
 
   # Check data
-  if (typeof(data[[1]]) != "character" || any(unlist(lapply(data[-1], typeof)) != "logical")) {
+  if (typeof(data[[1]]) != "character" ||
+      any(unlist(lapply(data[-1], typeof)) != "logical")) {
 
     message("Dataframe must consist of one character and n logical columns.")
     return(invisible(data_))
@@ -63,7 +66,7 @@ plot_euler <- function(data_, fontsize = 8, transpose = T, from.row.names = "obs
 
 
   # Prepare return
-  if (list.input) data_[[output]] <- p
+  if (input_list[["list.input"]]) data_[[output]] <- p
 
   else data_ <- p
 

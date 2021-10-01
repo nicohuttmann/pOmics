@@ -2,7 +2,9 @@
 #'
 #' @param keys keys
 #' @param columns data to query
-#' @param keytype type of key
+#' @param output format of output ("vector.keep" (default), "vector.na,
+#' "vector.rm", "mapping.na", "mapping.rm", "TERM2GENE")
+#' @param keytype type of keys
 #' @param x UniProt data base
 #' @param modify (recommended) Should output values be modified to to singular
 #' entries?
@@ -14,6 +16,7 @@
 #'
 select_UniProt <- function(keys,
                            columns,
+                           output = "vector.keep",
                            keytype = "UNIPROTKB",
                            x,
                            modify = T,
@@ -146,5 +149,14 @@ select_UniProt <- function(keys,
 
   }
 
-  return(data)
+
+  # Format output
+  output.data <- select2output(output.data = data,
+                               keys = keys,
+                               output = output,
+                               database = "UniProt",
+                               dataset = dataset)
+
+
+  return(output.data)
 }

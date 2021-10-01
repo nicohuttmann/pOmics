@@ -7,13 +7,14 @@
 cleanup <- function() {
 
   #
-  rm(list = setdiff(ls(pos = .GlobalEnv, all.names = TRUE),
+  rm(list = setdiff(ls(pos = .GlobalEnv, all.names = FALSE),
                     c(".cache",
                       ".datasets",
                       ".databases",
                       ".imports",
                       ".info",
-                      "Analysis")),
+                      "Analysis",
+                      "data_")),
      pos = .GlobalEnv)
 
 }

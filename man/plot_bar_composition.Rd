@@ -31,7 +31,8 @@ plot_bar_composition(
 
 \item{legend.name}{name of lagend}
 
-\item{legend.position}{position of legend ("none", "right", "bottom", "top", "left")}
+\item{legend.position}{position of legend ("none", "right", "bottom",
+"top", "left")}
 
 \item{aspect.ratio}{aspect ratio of x- and y-axis}
 

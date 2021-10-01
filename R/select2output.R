@@ -3,6 +3,7 @@
 #' @param output.data mapping data from select method
 #' @param keys keys
 #' @param output output type
+#' @param database database of origin ("org" or "UniProt")
 #' @param dataset dataset
 #' @param ... arguments for TERM2GENE function (subtype = "CC", "BP", or "MF")
 #'
@@ -10,7 +11,7 @@
 #' @export
 #'
 #'
-select2output <- function(output.data, keys, output, dataset, ...) {
+select2output <- function(output.data, keys, output, database, dataset, ...) {
 
   # Process data
   if (output == "vector.keep") {
@@ -60,10 +61,16 @@ select2output <- function(output.data, keys, output, dataset, ...) {
     output.data <- output.data[!is.na(output.data[, 2]), ]
 
 
-  } else if (output == "TERM2GENE") {
+  } else if (output == "TERM2GENE" && database == "org") {
 
-    output.data <- select_org_2_TERM2GENE(mapping = output.data, dataset = dataset, ...)
+    output.data <- select_org_2_TERM2GENE(mapping = output.data,
+                                          dataset = dataset,
+                                          ...)
 
+
+  } else if (output == "TERM2GENE" && database == "UniProt" ) {
+
+    output.data <- select_UniProt_2_TERM2GENE(mapping = output.data)
 
   } else {
 

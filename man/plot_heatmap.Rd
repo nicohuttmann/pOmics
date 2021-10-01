@@ -7,8 +7,11 @@
 plot_heatmap(
   data_,
   transpose = F,
-  protein.label.FUN = p2g,
-  observation.labels,
+  variables.labels,
+  observations.labels,
+  color.high = "darkred",
+  color.mid = "white",
+  color.low = "darkblue",
   labels_x = T,
   labels_y = F,
   dend_x = T,
@@ -42,9 +45,15 @@ plot_heatmap(
 
 \item{transpose}{should data be transformed}
 
-\item{protein.label.FUN}{function for protein labels}
+\item{variables.labels}{variables data to use as lables}
 
-\item{observation.labels}{column for observation labels}
+\item{observations.labels}{column for observation labels}
+
+\item{color.high}{color for highest value (default = "darkred")}
+
+\item{color.mid}{color for middle value (default = "white")}
+
+\item{color.low}{color for lowest value (default = "darkblue")}
 
 \item{labels_x}{(logical) plot x-axis labels}
 

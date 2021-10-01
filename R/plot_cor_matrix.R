@@ -29,8 +29,8 @@ plot_cor_matrix <- function(data_,
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+
   }
 
 
@@ -101,7 +101,7 @@ plot_cor_matrix <- function(data_,
     ggplot(data_heatmap,
            aes(x = x_center, y = y_center, fill = expr,
                height = height, width = width)) +
-    geom_tile() +
+    geom_raster() +
     scale_fill_gradient2(name = "cor",
                          high = "darkred",
                          mid = "white",
@@ -114,7 +114,7 @@ plot_cor_matrix <- function(data_,
                        labels = labels.y,
                        limits = axis_limits_y,
                        expand = c(0, 0)) +
-    theme_thesis_cormatrix() +
+    theme_thesis_cor_matrix() +
     theme(axis.text.x = element_blank())
 
 
@@ -137,7 +137,10 @@ plot_cor_matrix <- function(data_,
 
 
   # Prepare return
-  if (list.input) data_[[output]] <- data
+  if (input_list[["list.input"]]) {
+    data_[[output]] <- data
+    attr(data_, "data") <- output
+  }
 
   else data_ <- data
 

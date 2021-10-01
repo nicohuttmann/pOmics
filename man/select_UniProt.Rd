@@ -4,14 +4,25 @@
 \alias{select_UniProt}
 \title{Improved select function for UniProt databases}
 \usage{
-select_UniProt(keys, columns, keytype = "UNIPROTKB", x, modify = T, dataset)
+select_UniProt(
+  keys,
+  columns,
+  output = "vector.keep",
+  keytype = "UNIPROTKB",
+  x,
+  modify = T,
+  dataset
+)
 }
 \arguments{
 \item{keys}{keys}
 
 \item{columns}{data to query}
 
-\item{keytype}{type of key}
+\item{output}{format of output ("vector.keep" (default), "vector.na,
+"vector.rm", "mapping.na", "mapping.rm", "TERM2GENE")}
+
+\item{keytype}{type of keys}
 
 \item{x}{UniProt data base}
 

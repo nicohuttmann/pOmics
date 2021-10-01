@@ -2,8 +2,11 @@
 #'
 #' @param data_ data
 #' @param transpose should data be transformed
-#' @param protein.label.FUN function for protein labels
-#' @param observation.labels column for observation labels
+#' @param variables.labels variables data to use as lables
+#' @param observations.labels column for observation labels
+#' @param color.high color for highest value (default = "darkred")
+#' @param color.mid color for middle value (default = "white")
+#' @param color.low color for lowest value (default = "darkblue")
 #' @param labels_x (logical) plot x-axis labels
 #' @param labels_y (logical) plot y-axis labels
 #' @param dend_x (logical) plot x-axis dendrogram
@@ -45,8 +48,11 @@
 #'
 plot_heatmap <- function(data_,
                          transpose = F,
-                         protein.label.FUN = p2g,
-                         observation.labels,
+                         variables.labels,
+                         observations.labels,
+                         color.high = "darkred",
+                         color.mid = "white",
+                         color.low = "darkblue",
                          labels_x = T,
                          labels_y = F,
                          dend_x = T,
@@ -79,12 +85,7 @@ plot_heatmap <- function(data_,
 
   if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-  else {
-    data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
-  }
-
+  else data <- input_list[["data"]]
 
 
 
@@ -94,8 +95,9 @@ plot_heatmap <- function(data_,
 
 
   # Transpose data depending on dendrograms
-  if (all(data_[["dend_x"]][["labels"]] %in% colnames(data)))
-    data <- transpose_tibble(tibble = data, from.row.names = names(data)[1])
+  if (all(data[["dend_x"]][["labels"]] %in% colnames(data[["data"]])))
+    data <- transpose_tibble(tibble = data[["data"]],
+                             from.row.names = names(data[["data"]])[1])
 
   # Manually transpose
   if (transpose) transpose_tibble(tibble = data,
@@ -105,11 +107,11 @@ plot_heatmap <- function(data_,
 
   # Get dendrogram data
   if (transpose) {
-    dend_data_x <- ggdendro::dendro_data(data_[["dend_y"]])
-    dend_data_y <- ggdendro::dendro_data(data_[["dend_x"]])
+    dend_data_x <- ggdendro::dendro_data(data[["dend_y"]])
+    dend_data_y <- ggdendro::dendro_data(data[["dend_x"]])
   }  else {
-    dend_data_x <- ggdendro::dendro_data(data_[["dend_x"]])
-    dend_data_y <- ggdendro::dendro_data(data_[["dend_y"]])
+    dend_data_x <- ggdendro::dendro_data(data[["dend_x"]])
+    dend_data_y <- ggdendro::dendro_data(data[["dend_y"]])
   }
 
 
@@ -151,24 +153,28 @@ plot_heatmap <- function(data_,
 
 
   # Observations labels
-  observation.labels.column <- get_labels_column(data = data,
-                                                 labels = observation.labels,
-                                                 dataset = dataset)
+  observations.labels.column <- get_labels_column(data = data[["data"]],
+                                                  labels = observations.labels,
+                                                  dataset = dataset)
 
 
   # Modify labels
   if (transpose) {
 
-      labels.x <- protein.label.FUN(pos_table_x$x)
+    labels.x <- variables2labels(variables = pos_table_x$x,
+                                 name = variables.labels,
+                                 dataset = dataset)
 
-      labels.y <- dplyr::pull(!!observation.labels.column,
-                              "observations")[pos_table_y$y]
+    labels.y <- dplyr::pull(data[["data"]], !!observations.labels.column,
+                            "observations")[pos_table_y$y]
 
     } else {
 
-      labels.y <- protein.label.FUN(pos_table_y$y)
+      labels.y <- variables2labels(variables = pos_table_y$y,
+                                   name = variables.labels,
+                                   dataset = dataset)
 
-      labels.x <- dplyr::pull(data, !!observation.labels.column,
+      labels.x <- dplyr::pull(data[["data"]], !!observations.labels.column,
                               "observations")[pos_table_x$x]
     }
 
@@ -183,13 +189,14 @@ plot_heatmap <- function(data_,
   ### Main heatmap
 
   # Calculate ratio of tiles
-  ratio.hm <- nrow(data) / (ncol(data) - 1) * ratio
+  ratio.hm <- nrow(data[["data"]]) / (ncol(data[["data"]]) - 1) * ratio
 
 
   # Construct heatmap df
-  data_heatmap <- data %>%
+  data_heatmap <- data[["data"]] %>%
     dplyr::select(c(colnames(.)[1], dend_data_y[["labels"]][["label"]])) %>%
-    reshape2::melt(value.name = "expr", id.vars = colnames(data)[1]) %>%
+    reshape2::melt(value.name = "expr",
+                   id.vars = colnames(data[["data"]])[1]) %>%
     dplyr::rename(x = !!names(.[1]), y = !!names(.[2])) %>%
     dplyr::left_join(pos_table_x, by = "x") %>%
     dplyr::left_join(pos_table_y, by = "y") %>%
@@ -202,9 +209,9 @@ plot_heatmap <- function(data_,
                          height = height, width = width)) +
     geom_tile() +
     scale_fill_gradient2(name = heatmap.legend.title,
-                         high = "darkred",
-                         mid = "white",
-                         low = "darkblue") +
+                         high = color.high,
+                         mid = color.mid,
+                         low = color.low) +
     scale_x_continuous(breaks = pos_table_x$x_center,
                        labels = labels.x,
                        limits = axis_limits_x,
@@ -273,19 +280,19 @@ plot_heatmap <- function(data_,
   if (dend_x) {
 
     plot.list[["dend_x"]] <-
-    ggplot(segment_data_x) +
-    geom_segment(aes(x = x,
-                     y = y,
-                     xend = xend,
-                     yend = yend),
-                 size = gg_size(0.5)) +
-    scale_y_continuous(limits = with(segment_data_x, c(0, max(y) * 1.01)),
-                       expand = c(0, 0)) +
-    scale_x_continuous(breaks = pos_table_x$x_center,
-                       #                   labels = pos_table_y$y,
-                       limits = axis_limits_x,
-                       expand = c(0, 0)) +
-    theme_iDC_dendrogram()
+      ggplot(segment_data_x) +
+      geom_segment(aes(x = x,
+                       y = y,
+                       xend = xend,
+                       yend = yend),
+                   size = gg_size(0.5)) +
+      scale_y_continuous(limits = with(segment_data_x, c(0, max(y) * 1.01)),
+                         expand = c(0, 0)) +
+      scale_x_continuous(breaks = pos_table_x$x_center,
+                         #                   labels = pos_table_y$y,
+                         limits = axis_limits_x,
+                         expand = c(0, 0)) +
+      theme_iDC_dendrogram()
 
   }
 
@@ -297,17 +304,18 @@ plot_heatmap <- function(data_,
   if (dend_y) {
 
     plot.list[["dend_y"]] <-
-    ggplot(segment_data_y) +
-    geom_segment(aes(x = x, y = y, xend = xend, yend = yend),
-                 size = gg_size(0.5)) +
-    scale_x_reverse(limits = with(segment_data_y,
-                                  c(max(x) * 1.01, 0 - max(x) * 0.01)),
-                    expand = c(0, 0)) +
-    scale_y_continuous(breaks = pos_table_y$y_center,
-                       #                   labels = pos_table_y$y,
-                       limits = axis_limits_y,
-                       expand = c(0, 0)) +
-    theme_iDC_dendrogram()
+      ggplot(segment_data_y) +
+      geom_segment(aes(x = x, y = y, xend = xend, yend = yend),
+                   size = gg_size(0.5)) +
+      scale_x_reverse(limits = with(segment_data_y,
+                                    c(max(x) * 1.01, 0 - max(x) * 0.01)),
+                      expand = c(0, 0)) +
+      scale_y_continuous(breaks = pos_table_y$y_center,
+                         #                   labels = pos_table_y$y,
+                         limits = axis_limits_y,
+                         expand = c(0, 0)) +
+      theme_iDC_dendrogram()
+
 
   }
 
@@ -315,9 +323,10 @@ plot_heatmap <- function(data_,
 
 
   # Annotation layers
-  if (hasArg(annot_layer_x) && any(annot_layer_x %in% colnames(data))) {
+  if (hasArg(annot_layer_x) &&
+      any(annot_layer_x %in% colnames(data[["data"]]))) {
 
-    layers <- annot_layer_x[annot_layer_x %in% colnames(data)]
+    layers <- annot_layer_x[annot_layer_x %in% colnames(data[["data"]])]
 
     for (layer in layers) {
 
@@ -326,7 +335,7 @@ plot_heatmap <- function(data_,
       #annot_layer_continuous_x()?
 
       else plot.list[[paste0("annot_layer_x_", layers)]] <-
-          annot_layer_discrete_x(data = data,
+          annot_layer_discrete_x(data = data[["data"]],
                                  pos_table_x = pos_table_x,
                                  x = "observations",
                                  value = "groups",
@@ -428,7 +437,10 @@ plot_heatmap <- function(data_,
 
 
   # Prepare return
-  if (list.input) data_[[output]] <- data
+  if (input_list[["list.input"]]) {
+    data_[[output]] <- data
+    attr(data_, "data") <- output
+  }
 
   else data_ <- data
 

@@ -21,8 +21,8 @@ collapse_rows <- function(data_, FUN = mean, by = "All", input, output) {
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+
   }
 
   # Add dummy variable for all
@@ -64,7 +64,10 @@ collapse_rows <- function(data_, FUN = mean, by = "All", input, output) {
   if (!hasArg(output)) output <- input
 
   # Prepare return
-  if (list.input) data_[[output]] <- data
+  if (input_list[["list.input"]]) {
+    data_[[output]] <- data
+    attr(data_, "data") <- output
+  }
 
   else data_ <- data
 

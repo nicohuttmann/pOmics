@@ -19,8 +19,8 @@ data2list <- function(data_, names, input, output, output.type) {
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+    
   }
 
 
@@ -52,7 +52,7 @@ data2list <- function(data_, names, input, output, output.type) {
   if (!hasArg(output)) output <- input
 
   # Prepare return
-  if (list.input && (!hasArg(output.type) || output.type != "list")) {
+  if (input_list[["list.input"]] && (!hasArg(output.type) || output.type != "list")) {
     data_[[output]] <- data.list
   }
 

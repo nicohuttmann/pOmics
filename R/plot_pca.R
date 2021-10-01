@@ -67,8 +67,8 @@ plot_pca <- function(data_,
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+
   }
 
 
@@ -93,7 +93,8 @@ plot_pca <- function(data_,
   # Shape
   shapes <- 15:20 # c(21, 24, 21, 24)
 
-  if (hasArg(shape.by) & (length(shape) != length(unique(data[[shape.by]])))) {
+  if (hasArg(shape.by) &
+      (length(shape) != length(unique(data[[shape.by]])))) {
 
     shape <- shapes[1:length(unique(data[[shape.by]]))]
 
@@ -177,7 +178,8 @@ plot_pca <- function(data_,
   if (view) print(p)
 
   # Prepare return
-  if (list.input) data_[[paste(output, x, y, sep = "_")]] <- p
+  if (input_list[["list.input"]])
+    data_[[paste(output, x, y, sep = "_")]] <- p
 
   else data_ <- p
 

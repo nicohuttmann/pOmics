@@ -67,8 +67,8 @@ plot_volcano <- function(data_,
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+    
   }
 
 
@@ -145,7 +145,7 @@ plot_volcano <- function(data_,
     }
 
   # Prepare return
-  if (list.input) {
+  if (input_list[["list.input"]]) {
     data_[[paste0("data_", output)]] <- data
     data_[[output]] <- p
   }

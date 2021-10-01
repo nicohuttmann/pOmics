@@ -11,54 +11,57 @@
 #' @export
 #'
 #'
-plot_nothing <- function(data_, 
-                         ..., 
-                         dataset, 
-                         view = T, 
-                         export = F, 
-                         file = "nothing.pdf", 
+plot_nothing <- function(data_,
+                         ...,
+                         dataset,
+                         view = T,
+                         export = F,
+                         file = "nothing.pdf",
                          height = 3,
-                         input = "data_nothing", 
+                         input = "data_nothing",
                          output = "plot_nothing") {
-  
+
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
-  
+
   if (input_list[["error"]]) return(invisible(input_list[["data"]]))
-  
+
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+
   }
-  
-  
-  
+
+
+
   data <- data
-  
-  
+
+
   # Print plot
   if (view) print(p)
-  
+
   # Export plot
   if (export) {
-    
-    export_pdf(p, file = file, 
-               width, 
-               heigth, 
+
+    export_pdf(p, file = file,
+               width,
+               heigth,
                open = F)
-    
+
   }
-  
+
   # Output name
   if (!hasArg(output)) output <- input
-  
+
   # Prepare return
-  if (list.input) data_[[output]] <- data
-  
+  if (input_list[["list.input"]]) {
+    data_[[output]] <- data
+    attr(data_, "data") <- output
+  }
+
   else data_ <- data
-  
+
   # Return
   return(data_)
-  
+
 }

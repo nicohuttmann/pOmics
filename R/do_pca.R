@@ -19,15 +19,15 @@ do_pca <- function(data_, scale = T, dataset, input, output = "data_pca") {
   
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+    
   }
   
   
   # Scale data
   if (scale) {
     data <- do_scale(data)
-    if (list.input) data_[[paste0(input, "_scaled")]] <- data
+    if (input_list[["list.input"]]) data_[[paste0(input, "_scaled")]] <- data
   }
   
   
@@ -56,7 +56,7 @@ do_pca <- function(data_, scale = T, dataset, input, output = "data_pca") {
 
   
   # Prepare return
-  if (list.input) {
+  if (input_list[["list.input"]]) {
     data_[[output]] <- data
     data_[["data_prcomp"]] <- data.prcomp
   }

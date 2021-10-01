@@ -4,7 +4,7 @@
 \alias{select2output}
 \title{Formats mapping from select methods}
 \usage{
-select2output(output.data, keys, output, dataset, ...)
+select2output(output.data, keys, output, database, dataset, ...)
 }
 \arguments{
 \item{output.data}{mapping data from select method}
@@ -12,6 +12,8 @@ select2output(output.data, keys, output, dataset, ...)
 \item{keys}{keys}
 
 \item{output}{output type}
+
+\item{database}{database of origin ("org" or "UniProt")}
 
 \item{dataset}{dataset}
 

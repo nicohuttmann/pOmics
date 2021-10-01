@@ -18,25 +18,27 @@ do_scale <- function(data_, input, output) {
 
   if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-  else {
-    data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
-  }
+  else data <- input_list[["data"]]
 
 
 
   # Scale data
   data <- data %>%
-    dplyr::mutate(dplyr::across(.cols = where(is.numeric), .fns = scale))
+    dplyr::mutate(dplyr::across(.cols = where(is.numeric),
+                                .fns = scale)) %>%
+    dplyr::mutate(dplyr::across(.cols = where(function(x) all(is.na(x))),
+                                .fns = function(x) 0))
 
 
 
   # Output name
-  if (!hasArg(output)) output <- input
+  if (!hasArg(output)) output <- input_list[["input"]]
 
   # Prepare return
-  if (list.input) data_[[output]] <- data
+  if (input_list[["list.input"]]) {
+    data_[[output]] <- data
+    attr(data_, "data") <- output
+  }
 
   else data_ <- data
 

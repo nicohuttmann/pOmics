@@ -42,7 +42,7 @@ map_variables_data <- function(variables.data,
 
 
   # if variables input expression
-  if (!vector.input && !list.input) {
+  if (!vector.input && !input_list[["list.input"]]) {
     stop(
       "This function only accepts a vector or a list for variable specification.
          Did you mean to use get_variables?")
@@ -98,7 +98,7 @@ map_variables_data <- function(variables.data,
     return(variables.data.output)
 
 
-  } else if (list.input) {
+  } else if (input_list[["list.input"]]) {
 
     var2data.from <- get_variables_data(variables = All,
                                         which = match.to,

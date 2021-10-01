@@ -26,11 +26,7 @@ do_hclust <- function(data_,
 
   if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-  else {
-    data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
-  }
+  else data <- input_list[["data"]]
 
   # Scale data
   if (scale) data <- do_scale(data)
@@ -53,19 +49,22 @@ do_hclust <- function(data_,
 
 
    # Save data
-   data_[[output]] <- data %>%
-     dplyr::arrange(match(!!dplyr::sym(colnames(.)[1]), dend_x[["labels"]][dend_x[["order"]]])) #%>%
+   data_[[output]] <- list()
+
+   data_[[output]][["data"]] <- data %>%
+     dplyr::arrange(match(!!dplyr::sym(colnames(.)[1]),
+                          dend_x[["labels"]][dend_x[["order"]]])) #%>%
      #dplyr::select(c(colnames(.)[1], dend_y[["labels"]][dend_y[["order"]]]))
 
 
-   data_[["dend_x"]] <- data_[[output]] %>%
+   data_[[output]][["dend_x"]] <- data_[[output]][["data"]] %>%
      dplyr::select(c(colnames(.)[1], where(is.numeric))) %>%
      tibble2matrix(row.names = colnames(.)[1]) %>%
      dist(method = distance.method) %>%
      hclust(method = clustering.method)
 
    # Dendrogram for x-axis (variables mostly)
-   data_[["dend_y"]] <- data_[[output]] %>%
+   data_[[output]][["dend_y"]] <- data_[[output]][["data"]] %>%
      dplyr::select(c(colnames(.)[1], where(is.numeric))) %>%
      tibble2matrix(row.names = colnames(.)[1]) %>%
      t() %>%

@@ -4,12 +4,12 @@
 \alias{get_obs_data}
 \title{Return observations data}
 \usage{
-get_obs_data(observations, which, observations.set, dataset)
+get_obs_data(which, observations, observations.set, dataset)
 }
 \arguments{
-\item{observations}{(optional) vector of observations or expression}
-
 \item{which}{which observations data to pull}
+
+\item{observations}{(optional) vector of observations or expression}
 
 \item{observations.set}{observations data frame}
 

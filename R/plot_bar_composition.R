@@ -6,7 +6,8 @@
 #' @param xlab labels of x-axis
 #' @param ylab label of y-axis
 #' @param legend.name name of lagend
-#' @param legend.position position of legend ("none", "right", "bottom", "top", "left")
+#' @param legend.position position of legend ("none", "right", "bottom",
+#' "top", "left")
 #' @param aspect.ratio aspect ratio of x- and y-axis
 #' @param view view plot after generation
 #' @param input name of input data
@@ -17,9 +18,17 @@
 #'
 #' @import ggplot2
 #'
-plot_bar_composition <- function(data_, TERMS = "mitochondrion", color, xlab = "Fraction of Proteins", ylab = "",
-                                 legend.name = "", legend.position = "right", aspect.ratio = 1, view = T,
-                                 input = "data_annotation_composition", output = "plot_annotation_composition") {
+plot_bar_composition <- function(data_,
+                                 TERMS = "mitochondrion",
+                                 color,
+                                 xlab = "Fraction of Proteins",
+                                 ylab = "",
+                                 legend.name = "",
+                                 legend.position = "right",
+                                 aspect.ratio = 1,
+                                 view = T,
+                                 input = "data_annotation_composition",
+                                 output = "plot_annotation_composition") {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -28,8 +37,8 @@ plot_bar_composition <- function(data_, TERMS = "mitochondrion", color, xlab = "
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+
   }
 
 
@@ -60,17 +69,24 @@ plot_bar_composition <- function(data_, TERMS = "mitochondrion", color, xlab = "
   }
 
 
-  data.melt$variable <- factor(data.melt$variable, levels = rev(unique(data.melt$variable)))
-  data.melt$TERM <- factor(data.melt$TERM, levels = rev(unique(data.melt$TERM)))
+  data.melt$variable <- factor(data.melt$variable,
+                               levels = rev(unique(data.melt$variable)))
+  data.melt$TERM <- factor(data.melt$TERM,
+                           levels = rev(unique(data.melt$TERM)))
 
 
-  if (!hasArg(color)) color <- rev(RColorBrewer::brewer.pal(9, "Blues")[c(3,5,7)])
+  if (!hasArg(color))
+    color <- rev(RColorBrewer::brewer.pal(9, "Blues")[c(3,5,7)])
 
   # Plot
-  p <- ggplot(data = data.melt, aes(x = TERM, y = Fraction, fill = variable)) +
+  p <- ggplot(data = data.melt, aes(x = TERM,
+                                    y = Fraction,
+                                    fill = variable)) +
     geom_bar(stat = "identity", position = "dodge") +
     scale_y_continuous(labels = scales::percent) +
-    scale_fill_manual(name = legend.name, values = color, guide = guide_legend(reverse=TRUE)) +
+    scale_fill_manual(name = legend.name,
+                      values = color,
+                      guide = guide_legend(reverse=TRUE)) +
     theme_hjv_half_open() +
     theme(axis.text.x = element_text(angle = 0, hjust = 0.5),
           axis.text.y = element_text(vjust = 0.5),
@@ -86,7 +102,7 @@ plot_bar_composition <- function(data_, TERMS = "mitochondrion", color, xlab = "
 
 
   # Prepare return
-  if (list.input) data_[[output]] <- p
+  if (input_list[["list.input"]]) data_[[output]] <- p
 
   else data_ <- p
 

@@ -10,7 +10,11 @@
 #' @export
 #'
 #'
-transpose_data <- function(data_, from.row.names, to.row.names, input, output) {
+transpose_data <- function(data_,
+                           from.row.names,
+                           to.row.names,
+                           input,
+                           output) {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -19,8 +23,8 @@ transpose_data <- function(data_, from.row.names, to.row.names, input, output) {
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+
   }
 
 
@@ -31,7 +35,7 @@ transpose_data <- function(data_, from.row.names, to.row.names, input, output) {
   if (!hasArg(to.row.names)) {
     if (from.row.names == "observations") {
       to.row.names <- "variables"
-    } else if (from.row.names == "variabels") {
+    } else if (from.row.names == "variables") {
       to.row.names <- "observations"
     } else {
       to.row.names <- "names"
@@ -48,12 +52,14 @@ transpose_data <- function(data_, from.row.names, to.row.names, input, output) {
   if (!hasArg(output)) output <- input
 
   # Prepare return
-  if (list.input) data_[[output]] <- data
+  if (input_list[["list.input"]]) {
+    data_[[output]] <- data
+    attr(data_, "data") <- output
+  }
 
   else data_ <- data
 
   # Return
   return(data_)
-
 
 }

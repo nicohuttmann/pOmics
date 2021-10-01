@@ -4,12 +4,12 @@
 \alias{get_variables_data}
 \title{Return variables data}
 \usage{
-get_variables_data(variables, which, output.type = "vector", FUN, ..., dataset)
+get_variables_data(which, variables, output.type = "vector", FUN, ..., dataset)
 }
 \arguments{
-\item{variables}{(optional) vector of variables or expression}
-
 \item{which}{which variables data to pull (multiple supported)}
+
+\item{variables}{(optional) vector of variables or expression}
 
 \item{output.type}{output type (default = "vector" or "tibble_inlist" for
 multiple arguments; combination of "vector", "list", "tibble", or

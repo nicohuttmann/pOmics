@@ -11,9 +11,11 @@ select_org(keys, columns, output = "vector.keep", keytype, OrgDb, dataset, ...)
 
 \item{columns}{data columns to return(see columns_org())}
 
-\item{output}{format of output ("vector.keep" (default), "vector.na, "vector.rm", "mapping.na", "mapping.rm", "TERM2GENE")}
+\item{output}{format of output ("vector.keep" (default), "vector.na,
+"vector.rm", "mapping.na", "mapping.rm", "TERM2GENE")}
 
-\item{keytype}{Id type of supplied keys (identified automatically if not provided)}
+\item{keytype}{type of supplied keys (identified automatically if not
+provided)}
 
 \item{OrgDb}{string of Annotation package name to use}
 

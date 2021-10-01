@@ -2,8 +2,10 @@
 #'
 #' @param keys vector of protein identifiers (see keytypes_org())
 #' @param columns data columns to return(see columns_org())
-#' @param output format of output ("vector.keep" (default), "vector.na, "vector.rm", "mapping.na", "mapping.rm", "TERM2GENE")
-#' @param keytype Id type of supplied keys (identified automatically if not provided)
+#' @param output format of output ("vector.keep" (default), "vector.na,
+#' "vector.rm", "mapping.na", "mapping.rm", "TERM2GENE")
+#' @param keytype type of supplied keys (identified automatically if not
+#' provided)
 #' @param OrgDb string of Annotation package name to use
 #' @param dataset dataset
 #' @param ... arguments for TERM2GENE function (subtype = "CC", "BP", or "MF")
@@ -12,7 +14,13 @@
 #' @export
 #'
 #'
-select_org <- function(keys, columns, output = "vector.keep", keytype, OrgDb, dataset, ...) {
+select_org <- function(keys,
+                       columns,
+                       output = "vector.keep",
+                       keytype,
+                       OrgDb,
+                       dataset,
+                       ...) {
 
   if (!hasArg(keys)) {
 
@@ -42,11 +50,16 @@ select_org <- function(keys, columns, output = "vector.keep", keytype, OrgDb, da
 
 
   # Test keytypes and keys
-  if (!hasArg(keytype) || length(keytype) > 1 || !keytype %in% AnnotationDbi::keytypes(eval(parse(text = OrgDb)))) {
+  if (!hasArg(keytype) ||
+      length(keytype) > 1 ||
+      !keytype %in% AnnotationDbi::keytypes(eval(parse(text = OrgDb)))) {
 
 
     keytype <- 1
-    keytypes <- c("UNIPROT", "ENTREZID", "SYMBOL", AnnotationDbi::keytypes(eval(parse(text = OrgDb))))
+    keytypes <- c("UNIPROT",
+                  "ENTREZID",
+                  "SYMBOL",
+                  AnnotationDbi::keytypes(eval(parse(text = OrgDb))))
 
     while (is.numeric(keytype)) {
 
@@ -63,8 +76,9 @@ select_org <- function(keys, columns, output = "vector.keep", keytype, OrgDb, da
     # Test keys
   } else {
 
-    if (all(!keys %in% AnnotationDbi::keys(eval(parse(text = OrgDb)), keytype = keytype)))
-      stop("No keys match the database. Change the keytype argument or remove it.")
+    if (all(!keys %in%
+            AnnotationDbi::keys(eval(parse(text = OrgDb)), keytype = keytype)))
+  stop("No keys match the database. Change the keytype argument or remove it.")
 
   }
 
@@ -73,19 +87,23 @@ select_org <- function(keys, columns, output = "vector.keep", keytype, OrgDb, da
   # Test columns
   if (!hasArg(columns)) {
 
-    columns <- select.list(choices = AnnotationDbi::columns(eval(parse(text = OrgDb))),
-                multiple = T,
-                title = paste0("Select columns from ", OrgDb, ": "))
+    columns <-
+      select.list(choices = AnnotationDbi::columns(eval(parse(text = OrgDb))),
+                  multiple = T,
+                  title = paste0("Select columns from ", OrgDb, ": "))
 
-  } else if (any(!columns %in% AnnotationDbi::columns(eval(parse(text = OrgDb))))) {
+  } else if (any(!columns %in%
+                 AnnotationDbi::columns(eval(parse(text = OrgDb))))) {
 
-    if (all(!columns %in% AnnotationDbi::columns(eval(parse(text = OrgDb))))) {
+    if (all(!columns %in%
+            AnnotationDbi::columns(eval(parse(text = OrgDb))))) {
 
       stop("No column could be found in the database.")
 
     } else {
 
-      columns <- intersect(columns, AnnotationDbi::columns(eval(parse(text = OrgDb))))
+      columns <- intersect(columns,
+                           AnnotationDbi::columns(eval(parse(text = OrgDb))))
       message(paste0("Columns used: ", paste(columns, collapse = ", ")))
 
     }
@@ -106,6 +124,7 @@ select_org <- function(keys, columns, output = "vector.keep", keytype, OrgDb, da
   output.data <- select2output(output.data = output.data,
                                keys = keys,
                                output = output,
+                               database = "org",
                                dataset = dataset,
                                ...)
 

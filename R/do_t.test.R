@@ -30,8 +30,8 @@ do_t.test <- function(data_,
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+
   }
 
 
@@ -126,7 +126,10 @@ data_t.test <- data_t.test %>%
 
 
   # Prepare return
-  if (list.input) data_[[output]] <- data_t.test
+  if (input_list[["list.input"]]) {
+    data_[[output]] <- data_t.test
+    attr(data_, "data") <- output
+  }
 
   else data_ <- data
 

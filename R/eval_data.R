@@ -26,8 +26,7 @@ eval_data <- function(data_, expr, FUN, modify, ignore, input, output) {
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
   }
 
 
@@ -87,10 +86,14 @@ eval_data <- function(data_, expr, FUN, modify, ignore, input, output) {
 
   }
 
-
+  # Output name
+  if (!hasArg(output)) output <- input
 
   # Prepare return
-  if (list.input) data_[[ifelse(hasArg(output), output, input)]] <- data
+  if (input_list[["list.input"]]) {
+    data_[[output]] <- data
+    attr(data_, "data") <- output
+  }
 
   else data_ <- data
 

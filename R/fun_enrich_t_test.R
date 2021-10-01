@@ -25,8 +25,8 @@ fun_enrich_t.test <- function(data_,
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+
   }
 
 
@@ -61,7 +61,10 @@ fun_enrich_t.test <- function(data_,
   #if (!hasArg(output)) output <- input
 
   # Prepare return
-  if (list.input) data_[[output]] <- data_fun_enrich
+  if (input_list[["list.input"]]) {
+    data_[[output]] <- data_fun_enrich
+    attr(data_, "data") <- output
+  }
 
   else data_ <- data
 

@@ -23,9 +23,10 @@ nice_number(
 
 \item{format}{number format (see formatC())}
 
-\item{big.mark}{separotor between 3 digits; remove with ""}
+\item{big.mark}{separator between 3 digits; remove with ""}
 
-\item{sci.digits}{digits after decimal point for scientific notation (format = "e)}
+\item{sci.digits}{digits after decimal point for scientific notation
+(format = "e)}
 
 \item{output}{type of output vector}
 }

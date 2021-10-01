@@ -12,7 +12,12 @@
 #' @export
 #'
 #'
-pull_data <- function(data_, values, names, dataset, input, output,
+pull_data <- function(data_,
+                      values,
+                      names,
+                      dataset,
+                      input,
+                      output,
                       output.type) {
 
   # Handle input
@@ -20,11 +25,7 @@ pull_data <- function(data_, values, names, dataset, input, output,
 
   if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-  else {
-    data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
-  }
+  else data <- input_list[["data"]]
 
 
 
@@ -40,14 +41,15 @@ pull_data <- function(data_, values, names, dataset, input, output,
     data2tibble() %>%
     dplyr::pull(var = !!values, name = !!names)
 
-
+  if (all(data == names(data))) data <- unname(data)
 
 
   # Output name
-  if (!hasArg(output)) output <- input
+  if (!hasArg(output)) output <- input_list[["input"]]
 
   # Prepare return
-  if (list.input && (!hasArg(output.type) || output.type != "vector")) {
+  if (input_list[["list.input"]] &&
+      (!hasArg(output.type) || output.type != "vector")) {
     data_[[output]] <- data
   }
 

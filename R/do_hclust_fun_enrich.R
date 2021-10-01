@@ -6,7 +6,11 @@
 #' @export
 #'
 #'
-do_hclust_fun_enrich <- function(data_, max.k = 8, simplify = F, database = "BP", input = "dend_y") {
+do_hclust_fun_enrich <- function(data_,
+                                 max.k = 8,
+                                 simplify = F,
+                                 database = "BP",
+                                 input = "dend_y") {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -15,8 +19,8 @@ do_hclust_fun_enrich <- function(data_, max.k = 8, simplify = F, database = "BP"
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+
   }
 
 
@@ -37,8 +41,10 @@ do_hclust_fun_enrich <- function(data_, max.k = 8, simplify = F, database = "BP"
   }
 
 
-  cluster_enrichment <- merge_enrichment_results(cluster_list, append.name = F)
-  cluster_enrichment <- cluster_enrichment[!duplicated(cluster_enrichment$ID), ]
+  cluster_enrichment <- merge_enrichment_results(cluster_list,
+                                                 append.name = F)
+  cluster_enrichment <-
+    cluster_enrichment[!duplicated(cluster_enrichment$ID), ]
 
 
 
@@ -67,39 +73,42 @@ do_hclust_fun_enrich <- function(data_, max.k = 8, simplify = F, database = "BP"
   View(simplify_enrichment_results(cluster_enrichment))
 
 
-  dat <- plot_gg_heatmap_terms(data_,
-                               TERMS = c("lipid metabolic process",
-                                         "plasma membrane",
-                                         "ion transport",
-                                         "iron ion binding",
-                                         "mitochondrion",
-                                         "carboxylic acid metabolic process"),
-                               TERM2GENE,
-                               observations.order = get_observations_data(which = groups) %>% unique() %>% as.character(),
+  dat <- plot_gg_heatmap_terms(
+    data_,
+    TERMS = c("lipid metabolic process",
+              "plasma membrane",
+              "ion transport",
+              "iron ion binding",
+              "mitochondrion",
+              "carboxylic acid metabolic process"),
+    TERM2GENE,
+    observations.order = get_observations_data(which = groups) %>%
+      unique() %>%
+      as.character(),
 
-                               label.proteins = F,
-                               label.observations = T,
-                               label.terms = T,
-                               indicate.clusters = T,
-                               k = 8,
-                               term.lines.height = 0.5,
-                               term.lines.width = 0.9,
-                               color.term.lines = "#A18276",
-                               color.cluster.annotation = "#463730",
+    label.proteins = F,
+    label.observations = T,
+    label.terms = T,
+    indicate.clusters = T,
+    k = 8,
+    term.lines.height = 0.5,
+    term.lines.width = 0.9,
+    color.term.lines = "#A18276",
+    color.cluster.annotation = "#463730",
 
-                               ratio.hm = 2,
-                               abs.height = 6,
-                               rel.width.hm.terms = 1,
-                               rel.width.dend.y = 0.2,
-                               rel.width.labels.y = 0.3,
-                               rel.height.dend.x = 0.05,
-                               rel.height.labels.x = 0.5,
+    ratio.hm = 2,
+    abs.height = 6,
+    rel.width.hm.terms = 1,
+    rel.width.dend.y = 0.2,
+    rel.width.labels.y = 0.3,
+    rel.height.dend.x = 0.05,
+    rel.height.labels.x = 0.5,
 
-                               terms.distance.method = "euclidean",
-                               terms.clustering.method = "complete",
+    terms.distance.method = "euclidean",
+    terms.clustering.method = "complete",
 
 
-                               export = T, file = "heatmap2.pdf")
+    export = T, file = "heatmap2.pdf")
 
 
 
@@ -138,7 +147,8 @@ dat <- plot_gg_heatmap_terms(data_,
 
 
   # Prepare return
-  if (list.input) data_[[paste0("enrichment_", input)]] <- data
+  if (input_list[["list.input"]])
+    data_[[paste0("enrichment_", input)]] <- data
 
   else data_ <- data
 

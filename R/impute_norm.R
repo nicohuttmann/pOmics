@@ -20,8 +20,8 @@ impute_norm <- function(data_, shift = 1.8, width = 0.3, seed = 123, input, outp
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]]
-    list.input <- input_list[["list.input"]]
+    input <- input_list[["input"]] # Remove if not used
+
   }
 
 
@@ -72,7 +72,10 @@ impute_norm <- function(data_, shift = 1.8, width = 0.3, seed = 123, input, outp
   if (!hasArg(output)) output <- input
 
   # Prepare return
-  if (list.input) data_[[output]] <- data
+  if (input_list[["list.input"]]) {
+    data_[[output]] <- data
+    attr(data_, "data") <- output
+  }
 
   else data_ <- data
 

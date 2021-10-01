@@ -1,7 +1,7 @@
 #' Return variables data
 #'
-#' @param variables (optional) vector of variables or expression
 #' @param which which variables data to pull (multiple supported)
+#' @param variables (optional) vector of variables or expression
 #' @param output.type output type (default = "vector" or "tibble_inlist" for
 #' multiple arguments; combination of "vector", "list", "tibble", or
 #' "data.frame" to define data type and "_inlist" or "" if data should be put
@@ -17,8 +17,8 @@
 #' @importFrom magrittr %>%
 #'
 #'
-get_variables_data <- function(variables,
-                               which,
+get_variables_data <- function(which,
+                               variables,
                                output.type = "vector",
                                FUN,
                                ...,
@@ -239,8 +239,8 @@ get_variables_data <- function(variables,
 
 #' Return variables data
 #'
-#' @param variables (optional) vector of variables or expression
 #' @param which which variables data to pull (multiple supported)
+#' @param variables (optional) vector of variables or expression
 #' @param output.type output type (default = "vector" or "tibble_inlist" for
 #' multiple arguments; combination of "vector", "list", "tibble", or
 #' "data.frame" to define data type and "_inlist" or "" if data should be put
