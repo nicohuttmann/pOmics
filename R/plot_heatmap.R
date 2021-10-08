@@ -2,8 +2,8 @@
 #'
 #' @param data_ data
 #' @param transpose should data be transformed
-#' @param variables.labels variables data to use as lables
-#' @param observations.labels column for observation labels
+#' @param labels.variables variables data name to use as labels
+#' @param labels.observations column in data for observation labels
 #' @param color.high color for highest value (default = "darkred")
 #' @param color.mid color for middle value (default = "white")
 #' @param color.low color for lowest value (default = "darkblue")
@@ -11,6 +11,10 @@
 #' @param labels_y (logical) plot y-axis labels
 #' @param dend_x (logical) plot x-axis dendrogram
 #' @param dend_y (logical) plot y-axis dendrogram
+#' @param man.pos.x option to manually specify order of x-axis labels
+#' (disables) dendrogram
+#' @param man.pos.y option to manually specify order of x-axis labels
+#' (disables) dendrogram
 #' @param annot_layer_x (character) data columns to be included as annotation
 #' layers on x-axis
 #' @param annot_layer_y (character) data columns to be included as annotation
@@ -48,8 +52,8 @@
 #'
 plot_heatmap <- function(data_,
                          transpose = F,
-                         variables.labels,
-                         observations.labels,
+                         labels.variables,
+                         labels.observations,
                          color.high = "darkred",
                          color.mid = "white",
                          color.low = "darkblue",
@@ -57,6 +61,8 @@ plot_heatmap <- function(data_,
                          labels_y = F,
                          dend_x = T,
                          dend_y = T,
+                         man.pos.x,
+                         man.pos.y,
                          annot_layer_x,
                          annot_layer_y,
                          legends,
@@ -116,6 +122,7 @@ plot_heatmap <- function(data_,
 
 
 
+
   # Segment data for dendrogram plot
   segment_data_x <- with(ggdendro::segment(dend_data_x),
                          data.frame(x = x, y = y, xend = xend, yend = yend))
@@ -126,6 +133,19 @@ plot_heatmap <- function(data_,
                                  x = as.character(label),
                                  width = 1))
 
+  # Manual x positions
+  if (hasArg(man.pos.x)) {
+    # Test positions
+    if (all(pos_table_x$x %in% man.pos.x)) {
+      # Resort labels (and to be sure positions)
+      pos_table_x$x <- pos_table_x$x[match(pos_table_x$x, man.pos.x)]
+      pos_table_x$x_center <- sort(pos_table_x$x_center)
+
+      # Disable dendrogram
+      dend_x <- FALSE
+    }
+  }
+
   # Invert layout observations
   segment_data_y <- with(ggdendro::segment(dend_data_y),
                          data.frame(x = y, y = x, xend = yend, yend = xend))
@@ -135,6 +155,19 @@ plot_heatmap <- function(data_,
                       data.frame(y_center = x,
                                  y = as.character(label),
                                  height = 1))
+
+  # Manual y positions
+  if (hasArg(man.pos.y)) {
+    # Test positions
+    if (all(pos_table_y$y %in% man.pos.y)) {
+      # Resort labels (and to be sure positions)
+      pos_table_y$y <- pos_table_y$y[match(pos_table_y$y, man.pos.y)]
+      pos_table_y$y_center <- sort(pos_table_y$y_center)
+
+      # Disable dendrogram
+      dend_y<- FALSE
+    }
+  }
 
   # Limits for the vertical axes
   axis_limits_y <- with(
@@ -153,16 +186,17 @@ plot_heatmap <- function(data_,
 
 
   # Observations labels
-  observations.labels.column <- get_labels_column(data = data[["data"]],
-                                                  labels = observations.labels,
-                                                  dataset = dataset)
+  observations.labels.column <-
+    get_labels_column(data = data[["data"]],
+                      labels = labels.observations,
+                      dataset = dataset)
 
 
   # Modify labels
   if (transpose) {
 
     labels.x <- variables2labels(variables = pos_table_x$x,
-                                 name = variables.labels,
+                                 name = labels.variables,
                                  dataset = dataset)
 
     labels.y <- dplyr::pull(data[["data"]], !!observations.labels.column,
@@ -171,7 +205,7 @@ plot_heatmap <- function(data_,
     } else {
 
       labels.y <- variables2labels(variables = pos_table_y$y,
-                                   name = variables.labels,
+                                   name = labels.variables,
                                    dataset = dataset)
 
       labels.x <- dplyr::pull(data[["data"]], !!observations.labels.column,
@@ -181,7 +215,7 @@ plot_heatmap <- function(data_,
 
 
 
-  # List to save plots in
+  # List to store plots
   plot.list <- tibble::lst()
 
 

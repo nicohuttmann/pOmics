@@ -7,8 +7,8 @@
 plot_heatmap(
   data_,
   transpose = F,
-  variables.labels,
-  observations.labels,
+  labels.variables,
+  labels.observations,
   color.high = "darkred",
   color.mid = "white",
   color.low = "darkblue",
@@ -16,6 +16,8 @@ plot_heatmap(
   labels_y = F,
   dend_x = T,
   dend_y = T,
+  man.pos.x,
+  man.pos.y,
   annot_layer_x,
   annot_layer_y,
   legends,
@@ -45,9 +47,9 @@ plot_heatmap(
 
 \item{transpose}{should data be transformed}
 
-\item{variables.labels}{variables data to use as lables}
+\item{labels.variables}{variables data name to use as labels}
 
-\item{observations.labels}{column for observation labels}
+\item{labels.observations}{column in data for observation labels}
 
 \item{color.high}{color for highest value (default = "darkred")}
 
@@ -62,6 +64,12 @@ plot_heatmap(
 \item{dend_x}{(logical) plot x-axis dendrogram}
 
 \item{dend_y}{(logical) plot y-axis dendrogram}
+
+\item{man.pos.x}{option to manually specify order of x-axis labels
+(disables) dendrogram}
+
+\item{man.pos.y}{option to manually specify order of x-axis labels
+(disables) dendrogram}
 
 \item{annot_layer_x}{(character) data columns to be included as annotation
 layers on x-axis}

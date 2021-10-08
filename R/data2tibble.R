@@ -16,10 +16,13 @@ data2tibble <- function(data, row.names = "observations") {
   # Matrix
   } else if (is.matrix(data) || is.data.frame(data)) {
 
-    return(data %>%
-             {if (is.matrix(.)) as.data.frame(.) else .} %>%
-             {if (!all(rownames(.) == as.character(1:nrow(.)))) tibble::rownames_to_column(.data = ., var = row.names) else .} %>%
-             tibble::as_tibble())
+    data <- data %>%
+      {if (is.matrix(.)) as.data.frame(.) else .} %>%
+      {if (!all(rownames(.) == as.character(1:nrow(.))))
+        tibble::rownames_to_column(.data = ., var = row.names) else .} %>%
+      tibble::as_tibble()
+
+    return(data)
 
   # Other data types
   } else {

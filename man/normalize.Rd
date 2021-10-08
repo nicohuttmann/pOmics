@@ -9,7 +9,7 @@ normalize(data, method = "pqn")
 \arguments{
 \item{data}{data}
 
-\item{method}{method to use}
+\item{method}{method to use (default = "pqn", "none")}
 }
 \value{
 

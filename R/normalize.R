@@ -1,7 +1,7 @@
 #' Normalizes and returns data
 #'
 #' @param data data
-#' @param method method to use
+#' @param method method to use (default = "pqn", "none")
 #'
 #' @return
 #' @export
