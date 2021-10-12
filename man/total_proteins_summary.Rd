@@ -4,12 +4,18 @@
 \alias{total_proteins_summary}
 \title{INCOMOPLETE FUNCTION: Combines data frames with variables info}
 \usage{
-total_proteins_summary(input, dataset)
+total_proteins_summary(input, dataset, buttons, dom = "lBfrtip")
 }
 \arguments{
 \item{input}{list of protein data frames}
 
 \item{dataset}{dataset}
+
+\item{buttons}{(optional) add buttons ("copy", "csv", "excel", "pdf",
+"print")}
+
+\item{dom}{order of table elements (default: "lBfrtip", see
+https://rstudio.github.io/DT/)}
 }
 \value{
 

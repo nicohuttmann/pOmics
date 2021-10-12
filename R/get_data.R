@@ -25,7 +25,10 @@ get_data <- function(which,
   # Checks correct name of dataset
   dataset <- get_dataset(dataset)
 
-
+  # Default data name
+  if (!hasArg(which)) {
+    which <- get_data_name(name = which, dataset = dataset)
+  }
 
   # Check data type and name
   # Check if names are all in variables data

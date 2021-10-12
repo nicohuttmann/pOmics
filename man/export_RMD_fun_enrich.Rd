@@ -6,6 +6,8 @@
 \usage{
 export_RMD_fun_enrich(
   data_,
+  buttons,
+  dom = "lBfrtip",
   view = F,
   input = "fun_enrich",
   output = "fun_enrich_DT"
@@ -13,6 +15,12 @@ export_RMD_fun_enrich(
 }
 \arguments{
 \item{data_}{list or tibble}
+
+\item{buttons}{(optional) add buttons ("copy", "csv", "excel", "pdf",
+"print")}
+
+\item{dom}{order of table elements (default: "lBfrtip", see
+https://rstudio.github.io/DT/)}
 
 \item{view}{view table}
 

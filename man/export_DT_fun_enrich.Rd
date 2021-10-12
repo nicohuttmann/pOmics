@@ -4,10 +4,16 @@
 \alias{export_DT_fun_enrich}
 \title{Formats table for nice output (R Markdown)}
 \usage{
-export_DT_fun_enrich(data)
+export_DT_fun_enrich(data, buttons, dom = "lBfrtip")
 }
 \arguments{
 \item{data}{data from fun_enrich (enrichResult)}
+
+\item{buttons}{(optional) add buttons ("copy", "csv", "excel", "pdf",
+"print")}
+
+\item{dom}{order of table elements (default: "lBfrtip", see
+https://rstudio.github.io/DT/)}
 }
 \value{
 

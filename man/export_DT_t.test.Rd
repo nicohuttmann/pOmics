@@ -4,7 +4,13 @@
 \alias{export_DT_t.test}
 \title{Formats table for nice output (R Markdown)}
 \usage{
-export_DT_t.test(data, order.by = "p.adjust", descending = F)
+export_DT_t.test(
+  data,
+  order.by = "p.adjust",
+  descending = F,
+  buttons,
+  dom = "lBfrtip"
+)
 }
 \arguments{
 \item{data}{data from t.test}
@@ -12,6 +18,12 @@ export_DT_t.test(data, order.by = "p.adjust", descending = F)
 \item{order.by}{order rows by given column}
 
 \item{descending}{arrange in descending order}
+
+\item{buttons}{(optional) add buttons ("copy", "csv", "excel", "pdf",
+"print")}
+
+\item{dom}{order of table elements (default: "lBfrtip", see
+https://rstudio.github.io/DT/)}
 }
 \value{
 

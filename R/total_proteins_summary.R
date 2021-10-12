@@ -2,13 +2,17 @@
 #'
 #' @param input list of protein data frames
 #' @param dataset dataset
+#' @param buttons (optional) add buttons ("copy", "csv", "excel", "pdf",
+#' "print")
+#' @param dom order of table elements (default: "lBfrtip", see
+#' https://rstudio.github.io/DT/)
 #'
 #' @return
 #' @export
 #'
 #' @importFrom magrittr %>%
 #'
-total_proteins_summary <- function(input, dataset) {
+total_proteins_summary <- function(input, dataset, buttons, dom = "lBfrtip") {
 
   dataset <- get_dataset(dataset)
 
@@ -32,7 +36,7 @@ total_proteins_summary <- function(input, dataset) {
                       regulated)
 
 
-      }else {
+      } else {
       dummy <- input[[i]]
     }
 
@@ -43,12 +47,35 @@ total_proteins_summary <- function(input, dataset) {
 
   }
 
-  output <- DT::datatable(output,
-                          escape = FALSE,
-                          options = list(
-                            columnDefs = list(list(className = 'dt-left',
-                                                   targets = "_all"))),
-                          rownames = FALSE)
+
+  # Generate DT w/ or w/out buttons
+  if (hasArg(buttons)) {
+    buttons <- intersect(buttons, c("copy", "csv", "excel", "pdf", "print"))
+  } else {
+    buttons <- c()
+  }
+
+  if (length(buttons) > 0) {
+    output <- DT::datatable(output,
+                            escape = FALSE,
+                            extensions = "Buttons",
+                            options = list(
+                              columnDefs = list(list(className = 'dt-left',
+                                                     targets = "_all")),
+                              dom = dom,
+                              buttons = buttons,
+                              lengthMenu = list(c(10,25,50,-1),
+                                                c(10,25,50,"All"))),
+                            rownames = FALSE)
+  } else {
+    output <- DT::datatable(output,
+                            escape = FALSE,
+                            options = list(
+                              columnDefs = list(list(className = 'dt-left',
+                                                     targets = "_all"))),
+                            rownames = FALSE)
+  }
+
 
   return(output)
 

@@ -1,6 +1,10 @@
 #' Template for functions that accept either a data frame or a list
 #'
 #' @param data_ list or tibble
+#' @param buttons (optional) add buttons ("copy", "csv", "excel", "pdf",
+#' "print")
+#' @param dom order of table elements (default: "lBfrtip", see
+#' https://rstudio.github.io/DT/)
 #' @param view view table
 #' @param input name of input data
 #' @param output name of output data
@@ -10,6 +14,8 @@
 #'
 #'
 export_RMD_fun_enrich <- function(data_,
+                                  buttons,
+                                  dom = "lBfrtip",
                                   view = F,
                                   input = "fun_enrich",
                                   output = "fun_enrich_DT") {
@@ -31,7 +37,9 @@ export_RMD_fun_enrich <- function(data_,
 
     for (j in seq_along(data[[i]])) {
 
-      data[[i]][[j]] <- export_DT_fun_enrich(data[[i]][[j]])
+      data[[i]][[j]] <- export_DT_fun_enrich(data[[i]][[j]],
+                                             buttons = buttons,
+                                             dom = dom)
 
     }
 
@@ -55,3 +63,4 @@ export_RMD_fun_enrich <- function(data_,
   return(data_)
 
 }
+

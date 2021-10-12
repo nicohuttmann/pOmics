@@ -3,6 +3,12 @@
 #' @param data_ list or tibble
 #' @param order.by order rows by given column
 #' @param descending arrange in descending order
+#' @param buttons (optional) add buttons ("copy", "csv", "excel", "pdf",
+#' "print")
+#' @param dom order of table elements (default: "lBfrtip", see
+#' https://rstudio.github.io/DT/)
+#' @param add.annotations add annotations to proteins
+#' @param dataset dataset
 #' @param view view table
 #' @param input name of input data
 #' @param output name of output data
@@ -11,8 +17,11 @@
 #' @export
 #'
 #'
-export_RMD_t.test <- function(data_, order.by = "p.adjust",
+export_RMD_t.test <- function(data_,
+                              order.by = "p.adjust",
                               descending = F,
+                              buttons,
+                              dom = "lBfrtip",
                               add.annotations = F,
                               dataset,
                               view = F,
@@ -68,8 +77,11 @@ export_RMD_t.test <- function(data_, order.by = "p.adjust",
   }
 
   #
-  data <- export_DT_t.test(data = data, order.by = order.by,
-                           descending = descending)
+  data <- export_DT_t.test(data = data,
+                           order.by = order.by,
+                           descending = descending,
+                           buttons = buttons,
+                           dom = dom)
 
   if (view) print(data)
 

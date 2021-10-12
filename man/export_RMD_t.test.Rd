@@ -8,6 +8,8 @@ export_RMD_t.test(
   data_,
   order.by = "p.adjust",
   descending = F,
+  buttons,
+  dom = "lBfrtip",
   add.annotations = F,
   dataset,
   view = F,
@@ -21,6 +23,16 @@ export_RMD_t.test(
 \item{order.by}{order rows by given column}
 
 \item{descending}{arrange in descending order}
+
+\item{buttons}{(optional) add buttons ("copy", "csv", "excel", "pdf",
+"print")}
+
+\item{dom}{order of table elements (default: "lBfrtip", see
+https://rstudio.github.io/DT/)}
+
+\item{add.annotations}{add annotations to proteins}
+
+\item{dataset}{dataset}
 
 \item{view}{view table}
 
