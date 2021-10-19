@@ -4,10 +4,10 @@
 \alias{data.frame2tibble}
 \title{Transforms data frames to tibble and adds column for row names}
 \usage{
-data.frame2tibble(data.frame, row.names = "observations")
+data.frame2tibble(data, row.names)
 }
 \arguments{
-\item{data.frame}{data frame with row names}
+\item{data}{data frame with row names}
 
 \item{row.names}{name for row names vector}
 }

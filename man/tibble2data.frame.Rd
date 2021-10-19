@@ -4,7 +4,7 @@
 \alias{tibble2data.frame}
 \title{Transforms tibble to data frame}
 \usage{
-tibble2data.frame(tibble, row.names = "observations")
+tibble2data.frame(tibble, row.names)
 }
 \arguments{
 \item{tibble}{tibble}

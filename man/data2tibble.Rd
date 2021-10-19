@@ -4,7 +4,7 @@
 \alias{data2tibble}
 \title{Transforms any data type to a tibble}
 \usage{
-data2tibble(data, row.names = "observations")
+data2tibble(data, row.names)
 }
 \arguments{
 \item{data}{supported data types: matrix, data.frame}

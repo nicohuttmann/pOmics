@@ -20,7 +20,8 @@ get_observations_data <- function(which,
   dataset <- get_dataset(dataset)
 
   # Check observations set
-  observations.set <- get_observations_set(observations.set = observations.set)
+  observations.set <- get_observations_set(observations.set = observations.set,
+                                           dataset = dataset)
 
   # Observations
 

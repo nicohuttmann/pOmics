@@ -21,7 +21,7 @@ do_hclust <- function(data_,
                       input,
                       output = "data_hclust") {
 
-  # Handle input
+  # ---- Handle input ----
   input_list <- data_input(data_ = data_, input = input)
 
   if (input_list[["error"]]) return(invisible(input_list[["data"]]))
@@ -48,23 +48,29 @@ do_hclust <- function(data_,
     hclust(method = clustering.method)
 
 
+  # ---- Reorder data based on dendrograms (simplifies analysis later) ----
+
+  data <- tibble2data.frame(data)
+
+  data <- data[dend_y[["labels"]][dend_y[["order"]]],
+               dend_x[["labels"]][dend_x[["order"]]]]
+
+  data <- data2tibble(data)
+
    # Save data
    data_[[output]] <- list()
 
-   data_[[output]][["data"]] <- data %>%
-     dplyr::arrange(match(!!dplyr::sym(colnames(.)[1]),
-                          dend_x[["labels"]][dend_x[["order"]]])) #%>%
-     #dplyr::select(c(colnames(.)[1], dend_y[["labels"]][dend_y[["order"]]]))
+   data_[[output]][["data"]] <- data
 
 
-   data_[[output]][["dend_x"]] <- data_[[output]][["data"]] %>%
+   data_[[output]][["dend_x"]] <- data %>%
      dplyr::select(c(colnames(.)[1], where(is.numeric))) %>%
      tibble2matrix(row.names = colnames(.)[1]) %>%
      dist(method = distance.method) %>%
      hclust(method = clustering.method)
 
    # Dendrogram for x-axis (variables mostly)
-   data_[[output]][["dend_y"]] <- data_[[output]][["data"]] %>%
+   data_[[output]][["dend_y"]] <- data %>%
      dplyr::select(c(colnames(.)[1], where(is.numeric))) %>%
      tibble2matrix(row.names = colnames(.)[1]) %>%
      t() %>%

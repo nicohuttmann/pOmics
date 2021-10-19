@@ -7,7 +7,7 @@
 #' @export
 #'
 #'
-data2tibble <- function(data, row.names = "observations") {
+data2tibble <- function(data, row.names) {
 
   # Already a tibble
   if (tibble::is_tibble(data)) {
@@ -15,6 +15,24 @@ data2tibble <- function(data, row.names = "observations") {
 
   # Matrix
   } else if (is.matrix(data) || is.data.frame(data)) {
+
+    # Determine row.names
+    if (hasArg(row.names)) {
+
+      if (!is.null(attr(data, "row_names"))) {
+
+        row.names <- attr(data, "row_names")
+
+      } else {
+
+        # row.names <- "observations"
+        if (nrow(data) < ncol(data)) row.names <- "observations"
+
+        else row.names <- "variables"
+
+      }
+
+    }
 
     data <- data %>%
       {if (is.matrix(.)) as.data.frame(.) else .} %>%

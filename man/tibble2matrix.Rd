@@ -4,7 +4,7 @@
 \alias{tibble2matrix}
 \title{Transforms tibble to matrix}
 \usage{
-tibble2matrix(tibble, row.names = "observations")
+tibble2matrix(tibble, row.names)
 }
 \arguments{
 \item{tibble}{tibble}

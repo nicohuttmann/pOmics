@@ -1,6 +1,7 @@
 #' Template for functions that accept either a data frame or a list
 #'
 #' @param data_ list or tibble
+#' @param dend which dendrogram to use for analysis
 #' @param ... specific arguments
 #' @param dataset dataset
 #' @param input name of input data
@@ -10,7 +11,12 @@
 #' @export
 #'
 #'
-do_nothing <- function(data_, ..., dataset, input, output) {
+do_dend_enrich <- function(data_,
+                           dend = "dend_y",
+                           ...,
+                           dataset,
+                           input = "data_cormat",
+                           output) {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)

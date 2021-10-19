@@ -4,10 +4,10 @@
 \alias{matrix2tibble}
 \title{Transforms matrix to tibble and adds column for rownames}
 \usage{
-matrix2tibble(matrix, row.names = "observations")
+matrix2tibble(data, row.names)
 }
 \arguments{
-\item{matrix}{matrix with row names}
+\item{data}{matrix with row names}
 
 \item{row.names}{name for rownames vector}
 }

@@ -1,6 +1,6 @@
 #' Transforms data frames to tibble and adds column for row names
 #'
-#' @param data.frame data frame with row names
+#' @param data data frame with row names
 #' @param row.names name for row names vector
 #'
 #' @return
@@ -8,11 +8,34 @@
 #'
 #' @importFrom magrittr %>%
 #'
-data.frame2tibble <- function(data.frame, row.names = "observations") {
+data.frame2tibble <- function(data, row.names) {
+
+  # Determine row.names
+  if (hasArg(row.names)) {
+
+    if (!is.null(attr(data, "row_names"))) {
+
+      row.names <- attr(data, "row_names")
+
+    } else {
+
+      # row.names <- "observations"
+      if (nrow(data) < ncol(data)) row.names <- "observations"
+
+      else row.names <- "variables"
+
+    }
+
+  }
+
+
+  # Transform data.frame
+  data <- data %>%
+    tibble::rownames_to_column(var = row.names) %>%
+    tibble::as_tibble()
+
 
   # Transform and return
-  return(data.frame %>%
-           tibble::rownames_to_column(var = row.names) %>%
-           tibble::as_tibble())
+  return(data)
 
 }

@@ -57,9 +57,10 @@ get_observations <- function(observations, observations.set, dataset) {
     # input given as vector
     # intersect given proteins with proteins in dataset
   } else {
-    return(intersect(observations,
-                     .datasets[[dataset]][["observations"]][[observations.set]] %>%
-                       dplyr::pull(var = "observations", name = NULL)))
+    return(
+      intersect(observations,
+                .datasets[[dataset]][["observations"]][[observations.set]] %>%
+                  dplyr::pull(var = "observations", name = NULL)))
 
 
   }

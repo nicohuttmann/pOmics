@@ -19,20 +19,20 @@
 #' @export
 #'
 #'
-do_cor_matrix <- function(data_,
-                          cor.method = "pearson",
-                          diag0 = T,
-                          similarity.method = "none",
-                          adjacency.method = "none",
-                          alpha,
-                          theta,
-                          beta,
-                          distance.method = "euclidean",
-                          clustering.method = "complete",
-                          dataset,
-                          plot = T,
-                          input,
-                          output = "data_cor_matrix") {
+do_cormat <- function(data_,
+                      cor.method = "pearson",
+                      diag0 = T,
+                      similarity.method = "none",
+                      adjacency.method = "none",
+                      alpha,
+                      theta,
+                      beta,
+                      distance.method = "euclidean",
+                      clustering.method = "complete",
+                      dataset,
+                      plot = T,
+                      input,
+                      output = "data_cormat") {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -42,11 +42,12 @@ do_cor_matrix <- function(data_,
   else {
     data <- input_list[["data"]]
     input <- input_list[["input"]] # Remove if not used
-    
   }
 
 
   # Compute correlation measure
+  col_names <- colnames(data)
+
   data <- data %>%
     tibble2matrix(row.names = ) %>%
     cor(method = cor.method) %>%
@@ -56,28 +57,34 @@ do_cor_matrix <- function(data_,
     {if (diag0) {diag(.) <- 0; .}
       else .} %>%
     # Calculate adjacency from similarity
-    adjacency(method = adjacency.method)
+    adjacency(method = adjacency.method) %>%
+    matrix2tibble(row.names = setdiff(col_names, colnames(.)))
 
-
-  # Compute dendrograms
-  dend <- data %>%
-    dist(method = distance.method) %>%
-    hclust(method = clustering.method)
 
 
 
   # Prepare return
   if (input_list[["list.input"]]) {
     data_[[output]] <- data
-    data_[["dend"]] <- dend
   }
 
   else data_ <- data
 
 
+
+  # Compute dendrograms
+  data_ <- data_ %>%
+    do_hclust(scale = FALSE,
+              distance.method = distance.method,
+              clustering.method = clustering.method,
+              plot = F,
+              input = output,
+              output = output)
+
+
   # Plot cor matrix
   if (plot) {
-    data_ <- plot_cor_matrix(data_ = data_, view = T)
+    data_ <- plot_cormat(data_ = data_, view = T)
   }
 
 

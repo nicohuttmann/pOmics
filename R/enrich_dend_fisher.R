@@ -8,7 +8,10 @@
 #' @export
 #'
 #'
-enrich_dend_fisher <- function(dend.table, annotated.proteins, n = 10, inverse = F) {
+enrich_dend_fisher <- function(dend.table,
+                               annotated.proteins,
+                               n = 10,
+                               inverse = F) {
 
   # Extract data as matrix
   dend.table.pvalue <- as.matrix(dend.table[, c(1:n + 1)])
