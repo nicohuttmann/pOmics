@@ -13,10 +13,14 @@
 #'
 #' @importFrom magrittr %>%
 #'
-plot_euler <- function(data_, fontsize = 8, transpose = T,
+plot_euler <- function(data_,
+                       fontsize = 8,
+                       transpose = T,
                        from.row.names = "observations",
-                       to.row.names = "variables", view = T,
-                       input, output = "plot_euler") {
+                       to.row.names = "variables",
+                       view = T,
+                       input,
+                       output = "plot_euler") {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -26,7 +30,6 @@ plot_euler <- function(data_, fontsize = 8, transpose = T,
   else {
     data <- input_list[["data"]]
     input <- input_list[["input"]] # Remove if not used
-
   }
 
 

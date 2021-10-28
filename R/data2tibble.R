@@ -17,7 +17,7 @@ data2tibble <- function(data, row.names) {
   } else if (is.matrix(data) || is.data.frame(data)) {
 
     # Determine row.names
-    if (hasArg(row.names)) {
+    if (!hasArg(row.names)) {
 
       if (!is.null(attr(data, "row_names"))) {
 

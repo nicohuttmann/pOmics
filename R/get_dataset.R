@@ -29,7 +29,7 @@ get_dataset <- function(dataset, try.all = F) {
     return(names(.datasets)[dataset])
 
   # Dynamic selection
-  if (dataset == "dynamic")
+  if (dataset == "dynamic" || dataset == "")
     return(names(.datasets)[menu(names(.datasets),
                                  title = "Select dataset: ")])
 

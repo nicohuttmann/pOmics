@@ -25,7 +25,7 @@ do_scale <- function(data_, input, output) {
   # Scale data
   data <- data %>%
     dplyr::mutate(dplyr::across(.cols = where(is.numeric),
-                                .fns = scale)) %>%
+                                .fns = function(x) c(scale(x)))) %>%
     dplyr::mutate(dplyr::across(.cols = where(function(x) all(is.na(x))),
                                 .fns = function(x) 0))
 

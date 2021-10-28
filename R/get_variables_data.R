@@ -57,7 +57,7 @@ get_variables_data <- function(which,
   }
 
 
-  ### Which data to pull
+  # ---- Which data to pull ----
 
   # No argument given (which)
   if (!hasArg(which)) {
@@ -74,7 +74,7 @@ get_variables_data <- function(which,
   }
 
 
-  # Check if names are all in variables data
+  # Check if names of data were not found in variables_data
   if (any(!which %in% get_variables_data_names(dataset = dataset))) {
 
     message(paste0("Some data names were not found: \n  ",
@@ -170,6 +170,19 @@ get_variables_data <- function(which,
           message(paste0("Modifying function would change the length or type ",
           "of the output. List not modified. Consider list output."))
         }
+      }
+
+    # Tibble
+    } else if (grepl(pattern = "tibble", x = output.type)) {
+
+      data <- .datasets[[dataset]][["variables"]] %>%
+        dplyr::filter(.data[["variables"]] %in% !!variables) %>%
+        dplyr::arrange(match(.data[["variables"]], !!variables)) %>%
+        dplyr::select("variables", !!which)
+
+      # Modify
+      if (hasArg(FUN)) {
+        data <- lapply(data, FUN, ...)
       }
 
     }

@@ -34,15 +34,15 @@ do_hclust <- function(data_,
 
   # Dendrogram for x-axis (observations mostly)
   dend_x <- data %>%
-    dplyr::select(c(colnames(.)[1], where(is.numeric))) %>%
-    tibble2matrix(row.names = colnames(.)[1]) %>%
+    dplyr::select(c(1, where(is.numeric))) %>%
+    tibble2matrix() %>%
     dist(method = distance.method) %>%
     hclust(method = clustering.method)
 
   # Dendrogram for x-axis (variables mostly)
   dend_y <- data %>%
-    dplyr::select(c(colnames(.)[1], where(is.numeric))) %>%
-    tibble2matrix(row.names = colnames(.)[1]) %>%
+    dplyr::select(c(1, where(is.numeric))) %>%
+    tibble2matrix() %>%
     t() %>%
     dist(method = distance.method) %>%
     hclust(method = clustering.method)
@@ -52,8 +52,9 @@ do_hclust <- function(data_,
 
   data <- tibble2data.frame(data)
 
-  data <- data[dend_y[["labels"]][dend_y[["order"]]],
-               dend_x[["labels"]][dend_x[["order"]]]]
+  data <- data[dend_x[["labels"]][dend_x[["order"]]],
+               c(setdiff(colnames(data), dend_y[["labels"]][dend_y[["order"]]]),
+                 dend_y[["labels"]][dend_y[["order"]]])]
 
   data <- data2tibble(data)
 

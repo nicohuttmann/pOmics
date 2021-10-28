@@ -11,7 +11,7 @@
 data.frame2tibble <- function(data, row.names) {
 
   # Determine row.names
-  if (hasArg(row.names)) {
+  if (!hasArg(row.names)) {
 
     if (!is.null(attr(data, "row_names"))) {
 

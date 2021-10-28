@@ -21,7 +21,8 @@ add_data(
 
 \item{set.default.data.name}{set data name as default}
 
-\item{new.observations.set.name}{if new observations set is added, specify name}
+\item{new.observations.set.name}{if new observations set is added, specify
+name}
 }
 \value{
 

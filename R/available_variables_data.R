@@ -31,12 +31,16 @@ available_variables_data <- function(dataset, view = T, return = F,
                                       multiple = T,
                                       graphics = F)
 
-    cat(paste0('transfer_variables_data(dataset = "',
+    call_str <- paste0('transfer_variables_data(dataset = "',
                dataset,
                '",\n\t',
                'data.columns = c("',
                paste(variables.data.sel, collapse = '",\n\t\t"'),
-               '"))'))
+               '"))')
+
+    writeClipboard(call_str)
+
+    cat(call_str)
 
 
   # Return data frames names

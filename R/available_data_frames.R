@@ -29,12 +29,15 @@ available_data_frames <- function(dataset, view = T, return = F,
                                    multiple = T,
                                    graphics = F)
 
-    cat(paste0('transfer_data_frames(dataset = "',
+    call_str <- paste0('transfer_data_frames(dataset = "',
                dataset,
                '",\n\t',
                'data.columns = c("',
                paste(data.frames.sel, collapse = '",\n\t\t"'),
-               '"))'))
+               '"))')
+    writeClipboard(call_str)
+
+    cat(call_str)
 
   #  Return data frames names
   } else if (return) {

@@ -11,7 +11,7 @@
 tibble2matrix <- function(tibble, row.names) {
 
   # Determine row.names
-  if (hasArg(row.names)) {
+  if (!hasArg(row.names)) {
 
     if (!is.null(attr(tibble, "row_names")) &&
         attr(tibble, "row_names") %in% colnames(tibble)) {

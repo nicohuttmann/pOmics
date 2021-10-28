@@ -19,7 +19,7 @@ get_proteome <- function(id, dataset) {
   }
 
   # Check taxId
-  if (is.null(taxId)) {
+  if (is.null(Id)) {
 
     message("No taxId saved in dataset. Use setup_annotations() or a protoeme name.")
     return(invisible(NULL))
@@ -46,7 +46,8 @@ get_proteome <- function(id, dataset) {
 
   if (!check_database(id = id, type = "Proteome")) {
 
-    message(paste0("No proteome database setup for taxId ", taxId, ". Use import_fasta()."))
+    message(paste0("No proteome database setup for taxId ",
+                   taxId, ". Use import_fasta()."))
     return(invisible(NULL))
 
   }
