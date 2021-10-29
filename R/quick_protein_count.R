@@ -25,13 +25,13 @@ quick_protein_count <- function(variables, observations, observations.set,
                   observations = observations,
                   observations.set = observations.set,
                   dataset = dataset) %>%
-    eval_data(expr = x > 0, input = "Peptides") %>%
+    do_expr(expr = x > 0, input = "Peptides") %>%
     put_data(which = "LFQ.intensity",
              variables = variables,
              observations = observations,
              observations.set = observations.set,
              dataset = dataset) %>%
-    eval_data(expr = x > 0, input = "LFQ.intensity") %>%
+    do_expr(expr = x > 0, input = "LFQ.intensity") %>%
     do_count_id_quant())
 
 

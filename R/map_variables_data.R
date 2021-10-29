@@ -29,7 +29,7 @@ map_variables_data <- function(variables.data,
 
   # Check match.to argument
   if (!hasArg(match.to)) {
-    stop("Guessing not implemeted yet. Please provide an argument.")
+    stop("Guessing not implemeted yet. Please provide an argument for matchto.")
   }
 
   # Check if input is vector

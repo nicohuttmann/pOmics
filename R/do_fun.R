@@ -11,7 +11,7 @@
 #' @export
 #'
 #'
-do_something <- function(data_, FUN, ..., dataset, input, output) {
+do_fun <- function(data_, FUN, ..., dataset, input, output) {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)

@@ -25,7 +25,7 @@ impute_missForest <- function(data_, input, output, ...) {
 
   # Impute by missForest
   data <- data %>%
-    eval_data(expr = ifelse(x > 0, x, NA)) %>%
+    do_expr(expr = ifelse(x > 0, x, NA)) %>%
     tibble2matrix() %>%
     missForest::missForest(...) %>%
     purrr::pluck("ximp") %>%

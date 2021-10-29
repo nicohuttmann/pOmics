@@ -17,7 +17,7 @@
 #' @importFrom magrittr %>%
 #'
 #'
-eval_data <- function(data_, expr, FUN, modify, ignore, input, output) {
+do_expr <- function(data_, expr, FUN, modify, ignore, input, output) {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -101,3 +101,7 @@ eval_data <- function(data_, expr, FUN, modify, ignore, input, output) {
   return(data_)
 
 }
+
+
+eval_data <- do_expr
+
