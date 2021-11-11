@@ -1,15 +1,17 @@
-#' Returns variable names from data frame of specific column type
+#' Returns column names from data frame of specific column type
 #'
 #' @param data data frame
-#' @param type data type
+#' @param data.type data type/s
 #'
 #' @return
 #' @export
 #'
-colnames_typeof <- function(data, type = "double") {
+colnames_typeof <- function(data, data.type = "double") {
 
-  coltypes <- unlist(lapply(data, typeof))
+  col.types <- unlist(lapply(data, typeof))
 
-  return(which_names(coltypes == type))
+  col.names <- names(in_(col.types, data.type))
+
+  return(col.names)
 
 }

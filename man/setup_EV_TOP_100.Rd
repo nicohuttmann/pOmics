@@ -4,7 +4,7 @@
 \alias{setup_EV_TOP_100}
 \title{Downloads Top 100 EV protein markers from Vesiclepedia}
 \usage{
-setup_EV_TOP_100()
+setup_EV_TOP_100(id = "EV_TOP_100", type = "EV_database")
 }
 \value{
 

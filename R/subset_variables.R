@@ -27,10 +27,9 @@ subset_variables <- function(data_, variables, dataset, input, output) {
   # Keep all non-variables columns
   columns <- colnames(data)[!colnames(data) %in% get_all_variables()]
 
-  # Add proteins
 
-
-  # check dataset
+  # Check dataset
+  if (!hasArg(dataset)) dataset <- attr(data, "dataset")
   dataset <- get_dataset(dataset)
 
 

@@ -28,7 +28,7 @@ get_labels_column <- function(data, labels, dataset) {
 
     } else {
 
-      labels <- colnames_typeof(data, type = "character")[1]
+      labels <- colnames_class(data, data.class = "character")[1]
 
     }
 

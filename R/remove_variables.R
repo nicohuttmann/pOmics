@@ -23,9 +23,16 @@ remove_variables <- function(data_, min = 0.5, input, output) {
   }
 
 
-
   # Remove columns
-  data <- dplyr::select(data, -where(function(x) is.numeric(x) & mean(x > 0) < min))
+
+  keep <- colnames_class(data, c("character", "factor"))
+
+  keep <- c(keep, data %>%
+              dplyr::select(colnames_class(., "numeric")) %>%
+              sapply(function(x) mean(x > 0) >= min) %>%
+              which_names())
+
+  data <- dplyr::select(data, all_of(keep))
 
 
   if (!hasArg(output)) output <- input

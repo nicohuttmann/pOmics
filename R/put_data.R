@@ -21,14 +21,17 @@ put_data <- function(data_,
                      output) {
 
   # Check input
-  if (!hasArg(data_) || !is.list(data_)) stop("No list given to which data can be added.")
+  if (!hasArg(data_) || !is.list(data_))
+    stop("No list given to which data can be added.")
 
   if (!hasArg(output)) output <- which
 
-  if (output %in% names(data_)) stop("Name data name already present in list. Please provide a unque name.")
+  if (output %in% names(data_))
+    stop("Name data name already present in list. Please provide a unque name.")
 
 
   # Checks correct name of dataset
+  if (!hasArg(dataset)) dataset <- attr(data_, "dataset")
   dataset <- get_dataset(dataset)
 
   # Check data type and name
@@ -48,11 +51,17 @@ put_data <- function(data_,
   data <- .datasets[[dataset]][[which]]
 
 
-
   # Add data to list
   data_[[output]] <- data %>%
     dplyr::filter(observations %in% !!observations) %>%
     dplyr::select(c(observations, dplyr::any_of(variables)))
+
+
+  # ---- Transfer attributes ----
+  attr(data_[[output]], "dataset") <- dataset
+  attr(data_, "dataset") <- dataset
+  attr(data_, "data") <- output
+
 
   # Return
   return(data_)

@@ -11,8 +11,27 @@ select_DisGeNet <- function(genes) {
 
 
   # Prebuild data frame
-  data <- data.frame(matrix(NA, ncol = 2, nrow = 0))
-  colnames(data) <- c("gene_symbol", "disease_name")
+  data <- data.frame(matrix(NA, ncol = 20, nrow = 0))
+  colnames(data) <- c("diseaseid",
+                      "el",
+                      "year_initial",
+                      "source",
+                      "disease_class_name",
+                      "gene_pli",
+                      "disease_type",
+                      "uniprotid",
+                      "disease_semantic_type",
+                      "score",
+                      "gene_symbol",
+                      "disease_class",
+                      "geneid",
+                      "ei",
+                      "year_final",
+                      "protein_class",
+                      "protein_class_name",
+                      "gene_dpi",
+                      "disease_name",
+                      "gene_dsi")
 
 
 
@@ -22,7 +41,8 @@ select_DisGeNet <- function(genes) {
     temp.data <-
       suppressWarnings(
       suppressMessages(
-        tryCatch(disgenet2r::gene2disease(genes[1:200])@qresult[, c("gene_symbol", "disease_name")],
+        tryCatch(disgenet2r::gene2disease(
+          genes[1:200])@qresult[, ],
                  error = function(cond) {
                    NA
                    }
@@ -40,7 +60,9 @@ select_DisGeNet <- function(genes) {
       temp.data <-
         suppressWarnings(
         suppressMessages(
-          tryCatch(disgenet2r::gene2disease(genes[i:ifelse(i + 399 > length(genes), length(genes), i + 399)])@qresult[, c("gene_symbol", "disease_name")],
+          tryCatch(disgenet2r::gene2disease(
+            genes[i:ifelse(i + 399 > length(genes),
+                           length(genes), i + 399)])@qresult[, ],
                    error = function(cond) {
                      NA
                      }
@@ -55,18 +77,19 @@ select_DisGeNet <- function(genes) {
 
 
   # Rename genes to protein accession
-  data[, 1] <- names(genes)[match(data[, 1], genes)]
+  #data[, 1] <- names(genes)[match(data[, 1], genes)]
 
 
-  data.return <- data.frame(matrix(NA, ncol = 2, nrow = length(genes)))
-  colnames(data.return) <- c("UNIPROTKB", "disease_name")
-  data.return[, 1] <- names(genes)
+  data.return <- data
+  #data.return <- data.frame(matrix(NA, ncol = 2, nrow = length(genes)))
+  #colnames(data.return) <- c("UNIPROTKB", "disease_name")
+  #data.return[, 1] <- names(genes)
 
   #
-  for (i in 1:nrow(data.return)) {
-    data.return[i, 2] <- paste(unique(data[data[, 1] == data.return[i, 1], 2]), collapse = "; ")
-
-  }
+  # for (i in 1:nrow(data.return)) {
+  #   data.return[i, 2] <- paste(unique(data[data[, 1] == data.return[i, 1], 2]), collapse = "; ")
+  #
+  # }
 
 
 

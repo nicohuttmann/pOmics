@@ -6,7 +6,7 @@
 \usage{
 do_count_id_quant(
   data_,
-  input.id = "Peptides",
+  input.id = "Unique.peptides",
   input.quant = "LFQ.intensity",
   output = "data_count_id_quant"
 )
@@ -14,9 +14,9 @@ do_count_id_quant(
 \arguments{
 \item{data_}{data_}
 
-\item{input.id}{dataframe of identified proteins}
+\item{input.id}{data frame of identified proteins}
 
-\item{input.quant}{dataframe of quanitfied proteins}
+\item{input.quant}{data frame of quantified proteins}
 
 \item{output}{name of output data}
 }

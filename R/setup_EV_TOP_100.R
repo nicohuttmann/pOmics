@@ -3,8 +3,9 @@
 #' @return
 #' @export
 #'
+#' @importFrom magrittr %>%
 #'
-setup_EV_TOP_100 <- function() {
+setup_EV_TOP_100 <- function(id = "EV_TOP_100", type = "EV_database") {
 
 
   # Download list
@@ -12,17 +13,20 @@ setup_EV_TOP_100 <- function() {
 
 
   # Translate Gene symbols to UniProt ids
-  data <- select_org(keys = data[[1]],
-                     columns = "UNIPROT",
-                     output = "vector.rm",
-                     keytype = "SYMBOL",
-                     OrgDb = "org.Hs.eg.db")
+  data <- data %>%
+    as_tibble() %>%
+    dplyr::rename(SYMBOL = GENE.SYMBOL) %>%
+    dplyr::mutate(UNIPROT = select_org(keys = SYMBOL,
+                                       columns = "UNIPROT",
+                                       output = "vector.na",
+                                       keytype = "SYMBOL",
+                                       OrgDb = "org.Hs.eg.db"))
 
 
   # Add new database entry
   add_database(database = data,
-               id = "EV_TOP_100",
-               type = "Protein_lists",
+               id = id,
+               type = type,
                replace = T)
 
 }

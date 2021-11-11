@@ -9,10 +9,12 @@ plot_pca(
   x = "PC1",
   y = "PC2",
   include.variance = T,
-  fill.by = "observations",
+  color.by,
+  color,
+  fill.by,
   fill,
   shape.by,
-  shape = 21,
+  shape,
   point.size = 1,
   point.transparency = 1,
   custom.theme = theme_hjv_framed_no_axes,
@@ -23,18 +25,17 @@ plot_pca(
   expand.y.axis = c(0, 0),
   x.axis.breaks = 1,
   y.axis.breaks = 1,
-  legend.title.fill = "",
-  legend.title.shape = "",
+  legend.title.color,
+  legend.title.shape,
   legend.position = "right",
   legend.rows,
   view = T,
   input = "data_pca",
-  output = "plot_pca",
-  ...
+  output = "plot_pca"
 )
 }
 \arguments{
-\item{data_}{data list}
+\item{data_}{data_}
 
 \item{x}{Principal component to plot on x-axis}
 
@@ -42,9 +43,13 @@ plot_pca(
 
 \item{include.variance}{add variance to axis titles}
 
-\item{fill.by}{column to use for coloring data points}
+\item{color.by}{column to use for coloring data points}
 
-\item{fill}{fill}
+\item{color}{color}
+
+\item{fill.by}{column to use for filling data points}
+
+\item{fill}{fill (same as color if not defined)}
 
 \item{shape.by}{column to use for shape of data points}
 
@@ -52,7 +57,7 @@ plot_pca(
 
 \item{point.size}{point size (pt)}
 
-\item{point.transparency}{transpacency (0-1)}
+\item{point.transparency}{transparency (0-1)}
 
 \item{custom.theme}{theme to use for plot}
 
@@ -66,7 +71,7 @@ plot_pca(
 
 \item{expand.y.axis}{expand x.axis (see scale_y_continuous)}
 
-\item{legend.title.fill}{title of fill legend}
+\item{legend.title.color}{title of color legend}
 
 \item{legend.title.shape}{title of shape legend}
 
@@ -77,8 +82,6 @@ plot_pca(
 \item{input}{name of input data}
 
 \item{output}{name of output data}
-
-\item{...}{}
 
 \item{x.axis.break.size}{distance between x-axis breaks}
 

@@ -27,6 +27,7 @@ subset_observations <- function(data_, observations, observations.set, dataset, 
 
 
   # check dataset
+  if (!hasArg(dataset)) dataset <- attr(data, "dataset")
   dataset <- get_dataset(dataset)
 
   # Check observations set

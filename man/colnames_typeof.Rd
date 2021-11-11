@@ -2,18 +2,18 @@
 % Please edit documentation in R/colnames_typeof.R
 \name{colnames_typeof}
 \alias{colnames_typeof}
-\title{Returns variable names from data frame of specific column type}
+\title{Returns column names from data frame of specific column type}
 \usage{
-colnames_typeof(data, type = "double")
+colnames_typeof(data, data.type = "double")
 }
 \arguments{
 \item{data}{data frame}
 
-\item{type}{data type}
+\item{data.type}{data type/s}
 }
 \value{
 
 }
 \description{
-Returns variable names from data frame of specific column type
+Returns column names from data frame of specific column type
 }

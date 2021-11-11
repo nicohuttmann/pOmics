@@ -36,6 +36,7 @@ include_variables_data <- function(data_,
                                                     row.names = "variables")
 
   # Check dataset
+  if (!hasArg(dataset)) dataset <- attr(data, "dataset")
   dataset <- get_dataset(dataset)
 
 

@@ -10,7 +10,7 @@
 get_dataset <- function(dataset, try.all = F) {
 
   # Default if not given
-  if (!hasArg(dataset)) {
+  if (!hasArg(dataset) || is.null(dataset)) {
 
     if (try.all && is_dataset("all"))
       return("all")

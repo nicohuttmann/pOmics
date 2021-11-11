@@ -20,12 +20,19 @@
 #' @importFrom magrittr %>%
 #'
 #'
-plot_gg_count_id_quant <- function(data_, color.id = "#6BAED6",
-                                   color.quant = "#2171B5", labels, order.by,
-                                   xlab = NULL, ylab = "Proteins",
-                                   limit.y.top, aspect.ratio = 0.66,
-                                   dataset, input = "data_count_id_quant",
-                                   output = "plot_count_id_quant", View = T) {
+plot_gg_count_id_quant <- function(data_,
+                                   color.id = "#6BAED6",
+                                   color.quant = "#2171B5",
+                                   labels,
+                                   order.by,
+                                   xlab = NULL,
+                                   ylab = "Proteins",
+                                   limit.y.top,
+                                   aspect.ratio = 0.66,
+                                   dataset,
+                                   input = "data_count_id_quant",
+                                   output = "plot_count_id_quant",
+                                   View = T) {
 
 
 
@@ -47,13 +54,14 @@ plot_gg_count_id_quant <- function(data_, color.id = "#6BAED6",
     data$observations <-
       factor(data$observations,
              levels = data$observations[order(data[[order.by]])])
+
     x.labels <- x.labels[order(data[[order.by]])]
 
   }
 
 
   data.plot <- data %>%
-    dplyr::select(observations, !!labels, count.id, count.quant) %>%
+    dplyr::select(!!labels, count.id, count.quant) %>%
     dplyr::mutate(count.id = count.id - count.quant) %>%
     dplyr::rename(Identified = count.id) %>%
     dplyr::rename(Quantified = count.quant) %>%
@@ -66,14 +74,14 @@ plot_gg_count_id_quant <- function(data_, color.id = "#6BAED6",
 
 
   p <- ggplot(data = data.plot) +
-    geom_bar(mapping = aes(x = observations, y = value, fill = variable),
+    geom_bar(mapping = aes(x = labels, y = value, fill = variable),
              stat = "identity", position = "stack") +
     scale_y_continuous(expand = c(0, 0),
                        limits = c(0, limit.y.top)) +
     scale_fill_manual(name = "",
                       values = c(Identified = color.id,
                                  Quantified = color.quant)) +
-    scale_x_discrete(labels = x.labels) +
+    scale_x_discrete() +
     theme_hjv_half_open() +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
           aspect.ratio = aspect.ratio,

@@ -37,8 +37,11 @@ include_observations_data <- function(data_,
   if (!tibble::is_tibble(data))
     data <- data2tibble(data = data, row.names = "observations")
 
+
   # Check dataset
+  if (!hasArg(dataset)) dataset <- attr(data, "dataset")
   dataset <- get_dataset(dataset)
+
 
   # Check observations set
   observations.set <- get_observations_set(observations.set = observations.set,

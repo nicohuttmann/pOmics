@@ -85,13 +85,11 @@ get_data <- function(which,
 
 
 
-
-
-
+  # ---- Grab data ----
   data <- .datasets[[dataset]][[which]]
 
 
-
+  #
   if (grepl(pattern = "tibble", x = output.type)) {
 
     data <- data %>%
@@ -124,18 +122,26 @@ get_data <- function(which,
   }
 
 
+  # ---- Return in list or not ----
   if (grepl(pattern = "_inlist", x = output.type)) {
 
     if (!hasArg(output)) output <- which
 
     # Add data to list
-    data_ <- tibble::lst(
-      !!output := data)
+    data_ <- tibble::lst(!!output := data)
+
+    # ---- Transfer attributes ----
+    attr(data_[[output]], "dataset") <- dataset
+    attr(data_, "dataset") <- dataset
+    attr(data_, "data") <- output
+
 
   } else {
     data_ <- data
-  }
 
+    # ---- Transfer attributes ----
+    attr(data_, "dataset") <- dataset
+  }
 
 
   # Return

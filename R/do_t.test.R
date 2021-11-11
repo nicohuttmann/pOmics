@@ -30,8 +30,7 @@ do_t.test <- function(data_,
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]] # Remove if not used
-
+    input <- input_list[["input"]]
   }
 
 
@@ -39,7 +38,9 @@ do_t.test <- function(data_,
 
 
 
-  data_t.test <- dplyr::tibble(variables = colnames_typeof(data = data),
+  data_t.test <- dplyr::tibble(variables =
+                                 colnames_class(data = data,
+                                                data.class = "numeric"),
                                log2.fc = NA_real_,
                                sig.log2.fc = NA,
                                p.value = NA_real_,
@@ -120,8 +121,6 @@ data_t.test <- data_t.test %>%
   dplyr::mutate(regulated = if (significant) ifelse(log2.fc > 0, "up", "down")
                 else "not") %>%
   dplyr::ungroup()
-
-
 
 
 

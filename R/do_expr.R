@@ -39,7 +39,10 @@ do_expr <- function(data_, expr, FUN, modify, ignore, input, output) {
 
   # ignore
   if (!hasArg(ignore)) {
-    ignore <- c("observations", "variables", "groups", "labels")
+    ignore <- data %>%
+      lapply(FUN = class) %>%
+      in_(c("character", "factor")) %>%
+      names()
   }
 
   # modify
