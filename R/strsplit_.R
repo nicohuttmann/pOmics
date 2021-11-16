@@ -18,7 +18,7 @@ strsplit_ <- function(x, split, output.type = "vector", as_numeric = T) {
   if (!hasArg(split)) split <- identify_separator(x)
 
   # Check if input is list
-  if (is.list(x) || is.vector(x)) {
+  if (is.list(x) || is.atomic(x)) {
 
     x <- unlist(x)
 

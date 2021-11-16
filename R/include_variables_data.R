@@ -33,7 +33,7 @@ include_variables_data <- function(data_,
 
   # Matrix to tibble
   if (!tibble::is_tibble(data)) data <- data2tibble(data = data,
-                                                    row.names = "variables")
+                                                    to.row.names = "variables")
 
   # Check dataset
   if (!hasArg(dataset)) dataset <- attr(data, "dataset")

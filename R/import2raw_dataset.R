@@ -30,9 +30,14 @@ import2raw_dataset <- function(import, identifier, add = T) {
   attr(x = raw_dataset, which = "path") <- attr(import, "path")
   attr(x = raw_dataset, which = "time") <- attr(import, "time")
 
+
   # Set separator
   attr(x = raw_dataset, which = "separator") <- sep
 
+
+
+
+  # Store
   if (add)
     add_raw_dataset(raw_dataset = raw_dataset, name = attr(import, "name"))
 

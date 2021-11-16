@@ -20,7 +20,7 @@ get_variables <- function(variables, dataset) {
 
 
   # Check if input is vector
-  vector.input <- tryCatch(is.vector(variables),
+  vector.input <- tryCatch(is.atomic(variables),
                            error = function(cond) FALSE)
 
 

@@ -25,7 +25,7 @@ get_observations <- function(observations, observations.set, dataset) {
              dplyr::pull(var = "observations", name = NULL))
 
   # Check if input is vector
-  vector.input <- tryCatch(is.vector(observations),
+  vector.input <- tryCatch(is.atomic(observations),
                            error = function(cond) FALSE)
 
   # if observations input expression

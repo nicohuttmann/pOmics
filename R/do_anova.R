@@ -52,7 +52,7 @@ do_anova <- function(analysis_list, formula = "log2(x) ~ groups", data.name = "r
     x %>%
       summary %>%
       dplyr::first() %>%
-      data2tibble(row.names = "groups") %>%
+      data2tibble(to.row.names = "groups") %>%
       dplyr::filter(!grepl("Residuals", groups)) %>%
       dplyr::pull(var = "Pr(>F)", name = "groups")})
 
@@ -62,7 +62,7 @@ do_anova <- function(analysis_list, formula = "log2(x) ~ groups", data.name = "r
   results.df <- results.list %>%
     list2DF() %>%
     t() %>%
-    data2tibble(row.names = "variables")
+    data2tibble(to.row.names = "variables")
 
   colnames(results.df)[-1] <- stringr::str_trim(names(results.list[[1]]))
 
@@ -83,7 +83,7 @@ do_anova <- function(analysis_list, formula = "log2(x) ~ groups", data.name = "r
         matrix_rows(row.names = "p adj")}) %>%
     list2DF() %>%
     t() %>%
-    data2tibble(row.names = "variables")
+    data2tibble(to.row.names = "variables")
 
   colnames(posthoc.p.value)[-1] <- paste0("tukey_", stringr::str_trim(rownames(dplyr::last(posthoc.list[[1]]))))
 
@@ -101,7 +101,7 @@ do_anova <- function(analysis_list, formula = "log2(x) ~ groups", data.name = "r
         matrix_rows(row.names = "diff")}) %>%
     list2DF() %>%
     t() %>%
-    data2tibble(row.names = "variables")
+    data2tibble(to.row.names = "variables")
 
   colnames(posthoc.diff)[-1] <- paste0("log2fc_", stringr::str_trim(rownames(dplyr::last(posthoc.list[[1]]))))
 

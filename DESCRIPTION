@@ -4,7 +4,8 @@ Title: Framework for proteomics data analysis
 Version: 0.14.0
 Author: Nico Huettmann 
 Maintainer: Nico Huettmann <huttmann.nico@gmail.com>
-Description: Provides a framework and functions for the analysis of proteomics data
+Description: Provides a framework and functions for the analysis of proteomics 
+    data
 License: MIT
 Encoding: UTF-8
 LazyData: true

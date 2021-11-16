@@ -22,7 +22,8 @@ add_variables_data(
 
 \item{set.default}{set new variables data as default}
 
-\item{add.background.variable}{add name of column to the background variables for easy access}
+\item{add.background.variable}{add name of column to the background
+variables for easy access}
 
 \item{replace}{replace existing column}
 }

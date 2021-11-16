@@ -4,7 +4,8 @@
 #' @param name name
 #' @param dataset dataset
 #' @param set.default set new variables data as default
-#' @param add.background.variable add name of column to the background variables for easy access
+#' @param add.background.variable add name of column to the background
+#' variables for easy access
 #' @param replace replace existing column
 #'
 #' @return
@@ -13,7 +14,12 @@
 #' @importFrom magrittr %>%
 #'
 #'
-add_variables_data <- function(data, name, dataset, set.default = F, add.background.variable = T, replace) {
+add_variables_data <- function(data,
+                               name,
+                               dataset,
+                               set.default = F,
+                               add.background.variable = T,
+                               replace) {
 
   # Check dataset
   dataset <- get_dataset(dataset)
@@ -26,11 +32,24 @@ add_variables_data <- function(data, name, dataset, set.default = F, add.backgro
 
 
   # Fill template with data
-  if (length(names(data)) > 0) {
+  if (is.atomic(data) && length(names(data)) > 0) {
     template[names(data)] <- data
     # Data vector not named but given vector indicates variables
-  } else if(all(data %in% names(template))) {
+  } else if(is.atomic(data) && all(data %in% names(template))) {
     template[data] <- T
+    # List which can be coerced to vector
+  } else if (is.list(data) && all(sapply(data, length) == 1)) {
+    data <- unlist(data)
+    template[names(data)] <- data
+    # list
+  } else if (is.list(data)) {
+
+    template <- as.list(template)
+
+    for (i in intersect(names(template), names(data))) {
+      template[[i]] <- data[[i]]
+    }
+
     # Stop
   } else {
     message("Data cannot be added.")
@@ -39,7 +58,7 @@ add_variables_data <- function(data, name, dataset, set.default = F, add.backgro
 
 
 
-  # Name already present in dataset
+  # ---- Name already present in dataset ----
   if (name %in% get_variables_data_names(dataset = dataset)) {
 
     # Argument replace given as TRUE
@@ -54,7 +73,8 @@ add_variables_data <- function(data, name, dataset, set.default = F, add.backgro
 
       # Ask
       message(paste0("Column <", name, "> already in variables data."))
-      if (menu(choices = c("Yes", "No"), title = "Should column be replaced? ") == 1) {
+      if (menu(choices = c("Yes", "No"),
+               title = "Should column be replaced? ") == 1) {
 
         remove_variables_data(name = name,
                               dataset = dataset,
@@ -73,13 +93,16 @@ add_variables_data <- function(data, name, dataset, set.default = F, add.backgro
   }
 
 
-  # Add
-  .datasets[[dataset]][["variables"]] <<- .datasets[[dataset]][["variables"]] %>%
-    dplyr::mutate(!!name := template)
+
+  # ---- Add ----
+  .datasets[[dataset]][["variables"]] <<-
+    .datasets[[dataset]][["variables"]] %>%
+    dplyr::mutate(!!name := unname(template))
 
 
   # Set as default variables
-  if (set.default) set_dataset_attr(x = name, which = "default_variables", dataset = dataset)
+  if (set.default) set_dataset_attr(x = name, which = "default_variables",
+                                    dataset = dataset)
 
 
   # Add background variable

@@ -34,7 +34,7 @@ get_observations_data <- function(which,
   } else {
 
     # Check if input is vector
-    vector.input <- tryCatch(is.vector(observations),
+    vector.input <- tryCatch(is.atomic(observations),
                              error = function(cond) FALSE)
 
     # Default observations

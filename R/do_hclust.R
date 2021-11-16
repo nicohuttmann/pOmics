@@ -26,24 +26,26 @@ do_hclust <- function(data_,
 
   if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-  else data <- input_list[["data"]]
+  data <- input_list[["data"]]
 
   # Scale data
   if (scale) data <- do_scale(data)
+
 
 
   # Dendrogram for x-axis (observations mostly)
   dend_x <- data %>%
     dplyr::select(c(1, where(is.numeric))) %>%
     tibble2matrix() %>%
+    t() %>%
     dist(method = distance.method) %>%
     hclust(method = clustering.method)
+
 
   # Dendrogram for x-axis (variables mostly)
   dend_y <- data %>%
     dplyr::select(c(1, where(is.numeric))) %>%
     tibble2matrix() %>%
-    t() %>%
     dist(method = distance.method) %>%
     hclust(method = clustering.method)
 
@@ -52,37 +54,39 @@ do_hclust <- function(data_,
 
   data <- tibble2data.frame(data)
 
-  data <- data[dend_x[["labels"]][dend_x[["order"]]],
-               c(setdiff(colnames(data), dend_y[["labels"]][dend_y[["order"]]]),
-                 dend_y[["labels"]][dend_y[["order"]]])]
+  data <- data[dend_y[["labels"]][dend_y[["order"]]],
+               c(setdiff(colnames(data), dend_x[["labels"]][dend_x[["order"]]]),
+                 dend_x[["labels"]][dend_x[["order"]]])]
 
   data <- data2tibble(data)
 
-   # Save data
-   data_[[output]] <- list()
+  # Save data
+  data_[[output]] <- list()
 
-   data_[[output]][["data"]] <- data
-
-
-   data_[[output]][["dend_x"]] <- data %>%
-     dplyr::select(c(colnames(.)[1], where(is.numeric))) %>%
-     tibble2matrix(row.names = colnames(.)[1]) %>%
-     dist(method = distance.method) %>%
-     hclust(method = clustering.method)
-
-   # Dendrogram for x-axis (variables mostly)
-   data_[[output]][["dend_y"]] <- data %>%
-     dplyr::select(c(colnames(.)[1], where(is.numeric))) %>%
-     tibble2matrix(row.names = colnames(.)[1]) %>%
-     t() %>%
-     dist(method = distance.method) %>%
-     hclust(method = clustering.method)
+  data_[[output]][["data"]] <- data
 
 
-   # Plot
-   if (plot) data_ <- plot_heatmap(data_ = data_, export = F, input = output)
+  data_[[output]][["dend_x"]] <- data %>%
+    dplyr::select(c(1, where(is.numeric))) %>%
+    tibble2matrix(from.row.names = colnames(.)[1]) %>%
+    t() %>%
+    dist(method = distance.method) %>%
+    hclust(method = clustering.method)
 
-   # Return
-   return(invisible(data_))
+
+  # Dendrogram for x-axis (variables mostly)
+  data_[[output]][["dend_y"]] <- data %>%
+    dplyr::select(c(1, where(is.numeric))) %>%
+    tibble2matrix(from.row.names = colnames(.)[1]) %>%
+    dist(method = distance.method) %>%
+    hclust(method = clustering.method)
+
+
+  # Plot
+  if (plot) data_ <- plot_heatmap(data_ = data_, export = F, input = output)
+
+  # Return
+  return(invisible(data_))
 
 }
+

@@ -29,7 +29,7 @@ plot_euler <- function(data_,
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]] # Remove if not used
+    input <- input_list[["input"]]
   }
 
 

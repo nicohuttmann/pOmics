@@ -44,7 +44,7 @@ subset_variables <- function(data_, variables, dataset, input, output) {
   } else {
 
     # Check if input is vector
-    vector.input <- tryCatch(is.vector(variables),
+    vector.input <- tryCatch(is.atomic(variables),
                              error = function(cond) FALSE)
 
     # Default variables

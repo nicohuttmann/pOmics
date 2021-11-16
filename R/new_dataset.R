@@ -4,7 +4,8 @@
 #' @param name name of dataset
 #' @param data.type output type from MaxQuant
 #' @param identifier (optional) specific vector of identifier column/s
-#' @param data.columns (optional) types of data to extract; uses defaults if not specified
+#' @param data.columns (optional) types of data to extract; uses defaults if
+#' not specified
 #'
 #' @return
 #' @export

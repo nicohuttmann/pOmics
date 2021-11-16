@@ -25,8 +25,8 @@ add_data <- function(data,
   if (is_data_name(name, dataset)) stop("Name already taken.")
 
   # Check that a tibble is added
-  if (!tibble::is_tibble(data)) data <- data2tibble(data = data,
-                                                    row.names = "observations")
+  if (!tibble::is_tibble(data))
+    data <- data2tibble(data = data, to.row.names = "observations")
 
 
   # Factors to character

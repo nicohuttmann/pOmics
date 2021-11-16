@@ -4,14 +4,12 @@
 \alias{map_variables}
 \title{Return variables by matching variables.data}
 \usage{
-map_variables(variables.data, match.to, unique.matches = T, dataset)
+map_variables(variables.data, match.to, dataset)
 }
 \arguments{
 \item{variables.data}{named vector or list of variables data to match}
 
 \item{match.to}{column provided variables.data should be matched to}
-
-\item{unique.matches}{remove redundant matches?}
 
 \item{dataset}{dataset}
 }

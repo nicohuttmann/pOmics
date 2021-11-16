@@ -11,7 +11,7 @@ sep_vector2list <- function(x, sep) {
 
   x <- lapply(x,
               FUN = function(x1) {
-                if (is.vector(x1) && is.character(x1) && any(grepl(sep, x1))) {
+                if (is.atomic(x1) && is.character(x1) && any(grepl(sep, x1))) {
                   l <- strsplit(x1, split = sep)
 
                   tryCatch(

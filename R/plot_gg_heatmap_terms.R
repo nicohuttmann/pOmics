@@ -93,7 +93,7 @@ plot_gg_heatmap_terms <- function(data_,
 
   # Dendrogram for x-axis (observations mostly)
   dend_x_enrichment <- data_enrichment %>%
-    tibble2matrix(row.names = "TERM") %>%
+    tibble2matrix(from.row.names = "TERM") %>%
     dist(method = terms.distance.method) %>%
     hclust(method = terms.clustering.method)
 

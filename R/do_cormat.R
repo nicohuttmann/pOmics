@@ -49,7 +49,7 @@ do_cormat <- function(data_,
   col_names <- colnames(data)
 
   data <- data %>%
-    tibble2matrix(row.names = ) %>%
+    tibble2matrix() %>%
     cor(method = cor.method) %>%
     # Calculate similarity from correlation
     similarity(method = similarity.method) %>%
@@ -58,7 +58,7 @@ do_cormat <- function(data_,
       else .} %>%
     # Calculate adjacency from similarity
     adjacency(method = adjacency.method) %>%
-    matrix2tibble(row.names = setdiff(col_names, colnames(.)))
+    matrix2tibble(to.row.names = setdiff(col_names, colnames(.)))
 
 
 

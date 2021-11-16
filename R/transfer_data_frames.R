@@ -6,6 +6,7 @@
 #' @return
 #' @export
 #'
+#' @importFrom magrittr %>%
 #'
 transfer_data_frames <- function(dataset, data.columns) {
 
@@ -13,7 +14,7 @@ transfer_data_frames <- function(dataset, data.columns) {
   dataset <- get_dataset(dataset)
 
   # Check data
-  if (!is_dataset(dataset) | !is_raw_dataset(dataset))
+  if (!is_dataset(dataset) || !is_raw_dataset(dataset))
     stop("Dataset or raw dataset missing.")
 
   # Add new variables data frame
@@ -55,8 +56,11 @@ transfer_data_frames <- function(dataset, data.columns) {
     colnames(data) <-
       .info[["raw_datasets"]][[dataset]][["variables.data"]][["variables"]]
 
+    # Add variables and observations attributes (make dataframe sticky)
+
+
     .datasets[[dataset]][[type]] <<-
-      data2tibble(data, row.names = "observations")
+      data2tibble(data, to.row.names = "observations")
 
   }
 

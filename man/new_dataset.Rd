@@ -15,7 +15,8 @@ new_dataset(import, name, data.type, identifier, data.columns)
 
 \item{identifier}{(optional) specific vector of identifier column/s}
 
-\item{data.columns}{(optional) types of data to extract; uses defaults if not specified}
+\item{data.columns}{(optional) types of data to extract; uses defaults if
+not specified}
 }
 \value{
 

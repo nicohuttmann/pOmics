@@ -14,7 +14,7 @@ summary_proteins <- function(proteins, sort.names = F, view = T) {
 
   # Check input
   # vector
-  if (is.vector(proteins)) table <- tibble::tibble(Protein = proteins)
+  if (is.atomic(proteins)) table <- tibble::tibble(Protein = proteins)
 
   # Matrix
   else if (is.matrix(proteins)) table <-

@@ -1,37 +1,44 @@
 #' Transforms tibble to data frame
 #'
 #' @param tibble tibble
-#' @param row.names column to use for row names
+#' @param to.row.names column to use as new row names
 #'
 #' @return
 #' @export
 #'
 #' @importFrom magrittr %>%
 #'
-tibble2data.frame <- function(tibble, row.names) {
+tibble2data.frame <- function(tibble, to.row.names) {
+
+  # Save data_attributes
+  data_attributes <- .get_data_attributes(tibble)
+
 
   # Determine row.names
-  if (!hasArg(row.names)) {
+  if (!hasArg(from.row.names)) {
 
-    if (!is.null(attr(tibble, "row_names")) &&
-        attr(tibble, "row_names") %in% colnames(tibble)) {
+    if (!is.null(data_attributes)) {
 
-      row.names <- attr(tibble, "row_names")
+      from.row.names <- data_attributes[["rows"]]
 
     } else {
 
-      row.names <- colnames(tibble)[1]
+      from.row.names <- colnames(tibble)[1]
 
     }
 
   }
 
+
+
   # Transform to tibble
   data <- tibble %>%
     tibble::column_to_rownames(var = row.names)
 
-  # Set attribute for retransformation
-  attr(data, "row_names") <- row.names
+  # Reset data_attributes
+  if (!is.null(data_attributes)) {
+    data <- .set_data_attributes(data, data_attributes)
+  }
 
   # Transform and return
   return(data)

@@ -1,7 +1,6 @@
 #' Template for functions that accept either a data frame or a list
 #'
 #' @param data_ list or tibble
-#' @param FUN function to apply to data
 #' @param ... specific arguments
 #' @param dataset dataset
 #' @param input name of input data
@@ -11,7 +10,11 @@
 #' @export
 #'
 #'
-do_fun <- function(data_, FUN, ..., dataset, input, output) {
+do_reverse_dend <- function(data_,
+                            which = "y",
+                            dataset,
+                            input = "data_hclust",
+                            output) {
 
   # Handle input
   input_list <- data_input(data_ = data_, input = input)
@@ -20,18 +23,24 @@ do_fun <- function(data_, FUN, ..., dataset, input, output) {
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]] # Remove if not used
+    input <- input_list[["input"]]
+  }
+
+
+
+  # Ensure only x and y can be modified
+  which <- intersect(c("x", "y"), which)
+
+  # Reverse hclust objects
+  for (i in which) {
+
+    data[[paste0("dend_", i)]] <- data[[paste0("dend_", i)]] %>%
+      as.dendrogram() %>%
+      rev() %>%
+      as.hclust()
 
   }
 
-  # Test input function
-  if (!hasArg(FUN) | !is.function(FUN)) {
-    message("No function given for FUN argument.")
-    return(invisible(data_))
-  }
-
-  # Apply function
-  data <- FUN(data, ...)
 
 
   # Output name
