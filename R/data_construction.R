@@ -122,6 +122,8 @@ get_data <- function(which,
   }
 
 
+
+
   # Make data sticky
   data <- sticky::sticky(data)
 
@@ -132,6 +134,8 @@ get_data <- function(which,
   attr(data, "observations") <- observations
   attr(data, "rows") <- "observations"
   attr(data, "columns") <- "variables"
+
+
 
   # Return in list or not
   if (grepl(pattern = "_inlist", x = output.type)) {
@@ -148,6 +152,89 @@ get_data <- function(which,
   } else {
     data_ <- data
   }
+
+
+  # Return
+  return(data_)
+
+}
+
+
+#' Assemble data from dataset and return in list
+#'
+#' @param data_ data_ list
+#' @param which specific name of data type
+#' @param variables selected variables
+#' @param observations selected observations
+#' @param observations.set set of observations
+#' @param dataset dataset name or number
+#' @param output name to save in list
+#'
+#' @return
+#' @export
+#'
+#'
+put_data <- function(data_,
+                     which,
+                     variables = "default",
+                     observations = "default",
+                     observations.set,
+                     dataset,
+                     output) {
+
+  # Check input
+  if (!hasArg(data_) || !is.list(data_))
+    stop("No list given to which data can be added.")
+
+  if (!hasArg(output)) output <- which
+
+  if (output %in% names(data_))
+    stop("Name data name already present in list. Please provide a unque name.")
+
+
+  # Checks correct name of dataset
+  if (!hasArg(dataset)) dataset <- attr(data_, "dataset")
+  dataset <- get_dataset(dataset)
+
+  # Check data type and name
+  which <- get_data_name(name = which,
+                         dataset = dataset)
+
+  # Assemble variables
+  variables <- get_variables(variables = {{variables}},
+                             dataset = dataset)
+
+  # Assemble observations
+  observations <- get_observations(observations = {{observations}},
+                                   observations.set = observations.set,
+                                   dataset = dataset)
+
+
+  data <- .datasets[[dataset]][[which]]
+
+
+  # Make data sticky
+  data <- sticky::sticky(data)
+
+  # Add attributes
+  attr(data, "dataset") <- dataset
+  attr(data, "data") <- which
+  attr(data, "variables") <- variables
+  attr(data, "observations") <- observations
+  attr(data, "rows") <- "observations"
+  attr(data, "columns") <- "variables"
+
+
+  # Add data to list
+  data_[[output]] <- data %>%
+    dplyr::filter(observations %in% !!observations) %>%
+    dplyr::select(c(observations, dplyr::any_of(variables)))
+
+
+  # ---- Transfer attributes ----
+  attr(data_[[output]], "dataset") <- dataset
+  attr(data_, "dataset") <- dataset
+  attr(data_, "data") <- output
 
 
   # Return
@@ -323,7 +410,7 @@ get_variables_data <- function(which,
       dplyr::filter(.data[["variables"]] %in% !!variables) %>%
       dplyr::arrange(match(.data[["variables"]], !!variables)) %>%
       dplyr::select("variables", !!which) %>%
-      tibble2data.frame(to.row.names = "variables")
+      tibble2data.frame(from.row.names = "variables")
 
     # Output type not found
   } else {
@@ -410,15 +497,10 @@ include_observations_data <- function(data_,
 
   else {
     data <- input_list[["data"]]
-    input <- input_list[["input"]] # Remove if not used
-
+    input <- input_list[["input"]]
+    data_attributes <- input_list[["data_attributes"]]
   }
 
-  # Save data attributes
-  data_attributes <- .get_data_attributes(data)
-
-  # Make data unsticky
-  data <- sticky::unsticky(data)
 
   # Matrix to tibble
   if (!tibble::is_tibble(data))
@@ -439,11 +521,11 @@ include_observations_data <- function(data_,
 
   # Get groups data
   data.vector <- .datasets[[dataset]][["observations"]][[observations.set]] %>%
-    dplyr::pull(var = !!dplyr::enquo(which), name = "observations")
+    dplyr::pull(var = !!which, name = "observations")
 
 
   # Get observations
-  observations <- dplyr::pull(data, var = observations)
+  observations <- dplyr::pull(data, var = "observations")
 
 
   # Check observations and groups
@@ -474,8 +556,8 @@ include_observations_data <- function(data_,
 
 
   # Add groups
-  data <- data %>%
-    dplyr::mutate(!!name := data.vector, .after = "observations")
+  data <- dplyr::mutate(data, !!name := data.vector,
+                        .before = .data_columns(data_attributes))
 
 
   # Reset attributes
@@ -614,9 +696,8 @@ include_groups <- function(data_,
 
 
   # Add groups
-  data <- data %>%
-    dplyr::mutate(groups = group.factors,
-                  .before = .data_columns(data_attributes))
+  data <- dplyr::mutate(data, groups = group.factors,
+                        .before = .data_columns(data_attributes))
 
 
 
@@ -641,4 +722,104 @@ include_groups <- function(data_,
 }
 
 
+#' Adds group vector to data frame
+#'
+#' @param data_ data frame
+#' @param which variables data
+#' @param name name of new column
+#' @param dataset dataset
+#' @param input data frame to be modified
+#' @param output data frame to return in list
+#'
+#' @return
+#' @export
+#'
+include_variables_data <- function(data_,
+                                   which,
+                                   name,
+                                   dataset,
+                                   input,
+                                   output) {
 
+  # Handle input
+  input_list <- data_input(data_ = data_, input = input)
+
+  if (input_list[["error"]]) return(invisible(input_list[["data"]]))
+
+  else {
+    data <- input_list[["data"]]
+    input <- input_list[["input"]]
+    data_attributes <- input_list[["data_attributes"]]
+  }
+
+  # Matrix to tibble
+  if (!tibble::is_tibble(data))
+    data <- data2tibble(data = data, to.row.names = "variables")
+
+  # Check dataset
+  if (!hasArg(dataset)) dataset <- attr(data, "dataset")
+
+  dataset <- get_dataset(dataset)
+
+
+
+  # Get variables data
+  data.vector <- .datasets[[dataset]][["variables"]]%>%
+    dplyr::pull(var = !!which, name = "variables")
+
+
+  # Get variables
+  variables <- dplyr::pull(data, var = "variables")
+
+
+  # Check variables and groups
+  if (any(!variables %in% names(data.vector)))
+    stop("Data does not contain all variables.")
+
+
+  # Remove variables
+  data.vector <- data.vector[variables]
+
+
+  # Use input as name for new column
+  if (!hasArg(name)) {
+
+    if (!tryCatch(is.character(which),
+                  error = function(cond) FALSE)) {
+
+      name <- deparse(substitute(which))
+
+    } else {
+
+      name <- which
+
+    }
+
+  }
+
+
+  # Add data
+  data <- dplyr::mutate(data, !!name := data.vector,
+                        .before = .data_columns(data_attributes))
+
+  # Reset attributes
+  data <- data %>%
+    .set_data_attributes(data_attributes) %>%
+    .add_data_attributes(which = "variables_data", new_attr = name)
+
+
+  # Output name
+  if (!hasArg(output)) output <- input
+
+  # Prepare return
+  if (input_list[["list.input"]]) {
+    data_[[output]] <- data
+    attr(data_, "data") <- output
+  }
+
+  else data_ <- data
+
+  # Return
+  return(data_)
+
+}

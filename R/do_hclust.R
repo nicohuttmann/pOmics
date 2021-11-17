@@ -27,6 +27,7 @@ do_hclust <- function(data_,
   if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
   data <- input_list[["data"]]
+  data_attributes <- input_list[["data_attributes"]]
 
   # Scale data
   if (scale) data <- do_scale(data)
@@ -52,13 +53,12 @@ do_hclust <- function(data_,
 
   # ---- Reorder data based on dendrograms (simplifies analysis later) ----
 
-  data <- tibble2data.frame(data)
+  data <- data %>%
+    dplyr::relocate(c(setdiff(colnames(data), dend_x[["labels"]][dend_x[["order"]]]),
+                      dend_x[["labels"]][dend_x[["order"]]])) %>%
+    dplyr::arrange(match(.[[1]], dend_y[["labels"]][dend_y[["order"]]]))
 
-  data <- data[dend_y[["labels"]][dend_y[["order"]]],
-               c(setdiff(colnames(data), dend_x[["labels"]][dend_x[["order"]]]),
-                 dend_x[["labels"]][dend_x[["order"]]])]
 
-  data <- data2tibble(data)
 
   # Save data
   data_[[output]] <- list()
@@ -68,7 +68,7 @@ do_hclust <- function(data_,
 
   data_[[output]][["dend_x"]] <- data %>%
     dplyr::select(c(1, where(is.numeric))) %>%
-    tibble2matrix(from.row.names = colnames(.)[1]) %>%
+    tibble2matrix() %>%
     t() %>%
     dist(method = distance.method) %>%
     hclust(method = clustering.method)

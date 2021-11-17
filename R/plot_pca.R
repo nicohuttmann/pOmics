@@ -86,29 +86,24 @@ plot_pca <- function(data_,
 
     color.by <- "color"
 
-  } else {
-
-    data <- data %>%
-      dplyr::rename(color = !!color.by)
-
   }
 
   # values for color
-  if (!hasArg(color) || length(unique(data[["color"]])) > length(color)) {
+  if (!hasArg(color) || length(unique(data[[color.by]])) > length(color)) {
 
-    if (length(unique(data[["color"]])) == 1) {
+    if (length(unique(data[[color.by]])) == 1) {
 
       color <- "black"
 
-      names(color) <- unique(data[["color"]])
+      names(color) <- unique(data[[color.by]])
 
     } else {
 
       color <- RColorBrewer::brewer.pal(
-        max(3, length(unique(data[["color"]]))),
-        "Accent")[1:length(unique(data[["color"]]))]
+        max(3, length(unique(data[[color.by]]))),
+        "Accent")[1:length(unique(data[[color.by]]))]
 
-      names(color) <- unique(data[["color"]])
+      names(color) <- unique(data[[color.by]])
 
     }
 
@@ -116,24 +111,29 @@ plot_pca <- function(data_,
 
 
   # ---- fill column in data ----
+  no.fill <- FALSE
+
   if (!hasArg(fill.by) || !fill.by %in% names(data)) {
 
     data <- data %>%
       dplyr::mutate(fill = "all")
 
-    fill.by <- "fill"
-
-  } else {
-
-    data <- data %>%
-      dplyr::rename(fill = !!fill.by)
-
-  }
-
-  # values for fill
-  if (!hasArg(fill) || length(unique(data[["fill"]])) > length(fill)) {
+    fill.by <- color.by
 
     fill <- color
+
+    no.fill <- TRUE
+
+    # values for fill
+  } else if (!hasArg(fill) || length(unique(data[[fill.by]])) > length(fill)) {
+
+    fill <- c("black",
+              "grey",
+              "white",
+              "brown",
+              "blue",
+              "red",
+              "green")[1:length(unique(data[[fill.by]]))]
 
   }
 
@@ -146,27 +146,22 @@ plot_pca <- function(data_,
 
     shape.by <- "shape"
 
-  } else {
-
-    data <- data %>%
-      dplyr::rename(shape = !!shape.by)
-
   }
 
   # values for shape
-  if (!hasArg(shape) || length(unique(data[["shape"]])) > length(shape)) {
+  if (!hasArg(shape) || length(unique(data[[shape.by]])) > length(shape)) {
 
-    if (length(unique(data[["shape"]])) == 1) {
+    if (length(unique(data[[shape.by]])) == 1) {
 
       shape <- 16
 
-      names(shape) <- unique(data[["shape"]])
+      names(shape) <- unique(data[[shape.by]])
 
     } else {
 
-      shape <- c(15:20, 7:14)[1:length(unique(data[["shape"]]))]
+      shape <- c(15:20, 7:14)[1:length(unique(data[[shape.by]]))]
 
-      names(shape) <- unique(data[["shape"]])
+      names(shape) <- unique(data[[shape.by]])
 
     }
 
@@ -176,9 +171,9 @@ plot_pca <- function(data_,
 
 
   # Number of legend rows
-  if (!hasArg(legend.rows)) legend.rows <- max(length(unique(data[["color"]])),
-                                               length(unique(data[["fill"]])),
-                                               length(unique(data[["shape"]])))
+  if (!hasArg(legend.rows)) legend.rows <- max(length(unique(data[[color.by]])),
+                                               length(unique(data[[fill.by]])),
+                                               length(unique(data[[shape.by]])))
 
   # Legend names
   if (!hasArg(legend.title.color)) {
@@ -199,9 +194,9 @@ plot_pca <- function(data_,
 
   p <- ggplot(data, aes(x = .data[[x]],
                         y = .data[[y]],
-                        color = .data[["color"]],
-                        fill = .data[["fill"]],
-                        shape = .data[["shape"]])) +
+                        color = .data[[color.by]],
+                        fill = .data[[fill.by]],
+                        shape = .data[[shape.by]])) +
     geom_point(size = point.size,
                alpha = point.transparency) +
     custom.theme() +
@@ -214,7 +209,7 @@ plot_pca <- function(data_,
                    nrow = legend.rows,
                    byrow = FALSE)
       else "none",
-      fill = if(length(fill) > 1)
+      fill = if(!no.fill)
         guide_legend(title = legend.title.fill,
                      nrow = legend.rows,
                      byrow = FALSE)

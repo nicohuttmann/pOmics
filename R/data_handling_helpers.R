@@ -329,12 +329,12 @@ data.frame2tibble <- function(data, to.row.names) {
 #' Transforms tibble to data frame
 #'
 #' @param tibble tibble
-#' @param to.row.names column to use as new row names
+#' @param from.row.names column to use as new row names
 #'
 #' @return
 #' @export
 #'
-tibble2data.frame <- function(tibble, to.row.names) {
+tibble2data.frame <- function(tibble, from.row.names) {
 
   # Save data_attributes
   data_attributes <- .get_data_attributes(tibble)
@@ -358,8 +358,8 @@ tibble2data.frame <- function(tibble, to.row.names) {
   }
 
 
-  # Transform to tibble
-  data <-  tibble::column_to_rownames(tibble, var = row.names)
+  # Transform to data frame
+  data <-  tibble::column_to_rownames(tibble, var = from.row.names)
 
   # Reset data_attributes
   data <- .set_data_attributes(data, data_attributes)
@@ -407,3 +407,28 @@ data2tibble <- function(data, to.row.names) {
 }
 
 
+#' Transforms a list to tibble logical indication for variables
+#'
+#' @param x list
+#'
+#' @return
+#' @export
+#'
+#' @importFrom magrittr %>%
+#'
+#'
+list2tibble <- function(x, identifier = "variables") {
+
+  #
+  df <- tibble::tibble(!!identifier := unique(unlist(x)))
+
+  # Add logical columns
+  for (column in names(x)) {
+    df <- df %>%
+      dplyr::mutate(!!column := variables %in% x[[column]])
+  }
+
+  # Return
+  return(df)
+
+}

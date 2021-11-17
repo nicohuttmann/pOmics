@@ -252,11 +252,11 @@ do_transpose <- function(data_,
 
   # Prepare return
   if (input_list[["list.input"]]) {
-    data_[[output]] <- .set_data_attributes(data, data_attributes)
+    data_[[output]] <- data
     attr(data_, "data") <- output
   }
 
-  else data_ <- .set_data_attributes(data, data_attributes)
+  else data_ <- data
 
   # Return
   return(data_)
@@ -427,15 +427,13 @@ do_column_summary <- function(data_,
 
   # Prepare return
   if (input_list[["list.input"]]) {
-    data_[[output]] <- .set_data_attributes(data, data_attributes)
+    data_[[output]] <- data
     attr(data_, "data") <- output
   }
 
-  else data_ <- .set_data_attributes(data, data_attributes)
+  else data_ <- data
 
   # Return
   return(data_)
 
 }
-
-

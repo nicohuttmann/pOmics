@@ -63,6 +63,10 @@ plot_ComplexHeatmap <- function(data_,
   }
 
 
+  # ---- Row names ----
+  for (i in names(input.args)) {
+    heatmap.args[[i]] <- input.args[[i]]
+  }
 
 
 

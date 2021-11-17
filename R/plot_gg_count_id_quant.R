@@ -74,7 +74,7 @@ plot_gg_count_id_quant <- function(data_,
 
 
   p <- ggplot(data = data.plot) +
-    geom_bar(mapping = aes(x = labels, y = value, fill = variable),
+    geom_bar(mapping = aes(x = observations, y = value, fill = variable),
              stat = "identity", position = "stack") +
     scale_y_continuous(expand = c(0, 0),
                        limits = c(0, limit.y.top)) +

@@ -91,7 +91,7 @@ plot_heatmap <- function(data_,
 
   if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
-  else data <- input_list[["data"]]
+  data <- input_list[["data"]]
 
 
 
@@ -102,12 +102,14 @@ plot_heatmap <- function(data_,
 
   # Transpose data depending on dendrograms
   if (all(data[["dend_x"]][["labels"]] %in% colnames(data[["data"]])))
-    data <- transpose_tibble(tibble = data[["data"]],
-                             from.row.names = names(data[["data"]])[1])
+    data[["data"]] <- transpose_tibble(
+      tibble = data[["data"]],
+      from.row.names = names(data[["data"]])[1])
 
   # Manually transpose
-  if (transpose) transpose_tibble(tibble = data,
-                                  from.row.names = names(data)[1])
+  if (transpose) data[["data"]] <-
+    transpose_tibble(tibble = data[["data"]],
+                     from.row.names = names(data)[1])
 
 
 
@@ -208,8 +210,9 @@ plot_heatmap <- function(data_,
                                    name = labels.variables,
                                    dataset = dataset)
 
-      labels.x <- dplyr::pull(data[["data"]], !!observations.labels.column,
-                              "observations")[pos_table_x$x]
+      labels.x <- dplyr::pull(data[["data"]],
+                              !!observations.labels.column,
+                              1)[pos_table_x$x]
     }
 
 
