@@ -1,7 +1,6 @@
 #' Plots heatmap with dendrograms
 #'
 #' @param data_ data
-#' @param transpose should data be transformed
 #' @param labels.variables variables data name to use as labels
 #' @param labels.observations column in data for observation labels
 #' @param color.high color for highest value (default = "darkred")
@@ -51,7 +50,6 @@
 #' @importFrom magrittr %>%
 #'
 plot_heatmap <- function(data_,
-                         transpose = F,
                          labels.variables,
                          labels.observations,
                          color.high = "darkred",
@@ -92,6 +90,7 @@ plot_heatmap <- function(data_,
   if (input_list[["error"]]) return(invisible(input_list[["data"]]))
 
   data <- input_list[["data"]]
+  data_attributes <- .get_data_attributes(data[["data"]])
 
 
 
@@ -100,27 +99,11 @@ plot_heatmap <- function(data_,
 
 
 
-  # Transpose data depending on dendrograms
-  if (all(data[["dend_x"]][["labels"]] %in% colnames(data[["data"]])))
-    data[["data"]] <- transpose_tibble(
-      tibble = data[["data"]],
-      from.row.names = names(data[["data"]])[1])
-
-  # Manually transpose
-  if (transpose) data[["data"]] <-
-    transpose_tibble(tibble = data[["data"]],
-                     from.row.names = names(data)[1])
-
-
 
   # Get dendrogram data
-  if (transpose) {
-    dend_data_x <- ggdendro::dendro_data(data[["dend_y"]])
-    dend_data_y <- ggdendro::dendro_data(data[["dend_x"]])
-  }  else {
-    dend_data_x <- ggdendro::dendro_data(data[["dend_x"]])
-    dend_data_y <- ggdendro::dendro_data(data[["dend_y"]])
-  }
+  dend_data_x <- ggdendro::dendro_data(data[["dend_y"]])
+  dend_data_y <- ggdendro::dendro_data(data[["dend_x"]])
+
 
 
 
@@ -195,25 +178,14 @@ plot_heatmap <- function(data_,
 
 
   # Modify labels
-  if (transpose) {
+  labels.y <- variables2labels(variables = pos_table_y$y,
+                               name = labels.variables,
+                               dataset = dataset)
 
-    labels.x <- variables2labels(variables = pos_table_x$x,
-                                 name = labels.variables,
-                                 dataset = dataset)
+  labels.x <- dplyr::pull(data[["data"]],
+                          !!observations.labels.column,
+                          1)[pos_table_x$x]
 
-    labels.y <- dplyr::pull(data[["data"]], !!observations.labels.column,
-                            "observations")[pos_table_y$y]
-
-    } else {
-
-      labels.y <- variables2labels(variables = pos_table_y$y,
-                                   name = labels.variables,
-                                   dataset = dataset)
-
-      labels.x <- dplyr::pull(data[["data"]],
-                              !!observations.labels.column,
-                              1)[pos_table_x$x]
-    }
 
 
 

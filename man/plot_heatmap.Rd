@@ -6,7 +6,6 @@
 \usage{
 plot_heatmap(
   data_,
-  transpose = F,
   labels.variables,
   labels.observations,
   color.high = "darkred",
@@ -44,8 +43,6 @@ plot_heatmap(
 }
 \arguments{
 \item{data_}{data}
-
-\item{transpose}{should data be transformed}
 
 \item{labels.variables}{variables data name to use as labels}
 
