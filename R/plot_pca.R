@@ -5,6 +5,7 @@
 #' @param x Principal component to plot on x-axis
 #' @param y Principal component to plot on y-axis
 #' @param include.variance add variance to axis titles
+#' @param include.ellipses add ellipses around data points
 #' @param color.by column to use for coloring data points
 #' @param color color
 #' @param fill.by column to use for filling data points
@@ -13,17 +14,22 @@
 #' @param shape shape
 #' @param point.size point size (pt)
 #' @param point.transparency transparency (0-1)
+#' @param ellipse.size thiccness of ellipse lines (default = 1)
+#' @param ellipse.transparency transparency of ellipse lines (default = 1)
+#' @param ellipse.linetype linetype of ellipses (default = 1)
 #' @param custom.theme theme to use for plot
 #' @param aspect.ratio absolute length of x-axis/y-axis
 #' @param plot.center vector for center of plot
 #' @param axis.unit.ratio ratio between x- and y-axis units
 #' @param expand.x.axis expand x.axis (see scale_x_continuous)
 #' @param expand.y.axis expand x.axis (see scale_y_continuous)
-#' @param x.axis.break.size distance between x-axis breaks
-#' @param y.axis.break.size distance between y-axis breaks
+#' @param x.axis.breaks space between x-axis breaks
+#' @param y.axis.breaks space between y-axis breaks
 #' @param legend.title.color title of color legend
 #' @param legend.title.shape title of shape legend
 #' @param legend.position position of legend
+#' @param legend.rows (optional) number of rows legend content should be
+#' presented in
 #' @param view view plot
 #' @param input name of input data
 #' @param output name of output data
@@ -38,6 +44,7 @@ plot_pca <- function(data_,
                      x = "PC1",
                      y = "PC2",
                      include.variance = T,
+                     include.ellipses = F,
                      color.by,
                      color,
                      fill.by,
@@ -46,6 +53,9 @@ plot_pca <- function(data_,
                      shape,
                      point.size = 1,
                      point.transparency = 1,
+                     ellipse.size = 1,
+                     ellipse.transparency = 1,
+                     ellipse.linetype = 1,
                      custom.theme = theme_hjv_framed_no_axes,
                      aspect.ratio = 1,
                      plot.center,
@@ -215,10 +225,19 @@ plot_pca <- function(data_,
                      byrow = FALSE)
       else "none",
       shape = if(length(shape) > 1)
-          guide_legend(title = legend.title.shape,
-                       nrow = legend.rows,
-                       byrow = FALSE)
+        guide_legend(title = legend.title.shape,
+                     nrow = legend.rows,
+                     byrow = FALSE)
       else "none")
+
+
+  # ---- Include ellipses ----
+  if (include.ellipses) {
+    p <- p + stat_ellipse(size = ellipse.size,
+                          alpha = ellipse.transparency,
+                          linetype = ellipse.linetype)
+  }
+
 
 
   # Set plot axes size
@@ -230,7 +249,7 @@ plot_pca <- function(data_,
                            expand.y.axis = expand.y.axis,
                            x.axis.breaks = x.axis.breaks,
                            y.axis.breaks = y.axis.breaks
-                           )
+  )
 
 
   if (include.variance) {

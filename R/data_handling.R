@@ -331,8 +331,14 @@ do_row_summary <- function(data_, FUN = mean, by = "All", input, output) {
     dplyr::rename(!!data_attributes[["rows"]] := !!by)
 
 
+  # Add new observations to data attributes
+  data_attributes[["observations"]] <- data$observations
+  data_attributes[["observations_data"]] <-
+    setdiff(data_attributes[["observations_data"]], by)
+
   # Reset attributes
   data <- .set_data_attributes(data, data_attributes)
+
 
   # Output name
   if (!hasArg(output)) output <- input

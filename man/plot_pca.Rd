@@ -9,6 +9,7 @@ plot_pca(
   x = "PC1",
   y = "PC2",
   include.variance = T,
+  include.ellipses = F,
   color.by,
   color,
   fill.by,
@@ -17,6 +18,9 @@ plot_pca(
   shape,
   point.size = 1,
   point.transparency = 1,
+  ellipse.size = 1,
+  ellipse.transparency = 1,
+  ellipse.linetype = 1,
   custom.theme = theme_hjv_framed_no_axes,
   aspect.ratio = 1,
   plot.center,
@@ -43,6 +47,8 @@ plot_pca(
 
 \item{include.variance}{add variance to axis titles}
 
+\item{include.ellipses}{add ellipses around data points}
+
 \item{color.by}{column to use for coloring data points}
 
 \item{color}{color}
@@ -59,6 +65,12 @@ plot_pca(
 
 \item{point.transparency}{transparency (0-1)}
 
+\item{ellipse.size}{thiccness of ellipse lines (default = 1)}
+
+\item{ellipse.transparency}{transparency of ellipse lines (default = 1)}
+
+\item{ellipse.linetype}{linetype of ellipses (default = 1)}
+
 \item{custom.theme}{theme to use for plot}
 
 \item{aspect.ratio}{absolute length of x-axis/y-axis}
@@ -71,21 +83,24 @@ plot_pca(
 
 \item{expand.y.axis}{expand x.axis (see scale_y_continuous)}
 
+\item{x.axis.breaks}{space between x-axis breaks}
+
+\item{y.axis.breaks}{space between y-axis breaks}
+
 \item{legend.title.color}{title of color legend}
 
 \item{legend.title.shape}{title of shape legend}
 
 \item{legend.position}{position of legend}
 
+\item{legend.rows}{(optional) number of rows legend content should be
+presented in}
+
 \item{view}{view plot}
 
 \item{input}{name of input data}
 
 \item{output}{name of output data}
-
-\item{x.axis.break.size}{distance between x-axis breaks}
-
-\item{y.axis.break.size}{distance between y-axis breaks}
 }
 \value{
 

@@ -38,7 +38,7 @@ pull_data <- function(data_,
 
   # Transform DF to tibble
   data <- data %>%
-    data2tibble() %>%
+    data2tibble(to.row.names = "rownames") %>%
     dplyr::pull(var = !!values, name = !!names)
 
   if (all(data == names(data))) data <- unname(data)
