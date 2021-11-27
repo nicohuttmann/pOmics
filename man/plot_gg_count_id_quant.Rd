@@ -6,9 +6,9 @@
 \usage{
 plot_gg_count_id_quant(
   data_,
-  color.id = "#6BAED6",
-  color.quant = "#2171B5",
   labels,
+  color.by = "All",
+  color = list(all = c("#6BAED6", "#2171B5")),
   order.by,
   xlab = NULL,
   ylab = "Proteins",
@@ -23,11 +23,13 @@ plot_gg_count_id_quant(
 \arguments{
 \item{data_}{data_ list}
 
-\item{color.id}{color for identified proteins bar}
-
-\item{color.quant}{color for quantified proteins bar}
-
 \item{labels}{column name for labels}
+
+\item{color.by}{column to use for coloring (default is "All" - column will
+added automatically)}
+
+\item{color}{list containing vectors of length two (first color id, second
+quant) for each group}
 
 \item{order.by}{order.by factor levels of specified column}
 

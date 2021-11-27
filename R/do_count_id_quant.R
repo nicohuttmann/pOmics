@@ -18,7 +18,7 @@ do_count_id_quant <- function(data_,
 
 
   # Count
-  data_[[output]] <- data_[[input.id]] %>%
+  data <- data_[[input.id]] %>%
     dplyr::rowwise() %>%
     dplyr::mutate(count.id = sum(dplyr::c_across(where(is.logical))),
                   .after = where(is.character)) %>%
@@ -32,6 +32,21 @@ do_count_id_quant <- function(data_,
         dplyr::ungroup() %>%
         dplyr::select(c(observations, count.quant)),
       by = "observations")
+
+
+  data_attributes <- list(data = "count_id_quant",
+                          "rows" = "observations",
+                          columns = "other",
+                          observations = data[["observations"]],
+                          other = c("count.id", "quant.id"))
+
+  data <- .set_data_attributes(data, data_attributes)
+
+  #
+   data_[[output]] <- data
+
+
+   attr(data_, "data") <- output
 
 
   # Return
@@ -76,6 +91,7 @@ quick_protein_count <- function(variables, observations, observations.set,
              dataset = dataset) %>%
     do_expr(expr = x > 0, input = "LFQ.intensity") %>%
     do_count_id_quant()
+
 
   return(data_)
 
