@@ -68,7 +68,7 @@ select2output <- function(output.data, keys, output, database, dataset, ...) {
                                           ...)
 
 
-  } else if (output == "TERM2GENE" && database == "UniProt" ) {
+  } else if (output == "TERM2GENE" && database == "UniProt") {
 
     output.data <- select_UniProt_2_TERM2GENE(mapping = output.data)
 
