@@ -7,7 +7,7 @@
 enrich_dend_ks(dend.table, protein.scores, n = 10, inverse = F)
 }
 \arguments{
-\item{dend.table}{drndrogram represented as dataframe}
+\item{dend.table}{dendrogram represented as data frame}
 
 \item{protein.scores}{vector of protein scores}
 

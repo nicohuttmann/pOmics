@@ -1,9 +1,10 @@
 #' Imports fasta file and saves proteome
 #'
 #' @param file fasta file path
-#' @param name (optional) name to save information under
-#' @param add.proteome add all accessions of proteme
-#' @param extract.all extract all information from fasta headers
+#' @param name (optional) name of data base entry
+#' @param save.proteome add all protein accessions as reference proteome
+#' @param save.info extract all information from fasta headers
+#' @param save.sequences extract protein sequences
 #' @param replace replace existing databases
 #'
 #' @return
@@ -11,15 +12,41 @@
 #'
 #' @importFrom magrittr %>%
 #'
-import_fasta <- function(file, name, add.proteome = T, extract.all = T, replace = F) {
+import_fasta <- function(file,
+                         name,
+                         save.proteome = T,
+                         save.info = F,
+                         save.sequences = F,
+                         replace = F) {
 
-
+  # ---- get file ----
   if (!hasArg(file)) file <- file.choose()
 
+  # ---- import fasta file ----
   fasta <- Biostrings::readAAStringSet(filepath = file)
 
+  # ---- define a name ----
+  if (!hasArg(name)) {
 
-  if (add.proteome) {
+    name <- sapply(X = names(fasta),
+                   FUN = function(x)
+                   {
+                     x %>%
+                       substring(first = regexpr("OX=", .) + 3) %>%
+                       substring(first = 1, last = regexpr("=", .) - 4)
+                   },
+                   USE.NAMES = F) %>%
+      table %>%
+           sort(decreasing = T) %>%
+           names %>%
+           first_element()
+
+  }
+
+
+  # ---- save proteome ----
+  # Add id vector as reference proteome
+  if (save.proteome) {
 
     proteome <- sapply(X = names(fasta),
                        FUN = function(x) strsplit_(x, "\\|")[2], USE.NAMES = F)
@@ -40,18 +67,15 @@ import_fasta <- function(file, name, add.proteome = T, extract.all = T, replace 
 
 
   add_database(database = proteome,
-               id = ifelse(hasArg(name), name, taxIds %>%
-                             table %>%
-                             sort(decreasing = T) %>%
-                             names %>%
-                             first_element()),
+               id = name,
                type = "Proteome",
                replace = replace)
 
   }
 
-  # Store all information from fasta file
-  if (extract.all) {
+
+  # ---- Store header information from fasta file ----
+  if (save.info) {
 
     fasta.header <- names(fasta)
 
@@ -59,8 +83,6 @@ import_fasta <- function(file, name, add.proteome = T, extract.all = T, replace 
       strsplit(split = "\\|") %>%
       lapply(function(x) x[3]) %>%
       unlist()
-
-    #fasta.seq <- as.list(fasta)
 
     # fasta header to data frame
     fasta.df <- dplyr::tibble(
@@ -106,12 +128,26 @@ import_fasta <- function(file, name, add.proteome = T, extract.all = T, replace 
 
 
     add_database(database = fasta.df,
-                 id = ifelse(hasArg(name), name, taxIds %>%
-                               table %>%
-                               sort(decreasing = T) %>%
-                               names %>%
-                               first_element()),
+                 id = name,
                  type = "fasta_information",
+                 replace = replace)
+
+  }
+
+  # ---- Protein sequences ----
+  if (save.sequences) {
+
+    fasta.seq <- as.list(fasta)
+
+    names(fasta.seq) <- sapply(X = names(fasta),
+                               FUN = function(x) strsplit_(x, "\\|")[2],
+                               USE.NAMES = F)
+
+    fasta.seq <- lapply(fasta.seq, as.character)
+
+    add_database(database = fasta.seq,
+                 id = name,
+                 type = "Fasta_sequences",
                  replace = replace)
 
   }

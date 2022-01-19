@@ -21,13 +21,14 @@ do_ORA_GO(
 
 \item{pvalueCutoff}{p-value cutoff for annotations}
 
-\item{pAdjustMethod}{one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"}
+\item{pAdjustMethod}{one of "none", "BH" (Benjamini-Hochberg correction),
+"hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"}
 
 \item{qvalueCutoff}{q-value cutoff for annotations}
 
-\item{minGSSize}{minimum number of proteins for annotation to be used for enrichment}
+\item{minGSSize}{minimum number of annotated proteins to be included}
 
-\item{maxGSSize}{maximum number of proteins for annotation to be used for enrichment}
+\item{maxGSSize}{maximum number of annotated proteins to be included}
 
 \item{database}{which GO database to use}
 

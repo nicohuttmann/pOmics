@@ -20,7 +20,7 @@ get_taxId <- function(x) {
       # Prepares entries to test from given data frame
       id.list <- unlist(x[1:ifelse(nrow(x) > 200, 200, nrow(x)), !unlist(lapply(x, is.numeric))])
       id.list <- c(id.list,
-                   keep_first(id.list))
+                   strsplit_keep_first(id.list))
 
       taxId <- identify_taxId(id.list, silent = T)
 

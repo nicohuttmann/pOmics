@@ -139,7 +139,8 @@ select_UniProt <- function(keys,
       data[, "SUBCELLULAR-LOCATIONS"] <- data[, "SUBCELLULAR-LOCATIONS"] %>%
         gsub(pattern = "SUBCELLULAR LOCATION[: ]", replacement = "", x = .) %>%
         gsub(pattern = " \\{[^\\}]*\\}[\\.;] ?", replacement = ";", x = .) %>%
-        gsub(pattern = "\\[([[:alnum:]]| )*\\]: ?", replacement = "", x = .) %>%
+        gsub(pattern = "\\[.*\\]: ?",
+             replacement = "", x = .) %>%
         gsub(pattern = "[;,\\.]+ *", replacement = ";", .) %>%
         gsub(pattern = "Note=.*", replacement = "", .) %>%
         gsub(pattern = "[\\.,; ]+$", replacement = "", x = .) %>%

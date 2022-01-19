@@ -4,8 +4,8 @@
 #' @param pvalueCutoff p-value cutoff for annotations
 #' @param pAdjustMethod one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"
 #' @param qvalueCutoff q-value cutoff for annotations
-#' @param minGSSize minimum number of proteins for annotation to be used for enrichment
-#' @param maxGSSize maximum number of proteins for annotation to be used for enrichment
+#' @param minGSSize minimum number of annotated proteins to be included
+#' @param maxGSSize maximum number of annotated proteins to be included
 #' @param dataset dataset
 #' @param view view results
 #' @param return.all return enrichResult object; useful for further analysis of enrichment results

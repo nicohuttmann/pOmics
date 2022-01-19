@@ -11,7 +11,8 @@
 eval_dend_enrich <- function(dend.enrich, cut = T) {
 
   # Check data
-  if (!hasArg(dend.enrich) || !"dend.table.cluster" %in% names(dend.enrich) || !"dend.table.pvalue" %in% names(dend.enrich))
+  if (!hasArg(dend.enrich) || !"dend.table.cluster" %in% names(dend.enrich) ||
+      !"dend.table.pvalue" %in% names(dend.enrich))
     stop("Problematic input.")
 
   # Smallest p-value
@@ -27,11 +28,21 @@ eval_dend_enrich <- function(dend.enrich, cut = T) {
 
   # Collapse table
   if (cut) {
-    dend.table.pvalue.cut <- dend.enrich[["dend.table.pvalue"]][!duplicated(dend.enrich[["dend.table.cluster"]][, k]), 1:k]
-    dend.table.cluster.cut <- dend.enrich[["dend.table.cluster"]][!duplicated(dend.enrich[["dend.table.cluster"]][, k]), 1:k]
+    dend.table.pvalue.cut <-
+      dend.enrich[["dend.table.pvalue"]][
+        !duplicated(dend.enrich[["dend.table.cluster"]][, k]), 1:k]
+    dend.table.cluster.cut <-
+      dend.enrich[["dend.table.cluster"]][
+    !duplicated(dend.enrich[["dend.table.cluster"]][, k]), 1:k]
   } else {
-    dend.table.pvalue.cut <- dend.enrich[["dend.table.pvalue"]][!duplicated(dend.enrich[["dend.table.cluster"]][, ncol(dend.enrich[["dend.table.cluster"]])]), ]
-    dend.table.cluster.cut <- dend.enrich[["dend.table.cluster"]][!duplicated(dend.enrich[["dend.table.cluster"]][, ncol(dend.enrich[["dend.table.cluster"]])]), ]
+    dend.table.pvalue.cut <-
+      dend.enrich[["dend.table.pvalue"]][
+        !duplicated(dend.enrich[["dend.table.cluster"]][
+          , ncol(dend.enrich[["dend.table.cluster"]])]), ]
+    dend.table.cluster.cut <-
+      dend.enrich[["dend.table.cluster"]][
+        !duplicated(dend.enrich[["dend.table.cluster"]][
+          , ncol(dend.enrich[["dend.table.cluster"]])]), ]
   }
 
 
@@ -39,7 +50,10 @@ eval_dend_enrich <- function(dend.enrich, cut = T) {
   rownames(dend.table.cluster.cut) <- c()
 
   # Cluster identifier
-  l <- dend.table.cluster.cut[(dend.table.pvalue.cut[, k] == p.value) %>% which() %>% first_element, k] %>% unname()
+  l <- dend.table.cluster.cut[(dend.table.pvalue.cut[, k] == p.value) %>%
+                                which() %>%
+                                first_element, k] %>%
+    unname()
 
 
   dend.enrich[["dend.table.cluster.cut"]] <- dend.table.cluster.cut
@@ -52,7 +66,8 @@ eval_dend_enrich <- function(dend.enrich, cut = T) {
   dend.enrich[["l"]] <- l
 
   # Add data
-  dend.enrich[["proteins"]] <- which_names(dend.enrich[["dend.table.cluster"]][, k] == l)
+  dend.enrich[["proteins"]] <-
+    which_names(dend.enrich[["dend.table.cluster"]][, k] == l)
 
   # Return
   return(invisible(dend.enrich))

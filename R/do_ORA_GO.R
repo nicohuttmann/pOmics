@@ -2,10 +2,11 @@
 #'
 #' @param proteins numeric/logical vector of proteins indicating group
 #' @param pvalueCutoff p-value cutoff for annotations
-#' @param pAdjustMethod one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"
+#' @param pAdjustMethod one of "none", "BH" (Benjamini-Hochberg correction),
+#' "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"
 #' @param qvalueCutoff q-value cutoff for annotations
-#' @param minGSSize minimum number of proteins for annotation to be used for enrichment
-#' @param maxGSSize maximum number of proteins for annotation to be used for enrichment
+#' @param minGSSize minimum number of annotated proteins to be included
+#' @param maxGSSize maximum number of annotated proteins to be included
 #' @param database which GO database to use
 #' @param dataset dataset
 #' @param view view results
@@ -14,8 +15,15 @@
 #' @export
 #'
 #'
-do_ORA_GO <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qvalueCutoff = 0.2, minGSSize = 10, maxGSSize = 500,
-                      database, dataset, view = F) {
+do_ORA_GO <- function(proteins,
+                      pvalueCutoff = 0.05,
+                      pAdjustMethod = "none",
+                      qvalueCutoff = 0.2,
+                      minGSSize = 10,
+                      maxGSSize = 500,
+                      database,
+                      dataset,
+                      view = F) {
 
   # Get dataset
   dataset <- get_dataset(dataset)
@@ -24,12 +32,9 @@ do_ORA_GO <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qva
   # Annotation database for organism
   OrgDb <- get_OrgDb(dataset = dataset)
 
-  # Database
-  #if (database == "GO") database <- "ALL"
 
   # Prepare protein vectors
   sig.proteins <- names(proteins)[proteins == 1]
-
 
 
   background <- names(proteins)
@@ -77,9 +82,11 @@ do_ORA_GO <- function(proteins, pvalueCutoff = 0.05, pAdjustMethod = "none", qva
   # # Prepare results data
   # results <- tibble::as_tibble(go.results@result) %>%
   #   dplyr::rowwise() %>%
-  #   dplyr::mutate(Proteins = paste(mapping.eg2p[strsplit(geneID, split = "/")[[1]]], collapse = ";"), .before = geneID) %>%
+  #   dplyr::mutate(Proteins = paste(mapping.eg2p[strsplit(geneID,
+  #   split = "/")[[1]]], collapse = ";"), .before = geneID) %>%
   #   dplyr::select(-c(geneID)) %>%
-  #   dplyr::mutate(Genes = paste(mapping.p2g[strsplit(Proteins, split = ";")[[1]]], collapse = ";"), .before = Proteins) %>%
+  #   dplyr::mutate(Genes = paste(mapping.p2g[strsplit(Proteins,
+  #   split = ";")[[1]]], collapse = ";"), .before = Proteins) %>%
   #   dplyr::ungroup() %>%
   #   dplyr::filter(p.adjust < pvalueCutoff)
 

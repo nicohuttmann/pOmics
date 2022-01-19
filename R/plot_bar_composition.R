@@ -2,13 +2,16 @@
 #'
 #' @param data_ data_
 #' @param TERMS TERMS to plot
+#' @param type type of data to represent ("Fraction" or "Count")
 #' @param color names vector of colors
 #' @param xlab labels of x-axis
 #' @param ylab label of y-axis
-#' @param legend.name name of lagend
+#' @param legend.name name of legend
 #' @param legend.position position of legend ("none", "right", "bottom",
 #' "top", "left")
 #' @param aspect.ratio aspect ratio of x- and y-axis
+#' @param custom.theme predefined theme for plot
+#' @param ... arguments for custom.theme
 #' @param view view plot after generation
 #' @param input name of input data
 #' @param output name of output data
@@ -20,12 +23,15 @@
 #'
 plot_bar_composition <- function(data_,
                                  TERMS = "mitochondrion",
+                                 type = "Fraction",
                                  color,
                                  xlab = "Fraction of Proteins",
                                  ylab = "",
                                  legend.name = "",
                                  legend.position = "right",
                                  aspect.ratio = 1,
+                                 custom.theme = theme_phosprot_half_open,
+                                 ...,
                                  view = T,
                                  input = "data_annotation_composition",
                                  output = "plot_annotation_composition") {
@@ -80,14 +86,13 @@ plot_bar_composition <- function(data_,
 
   # Plot
   p <- ggplot(data = data.melt, aes(x = TERM,
-                                    y = Fraction,
+                                    y = .data[[type]],
                                     fill = variable)) +
     geom_bar(stat = "identity", position = "dodge") +
-    scale_y_continuous(labels = scales::percent) +
     scale_fill_manual(name = legend.name,
                       values = color,
                       guide = guide_legend(reverse=TRUE)) +
-    theme_hjv_half_open() +
+    custom.theme(...) +
     theme(axis.text.x = element_text(angle = 0, hjust = 0.5),
           axis.text.y = element_text(vjust = 0.5),
           aspect.ratio = aspect.ratio,
@@ -95,6 +100,13 @@ plot_bar_composition <- function(data_,
     coord_flip() +
     xlab(ylab) +
     ylab(xlab)
+
+  if (type == "Fraction") {
+    p <- p +
+      scale_y_continuous(labels = scales::percent)
+  }
+
+
 
   # Print plot
   if (view) print(p)

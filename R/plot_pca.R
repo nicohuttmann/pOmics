@@ -12,7 +12,8 @@
 #' @param fill fill (same as color if not defined)
 #' @param shape.by column to use for shape of data points
 #' @param shape shape
-#' @param point.size point size (pt)
+#' @param size.by column to use for size of data points
+#' @param size point size (default = 1)
 #' @param point.transparency transparency (0-1)
 #' @param ellipse.size thiccness of ellipse lines (default = 1)
 #' @param ellipse.transparency transparency of ellipse lines (default = 1)
@@ -26,7 +27,9 @@
 #' @param x.axis.breaks space between x-axis breaks
 #' @param y.axis.breaks space between y-axis breaks
 #' @param legend.title.color title of color legend
+#' @param legend.title.fill title of fill legend
 #' @param legend.title.shape title of shape legend
+#' @param legend.title.size title of size legend
 #' @param legend.position position of legend
 #' @param legend.rows (optional) number of rows legend content should be
 #' presented in
@@ -51,12 +54,13 @@ plot_pca <- function(data_,
                      fill,
                      shape.by,
                      shape,
-                     point.size = 1,
+                     size.by,
+                     size,
                      point.transparency = 1,
                      ellipse.size = 1,
                      ellipse.transparency = 1,
                      ellipse.linetype = 1,
-                     custom.theme = theme_hjv_framed_no_axes,
+                     custom.theme = theme_thesis_framed_no_axis,
                      aspect.ratio = 1,
                      plot.center,
                      axis.unit.ratio,
@@ -66,6 +70,8 @@ plot_pca <- function(data_,
                      y.axis.breaks = 1,
                      legend.title.color,
                      legend.title.shape,
+                     legend.title.fill,
+                     legend.title.size,
                      legend.position = "right",
                      legend.rows,
                      view = T,
@@ -178,12 +184,42 @@ plot_pca <- function(data_,
   }
 
 
+  # ---- size column in data ----
+  if (!hasArg(size.by) || !size.by %in% names(data)) {
+
+    data <- data %>%
+      dplyr::mutate(size = "all")
+
+    size.by <- "size"
+
+  }
+
+  # values for size
+  if (!hasArg(size) || length(unique(data[[size.by]])) > length(size)) {
+
+    if (length(unique(data[[size.by]])) == 1) {
+
+      size <- 1
+
+      names(size) <- unique(data[[size.by]])
+
+    } else {
+
+      size <- 1:length(unique(data[[size.by]]))
+
+      names(size) <- unique(data[[size.by]])
+
+    }
+
+  }
+
 
 
   # Number of legend rows
   if (!hasArg(legend.rows)) legend.rows <- max(length(unique(data[[color.by]])),
                                                length(unique(data[[fill.by]])),
-                                               length(unique(data[[shape.by]])))
+                                               length(unique(data[[shape.by]])),
+                                               length(unique(data[[size.by]])))
 
   # Legend names
   if (!hasArg(legend.title.color)) {
@@ -198,6 +234,10 @@ plot_pca <- function(data_,
     legend.title.shape <- shape.by
   }
 
+  if (!hasArg(legend.title.size)) {
+    legend.title.size <- size.by
+  }
+
 
 
   # ---- Create plot ----
@@ -206,14 +246,15 @@ plot_pca <- function(data_,
                         y = .data[[y]],
                         color = .data[[color.by]],
                         fill = .data[[fill.by]],
-                        shape = .data[[shape.by]])) +
-    geom_point(size = point.size,
-               alpha = point.transparency) +
+                        shape = .data[[shape.by]],
+                        size = .data[[size.by]])) +
+    geom_point(alpha = point.transparency) +
     custom.theme() +
     theme(legend.position = legend.position) +
     scale_color_manual(values = color) +
     scale_fill_manual(values = fill) +
     scale_shape_manual(values = shape) +
+    scale_size_manual(values = size) +
     guides(color = if(length(color) > 1)
       guide_legend(title = legend.title.color,
                    nrow = legend.rows,
@@ -228,7 +269,13 @@ plot_pca <- function(data_,
         guide_legend(title = legend.title.shape,
                      nrow = legend.rows,
                      byrow = FALSE)
-      else "none")
+      else "none",
+      size = if(length(size) > 1)
+        guide_legend(title = legend.title.size,
+                     nrow = legend.rows,
+                     byrow = FALSE)
+      else "none",
+    )
 
 
   # ---- Include ellipses ----

@@ -4,16 +4,25 @@
 \alias{import_fasta}
 \title{Imports fasta file and saves proteome}
 \usage{
-import_fasta(file, name, add.proteome = T, extract.all = T, replace = F)
+import_fasta(
+  file,
+  name,
+  save.proteome = T,
+  save.info = F,
+  save.sequences = F,
+  replace = F
+)
 }
 \arguments{
 \item{file}{fasta file path}
 
-\item{name}{(optional) name to save information under}
+\item{name}{(optional) name of data base entry}
 
-\item{add.proteome}{add all accessions of proteme}
+\item{save.proteome}{add all protein accessions as reference proteome}
 
-\item{extract.all}{extract all information from fasta headers}
+\item{save.info}{extract all information from fasta headers}
+
+\item{save.sequences}{extract protein sequences}
 
 \item{replace}{replace existing databases}
 }

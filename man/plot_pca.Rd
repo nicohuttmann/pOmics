@@ -16,12 +16,13 @@ plot_pca(
   fill,
   shape.by,
   shape,
-  point.size = 1,
+  size.by,
+  size,
   point.transparency = 1,
   ellipse.size = 1,
   ellipse.transparency = 1,
   ellipse.linetype = 1,
-  custom.theme = theme_hjv_framed_no_axes,
+  custom.theme = theme_thesis_framed_no_axis,
   aspect.ratio = 1,
   plot.center,
   axis.unit.ratio,
@@ -31,6 +32,8 @@ plot_pca(
   y.axis.breaks = 1,
   legend.title.color,
   legend.title.shape,
+  legend.title.fill,
+  legend.title.size,
   legend.position = "right",
   legend.rows,
   view = T,
@@ -61,7 +64,9 @@ plot_pca(
 
 \item{shape}{shape}
 
-\item{point.size}{point size (pt)}
+\item{size.by}{column to use for size of data points}
+
+\item{size}{point size (default = 1)}
 
 \item{point.transparency}{transparency (0-1)}
 
@@ -90,6 +95,10 @@ plot_pca(
 \item{legend.title.color}{title of color legend}
 
 \item{legend.title.shape}{title of shape legend}
+
+\item{legend.title.fill}{title of fill legend}
+
+\item{legend.title.size}{title of size legend}
 
 \item{legend.position}{position of legend}
 

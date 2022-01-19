@@ -7,12 +7,15 @@
 plot_bar_composition(
   data_,
   TERMS = "mitochondrion",
+  type = "Fraction",
   color,
   xlab = "Fraction of Proteins",
   ylab = "",
   legend.name = "",
   legend.position = "right",
   aspect.ratio = 1,
+  custom.theme = theme_phosprot_half_open,
+  ...,
   view = T,
   input = "data_annotation_composition",
   output = "plot_annotation_composition"
@@ -23,18 +26,24 @@ plot_bar_composition(
 
 \item{TERMS}{TERMS to plot}
 
+\item{type}{type of data to represent ("Fraction" or "Count")}
+
 \item{color}{names vector of colors}
 
 \item{xlab}{labels of x-axis}
 
 \item{ylab}{label of y-axis}
 
-\item{legend.name}{name of lagend}
+\item{legend.name}{name of legend}
 
 \item{legend.position}{position of legend ("none", "right", "bottom",
 "top", "left")}
 
 \item{aspect.ratio}{aspect ratio of x- and y-axis}
+
+\item{custom.theme}{predefined theme for plot}
+
+\item{...}{arguments for custom.theme}
 
 \item{view}{view plot after generation}
 

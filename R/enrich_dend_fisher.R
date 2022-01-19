@@ -1,6 +1,6 @@
 #' Performs Fisher's exact test on all cluster levels of given dendrogram
 #'
-#' @param dend.table dendrogram represented as dataframe
+#' @param dend.table dendrogram represented as data frame
 #' @param annotated.proteins vector of annotated proteins
 #' @param n maximum number of clusters
 #'

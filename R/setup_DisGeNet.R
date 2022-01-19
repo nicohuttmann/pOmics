@@ -7,7 +7,7 @@
 #' @export
 #'
 #'
-setup_DisGenet <- function(email = "nhutt069@uottawa.ca",
+setup_DisGeNET <- function(email = "nhutt069@uottawa.ca",
                            password = "makey0ur0wnacc0unt") {
 
 

@@ -38,7 +38,7 @@ do_count_id_quant <- function(data_,
                           "rows" = "observations",
                           columns = "other",
                           observations = data[["observations"]],
-                          other = c("count.id", "quant.id"))
+                          other = c("count.id", "count.quant"))
 
   data <- .set_data_attributes(data, data_attributes)
 

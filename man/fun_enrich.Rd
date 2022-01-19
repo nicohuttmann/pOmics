@@ -10,10 +10,10 @@ fun_enrich(
   database = "GO",
   pvalueCutoff = 0.05,
   pAdjustMethod = "none",
+  qvalueCutoff = 0.2,
   minGSSize = 10,
   maxGSSize = 500,
   inverse = F,
-  algorithm = "classic",
   dataset,
   view = T
 )
@@ -27,21 +27,20 @@ fun_enrich(
 
 \item{pvalueCutoff}{p-value cutoff for annotations}
 
-\item{pAdjustMethod}{one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"}
+\item{pAdjustMethod}{one of "none", "BH" (Benjamini-Hochberg correction),
+"hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"}
 
-\item{minGSSize}{minimum number of proteins for annotation to be used for enrichment}
+\item{qvalueCutoff}{q-value cutoff for annotations}
 
-\item{maxGSSize}{maximum number of proteins for annotation to be used for enrichment}
+\item{minGSSize}{minimum number of annotated proteins to be included}
+
+\item{maxGSSize}{maximum number of annotated proteins to be included}
 
 \item{inverse}{scores: enriches for higher scores if TRUE}
-
-\item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
 
 \item{dataset}{dataset}
 
 \item{view}{View results}
-
-\item{qvalueCutoff}{q-value cutoff for annotations}
 
 \item{threshold}{p-value/confidence threshold to exclude terms}
 }

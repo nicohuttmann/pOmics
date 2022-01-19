@@ -19,7 +19,7 @@ get_proteome <- function(id, dataset) {
   }
 
   # Check taxId
-  if (is.null(Id)) {
+  if (is.null(id)) {
 
     message("No taxId saved in dataset. Use setup_annotations() or a protoeme name.")
     return(invisible(NULL))

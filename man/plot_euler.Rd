@@ -7,6 +7,7 @@
 plot_euler(
   data_,
   fontsize = 8,
+  linewidth = 0.5,
   transpose = T,
   from.row.names = "observations",
   to.row.names = "variables",
@@ -17,6 +18,10 @@ plot_euler(
 }
 \arguments{
 \item{data_}{data_ list}
+
+\item{fontsize}{size of labels}
+
+\item{linewidth}{thiccness of ellipses}
 
 \item{transpose}{transpose data frame}
 

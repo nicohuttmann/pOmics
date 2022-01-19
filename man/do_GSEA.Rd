@@ -13,7 +13,6 @@ do_GSEA(
   qvalueCutoff = 0.2,
   minGSSize = 10,
   maxGSSize = 120,
-  algorithm,
   dataset,
   return.all = F,
   add.info = F
@@ -32,11 +31,9 @@ do_GSEA(
 
 \item{qvalueCutoff}{q-value cutoff for annotations}
 
-\item{minGSSize}{minimum number of proteins for annotation to be used for enrichment}
+\item{minGSSize}{minimum number of annotated proteins to be included}
 
-\item{maxGSSize}{maximum number of proteins for annotation to be used for enrichment}
-
-\item{algorithm}{algorithm to use ("classic", "elim", "weight", "weight01")}
+\item{maxGSSize}{maximum number of annotated proteins to be included}
 
 \item{dataset}{dataset}
 

@@ -7,6 +7,7 @@
 #' added automatically)
 #' @param color list containing vectors of length two (first color id, second
 #' quant) for each group
+#' @param show.average.line if column name specified, draws average lines
 #' @param xlab label of x-axis
 #' @param ylab label of y-axis
 #' @param limit.y.top upper limit of y-axis
@@ -22,15 +23,16 @@
 #' @importFrom magrittr %>%
 #'
 #'
-plot_gg_count_id_quant <- function(
+plot_count_id_quant <- function(
   data_,
   labels,
   order.by,
   color.by = "All",
   color = list("all" = c("#6BAED6", "#2171B5")),
+  show.average.line,
   custom.theme = theme_phosprot_half_open,
   xlab = NULL,
-  ylab = "Proteins",
+  ylab = "# of proteins",
   limit.y.top,
   aspect.ratio = 0.66,
   dataset,
@@ -38,10 +40,6 @@ plot_gg_count_id_quant <- function(
   output = "plot_count_id_quant",
   View = T) {
 
-
-
-  message(
-    "This function will be removed soon. Please use plot_count_id_quant().")
 
 
   # Label vector
@@ -125,6 +123,34 @@ plot_gg_count_id_quant <- function(
           legend.position = c(0.01, 0.98)) +
     xlab(xlab) +
     ylab(ylab)
+
+
+
+  if (hasArg(show.average.line) && show.average.line %in% colnames(data)) {
+
+    data.segment <- data %>%
+      do_fun(dplyr::select,
+             labels, show.average.line,
+             count.id, count.quant) %>%
+      do_row_summary(FUN = function(x) round(mean(x)),
+                     by = show.average.line) %>%
+      reshape2::melt()
+
+    for (i in seq_along(data.segment[["observations"]])) {
+
+      data.segment[i, "x1"] <-
+        min(which(data[[show.average.line]] == data.segment[i, "observations"]))
+
+      data.segment[i, "x2"] <-
+        max(which(data[[show.average.line]] == data.segment[i, "observations"]))
+
+    }
+
+    p <- p + geom_segment(aes(x = x1, y = value, xend = x2, yend = value),
+                          data = data.segment, size = gg_size(0.5))
+  }
+
+
 
 
   # Print plot

@@ -1,6 +1,6 @@
 #' Performs KS test on all cluster levels of given dendrogram
 #'
-#' @param dend.table drndrogram represented as dataframe
+#' @param dend.table dendrogram represented as data frame
 #' @param protein.scores vector of protein scores
 #' @param n maximum number of clusters
 #' @param inverse enrichment for higher scores
@@ -17,8 +17,9 @@ enrich_dend_ks <- function(dend.table, protein.scores, n = 10, inverse = F) {
   # Set rownames
   rownames(dend.table.pvalue) <- dplyr::pull(dend.table, var = 1)
 
-  protein.scores <- protein.scores[intersect(names(protein.scores),
-                                                   dplyr::pull(dend.table, var = 1))]
+  protein.scores <-
+    protein.scores[intersect(names(protein.scores),
+                             dplyr::pull(dend.table, var = 1))]
 
   # Inverse enrichment
   if(inverse) protein.scores <- -protein.scores
@@ -33,14 +34,16 @@ enrich_dend_ks <- function(dend.table, protein.scores, n = 10, inverse = F) {
 
     for (j in 1:i) {
 
-      dend.table.pvalue[dend.table.cluster[, i] == j, i] <- ks_test(protein.scores = protein.scores,
-                                                                    annotated.proteins = proteins[dend.table.cluster[, i] == j])
+      dend.table.pvalue[dend.table.cluster[, i] == j, i] <-
+        ks_test(protein.scores = protein.scores,
+                annotated.proteins = proteins[dend.table.cluster[, i] == j])
 
     }
 
   }
 
   # Return
-  return(list(dend.table.cluster = dend.table.cluster, dend.table.pvalue = dend.table.pvalue))
+  return(list(dend.table.cluster = dend.table.cluster,
+              dend.table.pvalue = dend.table.pvalue))
 
 }

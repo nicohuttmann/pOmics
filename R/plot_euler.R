@@ -1,6 +1,8 @@
 #' Plots Euler diagram from dataframe
 #'
 #' @param data_ data_ list
+#' @param fontsize size of labels
+#' @param linewidth thiccness of ellipses
 #' @param transpose transpose data frame
 #' @param from.row.names row names column of initial data frame
 #' @param to.row.names row names column after transposing (must be variables)
@@ -15,6 +17,7 @@
 #'
 plot_euler <- function(data_,
                        fontsize = 8,
+                       linewidth = 0.5,
                        transpose = T,
                        from.row.names = "observations",
                        to.row.names = "variables",
@@ -60,7 +63,8 @@ plot_euler <- function(data_,
     eulerr::euler() %>%
     plot(fill = "transparent",
          labels = list(fontsize = fontsize),
-         quantities = list(fontsize = fontsize))
+         quantities = list(fontsize = fontsize),
+         lwd = linewidth)
 
 
   # View plot

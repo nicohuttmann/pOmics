@@ -4,12 +4,12 @@
 #' @param background (optional) background genes
 #' @param database database(s) to use
 #' @param pvalueCutoff p-value cutoff for annotations
-#' @param pAdjustMethod one of "none", "BH" (Benjamini-Hochberg correction), "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"
+#' @param pAdjustMethod one of "none", "BH" (Benjamini-Hochberg correction),
+#' "hochberg", "bonferroni", "holm", "hommel", "BY", "fdr"
 #' @param qvalueCutoff q-value cutoff for annotations
-#' @param minGSSize minimum number of proteins for annotation to be used for enrichment
-#' @param maxGSSize maximum number of proteins for annotation to be used for enrichment
+#' @param minGSSize minimum number of annotated proteins to be included
+#' @param maxGSSize maximum number of annotated proteins to be included
 #' @param inverse scores: enriches for higher scores if TRUE
-#' @param algorithm algorithm to use ("classic", "elim", "weight", "weight01")
 #' @param threshold p-value/confidence threshold to exclude terms
 #' @param dataset dataset
 #' @param view View results
@@ -23,10 +23,10 @@ fun_enrich <- function(proteins,
                        database = "GO",
                        pvalueCutoff = 0.05,
                        pAdjustMethod = "none",
+                       qvalueCutoff = 0.2,
                        minGSSize = 10,
                        maxGSSize = 500,
                        inverse = F,
-                       algorithm = "classic",
                        dataset,
                        view = T) {
 
@@ -37,21 +37,29 @@ fun_enrich <- function(proteins,
 
 
   # Modify input
-  if (length(database) == 1 && database == "All") database <- c("CC", "BP", "MF", "Kegg", "Reactome", "CORUM")
-  database <- unlist(sapply(database, function(x) if(x == "GO") return(c("CC", "BP", "MF")) else return(x), USE.NAMES = FALSE))
+  if(is.atomic(database)) {
+
+    if (length(database) == 1 && database == "All") {
+    database <- c("CC", "BP", "MF", "Kegg", "Reactome", "CORUM")
+  }
+
+  database <- unlist(sapply(database, function(x) if(x == "GO")
+    return(c("CC", "BP", "MF")) else return(x), USE.NAMES = FALSE))
+
+  }
 
 
-  #
+
 
 
   # Check databases for functional enrichment
-  #if (!"Functional enrichment databases" %in% names(.info)&& any(!databases %in% .info[["Functional enrichment databases"]]))
-  #  stop("No database setup for functional enrichment. Use setup_fun_enrich() to prepare databases.")
+
 
 
 
   # Check input proteins
-  if (is.null(background) && is.null(names(proteins))) stop("Background or interesting proteins must be defined.")
+  if (is.null(background) && is.null(names(proteins)))
+    stop("Background or interesting proteins must be defined.")
 
 
 
@@ -63,21 +71,24 @@ fun_enrich <- function(proteins,
     allProteins <- proteins[!is.na(proteins)]
 
     # Case 2: Proteins w/out names and background given
-  } else if (!is.null(background) && is.null(names(proteins))) {
+  } else if (!is.null(background) &&
+             is.null(names(proteins))) {
 
     allProteins <- rep(FALSE, length(unique(c(proteins, background))))
     names(allProteins) <- unique(c(proteins, background))
     allProteins[proteins] <- TRUE
 
     # Case 3.1: Proteins w/ names and background given; ignore names(proteins)
-  } else if (!is.null(background) && any(proteins %in% get_all_variables())) {
+  } else if (!is.null(background) &&
+             any(proteins %in% get_all_variables())) {
 
     allProteins <- rep(FALSE, na.omit(length(unique(c(proteins, background)))))
     names(allProteins) <- na.omit(unique(c(proteins, background)))
     allProteins[proteins] <- TRUE
 
     # Case 3.2: Proteins w/ names and background given; use names(proteins)
-  } else if (!is.null(background) && any(names(proteins) %in% get_all_variables())) {
+  } else if (!is.null(background) &&
+             any(names(proteins) %in% get_all_variables())) {
 
     allProteins <- rep(FALSE, length(unique(c(names(proteins), background))))
     names(allProteins) <- na.omit(unique(c(names(proteins), background)))
@@ -90,55 +101,74 @@ fun_enrich <- function(proteins,
   }
 
 
-  # Check databases
-  #databases <- databases[databases %in% .info[["Functional enrichment databases"]]]
+
+  # Check if database is given as data frame
+  if (is.data.frame(database)) database <- list(TERM2GENE = database)
+
+  else names(database) <- database
+
 
   # Prepare list
   list.enrichment <- nulllist(n = length(database))
 
-  names(list.enrichment) <- database
+  names(list.enrichment) <- names(database)
 
-  for (db in database) {
+  for (db in seq_along(database)) {
     # Single Fisher's exact test
-    if (is.logical(allProteins)) dummy <-
-        do_ORA(proteins = ifelse(allProteins, 1, 0),
-               database = db,
-               pvalueCutoff = pvalueCutoff,
-               pAdjustMethod = pAdjustMethod,
-               minGSSize = minGSSize,
-               maxGSSize = maxGSSize,
-               algorithm = algorithm,
-               dataset = dataset)
+    if (is.logical(allProteins)) {
 
-    if (!is.null(dummy)) list.enrichment[[db]] <- dummy
-
-    # Multiple fisher's exact test
-    else if (is.character(allProteins)) dummy <-
-        do_ORA_groups(proteins = allProteins,
-                      database = db,
+      dummy <- do_ORA(proteins = ifelse(allProteins, 1, 0),
+                      database = database[[db]],
                       pvalueCutoff = pvalueCutoff,
                       pAdjustMethod = pAdjustMethod,
+                      qvalueCutoff = qvalueCutoff,
                       minGSSize = minGSSize,
                       maxGSSize = maxGSSize,
-                      algorithm = algorithm,
                       dataset = dataset)
 
-    if (!is.null(dummy)) list.enrichment[[db]] <- dummy
+      if (!is.null(dummy)) list.enrichment[[names(database)[[db]]]] <- dummy
+
+    }
+
+    # Multiple fisher's exact test
+    else if (is.character(allProteins)) {
+
+      dummy <- do_ORA_groups(proteins = allProteins,
+                             database = database[[db]],
+                             pvalueCutoff = pvalueCutoff,
+                             pAdjustMethod = pAdjustMethod,
+                             qvalueCutoff = qvalueCutoff,
+                             minGSSize = minGSSize,
+                             maxGSSize = maxGSSize,
+                             dataset = dataset)
+
+      if (!is.null(dummy)) list.enrichment[[names(database)[[db]]]] <- dummy
+
+    }
 
     # Kolmogorov-Smirnov test
-    else if (is.numeric(allProteins)) dummy <-
-        do_GSEA(proteins = allProteins,
-                database = db,
-                inverse = inverse,
-                pvalueCutoff = pvalueCutoff,
-                pAdjustMethod = pAdjustMethod,
-                minGSSize = minGSSize,
-                maxGSSize = maxGSSize,
-                algorithm = algorithm,
-                dataset = dataset)
+    else if (is.numeric(allProteins))  {
 
-    if (!is.null(dummy)) list.enrichment[[db]] <- dummy
 
+      dummy <- do_GSEA(proteins = allProteins,
+                       database = database[[db]],
+                       inverse = inverse,
+                       pvalueCutoff = pvalueCutoff,
+                       pAdjustMethod = pAdjustMethod,
+                       qvalueCutoff = qvalueCutoff,
+                       minGSSize = minGSSize,
+                       maxGSSize = maxGSSize,
+                       dataset = dataset)
+
+      if (!is.null(dummy)) list.enrichment[[names(database)[[db]]]] <- dummy
+
+    }
+
+  }
+
+
+  if (length(list.enrichment) == 1) {
+    list.enrichment <- list.enrichment[[1]]
   }
 
 

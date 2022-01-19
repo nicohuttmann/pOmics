@@ -26,9 +26,9 @@ do_ORA_MSigDB(
 
 \item{qvalueCutoff}{q-value cutoff for annotations}
 
-\item{minGSSize}{minimum number of proteins for annotation to be used for enrichment}
+\item{minGSSize}{minimum number of annotated proteins to be included}
 
-\item{maxGSSize}{maximum number of proteins for annotation to be used for enrichment}
+\item{maxGSSize}{maximum number of annotated proteins to be included}
 
 \item{dataset}{dataset}
 

@@ -232,7 +232,7 @@ t2g_get_matrix <- function(T2G,
     # genes as rows
     t2g.mat <- split(T2G.subset$GENE, T2G.subset$TERM) %>%
       list2tibble(identifier = "variables") %>%
-      dplyr::select(c("variables", !!terms)) %>%
+      dplyr::select(c("variables", dplyr::any_of(terms))) %>%
       dplyr::arrange(match(variables, genes))
 
   }
