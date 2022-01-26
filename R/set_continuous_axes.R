@@ -15,8 +15,16 @@
 #' @export
 #'
 #'
-set_continuous_axes <- function(p, x.axis.limits, y.axis.limits, aspect.ratio = 1, plot.center, axis.unit.ratio,
-                                expand.x.axis = c(0, 0), expand.y.axis = c(0, 0), x.axis.breaks = 1, y.axis.breaks = 1) {
+set_continuous_axes <- function(p,
+                                x.axis.limits,
+                                y.axis.limits,
+                                aspect.ratio = 1,
+                                plot.center,
+                                axis.unit.ratio,
+                                expand.x.axis = c(0, 0),
+                                expand.y.axis = c(0, 0),
+                                x.axis.breaks = 1,
+                                y.axis.breaks = 1) {
 
 
 
