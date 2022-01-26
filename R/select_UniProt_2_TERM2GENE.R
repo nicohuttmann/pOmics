@@ -14,48 +14,69 @@ select_UniProt_2_TERM2GENE <- function(mapping) {
     mapping <- pull_data(mapping) %>%
       strsplit(";")
 
-  terms <- unlist(mapping)
+    terms <- unlist(mapping)
 
-  mapping.length <- lapply(mapping, length)
+    mapping.length <- lapply(mapping, length)
 
-  genes <- c()
+    genes <- c()
 
-  for (i in seq_along(mapping.length)) {
+    for (i in seq_along(mapping.length)) {
 
-    genes <- c(genes, rep(names(mapping.length)[i],
-                          times = mapping.length[[i]]))
+      genes <- c(genes, rep(names(mapping.length)[i],
+                            times = mapping.length[[i]]))
 
-  }
+    }
 
-  TERM2GENE <- dplyr::tibble(TERM = terms,
-                             GENE = genes)
+    TERM2GENE <- dplyr::tibble(TERM = terms,
+                               GENE = genes)
 
   } else if ("GO" %in% colnames(mapping)) {
 
     mapping <- pull_data(mapping) %>%
       strsplit("; ")
 
-  terms <- unlist(mapping)
+    terms <- unlist(mapping)
 
-  mapping.length <- lapply(mapping, length)
+    mapping.length <- lapply(mapping, length)
 
-  genes <- c()
+    genes <- c()
 
-  for (i in seq_along(mapping.length)) {
+    for (i in seq_along(mapping.length)) {
 
-    genes <- c(genes, rep(names(mapping.length)[i],
-                          times = mapping.length[[i]]))
+      genes <- c(genes, rep(names(mapping.length)[i],
+                            times = mapping.length[[i]]))
+
+    }
+
+    TERM2GENE <- dplyr::tibble(TERM = terms,
+                               GENE = genes)
+
+  } else if ("GO-ID" %in% colnames(mapping)) {
+
+    mapping <- pull_data(mapping) %>%
+      strsplit("; ")
+
+    terms <- unlist(mapping)
+
+    mapping.length <- lapply(mapping, length)
+
+    genes <- c()
+
+    for (i in seq_along(mapping.length)) {
+
+      genes <- c(genes, rep(names(mapping.length)[i],
+                            times = mapping.length[[i]]))
+
+    }
+
+    TERM2GENE <- dplyr::tibble(TERM = terms,
+                               GENE = genes)
+
+  } else {
+
+    TERM2GENE <- mapping
 
   }
-
-  TERM2GENE <- dplyr::tibble(TERM = terms,
-                             GENE = genes)
-
-} else {
-
-  TERM2GENE <- mapping
-
-}
 
 
   #Remove redundant entries
