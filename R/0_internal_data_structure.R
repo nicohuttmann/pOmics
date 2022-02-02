@@ -1,3 +1,24 @@
+#' Creates basic data structure
+#'
+#' @param replace replace existing lists
+#'
+#' @return
+#' @export
+#'
+#'
+initialize_data_structure <- function(replace = F) {
+  
+  new_info_list(replace = replace)
+  
+  new_datasets_list(replace = replace)
+  
+  new_imports_list(replace = replace)
+  
+  new_cache(replace = replace)
+  
+}
+
+
 #' Creates imports list
 #'
 #' @param replace Should imports list be replaced if already existing
@@ -7,17 +28,17 @@
 #'
 #'
 new_imports_list <- function(replace = F) {
-
+  
   #
   if (!".imports" %in% objects(all.names = T, envir = .GlobalEnv) || replace) {
     .imports <<- tibble::lst()
-
+    
     # Indicate if new info list was created
     return(invisible(TRUE))
   } else {
     return(invisible(FALSE))
   }
-
+  
 }
 
 
@@ -30,23 +51,23 @@ new_imports_list <- function(replace = F) {
 #'
 #'
 new_info_list <- function(replace = F) {
-
+  
   #
   if (!".info" %in% objects(all.names = TRUE, envir = .GlobalEnv) || replace) {
     .info <<- tibble::lst("default_dataset" = NA,
                           "raw_datasets" = tibble::lst())
-
+    
     # Defaults data
     new_default_data()
-
-
+    
+    
     # Indicate if new info list was created
     return(invisible(TRUE))
-
+    
   } else {
     return(invisible(FALSE))
   }
-
+  
 }
 
 
@@ -59,11 +80,11 @@ new_info_list <- function(replace = F) {
 #'
 #'
 new_datasets_list <- function(replace = F) {
-
+  
   #
   if (!".datasets" %in% objects(all.names = TRUE, envir = .GlobalEnv) || replace) {
     .datasets <<- tibble::lst()
-
+    
     # Indicate if new datasets list was created
     return(invisible(TRUE))
   } else {
@@ -81,11 +102,11 @@ new_datasets_list <- function(replace = F) {
 #'
 #'
 new_databases_list <- function(replace = F) {
-
+  
   #
   if (!".databases" %in% objects(all.names = TRUE, envir = .GlobalEnv) || replace) {
     .databases <<- tibble::lst()
-
+    
     # Indicate if new databases list was created
     return(invisible(TRUE))
   } else {
@@ -103,18 +124,18 @@ new_databases_list <- function(replace = F) {
 #'
 #'
 new_cache <- function(replace = T) {
-
+  
   #
   if (!".cache" %in% objects(all.names = TRUE, envir = .GlobalEnv) || replace) {
     .cache <<- tibble::lst()
-
-
+    
+    
     # Indicate if new cache list was created
     return(invisible(TRUE))
   } else {
     return(invisible(FALSE))
   }
-
+  
 }
 
 
@@ -128,37 +149,37 @@ new_cache <- function(replace = T) {
 #'
 #'
 new_analysis_list <- function(silent = F, replace = F) {
-
+  
   # Analysis list already in global environment
   if ("Analysis" %in% ls(all.names = T, pos = .GlobalEnv)) {
-
+    
     # Should analysis list be replaced
     if (replace) {
-
+      
       # Assign new list
       Analysis <<- tibble::lst()
-
+      
       # Message (optional)
       if (!silent) message("Analysis list replaced.")
-
-
+      
+      
     } else {
-
+      
       # Do nothing; optional message
       if (!silent) message("Analysis list already exists.")
-
+      
     }
-
-
+    
+    
     # Analysis list not found
   } else {
-
+    
     # Assign new list
     Analysis <<- tibble::lst()
-
+    
     # Message (optional)
     if (!silent) message("New Analysis list added.")
-
+    
   }
-
+  
 }

@@ -8,7 +8,7 @@
 #'
 identify_separator <- function(x) {
 
-  sep <- most_common_character(x = x, exclude = c(LETTERS, letters, 0:9))
+  sep <- most_common_character(x = x, exclude = c(LETTERS, letters, 0:9, " "))
 
   if (sep %in% LETTERS || sep %in% letters || sep %in% 0:9) return(NA)
   else return(sep)

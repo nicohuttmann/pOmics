@@ -1,3 +1,73 @@
+#' Sets up bottons for HTML document
+#'
+#' @return
+#' @export
+#'
+#'
+check_buttons <- function() {
+
+  # Check
+  if (!exists(".n.button")) .n.button <<- 0
+
+}
+
+
+#' Increases button count
+#'
+#' @return
+#' @export
+#'
+#'
+next_button <- function() {
+  .n.button <<- .n.button + 1
+}
+
+
+#' Creates button to hide plots and tables
+#'
+#' @param label button label
+#'
+#' @return
+#' @export
+#'
+#'
+button_begin <- function(label = "View/Hide") {
+
+  # Buttons set up
+  check_buttons()
+
+  # Raise button counter
+  next_button()
+
+  # Paste names
+  code <- paste0('<button class="btn btn-primary" data-toggle="collapse" data-target="#',
+                 .n.button,
+                 '"> ',
+                 label,
+                 ' </button> <div id="',
+                 .n.button,
+                 '" class="collapse">  ')
+
+  # return unevaluated code
+  return(noquote(code))
+
+}
+
+
+#' Ends section hidden by button
+#'
+#' @return
+#' @export
+#'
+#'
+button_end <- function() {
+
+  # Return
+  return(noquote('</div>'))
+
+}
+
+
 #' Help make nice number in R Markdown
 #'
 #' @param x number
@@ -25,7 +95,7 @@ nice_number <- function(x,
 
   if (big.mark != "" & !hasArg(sci.digits)) {
     x <- formatC(x, format = format, big.mark = big.mark)
-   output <- "character"
+    output <- "character"
   }
 
   else if (big.mark != "") x <- formatC(x,

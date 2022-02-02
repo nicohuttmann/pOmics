@@ -2,6 +2,7 @@
 #'
 #' @param x data frame
 #' @param identifier vector of identifier columns
+#' @param modify.identifiers action to perform on identifier column
 #' @param sep separator
 #'
 #' @return
@@ -9,7 +10,10 @@
 #'
 #' @importFrom magrittr %>%
 #'
-identify_variables <- function(x, identifier, sep) {
+identify_variables <- function(x,
+                               identifier,
+                               modify.identifiers = "not",
+                               sep) {
 
   # Generate separators if not given
   if (!hasArg(sep)) {
@@ -35,9 +39,14 @@ identify_variables <- function(x, identifier, sep) {
 
   # No identifier specified; only test first column
   if (!hasArg(identifier)) {
-    x1 <- x[, 1] %>%
+    if (grepl(pattern = "split", x = modify.identifiers)) {
+      x1 <- x[, 1] %>%
       #as.character %>%
       strsplit_keep_first(split = sep)
+    } else {
+      x1 <- x[, 1]
+    }
+
 
     if (anyDuplicated(x1) == 0) {
       return(x1)
@@ -52,17 +61,26 @@ identify_variables <- function(x, identifier, sep) {
       # Build identifiers vector; join columns if multiple specified
       x1 <- x %>%
         dplyr::pull(identifier[1]) %>%
-        as.character %>%
-        strsplit_keep_first(split = sep)
+        as.character()
+
+      if (grepl(pattern = "split", x = modify.identifiers)) {
+        x1 <- x1 %>%
+          strsplit_keep_first(split = sep)
+      }
+
       if (length(identifier) > 1) {
         for (i in identifier[-1]) {
 
-          x1 <- paste(x1,
-                      x %>%
-                        dplyr::pull(i) %>%
-                        as.character %>%
-                        strsplit_keep_first(split = sep),
-                      sep = "_")
+          x2 <- x %>%
+            dplyr::pull(i) %>%
+            as.character()
+
+          if (grepl(pattern = "split", x = modify.identifiers)) {
+            x2 <- x2 %>%
+              strsplit_keep_first(split = sep)
+          }
+
+          x1 <- paste(x1, x2, sep = "_")
 
         }
 
@@ -94,14 +112,25 @@ identify_variables <- function(x, identifier, sep) {
 
       # Build identifiers vector; join columns if multiple specified
       x1 <- x[, identifier[1]] %>%
-        as.character %>%
-        strsplit_keep_first(split = sep)
+        as.character()
+
+      if (grepl(pattern = "split", x = modify.identifiers)) {
+        x1 <- x1 %>%
+          strsplit_keep_first(split = sep)
+      }
+
       if (length(identifier > 1)) {
         for (i in identifier[-1])
-          x1 <- paste(x1, x[, i] %>%
-                      as.character() %>%
-                      strsplit_keep_first(split = sep),
-                      sep = "_")
+
+          x2 <- x[, i] %>%
+                      as.character()
+
+        if (grepl(pattern = "split", x = modify.identifiers)) {
+          x2 <- x2 %>%
+            strsplit_keep_first(split = sep)
+        }
+
+          x1 <- paste(x1, x2, sep = "_")
 
       }
       # test identifier feasibility
