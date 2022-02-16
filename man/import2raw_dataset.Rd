@@ -4,14 +4,15 @@
 \alias{import2raw_dataset}
 \title{Extracts variables and grouped data from imported data frame}
 \usage{
-import2raw_dataset(import, identifier, modify.identifiers = "not", add = T)
+import2raw_dataset(import, identifier, modify.identifiers = "split", add = T)
 }
 \arguments{
 \item{import}{imported data frame}
 
 \item{identifier}{columns to use as identifiers}
 
-\item{modify.identifiers}{action to perform on identifier column}
+\item{modify.identifiers}{action to perform on identifier column ("not" for
+nothing; "split" to separate strings by separator)}
 
 \item{add}{add raw_dataset to .info list}
 }

@@ -4,14 +4,15 @@
 \alias{identify_variables}
 \title{Finds feasible identifier columns}
 \usage{
-identify_variables(x, identifier, modify.identifiers = "not", sep)
+identify_variables(x, identifier, modify.identifiers = "split", sep)
 }
 \arguments{
 \item{x}{data frame}
 
 \item{identifier}{vector of identifier columns}
 
-\item{modify.identifiers}{action to perform on identifier column}
+\item{modify.identifiers}{action to perform on identifier column ("not" for
+nothing; "split" to separate strings by separator)}
 
 \item{sep}{separator}
 }

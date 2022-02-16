@@ -2,7 +2,8 @@
 #'
 #' @param x data frame
 #' @param identifier vector of identifier columns
-#' @param modify.identifiers action to perform on identifier column
+#' @param modify.identifiers action to perform on identifier column ("not" for
+#' nothing; "split" to separate strings by separator)
 #' @param sep separator
 #'
 #' @return
@@ -12,7 +13,7 @@
 #'
 identify_variables <- function(x,
                                identifier,
-                               modify.identifiers = "not",
+                               modify.identifiers = "split",
                                sep) {
 
   # Generate separators if not given

@@ -28,7 +28,8 @@ get_observations_data <- function(which,
   # No observations defined
   if (!hasArg(observations)) {
 
-    observations <- get_observations(dataset = dataset)
+    observations <- get_observations(observations.set = observations.set,
+                                     dataset = dataset)
 
     # Variables defined
   } else {
@@ -41,7 +42,9 @@ get_observations_data <- function(which,
     if (vector.input &&
         length(observations) == 1 && observations == "default") {
       observations <-
-        get_observations(observations = "default", dataset = dataset)
+        get_observations(observations = "default",
+                         observations.set = observations.set,
+                         dataset = dataset)
     }
 
 
@@ -49,6 +52,7 @@ get_observations_data <- function(which,
     if (!vector.input) {
       observations <-
         get_observations(observations = !!dplyr::enquo(observations),
+                         observations.set = observations.set,
                          dataset = dataset)
     }
 

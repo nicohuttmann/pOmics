@@ -22,7 +22,8 @@ new_dataset(
 
 \item{identifier}{(optional) specific vector of identifier column/s}
 
-\item{modify.identifiers}{action to perform on identifier column}
+\item{modify.identifiers}{action to perform on identifier column ("not" for
+nothing; "split" to separate strings by separator)}
 
 \item{data.columns}{(optional) types of data to extract; uses defaults if
 not specified}

@@ -4,10 +4,14 @@
 \alias{p2g}
 \title{Returns gene symbol from known proteins in dataset}
 \usage{
-p2g(proteins, dataset)
+p2g(proteins, OrgDb, taxId, dataset)
 }
 \arguments{
 \item{proteins}{UniProt protein Ids}
+
+\item{OrgDb}{string of Annotation package name to use}
+
+\item{taxId}{taxonomy ID}
 
 \item{dataset}{dataset}
 }

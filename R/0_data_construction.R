@@ -135,6 +135,7 @@ get_data <- function(which,
   attr(data, "rows") <- "observations"
   attr(data, "columns") <- "variables"
 
+  data <- .update_data_attributes(data)
 
 
   # Return in list or not

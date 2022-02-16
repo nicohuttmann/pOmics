@@ -4,7 +4,8 @@
 #' @param name name of dataset
 #' @param data.type output type from MaxQuant
 #' @param identifier (optional) specific vector of identifier column/s
-#' @param modify.identifiers action to perform on identifier column
+#' @param modify.identifiers action to perform on identifier column ("not" for
+#' nothing; "split" to separate strings by separator)
 #' @param data.columns (optional) types of data to extract; uses defaults if
 #' not specified
 #'
@@ -86,7 +87,8 @@ new_dataset <- function(import,
 #'
 #' @param import imported data frame
 #' @param identifier columns to use as identifiers
-#' @param modify.identifiers action to perform on identifier column
+#' @param modify.identifiers action to perform on identifier column ("not" for
+#' nothing; "split" to separate strings by separator)
 #' @param add add raw_dataset to .info list
 #'
 #' @return
@@ -95,7 +97,7 @@ new_dataset <- function(import,
 #'
 import2raw_dataset <- function(import,
                                identifier,
-                               modify.identifiers = "not",
+                               modify.identifiers = "split",
                                add = T) {
 
   #

@@ -43,12 +43,13 @@ get_observations <- function(observations, observations.set, dataset) {
       stop("No default observations set.")
 
     observations.data <-
-      get_observations_data(which = get_dataset_attr(
-            which = "default_observations",
-            dataset = dataset),
-            observations = All,
-            observations.set = observations.set,
-            dataset = dataset) %>%
+      get_observations_data(
+        which = get_dataset_attr(
+          which = "default_observations",
+          dataset = dataset),
+        observations = All,
+        observations.set = observations.set,
+        dataset = dataset) %>%
       na.omit()
 
     return(names(observations.data)[observations.data])

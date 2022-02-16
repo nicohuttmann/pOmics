@@ -225,9 +225,21 @@ export_DT_fun_enrich <- function(data, buttons, dom = "lBfrtip") {
     # Prepare data frame
     data <- data %>%
       tibble::as_tibble() %>%
-      dplyr::mutate(pvalue = nice_number(pvalue, format = "e", round = F, sci.digits = 2, output = "character")) %>%
-      dplyr::mutate(p.adjust = nice_number(p.adjust, format = "e", round = F, sci.digits = 2, output = "character")) %>%
-      dplyr::mutate(qvalue = nice_number(qvalue, format = "e", round = F, sci.digits = 2, output = "character")) %>%
+      dplyr::mutate(pvalue = nice_number(pvalue,
+                                         format = "e",
+                                         round = F,
+                                         sci.digits = 2,
+                                         output = "character")) %>%
+      dplyr::mutate(p.adjust = nice_number(p.adjust,
+                                           format = "e",
+                                           round = F,
+                                           sci.digits = 2,
+                                           output = "character")) %>%
+      dplyr::mutate(qvalue = nice_number(qvalue,
+                                         format = "e",
+                                         round = F,
+                                         sci.digits = 2,
+                                         output = "character")) %>%
       dplyr::relocate(Count, .after = qvalue) %>%
       dplyr::rename(UniProt = geneID) %>%
       dplyr::mutate(Genes = "", .before = UniProt)
@@ -372,7 +384,8 @@ export_RMD_fun_enrich <- function(data_,
 export_GO_table <- function(table, caption = NULL) {
 
   # Check input
-  if (is.list(table) && !is.data.frame(table) && length(table) == 1) table <- table[[1]]
+  if (is.list(table) && !is.data.frame(table) && length(table) == 1) table <-
+      table[[1]]
 
   else if (is.list(table)&& !is.data.frame(table) && length(table) > 1) {
     message("Only first table in list used.")
@@ -388,13 +401,17 @@ export_GO_table <- function(table, caption = NULL) {
 
 
   # Transform to DT datatable
-  table <- DT::datatable(table,
-                         escape = FALSE,
-                         options = list(
-                           columnDefs = list(list(className = 'dt-left', targets = "_all"))
-                         ),
-                         caption = htmltools::tags$caption(caption, style="color:black; text-align:center"),
-                         rownames = FALSE)
+  table <- DT::datatable(
+    table,
+    escape = FALSE,
+    options = list(
+      columnDefs = list(list(className = 'dt-left',
+                             targets = "_all"))
+    ),
+    caption =
+      htmltools::tags$caption(caption,
+                              style="color:black; text-align:center"),
+    rownames = FALSE)
 
   # Return
   return(table)
