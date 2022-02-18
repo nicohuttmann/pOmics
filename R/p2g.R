@@ -15,6 +15,18 @@ p2g <- function(proteins, OrgDb, taxId, dataset) {
   dataset <- get_dataset(dataset)
 
 
+  # Try default gene symbols
+  gene_column <- get_dataset_attr("default_gene_symbols", dataset = dataset)
+
+  if (!is.null(gene_column) &&
+      gene_column %in% get_variables_data_names(dataset)) {
+
+    genes <- get_variables_data(gene_column, proteins)
+
+    return(genes)
+
+  }
+
   # Get OrgDb
   if (!hasArg(OrgDb))
     OrgDb <- get_dataset_attr(which = "OrgDb", dataset = dataset)

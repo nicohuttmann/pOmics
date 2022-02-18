@@ -9,7 +9,8 @@
 #'
 select_UniProt_2_TERM2GENE <- function(mapping) {
 
-  if ("SUBCELLULAR-LOCATIONS" %in% colnames(mapping)) {
+  if ("SUBCELLULAR-LOCATIONS" %in% colnames(mapping) ||
+      "KEYWORDS" %in% colnames(mapping)) {
 
     mapping <- pull_data(mapping) %>%
       strsplit(";")

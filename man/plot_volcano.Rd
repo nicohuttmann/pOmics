@@ -11,7 +11,7 @@ plot_volcano(
   pos.log2fc.cutoff = 0,
   neg.log2fc.cutoff = 0,
   highlight.variables = NULL,
-  highlight.color = "black",
+  highlight.color = NULL,
   x.axis.title = "log2 fold-change",
   y.axis.title = "-log10(p-value)",
   text.size = 6,
@@ -81,7 +81,8 @@ plot_volcano(
 
 \item{aspect.ratio}{y/x ratio}
 
-\item{use.plotly}{make interactive plots with ggplotly() (default: T if html document)}
+\item{use.plotly}{make interactive plots with ggplotly() (default: T if html
+document)}
 
 \item{view}{view plot}
 

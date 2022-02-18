@@ -23,7 +23,8 @@
 #' @param axis.title.size size of axis title
 #' @param axis.text.size size of axis labels
 #' @param aspect.ratio y/x ratio
-#' @param use.plotly make interactive plots with ggplotly() (default: T if html document)
+#' @param use.plotly make interactive plots with ggplotly() (default: T if html
+#' document)
 #' @param view view plot
 #' @param input name of input data
 #' @param output name of output data
@@ -32,13 +33,14 @@
 #' @export
 #'
 #'
+#'
 plot_volcano <- function(data_,
                          color = "regulated",
                          p.value.cutoff = 0.05,
                          pos.log2fc.cutoff = 0,
                          neg.log2fc.cutoff = 0,
                          highlight.variables = NULL,
-                         highlight.color = "black",
+                         highlight.color = NULL,
                          x.axis.title = "log2 fold-change",
                          y.axis.title = "-log10(p-value)",
                          text.size = 6,
@@ -68,7 +70,7 @@ plot_volcano <- function(data_,
   else {
     data <- input_list[["data"]]
     input <- input_list[["input"]] # Remove if not used
-    
+
   }
 
 
@@ -77,8 +79,19 @@ plot_volcano <- function(data_,
   data <- data %>%
     dplyr::rowwise() %>%
     dplyr::rename(color = !!color) %>%
-    dplyr::mutate(color = ifelse(variables %in% highlight.variables, "highlight", color)) %>%
-    dplyr::mutate(point.size = ifelse(variables %in% highlight.variables, highlight.point.size, !!point.size)) %>%
+    {if (!is.null(highlight.color))
+        dplyr::mutate(., color = ifelse(variables %in% highlight.variables,
+                                 "highlight",
+                                 color))
+      else .} %>%
+    dplyr::mutate(point.size =
+                    ifelse(variables %in% highlight.variables,
+                           highlight.point.size,
+                           point.size)) %>%
+    dplyr::mutate(alpha =
+                    ifelse(variables %in% highlight.variables,
+                           highlight.point.alpha,
+                           point.alpha)) %>%
     dplyr::arrange(point.size, -p.value)
 
 
@@ -92,7 +105,8 @@ plot_volcano <- function(data_,
                                p2n(data$variables),
                                data$variables, sep = "\n")
   } else {
-    data$text <- p2g(data$variables)
+    #data$text <- p2g(data$variables)
+    data$text <- "" #data$variables
   }
 
 
@@ -105,27 +119,35 @@ plot_volcano <- function(data_,
                   y = -log10(p.value),
                   col = color,
                   size = point.size,
-                  text = text)) +
-    geom_point(alpha = point.alpha, shape = 16, stroke = 0) +
-    scale_size(range = range(data$point.size)) +
+                  text = text,
+                  alpha = alpha)) +
+    geom_point(shape = 16, stroke = 0) +
+    scale_size_continuous(range = range(data$point.size)) +
+    scale_alpha_identity() +
     theme(aspect.ratio = aspect.ratio,
           axis.line = element_line(size = 0.5 * lwf, color = axis.color),
           panel.background = element_blank(),
           axis.text = element_text(size = axis.text.size, color = text.color),
-          axis.ticks = element_line(size = axis.ticks.size * lwf, color = axis.color),
+          axis.ticks = element_line(size = axis.ticks.size * lwf,
+                                    color = axis.color),
           axis.title = element_text(size = axis.title.size, color = text.color),
           legend.position = 0) +
-    scale_color_manual(values = c("highlight" = highlight.color, "up" = "red", "down" = "blue", "not" = "grey")) +
-    scale_x_continuous(limits = axis_limit_breaks(plot_limits = range(data$log2.fc),
-                                                  break.space = x.axis.breaks)$limits,
-                       breaks = axis_limit_breaks(plot_limits = range(data$log2.fc),
-                                                  break.space = x.axis.breaks)$breaks,
-                       expand = c(0, 0)) +
-    scale_y_continuous(limits = axis_limit_breaks(plot_limits = range(-log10(data$p.value)),
-                                                  break.space = y.axis.breaks)$limits,
-                       breaks = axis_limit_breaks(plot_limits = range(-log10(data$p.value)),
-                                                  break.space = y.axis.breaks)$breaks,
-                       expand = c(0, 0)) +
+    scale_color_manual(values = c("highlight" = highlight.color,
+                                  "up" = "red",
+                                  "down" = "blue",
+                                  "not" = "grey")) +
+    scale_x_continuous(
+      limits = axis_limit_breaks(plot_limits = range(data$log2.fc),
+                                 break.space = x.axis.breaks)$limits,
+      breaks = axis_limit_breaks(plot_limits = range(data$log2.fc),
+                                 break.space = x.axis.breaks)$breaks,
+      expand = c(0, 0)) +
+    scale_y_continuous(
+      limits = axis_limit_breaks(plot_limits = range(-log10(data$p.value)),
+                                 break.space = y.axis.breaks)$limits,
+      breaks = axis_limit_breaks(plot_limits = range(-log10(data$p.value)),
+                                 break.space = y.axis.breaks)$breaks,
+      expand = c(0, 0)) +
     xlab(x.axis.title) +
     ylab(y.axis.title)
 
