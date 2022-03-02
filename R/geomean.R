@@ -8,5 +8,5 @@
 #'
 #'
 geomean <- function(x, na.rm = T) {
-  exp(sum(log(x[(x > 0) %and% (x < Inf)]), na.rm = na.rm) / length(x))
+  exp(sum(log(x[(x > 0) & (x < Inf)]), na.rm = na.rm) / length(x))
 }

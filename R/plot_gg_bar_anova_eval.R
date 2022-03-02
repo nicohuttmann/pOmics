@@ -36,7 +36,7 @@ plot_gg_bar_anova_eval <- function(data, columns, labels, x.axis.title = "", y.a
     for (j in regulation) {
 
       # Count proteins
-      data.plot[(labels[i] == data.plot$groups) %and% (j == data.plot$regulation), "count"] <- sum(data[[columns[i]]] == j)
+      data.plot[(labels[i] == data.plot$groups) & (j == data.plot$regulation), "count"] <- sum(data[[columns[i]]] == j)
 
     }
 
