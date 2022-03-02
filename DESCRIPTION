@@ -1,7 +1,7 @@
 Package: pOmics
 Type: Package
 Title: Framework for proteomics data analysis
-Version: 0.14.0
+Version: 0.15.0
 Author: Nico Huettmann 
 Maintainer: Nico Huettmann <huttmann.nico@gmail.com>
 Description: Provides a framework and functions for the analysis of proteomics 
@@ -13,19 +13,13 @@ URL: https://github.com/nicohuttmann/pOmics
 BugReports: https://github.com/nicohuttmann/pOmics/issues
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown 
 VignetteBuilder: knitr
 Imports:
-    clusterProfiler,
     cowplot,
-    disgenet2r,
-    fastcluster,
     ggdendro,
     ggplot2,
-    GOSemSim,
     reshape2,
     tidyverse,
-    topGO,
-    UniProt.ws,
     vroom
 RoxygenNote: 7.1.1

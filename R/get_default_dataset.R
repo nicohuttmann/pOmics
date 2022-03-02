@@ -6,6 +6,10 @@
 #'
 get_default_dataset <- function() {
 
+  if (!exists(".info")) {
+    return(NULL)
+  }
+
   # Get default dataset from info list
   dataset <- .info[["default_dataset"]]
 
