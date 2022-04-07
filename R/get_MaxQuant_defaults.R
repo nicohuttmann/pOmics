@@ -76,8 +76,6 @@ get_MaxQuant_defaults <- function(data.type) {
 
   }
 
-  print("No default data type found. Make sure not to modify the output file names or contact Nico.")
-
   return(list(identifier = NULL, data.columns = NULL))
 
 }
