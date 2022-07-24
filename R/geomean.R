@@ -1,7 +1,7 @@
 #' Computes the geometric mean
 #'
 #' @param x vector
-#' @param na.rm should NAs be removed
+#' @param na.rm should NAs be removed?
 #'
 #' @return
 #' @export
