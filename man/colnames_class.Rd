@@ -11,9 +11,6 @@ colnames_class(data, data.class = "numeric")
 
 \item{data.class}{data type/s}
 }
-\value{
-
-}
 \description{
 Returns column names from data frame of specific column class
 }

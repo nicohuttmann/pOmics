@@ -32,9 +32,6 @@ do_ORA_KEGG(
 
 \item{view}{view results}
 }
-\value{
-
-}
 \description{
 Performs over-representation analysis using KEGG annotations
 }

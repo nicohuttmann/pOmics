@@ -9,9 +9,6 @@ new_databases_list(replace = F)
 \arguments{
 \item{replace}{Should databases list be replaced if already existing}
 }
-\value{
-
-}
 \description{
 Creates databases list
 }

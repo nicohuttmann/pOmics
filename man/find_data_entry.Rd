@@ -13,9 +13,6 @@ find_data_entry(data, entry, data.origin)
 
 \item{data.origin}{(optional) data origin}
 }
-\value{
-
-}
 \description{
 Identifies data entrys by column names
 }

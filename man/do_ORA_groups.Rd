@@ -33,9 +33,6 @@ do_ORA_groups(
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Performs overexpression enrichment on protein group vectors
 }

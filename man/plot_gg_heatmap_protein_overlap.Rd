@@ -38,9 +38,6 @@ plot_gg_heatmap_protein_overlap(
 
 \item{custom.theme}{theme to use for plot}
 }
-\value{
-
-}
 \description{
 Compares log2 fold-changes between two comparisons from an anova_eval data list
 }

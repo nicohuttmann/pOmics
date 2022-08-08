@@ -13,9 +13,6 @@ is_observations_data(name, set, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Checks if observations data exists
 }

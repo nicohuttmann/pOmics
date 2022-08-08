@@ -121,9 +121,6 @@ annotation layers}
 
 \item{output}{output data name}
 }
-\value{
-
-}
 \description{
 Plots correlation matrix with dendrograms
 }

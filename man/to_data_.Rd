@@ -11,9 +11,6 @@ to_data_(data, name = "data")
 
 \item{name}{name of list element}
 }
-\value{
-
-}
 \description{
 Adds data to data_ list
 }

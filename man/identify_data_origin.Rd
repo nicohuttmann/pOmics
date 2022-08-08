@@ -6,9 +6,6 @@
 \usage{
 identify_data_origin()
 }
-\value{
-
-}
 \description{
 Identifies MS spectra analysis software
 }

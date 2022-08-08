@@ -20,9 +20,6 @@ significant(
 
 \item{na.value}{return value for NA}
 }
-\value{
-
-}
 \description{
 Returns logical vector indication significant p-values
 }

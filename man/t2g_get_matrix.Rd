@@ -15,9 +15,6 @@ t2g_get_matrix(T2G, terms = NULL, genes = NULL, output.type = "tibble")
 
 \item{output.type}{"tibble" (default) or "matrix"}
 }
-\value{
-
-}
 \description{
 Get tibble of terms mapped to genes
 }

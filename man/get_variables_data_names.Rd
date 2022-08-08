@@ -9,9 +9,6 @@ get_variables_data_names(dataset)
 \arguments{
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Returns variables data names
 }

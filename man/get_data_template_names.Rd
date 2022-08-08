@@ -6,9 +6,6 @@
 \usage{
 get_data_template_names()
 }
-\value{
-
-}
 \description{
 Returns existing templates for raw data
 }

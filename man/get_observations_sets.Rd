@@ -9,9 +9,6 @@ get_observations_sets(dataset)
 \arguments{
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Returns observations sets
 }

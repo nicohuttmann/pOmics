@@ -44,9 +44,6 @@ fun_enrich(
 
 \item{threshold}{p-value/confidence threshold to exclude terms}
 }
-\value{
-
-}
 \description{
 Performs appropriate enrichment on given sets of proteins or values
 }

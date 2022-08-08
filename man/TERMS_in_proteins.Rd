@@ -13,9 +13,6 @@ TERMS_in_proteins(proteins, TERMS, TERM2GENE)
 
 \item{TERM2GENE}{}
 }
-\value{
-
-}
 \description{
 Returns logical dataframe which proteins is annotated by given terms
 }

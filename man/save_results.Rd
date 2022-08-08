@@ -13,9 +13,6 @@ save_results(data, name, replace)
 
 \item{replace}{replace existing element with same name}
 }
-\value{
-
-}
 \description{
 Store analysis object in Analysis list
 }

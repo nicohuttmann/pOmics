@@ -15,9 +15,6 @@ impute_missForest(data_, input, output, ...)
 
 \item{...}{arguments for missForest function}
 }
-\value{
-
-}
 \description{
 Imputes missing values based on a Random Forest algorithm
 }

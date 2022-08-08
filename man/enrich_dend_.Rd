@@ -47,9 +47,6 @@ enrich_dend_(
 
 \item{add.info}{adds protein information to fun enrich tables}
 }
-\value{
-
-}
 \description{
 Calculates enrichment for each cluster level
 }

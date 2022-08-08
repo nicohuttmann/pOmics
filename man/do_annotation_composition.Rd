@@ -18,9 +18,6 @@ do_annotation_composition(
 
 \item{correct.fractions.by}{devide fractions by total annotated proteins}
 }
-\value{
-
-}
 \description{
 Calculates composition of given annotations
 }

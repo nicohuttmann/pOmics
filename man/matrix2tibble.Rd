@@ -11,9 +11,6 @@ matrix2tibble(data, to.row.names)
 
 \item{to.row.names}{name for row names vector}
 }
-\value{
-
-}
 \description{
 Transforms matrix to tibble and adds column for row names
 }

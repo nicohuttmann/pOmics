@@ -11,9 +11,6 @@ get_variables(variables, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Return variables
 }

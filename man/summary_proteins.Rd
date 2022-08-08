@@ -13,9 +13,6 @@ summary_proteins(proteins, sort.names = F, view = T)
 
 \item{view}{view protein summary table}
 }
-\value{
-
-}
 \description{
 Views a list of proteins
 }

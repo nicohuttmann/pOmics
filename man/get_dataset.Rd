@@ -11,9 +11,6 @@ get_dataset(dataset, try.all = F)
 
 \item{try.all}{returns all if combined database exists}
 }
-\value{
-
-}
 \description{
 Checks and returns correct dataset identifier
 }

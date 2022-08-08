@@ -13,9 +13,6 @@ do_scale(data_, input, output)
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Scales data (Z-scores) from tibbles or analysis_list containing a tibble
 }

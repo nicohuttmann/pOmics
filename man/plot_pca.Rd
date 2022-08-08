@@ -111,9 +111,6 @@ presented in}
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Plots PCA with ggplot2
 }

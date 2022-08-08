@@ -11,9 +11,6 @@ add_combined_dataset(datasets = "all", name)
 
 \item{name}{name of combined dataset}
 }
-\value{
-
-}
 \description{
 Combines variables in one dataset
 }

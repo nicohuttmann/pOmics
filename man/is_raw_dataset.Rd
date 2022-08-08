@@ -9,9 +9,6 @@ is_raw_dataset(name)
 \arguments{
 \item{name}{raw_dataset name}
 }
-\value{
-
-}
 \description{
 Check if raw_dataset exists
 }

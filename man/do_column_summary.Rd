@@ -21,9 +21,6 @@ do_column_summary(data_, FUN = sum, name, modify, ignore, input, output)
 
 \item{new.name}{name of output data frame (defaults to input data name)}
 }
-\value{
-
-}
 \description{
 Collapses rows of data frame by specified function and adds as list entry
 }

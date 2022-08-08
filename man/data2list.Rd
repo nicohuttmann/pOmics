@@ -17,9 +17,6 @@ data2list(data_, names, input, output, output.type)
 
 \item{output.type}{(optional) type of output ("list" to force list output)}
 }
-\value{
-
-}
 \description{
 Pull names vector from
 }

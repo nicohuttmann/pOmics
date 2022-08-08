@@ -6,9 +6,6 @@
 \usage{
 cleanup()
 }
-\value{
-
-}
 \description{
 Removes all objects except specified analysis objects
 }

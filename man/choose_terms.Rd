@@ -13,9 +13,6 @@ choose_terms(proteins, TERM2GENE, graphics)
 
 \item{variables}{variables}
 }
-\value{
-
-}
 \description{
 Interface for user to define a list of GO terms
 }

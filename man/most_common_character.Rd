@@ -11,9 +11,6 @@ most_common_character(x, exclude = NA)
 
 \item{exclude}{characters to be excluded from list}
 }
-\value{
-
-}
 \description{
 Finds and returns most common character in a data
 }

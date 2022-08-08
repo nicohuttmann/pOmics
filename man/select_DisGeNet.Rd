@@ -9,9 +9,6 @@ select_DisGeNet(genes)
 \arguments{
 \item{genes}{vector of genes}
 }
-\value{
-
-}
 \description{
 Improved select function for DisGeNet databases
 }

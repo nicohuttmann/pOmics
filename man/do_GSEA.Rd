@@ -41,9 +41,6 @@ do_GSEA(
 
 \item{add.info}{Add additional information (takes longer)}
 }
-\value{
-
-}
 \description{
 Performs gene set enrichment on numeric protein vector with specified Ontology
 }

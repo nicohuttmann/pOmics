@@ -30,9 +30,6 @@ options}
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Performs hierarchical clustering on data frame
 }

@@ -9,9 +9,6 @@ get_all_attr(dataset)
 \arguments{
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Prints default dataset attributes
 }

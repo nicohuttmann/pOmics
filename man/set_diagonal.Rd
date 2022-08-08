@@ -11,9 +11,6 @@ set_diagonal(data, diag = 1)
 
 \item{diag}{new value for diagonal values}
 }
-\value{
-
-}
 \description{
 Sets diagonal values of symmetric matrix
 }

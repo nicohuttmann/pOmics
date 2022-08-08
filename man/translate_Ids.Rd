@@ -35,9 +35,6 @@ translate_Ids(
 
 \item{silent}{suppress all messages}
 }
-\value{
-
-}
 \description{
 Translates biological IDs using annotations packages
 }

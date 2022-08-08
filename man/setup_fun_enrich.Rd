@@ -9,9 +9,6 @@ setup_fun_enrich(databases = "all")
 \arguments{
 \item{databases}{databases to setup}
 }
-\value{
-
-}
 \description{
 Initiates databases for functional enrichment
 }

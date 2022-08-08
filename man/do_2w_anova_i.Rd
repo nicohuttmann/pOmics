@@ -20,9 +20,6 @@ do_2w_anova_i(
 
 \item{balanced}{Are analysis groups balanced (same number each)?}
 }
-\value{
-
-}
 \description{
 Performs a two-way ANOVA with an interaction term between variables
 }

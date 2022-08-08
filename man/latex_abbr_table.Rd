@@ -13,9 +13,6 @@ latex_abbr_table(table, line.start = "\\t\\t", sort.abc = T)
 
 \item{sort.abc}{sort table alphabetically}
 }
-\value{
-
-}
 \description{
 Prints latex table code to console (made for abbreviations table of geegeedown)
 }

@@ -23,9 +23,6 @@ plot_dend_enrich_lines(
 
 \item{print}{print plot to device}
 }
-\value{
-
-}
 \description{
 Plots -log10 p-value profile of dendrogram enrichment
 }

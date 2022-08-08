@@ -9,9 +9,6 @@ is_dataset(name)
 \arguments{
 \item{name}{dataset name}
 }
-\value{
-
-}
 \description{
 Check if dataset exists
 }

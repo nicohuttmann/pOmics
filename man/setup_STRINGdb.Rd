@@ -18,9 +18,6 @@ setup_STRINGdb(
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Sets up the STRING database
 }

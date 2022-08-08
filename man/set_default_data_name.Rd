@@ -11,9 +11,6 @@ set_default_data_name(name, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Set default data name
 }

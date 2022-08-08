@@ -9,9 +9,6 @@
 \arguments{
 \item{data_attributes}{data_attributes list}
 }
-\value{
-
-}
 \description{
 Get column names containing data independently if variables or data columns
 }

@@ -14,9 +14,6 @@ merge_enrichResults(
 \arguments{
 \item{enrichResult_list}{nested list of enrichment data frames}
 }
-\value{
-
-}
 \description{
 Merges a (nested) list of enrichResult objects
 }

@@ -13,9 +13,6 @@ get_GOdata(proteins, ontology)
 
 \item{statistic}{statistic}
 }
-\value{
-
-}
 \description{
 Searches for GOdata or makes new
 }

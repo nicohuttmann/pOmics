@@ -6,9 +6,6 @@
 \usage{
 v_info()
 }
-\value{
-
-}
 \description{
 Shows info list
 }

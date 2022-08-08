@@ -9,9 +9,6 @@ merge_TERM2GENE(...)
 \arguments{
 \item{...}{TERM2GENE dataframes}
 }
-\value{
-
-}
 \description{
 Combines TERM2GENE dataframes
 }

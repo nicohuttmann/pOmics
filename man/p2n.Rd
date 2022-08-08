@@ -11,9 +11,6 @@ p2n(proteins, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Returns names from known proteins
 }

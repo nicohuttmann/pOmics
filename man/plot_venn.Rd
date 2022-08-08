@@ -15,9 +15,6 @@ plot_venn(x, name, plot = T, export = F)
 
 \item{export}{exports plot to pdf}
 }
-\value{
-
-}
 \description{
 Plots a venn diagram form given data
 }

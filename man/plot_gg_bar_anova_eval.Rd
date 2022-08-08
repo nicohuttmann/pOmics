@@ -39,9 +39,6 @@ plot_gg_bar_anova_eval(
 
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Plots stacked bar plot to indicate significantly changed proteins from eval_anova output
 }

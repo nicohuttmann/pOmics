@@ -13,9 +13,6 @@ setup_org_database(dataset, OrgDb, taxId)
 
 \item{taxId}{taxonomy Id}
 }
-\value{
-
-}
 \description{
 Sets up annotaion database for biological Id translation and functional enrichment
 }

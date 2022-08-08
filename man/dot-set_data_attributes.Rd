@@ -11,9 +11,6 @@
 
 \item{data_attributes}{list of data_attributes}
 }
-\value{
-
-}
 \description{
 Sets relevant data attributes from list
 }

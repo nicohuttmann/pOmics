@@ -11,9 +11,6 @@ str_locate_last(string, pattern)
 
 \item{pattern}{pattern to match}
 }
-\value{
-
-}
 \description{
 Locates last position of pattern in given string
 }

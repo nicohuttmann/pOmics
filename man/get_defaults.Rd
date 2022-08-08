@@ -13,9 +13,6 @@ get_defaults(data.origin, type, silent = F)
 
 \item{silent}{suppress messages}
 }
-\value{
-
-}
 \description{
 Returns default data
 }

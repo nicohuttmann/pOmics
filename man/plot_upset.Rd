@@ -32,9 +32,6 @@ plot_upset(
 
 \item{output}{name of output plot}
 }
-\value{
-
-}
 \description{
 Visualizes identification data as UpSet plot
 }

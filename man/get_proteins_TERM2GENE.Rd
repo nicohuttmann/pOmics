@@ -15,9 +15,6 @@ get_proteins_TERM2GENE(proteins, terms, TERM2GENE, graphics)
 
 \item{graphics}{choose terms from graphical window or console}
 }
-\value{
-
-}
 \description{
 Retrieves proteins from annotation terms
 }

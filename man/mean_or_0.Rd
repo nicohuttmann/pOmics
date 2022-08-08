@@ -9,9 +9,6 @@ mean_or_0(x)
 \arguments{
 \item{x}{numeric vector}
 }
-\value{
-
-}
 \description{
 Helper function to combine technical replicates (only returns mean if all values are > 0)
 }

@@ -11,9 +11,6 @@ get_dataset_attr(which = "names", dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Returns dataset attribute; does not check if exists
 }

@@ -11,9 +11,6 @@ get_GO_proteins(terms, include.child.terms = F)
 
 \item{include.child.terms}{include child terms}
 }
-\value{
-
-}
 \description{
 Returns GO terms from given terms
 }

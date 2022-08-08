@@ -15,9 +15,6 @@ cat_function(FUN, add.equal.sign = T, print = T, copy2clipboard = T)
 
 \item{copy2clipboard}{copy function snippet to clipboard}
 }
-\value{
-
-}
 \description{
 Prints function snippet to console and clipboard
 }

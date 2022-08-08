@@ -11,9 +11,6 @@ get_variables_template(dataset, fill = NA)
 
 \item{fill}{entries of vector}
 }
-\value{
-
-}
 \description{
 Creates template for new variables data
 }

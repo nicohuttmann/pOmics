@@ -9,9 +9,6 @@ common_prefix(names)
 \arguments{
 \item{names}{vector of strings}
 }
-\value{
-
-}
 \description{
 Finds common substring; returns "" if no characters are in comomn
 }

@@ -9,9 +9,6 @@ add_import(import)
 \arguments{
 \item{import}{list of imported files}
 }
-\value{
-
-}
 \description{
 Saves imported files to .imports list
 }

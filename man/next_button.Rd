@@ -6,9 +6,6 @@
 \usage{
 next_button()
 }
-\value{
-
-}
 \description{
 Increases button count
 }

@@ -11,9 +11,6 @@ new_analysis_list(silent = F, replace = F)
 
 \item{replace}{replace if list already exists}
 }
-\value{
-
-}
 \description{
 Add or replace analysis list
 }

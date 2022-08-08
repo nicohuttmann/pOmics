@@ -38,9 +38,6 @@ do_ORA_MSigDB(
 
 \item{add.info}{add additional information to the results data frame}
 }
-\value{
-
-}
 \description{
 Performs over-representation analysis using MSigDB annotations
 }

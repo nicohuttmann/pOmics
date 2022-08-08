@@ -15,9 +15,6 @@ strsplit_(x, split, output.type = "vector", as_numeric = T)
 
 \item{as.numeric}{try to convert to numeric}
 }
-\value{
-
-}
 \description{
 Same as strsplit but option to return as vector and to convert to numeric
 }

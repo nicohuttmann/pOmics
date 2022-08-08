@@ -26,9 +26,6 @@ do_ORA_topGO(
 
 \item{add.info}{Add additional information (takes longer)}
 }
-\value{
-
-}
 \description{
 Performs overexpression enrichment on logical protein vector with specified GO ontology
 }

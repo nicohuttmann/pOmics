@@ -9,9 +9,6 @@ gg_extract_legend(p)
 \arguments{
 \item{p}{ggplot object}
 }
-\value{
-
-}
 \description{
 Extract legend from ggplot object
 }

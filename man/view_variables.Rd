@@ -9,9 +9,6 @@ view_variables(dataset)
 \arguments{
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Prints variables data frame
 }

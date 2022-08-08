@@ -26,9 +26,6 @@ eval_anova(
 
 \item{fcThreshold}{absolute fold-change threshold}
 }
-\value{
-
-}
 \description{
 Evaluates data from ANOVA do_anova() for significant proteins
 }

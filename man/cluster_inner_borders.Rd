@@ -11,9 +11,6 @@ cluster_inner_borders(dend, k)
 
 \item{k}{number of clusters}
 }
-\value{
-
-}
 \description{
 Returns borders between clusters
 }

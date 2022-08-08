@@ -24,9 +24,6 @@ add_data(
 \item{new.observations.set.name}{if new observations set is added, specify
 name}
 }
-\value{
-
-}
 \description{
 Adds new data
 }

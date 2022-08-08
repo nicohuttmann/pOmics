@@ -9,9 +9,6 @@ dendrogram2table(data_, dendrogram = "dend_x")
 \arguments{
 \item{data_}{data list}
 }
-\value{
-
-}
 \description{
 Adds table representation of dendrogram
 }

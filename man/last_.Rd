@@ -9,9 +9,6 @@ last_(x)
 \arguments{
 \item{x}{vector}
 }
-\value{
-
-}
 \description{
 Returns first element of vector
 }

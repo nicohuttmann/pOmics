@@ -26,9 +26,6 @@ do_hclust_transpose(
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Changes x and y dendrograms and transposes hclust data
 }

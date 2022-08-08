@@ -11,9 +11,6 @@ tibble2matrix(tibble, from.row.names)
 
 \item{from.row.names}{row to use as new row names}
 }
-\value{
-
-}
 \description{
 Transforms tibble to matrix
 }

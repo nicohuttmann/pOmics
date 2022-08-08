@@ -11,9 +11,6 @@ add_segment_pvalue(segment, dend.enrich)
 
 \item{dend.enrich}{dend.table.enrichment}
 }
-\value{
-
-}
 \description{
 Adds p-values to geom_segment dataframe fo rdendrogram plot
 }

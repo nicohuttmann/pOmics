@@ -13,9 +13,6 @@ set_wd(wd, change = F, save = T)
 
 \item{save}{Should new working directory be saved?}
 }
-\value{
-
-}
 \description{
 Changes working directory
 }

@@ -11,9 +11,6 @@ factorize_matrix(data, row)
 
 \item{row}{reference row}
 }
-\value{
-
-}
 \description{
 Divides each row of a matrix by the elements of the specified row
 }

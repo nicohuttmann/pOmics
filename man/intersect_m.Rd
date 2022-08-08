@@ -13,9 +13,6 @@ intersect_m(x, y, ...)
 
 \item{...}{additional vectors}
 }
-\value{
-
-}
 \description{
 Intersect multiple vectors
 }

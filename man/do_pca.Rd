@@ -17,9 +17,6 @@ do_pca(data_, scale = T, dataset, input, output = "data_pca")
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Template for functions that accept either a data frame or a list
 }

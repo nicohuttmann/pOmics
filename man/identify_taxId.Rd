@@ -13,9 +13,6 @@ identify_taxId(x, try = 1, silent = F)
 
 \item{silent}{should message be printed when Id found}
 }
-\value{
-
-}
 \description{
 Checks protein Ids for their species
 }

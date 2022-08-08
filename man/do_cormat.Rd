@@ -49,9 +49,6 @@ do_cormat(
 
 \item{distance.m}{ethod method to calculate distance; see ?dist for options}
 }
-\value{
-
-}
 \description{
 Do a correlation matrix analysis as described by Horvath et al.
 }

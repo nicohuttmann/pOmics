@@ -41,9 +41,6 @@ plot_lines(
 
 \item{ylab}{y-axis label}
 }
-\value{
-
-}
 \description{
 Lines plot fo rpublication in ggplot2
 }

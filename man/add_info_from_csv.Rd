@@ -29,9 +29,6 @@ add_info_from_csv(
 
 \item{character2factor}{transform character data to factors}
 }
-\value{
-
-}
 \description{
 Adds all info from imported csv file to observations data
 }

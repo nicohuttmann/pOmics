@@ -13,9 +13,6 @@ gg_legend.position(p, remove = T, legend.position = "right")
 
 \item{legend.position}{positoin of legend if remove = FALSE}
 }
-\value{
-
-}
 \description{
 Removes or repositions legend of ggplot
 }

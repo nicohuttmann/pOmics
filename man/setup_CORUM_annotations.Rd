@@ -6,9 +6,6 @@
 \usage{
 setup_CORUM_annotations()
 }
-\value{
-
-}
 \description{
 Downloads CORUM database for functional enrichment
 }

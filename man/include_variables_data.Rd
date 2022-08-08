@@ -19,9 +19,6 @@ include_variables_data(data_, which, name, dataset, input, output)
 
 \item{output}{data frame to return in list}
 }
-\value{
-
-}
 \description{
 Adds group vector to data frame
 }

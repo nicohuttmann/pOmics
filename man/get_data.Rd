@@ -31,9 +31,6 @@ if data should be put into a list or not)}
 
 \item{dataset}{dataset name or number}
 }
-\value{
-
-}
 \description{
 Assemble data from dataset and return in list
 }

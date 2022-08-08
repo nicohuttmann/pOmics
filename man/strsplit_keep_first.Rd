@@ -13,9 +13,6 @@ strsplit_keep_first(x, split, as_numeric = T)
 
 \item{as_numeric}{try to convert to numeric}
 }
-\value{
-
-}
 \description{
 Performs strsplit and keeps first element of each string
 }

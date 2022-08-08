@@ -11,9 +11,6 @@ sep_vector2list(x, sep)
 
 \item{sep}{separator}
 }
-\value{
-
-}
 \description{
 # Generates a list from separated vector
 }

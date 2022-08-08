@@ -13,9 +13,6 @@ select_org_2_TERM2GENE(mapping, subtype, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Exports TERM2GENE dataframe from select_org
 }

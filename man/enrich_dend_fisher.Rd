@@ -13,9 +13,6 @@ enrich_dend_fisher(dend.table, annotated.proteins, n = 10, inverse = F)
 
 \item{n}{maximum number of clusters}
 }
-\value{
-
-}
 \description{
 Performs Fisher's exact test on all cluster levels of given dendrogram
 }

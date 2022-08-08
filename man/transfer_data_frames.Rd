@@ -11,9 +11,6 @@ transfer_data_frames(dataset, data.columns)
 
 \item{data.columns}{data frames to transfer}
 }
-\value{
-
-}
 \description{
 Transfers data from raw_dataset to .datasets
 }

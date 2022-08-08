@@ -9,9 +9,6 @@ new_imports_list(replace = F)
 \arguments{
 \item{replace}{Should imports list be replaced if already existing}
 }
-\value{
-
-}
 \description{
 Creates imports list
 }

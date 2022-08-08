@@ -13,9 +13,6 @@ map_variables(variables.data, match.to, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Return variables by matching variables.data
 }

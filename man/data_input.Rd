@@ -11,9 +11,6 @@ data_input(data_, input)
 
 \item{input}{name of input data}
 }
-\value{
-
-}
 \description{
 Handles list input for functions
 }

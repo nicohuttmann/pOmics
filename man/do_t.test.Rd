@@ -32,9 +32,6 @@ do_t.test(
 
 \item{output}{name of output}
 }
-\value{
-
-}
 \description{
 Template for functions that accept either a data frame or a list
 }

@@ -6,9 +6,6 @@
 \usage{
 v_imp()
 }
-\value{
-
-}
 \description{
 Shows imports list
 }

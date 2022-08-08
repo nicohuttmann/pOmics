@@ -13,9 +13,6 @@ set_default_observations_set(set, dataset, silent = F)
 
 \item{silent}{Silent?}
 }
-\value{
-
-}
 \description{
 Set default data set
 }

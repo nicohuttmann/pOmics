@@ -6,9 +6,6 @@
 \usage{
 v_db()
 }
-\value{
-
-}
 \description{
 Shows databases list
 }

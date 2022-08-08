@@ -13,9 +13,6 @@ paste_terms_overlap_heatmap(terms, max = 5, include.count = F)
 
 \item{include.count}{incude count in brackets}
 }
-\value{
-
-}
 \description{
 Combines names and count of annotation terms
 }

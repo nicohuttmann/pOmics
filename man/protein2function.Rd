@@ -11,9 +11,6 @@ protein2function(proteins, dataset)
 
 \item{dataset}{}
 }
-\value{
-
-}
 \description{
 Returns list vector of protein functions from UniProt
 }

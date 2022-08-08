@@ -6,9 +6,6 @@
 \usage{
 rm_functions()
 }
-\value{
-
-}
 \description{
 Removes functions from global environment
 }

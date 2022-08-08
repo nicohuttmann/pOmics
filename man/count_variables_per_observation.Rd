@@ -13,9 +13,6 @@ count_variables_per_observation(data_, data.name = "raw_data", plot = T)
 
 \item{plot}{results}
 }
-\value{
-
-}
 \description{
 Performs analysis
 }

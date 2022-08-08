@@ -6,9 +6,6 @@
 \usage{
 .template_names()
 }
-\value{
-
-}
 \description{
 Lists available template names from pOmics-templates repository
 }

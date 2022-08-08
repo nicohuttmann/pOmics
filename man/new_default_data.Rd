@@ -6,9 +6,6 @@
 \usage{
 new_default_data()
 }
-\value{
-
-}
 \description{
 Add default dataframe if it does not exist
 }

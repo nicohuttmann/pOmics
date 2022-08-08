@@ -11,9 +11,6 @@ get_OrgDb(OrgDb, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Checks organism database name from Bioconductor and if package can be loaded
 }

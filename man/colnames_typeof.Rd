@@ -11,9 +11,6 @@ colnames_typeof(data, data.type = "double")
 
 \item{data.type}{data type/s}
 }
-\value{
-
-}
 \description{
 Returns column names from data frame of specific column type
 }

@@ -33,9 +33,6 @@ plot_enrichment_barplot(
 
 \item{silent}{suppress error message and only return NULL}
 }
-\value{
-
-}
 \description{
 Plots barplot as used by clusterProfiler
 }

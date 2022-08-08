@@ -9,9 +9,6 @@ is_data_origin(data.origin)
 \arguments{
 \item{data.origin}{data origin}
 }
-\value{
-
-}
 \description{
 Checks if given data.origin is among the defaults
 }

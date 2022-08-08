@@ -13,9 +13,6 @@ remove_variables_data(name, dataset, require.confirmation = T)
 
 \item{require.confirmation}{Require additional confirmation before execution}
 }
-\value{
-
-}
 \description{
 Removes variables data
 }

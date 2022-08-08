@@ -15,9 +15,6 @@ get_obs_data(which, observations, observations.set, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Return observations data
 }

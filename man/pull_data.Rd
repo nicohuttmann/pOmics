@@ -21,9 +21,6 @@ pull_data(data_, values, names, dataset, input, output, output.type)
 
 \item{output.type}{(optional) type of output ("vector" to force vector output)}
 }
-\value{
-
-}
 \description{
 Pull names vector from
 }

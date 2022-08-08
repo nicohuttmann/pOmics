@@ -11,9 +11,6 @@ protein2gene(proteins, dataset)
 
 \item{dataset}{which dataset to use}
 }
-\value{
-
-}
 \description{
 Translates protein accession Ids to gene names
 }

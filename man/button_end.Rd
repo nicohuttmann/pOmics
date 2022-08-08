@@ -6,9 +6,6 @@
 \usage{
 button_end()
 }
-\value{
-
-}
 \description{
 Ends section hidden by button
 }

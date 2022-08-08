@@ -36,9 +36,6 @@ simplify_enrichment_results(
 
 \item{minimum.count}{number of proteins per annotation}
 }
-\value{
-
-}
 \description{
 Simplifies enrichment data frame by overlap between annotations, semantic similarity for GO terms and minimum protein count
 }

@@ -11,9 +11,6 @@ export_GO_table(table, caption = NULL)
 
 \item{caption}{table caption}
 }
-\value{
-
-}
 \description{
 Prepares GO table for output in HTML file
 }

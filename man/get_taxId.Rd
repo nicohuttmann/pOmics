@@ -9,9 +9,6 @@ get_taxId(x)
 \arguments{
 \item{x}{data frame to be inspected}
 }
-\value{
-
-}
 \description{
 Identifies taxonomy Id if possible, ask otherwise
 }

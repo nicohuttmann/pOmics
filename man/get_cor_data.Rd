@@ -15,9 +15,6 @@ get_cor_data(cor_list, name = "adjacency", k = 1, l = 1)
 
 \item{l}{cluster index l}
 }
-\value{
-
-}
 \description{
 Returns data from cor_list object
 }

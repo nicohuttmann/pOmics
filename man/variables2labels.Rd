@@ -13,9 +13,6 @@ variables2labels(variables, name, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Wrapper around get_variables_data to replace variables with labels
 }

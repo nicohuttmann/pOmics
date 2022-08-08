@@ -9,9 +9,6 @@ eval_dend_enrich(dend.enrich, cut = T)
 \arguments{
 \item{dend.enrich}{output from enrich_dend_fisher/_ks}
 }
-\value{
-
-}
 \description{
 Evalueates dendrogram enrichment
 }

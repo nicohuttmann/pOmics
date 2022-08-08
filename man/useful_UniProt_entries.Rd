@@ -6,9 +6,6 @@
 \usage{
 useful_UniProt_entries()
 }
-\value{
-
-}
 \description{
 Prints useful/working UniProt entries
 }

@@ -9,9 +9,6 @@ button_begin(label = "View/Hide")
 \arguments{
 \item{label}{button label}
 }
-\value{
-
-}
 \description{
 Creates button to hide plots and tables
 }

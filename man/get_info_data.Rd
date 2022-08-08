@@ -9,9 +9,6 @@ get_info_data(name)
 \arguments{
 \item{name}{name of .info data}
 }
-\value{
-
-}
 \description{
 Returns .info data
 }

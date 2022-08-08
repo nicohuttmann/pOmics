@@ -17,9 +17,6 @@ add_group_columns(grouped.list, x, from, to, separate)
 
 \item{separate}{should columns be added separately}
 }
-\value{
-
-}
 \description{
 Helper function for df2groupedList to add column/s to the list
 }

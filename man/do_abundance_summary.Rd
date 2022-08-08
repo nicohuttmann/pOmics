@@ -32,9 +32,6 @@ do_abundance_summary(
 
 \item{output.plot}{name for output plot data}
 }
-\value{
-
-}
 \description{
 Template for functions that accept either a data frame or a list
 }

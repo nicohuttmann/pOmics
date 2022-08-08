@@ -11,9 +11,6 @@ is_variables_data(name, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Checks if variables data name exist
 }

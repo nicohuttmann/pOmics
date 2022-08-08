@@ -15,9 +15,6 @@ threshold(values, min = T, limit = 0, na.value = NA)
 
 \item{na.value}{value value for NA}
 }
-\value{
-
-}
 \description{
 Returns logical vector indicating values above or below given limit
 }

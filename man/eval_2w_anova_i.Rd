@@ -13,9 +13,6 @@ eval_2w_anova_i(analysis_list, p.value.threshold = 0.05, fc.threshold = 0.5)
 
 \item{data}{data frame output of two-way ANOVA with interactions}
 }
-\value{
-
-}
 \description{
 Classifies protein changes from two-way ANOVA with interaction
 }

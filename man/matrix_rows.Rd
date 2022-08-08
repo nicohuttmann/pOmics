@@ -11,9 +11,6 @@ matrix_rows(matrix, row.names)
 
 \item{row.names}{row naems}
 }
-\value{
-
-}
 \description{
 Subsets matrix by rownames and checks for transformations when only one row is selected
 }

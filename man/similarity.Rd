@@ -11,9 +11,6 @@ similarity(data, method = "none")
 
 \item{method}{similarity function ("absolute", "preserve", "none")}
 }
-\value{
-
-}
 \description{
 Calculates similarity from correlation
 }

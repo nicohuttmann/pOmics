@@ -35,9 +35,6 @@ assemble_heatmap_rowwise(
 
 \item{rel_legends_space}{realtive space between plot and legends}
 }
-\value{
-
-}
 \description{
 Combines subplots to form a heatmap
 }

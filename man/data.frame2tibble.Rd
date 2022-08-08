@@ -11,9 +11,6 @@ data.frame2tibble(data, to.row.names)
 
 \item{to.row.names}{name for row names vector}
 }
-\value{
-
-}
 \description{
 Transforms data frames to tibble and adds column for row names
 }

@@ -11,9 +11,6 @@ annotation_data2list(data.annotation, sep = "; ")
 
 \item{sep}{separator}
 }
-\value{
-
-}
 \description{
 Transforms data frame to annotation list
 }

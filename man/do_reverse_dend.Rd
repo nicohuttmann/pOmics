@@ -17,9 +17,6 @@ do_reverse_dend(data_, which = "y", dataset, input = "data_hclust", output)
 
 \item{...}{specific arguments}
 }
-\value{
-
-}
 \description{
 Template for functions that accept either a data frame or a list
 }

@@ -6,9 +6,6 @@
 \usage{
 v_ds()
 }
-\value{
-
-}
 \description{
 Shows datasets list
 }

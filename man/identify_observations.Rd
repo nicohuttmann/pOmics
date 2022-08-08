@@ -11,9 +11,6 @@ identify_observations(x, pattern = ".")
 
 \item{pattern}{separation pattern of column names}
 }
-\value{
-
-}
 \description{
 Guesses observations names from raw_dataset
 }

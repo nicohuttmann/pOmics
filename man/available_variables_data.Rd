@@ -15,9 +15,6 @@ available_variables_data(dataset, view = T, return = F, print.call = F)
 
 \item{print.call}{print call for transferring variables data}
 }
-\value{
-
-}
 \description{
 Shows available raw variables data and returns them or prints a transfer call
 }

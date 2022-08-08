@@ -6,9 +6,6 @@
 \usage{
 get_datasets()
 }
-\value{
-
-}
 \description{
 Prints or returns datasets
 }

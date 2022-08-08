@@ -26,7 +26,7 @@ p2n <- function(proteins, dataset) {
   }
 
 
-  protein_names <- select_org(keys = proteins, columns = "PROTEIN-NAMES",
+  protein_names <- select_org(keys = proteins, columns = "GENENAME",
              output = "vector.keep",
              dataset = dataset)
 

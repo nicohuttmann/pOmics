@@ -20,9 +20,6 @@ do_count_id_quant(
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Combines information of identified and quantified proteins
 }

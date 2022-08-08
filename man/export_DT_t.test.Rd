@@ -25,9 +25,6 @@ export_DT_t.test(
 \item{dom}{order of table elements (default: "lBfrtip", see
 https://rstudio.github.io/DT/)}
 }
-\value{
-
-}
 \description{
 Formats table for nice output (R Markdown)
 }

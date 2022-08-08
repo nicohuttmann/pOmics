@@ -90,9 +90,6 @@ document)}
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Plots a volcano plot with ggplot2
 }

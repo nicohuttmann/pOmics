@@ -9,9 +9,6 @@ TERM2GENE_2_list(TERM2GENE)
 \arguments{
 \item{TERM2GENE}{TERM2GENE dataframe}
 }
-\value{
-
-}
 \description{
 Splits TERM2GENE dataframe to list
 }

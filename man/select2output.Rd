@@ -19,9 +19,6 @@ select2output(output.data, keys, output, database, dataset, ...)
 
 \item{...}{arguments for TERM2GENE function (subtype = "CC", "BP", or "MF")}
 }
-\value{
-
-}
 \description{
 Formats mapping from select methods
 }

@@ -44,9 +44,6 @@ build_cor_list(
 
 \item{plot}{print plot of correlation matrix}
 }
-\value{
-
-}
 \description{
 Builds cor_list object with default parameters
 }

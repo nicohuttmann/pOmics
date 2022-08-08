@@ -9,9 +9,6 @@ add_dataset(name)
 \arguments{
 \item{name}{dataset to add}
 }
-\value{
-
-}
 \description{
 Adds new datasets to list
 }

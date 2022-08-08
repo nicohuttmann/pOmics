@@ -9,9 +9,6 @@ get_raw_dataset(name)
 \arguments{
 \item{name}{name of dataset}
 }
-\value{
-
-}
 \description{
 Returns raw datasets from .info list
 }

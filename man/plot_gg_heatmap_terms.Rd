@@ -52,9 +52,6 @@ plot_gg_heatmap_terms(
 
 \item{ratio}{y/x ratio of heat map}
 }
-\value{
-
-}
 \description{
 Plots heatmap with dendrograms
 }

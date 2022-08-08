@@ -30,9 +30,6 @@ nice_number(
 
 \item{output}{type of output vector}
 }
-\value{
-
-}
 \description{
 Help make nice number in R Markdown
 }

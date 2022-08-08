@@ -62,9 +62,6 @@ plot_gg_xy_fc(
 
 \item{...}{arguments for custom.theme}
 }
-\value{
-
-}
 \description{
 Compares log2 fold-changes between two comparisons from an anova_eval data list
 }

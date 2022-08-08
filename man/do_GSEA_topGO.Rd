@@ -23,9 +23,6 @@ do_GSEA_topGO(
 
 \item{pvalueCutoff}{p-value cutoff for annotations}
 }
-\value{
-
-}
 \description{
 Performs gene set enrichment on numeric protein vector with specified Ontology
 }

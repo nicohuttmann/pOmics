@@ -38,9 +38,6 @@ do_GSEA_KEGG(
 
 \item{add.info}{add additional information to the results data frame}
 }
-\value{
-
-}
 \description{
 Performs gene set enrichment analysis using KEGG terms
 }

@@ -38,9 +38,6 @@ do_GSEA_Reactome(
 
 \item{add.info}{add additional information to the results data frame}
 }
-\value{
-
-}
 \description{
 Performs gene set enrichment analysis using Reactome annotations
 }

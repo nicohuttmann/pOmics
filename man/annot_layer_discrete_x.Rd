@@ -29,9 +29,6 @@ annot_layer_discrete_x(
 
 \item{legend.title}{title of legend}
 }
-\value{
-
-}
 \description{
 Creates discrete annotation layer
 }

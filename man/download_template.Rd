@@ -9,9 +9,6 @@ download_template(folder = "Scripts")
 \arguments{
 \item{folder}{where to save template script}
 }
-\value{
-
-}
 \description{
 Downloads template scripts and writes to new file
 }

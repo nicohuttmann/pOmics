@@ -13,9 +13,6 @@ ask_name(name, message, exclude = NA)
 
 \item{exclude}{exclusion list for unavailable names}
 }
-\value{
-
-}
 \description{
 Asks user for name if no name given
 }

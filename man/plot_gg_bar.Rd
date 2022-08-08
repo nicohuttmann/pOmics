@@ -13,9 +13,6 @@ plot_gg_bar(data, x = "observations", y = "count")
 
 \item{y}{numeric value to be represented}
 }
-\value{
-
-}
 \description{
 Plots data as bar plot with ggplot2
 }

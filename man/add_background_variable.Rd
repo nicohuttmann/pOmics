@@ -9,9 +9,6 @@ add_background_variable(name)
 \arguments{
 \item{name}{name to store}
 }
-\value{
-
-}
 \description{
 Add variable names in as background objects
 }

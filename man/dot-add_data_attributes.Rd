@@ -13,9 +13,6 @@
 
 \item{new_attr}{new attributes}
 }
-\value{
-
-}
 \description{
 Adds entries to data_attributes
 }

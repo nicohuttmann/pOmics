@@ -9,9 +9,6 @@ cat_vector_string(...)
 \arguments{
 \item{...}{vector/s}
 }
-\value{
-
-}
 \description{
 Prints vectors to console in code-form
 }

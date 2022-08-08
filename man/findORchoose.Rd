@@ -13,9 +13,6 @@ findORchoose(names, patterns, title = NULL)
 
 \item{title}{Title of user interface}
 }
-\value{
-
-}
 \description{
 Finds vector entry based on given patterns and lets User choose if not possible
 }

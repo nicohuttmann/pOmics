@@ -15,9 +15,6 @@ reorder_data(data.name, observations.set, dataset, silent = F)
 
 \item{silent}{return error if function fails}
 }
-\value{
-
-}
 \description{
 Reorders dataframe rows according to observations data order
 }

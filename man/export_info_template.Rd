@@ -13,9 +13,6 @@ export_info_template(dataset, path, observations.set)
 
 \item{observations.set}{observations.set}
 }
-\value{
-
-}
 \description{
 Exports observations names to csv info template file
 }

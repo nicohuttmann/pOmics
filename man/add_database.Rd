@@ -15,9 +15,6 @@ add_database(database, id, type, replace = F)
 
 \item{replace}{Should existing database be replaced?}
 }
-\value{
-
-}
 \description{
 Adds new database to .databases
 }

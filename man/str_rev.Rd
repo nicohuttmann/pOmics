@@ -9,9 +9,6 @@ str_rev(strings)
 \arguments{
 \item{strings}{vector of strings}
 }
-\value{
-
-}
 \description{
 Returns given strings in reverse order
 }

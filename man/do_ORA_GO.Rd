@@ -36,9 +36,6 @@ do_ORA_GO(
 
 \item{view}{view results}
 }
-\value{
-
-}
 \description{
 Performs over-representation analysis using Gene Ontology annotations
 }

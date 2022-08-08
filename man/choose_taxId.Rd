@@ -6,9 +6,6 @@
 \usage{
 choose_taxId()
 }
-\value{
-
-}
 \description{
 Helps to find taxonomy Id
 }

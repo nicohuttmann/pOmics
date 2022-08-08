@@ -11,9 +11,6 @@ save_wd(wd, silent = F)
 
 \item{silent}{Should a message be}
 }
-\value{
-
-}
 \description{
 Saves given or current working directory
 }

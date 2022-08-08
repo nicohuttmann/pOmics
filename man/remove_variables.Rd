@@ -15,9 +15,6 @@ remove_variables(data_, min = 0.5, input, output)
 
 \item{output}{if data_ is list: name of output data to save in list under}
 }
-\value{
-
-}
 \description{
 Removes columns from data frame based on minimum values above 0
 }

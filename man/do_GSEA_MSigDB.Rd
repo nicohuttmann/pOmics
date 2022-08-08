@@ -38,9 +38,6 @@ do_GSEA_MSigDB(
 
 \item{add.info}{add additional information to the results data frame}
 }
-\value{
-
-}
 \description{
 Performs gene set enrichment analysis using MSigDB annotations
 }

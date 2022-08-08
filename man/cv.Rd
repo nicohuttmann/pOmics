@@ -9,9 +9,6 @@ cv(x)
 \arguments{
 \item{x}{vector}
 }
-\value{
-
-}
 \description{
 Calculates coefficient of variation
 }

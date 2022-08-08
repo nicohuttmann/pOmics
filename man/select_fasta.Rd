@@ -17,9 +17,6 @@ select_fasta(keys, columns, output = "vector.keep", keytype, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Retrieve annotation data from imported fasta files
 }

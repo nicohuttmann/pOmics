@@ -11,9 +11,6 @@ tibble2data.frame(tibble, from.row.names)
 
 \item{from.row.names}{column to use as new row names}
 }
-\value{
-
-}
 \description{
 Transforms tibble to data frame
 }

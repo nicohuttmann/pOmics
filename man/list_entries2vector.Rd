@@ -9,9 +9,6 @@ list_entries2vector(x)
 \arguments{
 \item{x}{data.list}
 }
-\value{
-
-}
 \description{
 Transforms list entries to vector of one element each; specific for rawdata2list
 }

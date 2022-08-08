@@ -11,9 +11,6 @@ pqn(data, data2)
 
 \item{data2}{(optional) data from which normalization factors can be calculated}
 }
-\value{
-
-}
 \description{
 Probabilistic quotient normalization
 }

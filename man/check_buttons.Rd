@@ -6,9 +6,6 @@
 \usage{
 check_buttons()
 }
-\value{
-
-}
 \description{
 Sets up bottons for HTML document
 }

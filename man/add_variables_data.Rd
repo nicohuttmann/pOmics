@@ -27,9 +27,6 @@ variables for easy access}
 
 \item{replace}{replace existing column}
 }
-\value{
-
-}
 \description{
 Add data to variables
 }

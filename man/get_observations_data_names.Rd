@@ -11,9 +11,6 @@ get_observations_data_names(observations.set, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Returns observations data names
 }

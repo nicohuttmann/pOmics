@@ -23,9 +23,6 @@ provided)}
 
 \item{...}{arguments for TERM2GENE function (subtype = "CC", "BP", or "MF")}
 }
-\value{
-
-}
 \description{
 Queries data from Annotation packages
 }

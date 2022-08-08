@@ -13,9 +13,6 @@ get_cluster_proteins(cor_list, k = 1, l = 1)
 
 \item{l}{index of cluster}
 }
-\value{
-
-}
 \description{
 Returns vector of proteins
 }

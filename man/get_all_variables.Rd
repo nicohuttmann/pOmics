@@ -6,9 +6,6 @@
 \usage{
 get_all_variables()
 }
-\value{
-
-}
 \description{
 Returns collective variables from all datasets
 }

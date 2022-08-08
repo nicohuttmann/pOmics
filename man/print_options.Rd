@@ -9,9 +9,6 @@ print_options(options)
 \arguments{
 \item{options}{strings}
 }
-\value{
-
-}
 \description{
 Prints options similar to menu() function
 }

@@ -27,9 +27,6 @@ do_hclust_enrich_T2G(
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Template for functions that accept either a data frame or a list
 }

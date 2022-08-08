@@ -11,9 +11,6 @@ setup_taxonomy_information(dataset, taxId)
 
 \item{taxId}{taxonomy Id}
 }
-\value{
-
-}
 \description{
 Sets up annotaion database for biological Id translation and functional enrichment
 }

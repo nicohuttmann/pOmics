@@ -17,9 +17,6 @@ export_tiff(p, file = "test.tiff", width = 4, height = 4, open = T)
 
 \item{open}{open pdf after export}
 }
-\value{
-
-}
 \description{
 Exports plot to tiff
 }

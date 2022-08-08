@@ -9,9 +9,6 @@ get_protein_list(name)
 \arguments{
 \item{name}{name of protein list}
 }
-\value{
-
-}
 \description{
 Returns lists of proteins
 }

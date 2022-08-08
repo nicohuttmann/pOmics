@@ -26,9 +26,6 @@ fun_enrich_t.test(
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Functional enrichment of t.test results
 }

@@ -11,9 +11,6 @@ t2g_subset_terms(T2G, terms)
 
 \item{terms}{character vector containing terms to keep}
 }
-\value{
-
-}
 \description{
 Subset term-to-gene data frame by given terms
 }

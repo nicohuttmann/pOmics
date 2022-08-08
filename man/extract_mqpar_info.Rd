@@ -9,9 +9,6 @@ extract_mqpar_info(file)
 \arguments{
 \item{file}{path to mqpar.xml file}
 }
-\value{
-
-}
 \description{
 Extracts information from mqpar.xml file
 }

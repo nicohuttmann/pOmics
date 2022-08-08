@@ -9,9 +9,6 @@ view_data(which = c(".imports", ".info", ".databases", ".datasets"))
 \arguments{
 \item{which}{data ftrames to show}
 }
-\value{
-
-}
 \description{
 Shows all data lists
 }

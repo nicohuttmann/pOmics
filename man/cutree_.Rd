@@ -13,9 +13,6 @@ cutree_(tree, k = NULL, h = NULL)
 
 \item{h}{height of cluster cut}
 }
-\value{
-
-}
 \description{
 Like cutree() but returns character vector
 }

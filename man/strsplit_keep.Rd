@@ -15,9 +15,6 @@ strsplit_keep(x, keep = 1, split, as_numeric = T)
 
 \item{as_numeric}{try to convert to numeric}
 }
-\value{
-
-}
 \description{
 Performs strsplit and keeps elements specified by vector
 }

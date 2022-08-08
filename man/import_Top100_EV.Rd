@@ -6,9 +6,6 @@
 \usage{
 import_Top100_EV()
 }
-\value{
-
-}
 \description{
 Downloads Top100 protein list and converts to protein accession ids
 }

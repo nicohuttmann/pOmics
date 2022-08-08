@@ -9,9 +9,6 @@ remove_dataset(name)
 \arguments{
 \item{name}{name of dataset}
 }
-\value{
-
-}
 \description{
 Removes dataset
 }

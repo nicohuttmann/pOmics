@@ -11,9 +11,6 @@ ks_test(protein.scores, annotated.proteins)
 
 \item{annotated.proteins}{proteins in annotated group}
 }
-\value{
-
-}
 \description{
 Calculates p-value from Fisher's exact test
 }

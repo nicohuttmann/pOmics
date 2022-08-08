@@ -6,9 +6,6 @@
 \usage{
 copy_template()
 }
-\value{
-
-}
 \description{
 Downloads template scripts and copies to clipboard
 }

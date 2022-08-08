@@ -11,9 +11,6 @@ view_observations(dataset, observations.set)
 
 \item{observations.set}{observations set}
 }
-\value{
-
-}
 \description{
 Prints observations data frame
 }

@@ -15,9 +15,6 @@ add_observations_set(name, observations, dataset, set.default = T)
 
 \item{set}{name for new set of observations}
 }
-\value{
-
-}
 \description{
 Adds a new set of observations
 }

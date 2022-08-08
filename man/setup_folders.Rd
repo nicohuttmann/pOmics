@@ -11,9 +11,6 @@ setup_folders(dir, silent = F)
 
 \item{silent}{suppress message when folders created}
 }
-\value{
-
-}
 \description{
 Creates folder structure for analysis project
 }

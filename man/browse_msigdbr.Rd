@@ -9,9 +9,6 @@ browse_msigdbr(names = "MODULE_212")
 \arguments{
 \item{names}{vector of entry names}
 }
-\value{
-
-}
 \description{
 Opens MSigDB entries
 }

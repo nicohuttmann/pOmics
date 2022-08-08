@@ -9,9 +9,6 @@ identify_separator(x)
 \arguments{
 \item{x}{dataset}
 }
-\value{
-
-}
 \description{
 Identifies most common character from dataset and tests for numbers or letters
 }

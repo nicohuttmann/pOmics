@@ -11,9 +11,6 @@ normalize(data, method = "pqn")
 
 \item{method}{method to use (default = "pqn", "none")}
 }
-\value{
-
-}
 \description{
 Normalizes and returns data
 }

@@ -9,9 +9,6 @@ cv_m(data)
 \arguments{
 \item{data}{data matrix}
 }
-\value{
-
-}
 \description{
 Calculates coefficient of variation
 }

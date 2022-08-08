@@ -11,9 +11,6 @@ add_raw_dataset(raw_dataset, name)
 
 \item{name}{name of dataset}
 }
-\value{
-
-}
 \description{
 Saves raw data frames to .info list
 }

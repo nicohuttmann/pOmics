@@ -13,9 +13,6 @@ compare_enrichment_data(enrichment.data.x, enrichment.data.y, ...)
 
 \item{...}{arguments for simplify_enrichment_results}
 }
-\value{
-
-}
 \description{
 Compares enrichment data and returns list of common and unique terms
 }

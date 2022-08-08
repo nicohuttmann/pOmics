@@ -11,9 +11,6 @@ bhc(p.values, FDR = 0.05)
 
 \item{FDR}{false discovery rate}
 }
-\value{
-
-}
 \description{
 Performs Benjamini-Hochberg-Correction of set of p-values
 }

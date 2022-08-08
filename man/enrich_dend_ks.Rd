@@ -15,9 +15,6 @@ enrich_dend_ks(dend.table, protein.scores, n = 10, inverse = F)
 
 \item{inverse}{enrichment for higher scores}
 }
-\value{
-
-}
 \description{
 Performs KS test on all cluster levels of given dendrogram
 }

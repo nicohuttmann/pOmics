@@ -51,9 +51,6 @@ plot_bar_composition(
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Plots data as bar plot with ggplot2
 }

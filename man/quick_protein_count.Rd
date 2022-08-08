@@ -15,9 +15,6 @@ quick_protein_count(variables, observations, observations.set, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Wrapper around do_count_id_quant
 }

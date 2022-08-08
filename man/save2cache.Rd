@@ -13,9 +13,6 @@ save2cache(data, view = F, new = F)
 
 \item{new}{Should cache list be renewed before saving}
 }
-\value{
-
-}
 \description{
 Saves data in cache
 }

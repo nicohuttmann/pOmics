@@ -11,9 +11,6 @@ get_data_name(name, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Check data type and return data.name
 }

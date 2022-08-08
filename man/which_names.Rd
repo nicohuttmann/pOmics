@@ -9,9 +9,6 @@ which_names(x)
 \arguments{
 \item{x}{x}
 }
-\value{
-
-}
 \description{
 Returns names of TRUE vector elements
 }

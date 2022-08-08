@@ -11,9 +11,6 @@ axis_limit_breaks(plot_limits, break.space = 1)
 
 \item{break.space}{space between breaks}
 }
-\value{
-
-}
 \description{
 Helps make nice axis limit breaks
 }

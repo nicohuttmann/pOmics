@@ -120,11 +120,6 @@ annotation layers}
 
 \item{output}{output data name}
 }
-\value{
-
-
-
-}
 \description{
 Plots heatmap with dendrograms
 

@@ -9,9 +9,6 @@ get_child_terms(terms)
 \arguments{
 \item{terms}{GO terms}
 }
-\value{
-
-}
 \description{
 Returns all offspring terms of given GO terms
 }

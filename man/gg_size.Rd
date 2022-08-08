@@ -9,9 +9,6 @@ gg_size(size)
 \arguments{
 \item{size}{size for geom_objects}
 }
-\value{
-
-}
 \description{
 Corrects size to points in ggplots
 }

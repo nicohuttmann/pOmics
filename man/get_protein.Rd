@@ -9,9 +9,6 @@ get_protein(x)
 \arguments{
 \item{x}{protein}
 }
-\value{
-
-}
 \description{
 NOT DONE
 }

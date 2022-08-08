@@ -13,9 +13,6 @@ get_observations(observations, observations.set, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Return observations
 }

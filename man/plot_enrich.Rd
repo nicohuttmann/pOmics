@@ -13,9 +13,6 @@ plot_enrich(cor_list, name, labels)
 
 \item{labels}{proteins to label yaxis}
 }
-\value{
-
-}
 \description{
 TPlots lines and cormat enrichment
 }

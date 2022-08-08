@@ -9,9 +9,6 @@ get_default_data_name(dataset)
 \arguments{
 \item{dataset}{datset}
 }
-\value{
-
-}
 \description{
 Return default data name
 }

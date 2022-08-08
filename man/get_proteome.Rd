@@ -11,9 +11,6 @@ get_proteome(id, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Returns all proteome accession numbers of given sepcies
 }

@@ -29,9 +29,6 @@ put_data(
 
 \item{output}{name to save in list}
 }
-\value{
-
-}
 \description{
 Assemble data from dataset and return in list
 }

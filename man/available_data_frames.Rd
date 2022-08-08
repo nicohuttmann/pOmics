@@ -15,9 +15,6 @@ available_data_frames(dataset, view = T, return = F, print.call = F)
 
 \item{print.call}{print call for transferring data frames}
 }
-\value{
-
-}
 \description{
 Shows available raw data frames and returns them or prints a transfer call
 }

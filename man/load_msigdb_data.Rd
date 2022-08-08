@@ -11,9 +11,6 @@ load_msigdb_data(category, subcategory, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Extracts category specific TERM2GENE data frames from local MSigDB data
 }

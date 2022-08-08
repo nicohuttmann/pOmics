@@ -11,9 +11,6 @@ get_database(id, type)
 
 \item{type}{database type}
 }
-\value{
-
-}
 \description{
 Returns  database
 }

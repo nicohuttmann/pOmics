@@ -11,9 +11,6 @@ correct_log2fc_anova(posthoc.diff, data)
 
 \item{data}{data used for anova}
 }
-\value{
-
-}
 \description{
 Calculates correct log2 fold-changes to replace anova diff values
 }

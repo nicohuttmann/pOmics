@@ -35,9 +35,6 @@ plot_euler(
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Plots Euler diagram from dataframe
 }

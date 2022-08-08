@@ -20,9 +20,6 @@ into a list or not)}
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Return variables data
 }

@@ -9,9 +9,6 @@
 \arguments{
 \item{data}{data object with}
 }
-\value{
-
-}
 \description{
 Saves relevant data attributes in list
 }

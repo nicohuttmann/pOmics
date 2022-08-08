@@ -9,9 +9,6 @@ initialize_data_structure(replace = F)
 \arguments{
 \item{replace}{replace existing lists}
 }
-\value{
-
-}
 \description{
 Creates basic data structure
 }

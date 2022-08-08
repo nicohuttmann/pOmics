@@ -9,9 +9,6 @@ get_input(data_)
 \arguments{
 \item{data_}{data_}
 }
-\value{
-
-}
 \description{
 Returns possible input names
 }

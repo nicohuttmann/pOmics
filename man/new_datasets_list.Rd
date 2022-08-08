@@ -9,9 +9,6 @@ new_datasets_list(replace = F)
 \arguments{
 \item{replace}{Should datasets list be replaced if already existing}
 }
-\value{
-
-}
 \description{
 Creates datasets list
 }

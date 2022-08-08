@@ -11,9 +11,6 @@ transfer_variables_data(dataset, data.columns)
 
 \item{data.columns}{columns to transfer}
 }
-\value{
-
-}
 \description{
 Transfers variables data from raw_dataset to .datasets
 }

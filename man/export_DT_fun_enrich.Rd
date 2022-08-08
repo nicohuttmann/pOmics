@@ -15,9 +15,6 @@ export_DT_fun_enrich(data, buttons, dom = "lBfrtip")
 \item{dom}{order of table elements (default: "lBfrtip", see
 https://rstudio.github.io/DT/)}
 }
-\value{
-
-}
 \description{
 Formats table for nice output (R Markdown)
 }

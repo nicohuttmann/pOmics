@@ -9,9 +9,6 @@ transfer_observations(dataset)
 \arguments{
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Transfers observations from raw_dataset to .datasets
 }

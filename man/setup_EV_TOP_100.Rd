@@ -6,9 +6,6 @@
 \usage{
 setup_EV_TOP_100(id = "EV_TOP_100", type = "EV_database")
 }
-\value{
-
-}
 \description{
 Downloads Top 100 EV protein markers from Vesiclepedia
 }

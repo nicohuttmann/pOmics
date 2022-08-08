@@ -9,9 +9,6 @@ get_MaxQuant_defaults(data.type)
 \arguments{
 \item{data.type}{datatype}
 }
-\value{
-
-}
 \description{
 Returns default list for identifier and data types to import
 }

@@ -11,9 +11,6 @@ get_observations_set(observations.set, dataset)
 
 \item{dataset}{dataset name or number}
 }
-\value{
-
-}
 \description{
 Checks and returns correct observations set identifier
 }

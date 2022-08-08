@@ -9,9 +9,6 @@
 \arguments{
 \item{data}{data object with specific attributes}
 }
-\value{
-
-}
 \description{
 Compares data attributes with data and removes non-existing entries
 }

@@ -11,9 +11,6 @@ match_v2l(vector, list)
 
 \item{list}{list vector entries should be matched to}
 }
-\value{
-
-}
 \description{
 Matches vector entries to list (stackoverflow question 11002391)
 }

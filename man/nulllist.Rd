@@ -9,9 +9,6 @@ nulllist(n)
 \arguments{
 \item{n}{length of list}
 }
-\value{
-
-}
 \description{
 Returns list filled with NULL of n length
 }

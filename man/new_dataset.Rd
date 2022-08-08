@@ -28,9 +28,6 @@ nothing; "split" to separate strings by separator)}
 \item{data.columns}{(optional) types of data to extract; uses defaults if
 not specified}
 }
-\value{
-
-}
 \description{
 Sorts raw data into data list with attributes
 }

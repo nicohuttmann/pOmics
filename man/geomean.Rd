@@ -9,10 +9,7 @@ geomean(x, na.rm = T)
 \arguments{
 \item{x}{vector}
 
-\item{na.rm}{should NAs be removed}
-}
-\value{
-
+\item{na.rm}{should NAs be removed?}
 }
 \description{
 Computes the geometric mean

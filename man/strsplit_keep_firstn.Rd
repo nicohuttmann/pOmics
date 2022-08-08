@@ -15,9 +15,6 @@ strsplit_keep_firstn(x, n = 1, split, as_numeric = T)
 
 \item{as_numeric}{try to convert to numeric}
 }
-\value{
-
-}
 \description{
 Performs strsplit and keeps first n elements of each string
 }

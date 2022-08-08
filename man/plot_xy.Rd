@@ -15,9 +15,6 @@ plot_xy(x, y, axis.title.x = "x", axis.title.y = "y")
 
 \item{axis.title.y}{title of y-axis}
 }
-\value{
-
-}
 \description{
 Matches names and plots scatter plot of two variables
 }

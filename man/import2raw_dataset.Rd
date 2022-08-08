@@ -16,9 +16,6 @@ nothing; "split" to separate strings by separator)}
 
 \item{add}{add raw_dataset to .info list}
 }
-\value{
-
-}
 \description{
 Extracts variables and grouped data from imported data frame
 }

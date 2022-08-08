@@ -9,9 +9,6 @@ import2grouped_data(import)
 \arguments{
 \item{import}{imported data frame}
 }
-\value{
-
-}
 \description{
 Stores data frame in a list and groups adjacent columns
 }

@@ -9,9 +9,6 @@ change_variables_manually(dataset)
 \arguments{
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Allows to manually change the variables data
 }

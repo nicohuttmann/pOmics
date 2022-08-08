@@ -17,9 +17,6 @@ adjacency(data, method, alpha, theta, beta)
 
 \item{beta}{beta parameter for power function}
 }
-\value{
-
-}
 \description{
 Calculates adjacency matrix from similarity matrix
 }

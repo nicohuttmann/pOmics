@@ -11,9 +11,6 @@ g2p(genes, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Translates gene symbols into protein accession IDs
 }

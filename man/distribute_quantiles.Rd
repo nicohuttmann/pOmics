@@ -11,9 +11,6 @@ distribute_quantiles(x, n = 4)
 
 \item{n}{number of quantiles}
 }
-\value{
-
-}
 \description{
 Returns named vector and substitutes numeric values by quantile groups
 }

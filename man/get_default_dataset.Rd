@@ -6,9 +6,6 @@
 \usage{
 get_default_dataset()
 }
-\value{
-
-}
 \description{
 Get default dataset
 }

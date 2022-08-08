@@ -11,9 +11,6 @@ setup_UniProt(taxId, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Loads the species specific UniProt.ws to the .GlobalEnv
 }

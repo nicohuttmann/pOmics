@@ -28,9 +28,6 @@ https://rstudio.github.io/DT/)}
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Template for functions that accept either a data frame or a list
 }

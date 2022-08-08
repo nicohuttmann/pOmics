@@ -19,9 +19,6 @@ impute_norm(data_, shift = 1.8, width = 0.3, seed = 123, input, output)
 
 \item{output}{if data_ is list: name of output data to save in list under}
 }
-\value{
-
-}
 \description{
 Imputes values based on normal distribution
 }

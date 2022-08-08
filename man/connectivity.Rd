@@ -11,9 +11,6 @@ connectivity(adjacency.matrix, scale = T)
 
 \item{scale}{should connectivity be divided by n - 1}
 }
-\value{
-
-}
 \description{
 Variable-wise connectivity
 }

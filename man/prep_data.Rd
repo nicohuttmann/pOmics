@@ -26,9 +26,6 @@ prep_data(
 
 \item{seed}{seed for imputation}
 }
-\value{
-
-}
 \description{
 Prepares data for analysis
 }

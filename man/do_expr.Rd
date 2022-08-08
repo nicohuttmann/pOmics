@@ -22,9 +22,6 @@ variable, e.g. x > 2)}
 
 \item{output}{if data_ is list: name of output data to save in list under}
 }
-\value{
-
-}
 \description{
 Evaluates data cell-wise
 }

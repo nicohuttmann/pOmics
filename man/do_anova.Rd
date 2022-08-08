@@ -13,9 +13,6 @@ do_anova(analysis_list, formula = "log2(x) ~ groups", data.name = "raw_data")
 
 \item{data.name}{data to use for analysis}
 }
-\value{
-
-}
 \description{
 Performs one-way ANOVA
 }

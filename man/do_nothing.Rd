@@ -17,9 +17,6 @@ do_nothing(data_, ..., dataset, input, output)
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Template for functions that accept either a data frame or a list
 }

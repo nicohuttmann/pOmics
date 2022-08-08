@@ -11,9 +11,6 @@ data2tibble(data, to.row.names)
 
 \item{to.row.names}{name for row names vector}
 }
-\value{
-
-}
 \description{
 Transforms any data type to a tibble
 }

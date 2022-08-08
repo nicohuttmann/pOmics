@@ -11,9 +11,6 @@ check_database(id, type)
 
 \item{type}{type of database}
 }
-\value{
-
-}
 \description{
 Checks if database is available
 }

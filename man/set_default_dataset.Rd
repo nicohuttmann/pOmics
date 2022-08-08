@@ -11,9 +11,6 @@ set_default_dataset(name, silent = F)
 
 \item{silent}{suppress messages}
 }
-\value{
-
-}
 \description{
 Updates default dataset
 }

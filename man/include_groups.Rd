@@ -29,9 +29,6 @@ include_groups(
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Adds group vector to data frame
 }

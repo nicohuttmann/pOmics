@@ -33,9 +33,6 @@ variables for easy access}
 
 \item{replace}{replace existing column}
 }
-\value{
-
-}
 \description{
 Adds data to observations data frame
 }

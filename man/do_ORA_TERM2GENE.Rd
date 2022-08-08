@@ -30,9 +30,6 @@ do_ORA_TERM2GENE(
 
 \item{maxGSSize}{maximum number of annotated proteins to be included}
 }
-\value{
-
-}
 \description{
 Performs over-representation analysis using Gene Ontology annotations
 }

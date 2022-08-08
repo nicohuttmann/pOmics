@@ -17,9 +17,6 @@ do_transpose(data_, from.row.names, to.row.names, input, output)
 
 \item{output}{name of output data}
 }
-\value{
-
-}
 \description{
 Transposes tibble and uses first column as column names
 }

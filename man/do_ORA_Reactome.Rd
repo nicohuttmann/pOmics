@@ -38,9 +38,6 @@ do_ORA_Reactome(
 
 \item{add.info}{add additional information to the results data frame}
 }
-\value{
-
-}
 \description{
 Performs over-representation analysis using Reactome annotations
 }

@@ -13,9 +13,6 @@ transpose_tibble(tibble, from.row.names, to.row.names)
 
 \item{to.row.names}{row names column after transposing}
 }
-\value{
-
-}
 \description{
 Transposes tibble and uses first column as column names
 }

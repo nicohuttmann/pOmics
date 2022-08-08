@@ -9,9 +9,6 @@ is_info_data(name)
 \arguments{
 \item{name}{name of .info data}
 }
-\value{
-
-}
 \description{
 Checks if .info data exists
 }

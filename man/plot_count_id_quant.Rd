@@ -51,9 +51,6 @@ quant) for each group}
 
 \item{View}{print plot}
 }
-\value{
-
-}
 \description{
 Barplot of identified/quantified proteins per sample
 }

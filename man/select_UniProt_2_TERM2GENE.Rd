@@ -9,9 +9,6 @@ select_UniProt_2_TERM2GENE(mapping)
 \arguments{
 \item{mapping}{output from select_UniProt}
 }
-\value{
-
-}
 \description{
 Exports TERM2GENE dataframe from select_org
 }

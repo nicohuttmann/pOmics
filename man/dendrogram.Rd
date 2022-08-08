@@ -13,9 +13,6 @@ dendrogram(cor_list, data = "adjacency", method = "average")
 
 \item{method}{clustering method}
 }
-\value{
-
-}
 \description{
 Computes a dendrogram from adjacency matrix in cor_object
 }

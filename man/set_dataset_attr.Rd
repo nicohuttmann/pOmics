@@ -13,9 +13,6 @@ set_dataset_attr(x, which, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Sets dataset attribute; does not check if exists
 }

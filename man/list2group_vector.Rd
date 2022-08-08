@@ -9,9 +9,6 @@ list2group_vector(x)
 \arguments{
 \item{x}{list of proein ids}
 }
-\value{
-
-}
 \description{
 Transforms list to group vector for functional enrichment
 }

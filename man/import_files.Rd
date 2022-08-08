@@ -15,9 +15,6 @@ import_files(files, dir, ext, silent = F)
 
 \item{silent}{suppresses messages}
 }
-\value{
-
-}
 \description{
 Imports any file type using the file extension and returns list
 }

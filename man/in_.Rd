@@ -11,9 +11,6 @@ in_(x, y)
 
 \item{y}{vector 2}
 }
-\value{
-
-}
 \description{
 Intersects x and y, but keeps names from x
 }

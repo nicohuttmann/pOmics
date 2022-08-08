@@ -9,9 +9,6 @@ copy2global(...)
 \arguments{
 \item{...}{function arguments}
 }
-\value{
-
-}
 \description{
 Assigns all arguments with names to Global Environment
 }

@@ -15,9 +15,6 @@ p2g(proteins, OrgDb, taxId, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Returns gene symbol from known proteins in dataset
 }

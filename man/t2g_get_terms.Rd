@@ -14,9 +14,6 @@ t2g_get_terms(T2G, genes, output.type)
 \item{output.type}{"vector" (default for one gene) or "list" (default for
 multiple genes)}
 }
-\value{
-
-}
 \description{
 Get vector or list of terms mapped to given gene/s
 }

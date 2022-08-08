@@ -26,9 +26,6 @@ import_fasta(
 
 \item{replace}{replace existing databases}
 }
-\value{
-
-}
 \description{
 Imports fasta file and saves proteome
 }

@@ -13,9 +13,6 @@ get_labels_column(data, labels, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Checks default observations labels of no column given
 }

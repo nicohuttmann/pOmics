@@ -29,9 +29,6 @@ include_observations_data(
 
 \item{output}{data frame to return in list}
 }
-\value{
-
-}
 \description{
 Adds group vector to data frame
 }

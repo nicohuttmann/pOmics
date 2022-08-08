@@ -31,9 +31,6 @@ entries?}
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Improved select function for UniProt databases
 }

@@ -11,9 +11,6 @@ list_files(dir, exclude = c("README", ".RData"))
 
 \item{exclude}{expression based on which to remove files}
 }
-\value{
-
-}
 \description{
 Returns all files in the Data folder excluding RData
 }

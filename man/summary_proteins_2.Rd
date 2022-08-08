@@ -13,9 +13,6 @@ summary_proteins_2(proteins, caption = NULL, sort.names = F)
 
 \item{sort.names}{order table by protein names}
 }
-\value{
-
-}
 \description{
 Views a list of proteins with links to UniProt
 }

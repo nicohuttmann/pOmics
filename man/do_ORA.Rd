@@ -35,9 +35,6 @@ do_ORA(
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Performs overexpression enrichment on logical protein vector with specified
 Ontology

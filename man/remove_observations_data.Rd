@@ -20,9 +20,6 @@ remove_observations_data(
 
 \item{require.confirmation}{Require additional confirmation before execution}
 }
-\value{
-
-}
 \description{
 Removes observations data
 }

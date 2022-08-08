@@ -16,9 +16,6 @@ nothing; "split" to separate strings by separator)}
 
 \item{sep}{separator}
 }
-\value{
-
-}
 \description{
 Finds feasible identifier columns
 }

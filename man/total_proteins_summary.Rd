@@ -17,9 +17,6 @@ total_proteins_summary(input, dataset, buttons, dom = "lBfrtip")
 \item{dom}{order of table elements (default: "lBfrtip", see
 https://rstudio.github.io/DT/)}
 }
-\value{
-
-}
 \description{
 INCOMOPLETE FUNCTION: Combines data frames with variables info
 }

@@ -9,9 +9,6 @@ list2tibble(x, identifier = "variables")
 \arguments{
 \item{x}{list}
 }
-\value{
-
-}
 \description{
 Transforms a list to tibble logical indication for variables
 }

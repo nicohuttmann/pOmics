@@ -11,9 +11,6 @@ browse_proteins(proteins = "Q63HQ2", limit = 10)
 
 \item{limit}{limit of proteins to be searched}
 }
-\value{
-
-}
 \description{
 Opens UniProt page of given protein
 }

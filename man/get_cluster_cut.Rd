@@ -11,9 +11,6 @@ get_cluster_cut(cor_list, k = 1)
 
 \item{k}{number of clusters}
 }
-\value{
-
-}
 \description{
 Returns group information of specified number of cluster
 }

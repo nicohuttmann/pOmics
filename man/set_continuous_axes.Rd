@@ -34,9 +34,6 @@ set_continuous_axes(
 
 \item{y.axis.break.size}{distance between y-axis breaks}
 }
-\value{
-
-}
 \description{
 Defines ggplot panel by ratio, size, unit size, center, and axis breaks
 }

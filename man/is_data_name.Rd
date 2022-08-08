@@ -11,9 +11,6 @@ is_data_name(name, dataset)
 
 \item{dataset}{dataset}
 }
-\value{
-
-}
 \description{
 Check if data name exists
 }

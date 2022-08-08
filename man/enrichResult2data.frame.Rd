@@ -9,9 +9,6 @@ enrichResult2data.frame(x)
 \arguments{
 \item{x}{enrichResult or list of objects}
 }
-\value{
-
-}
 \description{
 Extracts result data frame Cluster enrichResult object or list of objects
 }

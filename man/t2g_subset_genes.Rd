@@ -11,9 +11,6 @@ t2g_subset_genes(T2G, genes)
 
 \item{genes}{character vector contaiing genes to keep}
 }
-\value{
-
-}
 \description{
 Subset term-to-gene data frame by given genes
 }
