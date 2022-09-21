@@ -12,6 +12,8 @@ LazyData: true
 URL: https://github.com/nicohuttmann/pOmics
 BugReports: https://github.com/nicohuttmann/pOmics/issues
 Suggests: 
+    eulerr,
+    ggvenn,
     knitr,
     rmarkdown 
 VignetteBuilder: knitr
@@ -19,9 +21,9 @@ Imports:
     cowplot,
     ggdendro,
     ggplot2,
-    ggvenn,
     reshape2,
     rlang,
+    sticky, 
     tidyverse,
     vroom
 RoxygenNote: 7.2.1

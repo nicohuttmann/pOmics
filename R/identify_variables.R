@@ -23,7 +23,7 @@ identify_variables <- function(x,
 
 
   # Fill NAs
-  if (hasArg(identifier)) {
+  if (hasArg(identifier) && !is.null(identifier)) {
 
     for (i in identifier) {
 
@@ -39,7 +39,7 @@ identify_variables <- function(x,
 
 
   # No identifier specified; only test first column
-  if (!hasArg(identifier)) {
+  if (!hasArg(identifier) || is.null(identifier)) {
     if (grepl(pattern = "split", x = modify.identifiers)) {
       x1 <- x[, 1] %>%
       #as.character %>%
@@ -54,7 +54,7 @@ identify_variables <- function(x,
     }
     # Identifier column specified
 
-  } else if (hasArg(identifier)) {
+  } else if (hasArg(identifier) && !is.null(identifier)) {
 
     # Are all identifiers in colnames?
     if (all(identifier %in% colnames(x))) {

@@ -3,7 +3,6 @@
 #' @param data_ data_
 #' @param input name of input data
 #'
-#' @return
 #' @export
 #'
 #'
@@ -79,7 +78,6 @@ data_input <- function(data_, input) {
 #' @param tibble tibble
 #' @param from.row.names row to use as new row names
 #'
-#' @return
 #' @export
 #'
 #' @importFrom magrittr %>%
@@ -148,7 +146,6 @@ tibble2matrix <- function(tibble, from.row.names) {
 #' @param data matrix with row names
 #' @param to.row.names name for row names vector
 #'
-#' @return
 #' @export
 #'
 #'
@@ -200,7 +197,6 @@ matrix2tibble <- function(data, to.row.names) {
 #' @param from.row.names row names column of initial data frame
 #' @param to.row.names row names column after transposing
 #'
-#' @return
 #' @export
 #'
 #' @importFrom magrittr %>%
@@ -278,7 +274,6 @@ transpose_tibble <- function(tibble,
 #' @param data data frame with row names
 #' @param to.row.names name for row names vector
 #'
-#' @return
 #' @export
 #'
 #' @importFrom magrittr %>%
@@ -331,7 +326,6 @@ data.frame2tibble <- function(data, to.row.names) {
 #' @param tibble tibble
 #' @param from.row.names column to use as new row names
 #'
-#' @return
 #' @export
 #'
 tibble2data.frame <- function(tibble, from.row.names) {
@@ -376,7 +370,6 @@ tibble2data.frame <- function(tibble, from.row.names) {
 #' @param data supported data types: matrix, data.frame
 #' @param to.row.names name for row names vector
 #'
-#' @return
 #' @export
 #'
 #'
@@ -411,7 +404,6 @@ data2tibble <- function(data, to.row.names) {
 #'
 #' @param x list
 #'
-#' @return
 #' @export
 #'
 #' @importFrom magrittr %>%

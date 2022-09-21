@@ -95,10 +95,10 @@ new_dataset <- function(import,
 #' @export
 #'
 #'
-import2raw_dataset <- function(import,
-                               identifier,
-                               modify.identifiers = "split",
-                               add = T) {
+import2raw_dataset <-function(import,
+                              identifier,
+                              modify.identifiers = "split",
+                              add = T) {
 
   #
   sep <- identify_separator(x = import)

@@ -1,4 +1,4 @@
-#' Sets up bottons for HTML document
+#' Sets up buttons for HTML document
 #'
 #' @return
 #' @export

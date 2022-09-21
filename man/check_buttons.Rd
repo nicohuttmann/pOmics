@@ -2,10 +2,10 @@
 % Please edit documentation in R/0_RMD_functions.R
 \name{check_buttons}
 \alias{check_buttons}
-\title{Sets up bottons for HTML document}
+\title{Sets up buttons for HTML document}
 \usage{
 check_buttons()
 }
 \description{
-Sets up bottons for HTML document
+Sets up buttons for HTML document
 }

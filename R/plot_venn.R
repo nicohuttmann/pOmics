@@ -11,9 +11,17 @@
 #'
 #' @importFrom rlang sym
 #' @import ggplot2
-#' @import ggvenn
 #'
 plot_venn <- function(x, name, plot = T, export = F) {
+
+  # Check for ggvenn package
+  if (!requireNamespace("ggvenn", quietly = TRUE)) {
+    stop(
+      "Package \"ggvenn\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+
 
   #
   if (!hasArg(x)) {
